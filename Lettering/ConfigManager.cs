@@ -140,9 +140,9 @@ namespace Lettering {
             return true;
         }
 
-        public void insertPath(string style, int type, bool[] excludes = null, string mirrorStyle = "") {
+        public void insertPath(string style, int type, int[] wordOrder = null, string mirrorStyle = "") {
             paths.Add(style.Replace(" ", String.Empty), 
-                      new PathData(type, excludes != null ? excludes : new bool[4], mirrorStyle.Replace(" ", String.Empty)));
+                      new PathData(type, wordOrder != null ? wordOrder : new int[] {1, 2, 3, 4}, mirrorStyle.Replace(" ", String.Empty)));
         }
 
         public bool parsePath(string line) {
@@ -152,26 +152,29 @@ namespace Lettering {
             string style = tokens[0];
             int type = int.Parse(tokens[1]);
 
-            // if potential excludes and mirror style
+            // if potential custom word order and mirror style
             if(tokens.Length >= 3) {
-                bool[] excludes = new bool[4];
+                int[] wordOrder;
 
-                // if there are exclusions, set the bool array
+                // if there is a custom word order, set the array
                 if(tokens[2] != String.Empty) {
-                    int[] excludeWords = Array.ConvertAll(tokens[2].Split(new char[] {',', ' '}, StringSplitOptions.None), s=>int.Parse(s));
+                    wordOrder = new int[4];     // no words since using custom
+                    int[] customWordOrder = Array.ConvertAll(tokens[2].Split(new char[] {',', ' '}, StringSplitOptions.None), s=>int.Parse(s));
 
-                    foreach(int i in excludeWords) {
-                        excludes[i] = true;
+                    for(int i = 0; i != customWordOrder.Length; ++i) {
+                        wordOrder[i] = customWordOrder[i];
                     }
+                } else {
+                    wordOrder = new int[] {1, 2, 3, 4};     // default all words
                 }
 
                 // if mirror style
                 if(tokens.Length >= 4) {
                     string mirrorStyle = tokens[3];
-                    insertPath(style, type, excludes, mirrorStyle);
+                    insertPath(style, type, wordOrder, mirrorStyle);
                     return true;
                 } else {
-                    insertPath(style, type, excludes);
+                    insertPath(style, type, wordOrder);
                     return true;
                 }
             } else {
@@ -202,20 +205,23 @@ namespace Lettering {
             PathData pathData = paths[order.itemCode];
             string fileName = "";
 
-            if(!pathData.excludes[0]) {
-                fileName += order.word1 + '-';
-            }
-
-            if(!pathData.excludes[1]) {
-                fileName += order.word2 + '-';
-            }
-
-            if(!pathData.excludes[2]) {
-                fileName += order.word3 + '-';
-            }
-            
-            if(!pathData.excludes[3]) {
-                fileName += order.word4 + '-';
+            for(int i = 0; i != pathData.wordOrder.Length; ++i) {
+                if(pathData.wordOrder[i] > 0) {
+                    switch(pathData.wordOrder[i]) {
+                        case 1:
+                            fileName += order.word1 + '-';
+                            break;
+                        case 2:
+                            fileName += order.word2 + '-';
+                            break;
+                        case 3:
+                            fileName += order.word3 + '-';
+                            break;
+                        case 4:
+                            fileName += order.word4 + '-';
+                            break;
+                    }
+                }
             }
 
             return fileName.TrimEnd('-') + ".cdr";
@@ -244,14 +250,14 @@ namespace Lettering {
 
     // data structs
     struct PathData {
-        public PathData(int type, bool[] excludes, string mirrorStyle) {
+        public PathData(int type, int[] wordOrder, string mirrorStyle) {
             this.type = type;
-            this.excludes = (bool[])excludes.Clone();
+            this.wordOrder = (int[])wordOrder.Clone();
             this.mirrorStyle = mirrorStyle;
         }
 
         public readonly int type;
-        public readonly bool[] excludes;
+        public readonly int[] wordOrder;
         public readonly string mirrorStyle;
     }
 

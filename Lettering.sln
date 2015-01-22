@@ -5,6 +5,11 @@ VisualStudioVersion = 12.0.30501.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lettering", "Lettering\Lettering.csproj", "{DEDB73E8-0E97-4978-8AE3-F6C7B6B47B05}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{C17E5C16-91DC-4BFC-A648-7D0FEC1E2308}"
+	ProjectSection(SolutionItems) = preProject
+		Lettering\bin\Debug\configs\automation.cfg = Lettering\bin\Debug\configs\automation.cfg
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
