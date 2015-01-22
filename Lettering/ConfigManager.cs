@@ -79,13 +79,15 @@ namespace Lettering {
 
     public class ConfigData {
         private delegate string PathBuilderDelegate(OrderData order);
+        private delegate bool ExceptionCheckDelegate(OrderData order, ExceptionData exception);
 
         public string rootPath;
         private Dictionary<int, string> types = new Dictionary<int,string>();
         private List<string> prefixes = new List<string>();
         private Dictionary<string, PathData> paths = new Dictionary<string, PathData>();
         private Dictionary<string, PathBuilderDelegate> pathBuilders = new Dictionary<string, PathBuilderDelegate>();
-        private Dictionary<string, ExceptionData> exceptions = new Dictionary<string, ExceptionData>();
+        private Dictionary<string, List<ExceptionData>> exceptions = new Dictionary<string, List<ExceptionData>>();
+        private Dictionary<string, ExceptionCheckDelegate> exceptionChecks = new Dictionary<string, ExceptionCheckDelegate>();
         private List<string> trims = new List<string>();
 
         public ConfigData() {
@@ -102,6 +104,10 @@ namespace Lettering {
             pathBuilders.Add("!spec", (order) => { return String.Format("0.#", order.spec); });
             pathBuilders.Add("!ya", (order) => { return order.spec < 10 ? "YOUTH" : "ADULT"; });
             pathBuilders.Add("!cd", (order) => { return order.word2.ToUpper(); });  // current styles only use word 2
+
+            // add exception checking functions
+            exceptionChecks.Add("size", (order, exception) => { return order.size == exception.value; });
+            exceptionChecks.Add("spec", (order, exception) => { return order.spec == exception.value; });
         }
 
         public bool pathDataExists(string style) {
@@ -184,7 +190,13 @@ namespace Lettering {
         }
 
         public void insertException(string style, string path, string tag, double value) {
-            exceptions.Add(style.Replace(" ", String.Empty), new ExceptionData(path, tag, value));
+            // if there is an entry for the style, add to it; otherwise, create new entry
+            List<ExceptionData> exceptionList;
+            if(exceptions.TryGetValue(style.Replace(" ", String.Empty), out exceptionList)) {
+                exceptionList.Add(new ExceptionData(path, tag, value));
+            } else {
+                exceptions.Add(style.Replace(" ", String.Empty), new List<ExceptionData> {new ExceptionData(path, tag, value)});
+            }
         }
 
         public bool parseException(string line) {
@@ -192,7 +204,7 @@ namespace Lettering {
             if(tokens.Length < 3) return false;     // improper line formatting
 
             string[] exception = tokens[2].Split('=');
-            insertException(tokens[0], tokens[2], exception[0], double.Parse(exception[1]));
+            insertException(tokens[0], tokens[1], exception[0], double.Parse(exception[1]));
             return true;
         }
 
@@ -228,7 +240,27 @@ namespace Lettering {
         }
 
         public string constructPath(OrderData order) {
-            string startPath = rootPath + '\\' + types[paths[order.itemCode].type];
+            string startPath = "";
+
+            // test for exceptions
+            List<ExceptionData> possibleExceptions;
+            if(exceptions.TryGetValue(order.itemCode, out possibleExceptions)) {
+                bool noException = true;
+                foreach(ExceptionData ex in possibleExceptions) {
+                    if(exceptionChecks[ex.tag.ToLower()](order, ex)) {
+                        startPath = rootPath + '\\' + ex.path;
+                        noException = false;
+                        break;
+                    }
+                }
+                // fallthrough if no exception match
+                if(noException) {
+                    startPath = rootPath + '\\' + types[paths[order.itemCode].type];
+                }
+            } else {
+                startPath = rootPath + '\\' + types[paths[order.itemCode].type];
+            }
+
             string[] tokens = startPath.Split('\\');
             string finalPath = "";
 
@@ -244,7 +276,7 @@ namespace Lettering {
 
             MessageBox.Show("start: " + startPath + "\n  end: " + finalPath);
 
-            return "";
+            return finalPath;
         }
     }
 
