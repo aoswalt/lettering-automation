@@ -86,7 +86,7 @@ namespace Lettering {
                 }
 
                 // build
-                //MessageBox.Show("To build: " + order.itemCode);
+                MessageBox.Show("To build: " + order.itemCode + "\n Template: " + config.getTemplatePath(order));
             }
 
             DataWriter.writeLog(missingOrders);

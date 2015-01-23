@@ -93,6 +93,7 @@ namespace Lettering {
         public ConfigData() {
             // add path building functions
             pathBuilders.Add("!style", (order) => {
+                // "TTstyle" becomes "TT STYLES\TT style
                 foreach(string pre in prefixes) {
                     if(order.itemCode.StartsWith(pre)) {
                         return pre + " STYLES\\" + pre + " " + Regex.Replace(order.itemCode, pre, "");
@@ -128,6 +129,13 @@ namespace Lettering {
             return "";
         }
 
+        public string getTemplatePath(OrderData order) {
+            string dir = rootPath + '\\' + pathBuilders["!style"](order);
+            string[] pathTokens = dir.Split('\\');
+            string file = pathTokens[pathTokens.Length - 1] + " TEMPLATE.cdr";
+
+            return dir + '\\' + file;
+        }
 
         public void insertType(int i, string desc) {
             types.Add(i, desc);
