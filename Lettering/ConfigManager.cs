@@ -116,6 +116,8 @@ namespace Lettering {
 
         public string trimStyleCode(string style) {
             style = style.Replace(" ", String.Empty);
+            style = Regex.Replace(style, @"^CF", "TT");     // treat CF as TT
+
             if(pathDataExists(style)) return style;     // path data exists, no trimming needed
 
             foreach(string pattern in trims) {
