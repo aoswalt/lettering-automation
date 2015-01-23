@@ -24,10 +24,65 @@ namespace Lettering {
                         OdbcDataAdapter adapter = new OdbcDataAdapter(command);
 
                         DataTable dataTable = new DataTable();
-                        adapter.Fill(dataTable);
+
+                        DataColumn[] cols = {
+                                                new DataColumn("HOUSE", typeof(String)), 
+                                                new DataColumn("ORDER_NO", typeof(int)), 
+                                                new DataColumn("ORDER_VOUCH", typeof(int)), 
+                                                new DataColumn("PARENT_VOUCH", typeof(int)), 
+                                                new DataColumn("ITEM_NO", typeof(String)), 
+                                                new DataColumn("LETTER_SIZE", typeof(double)), 
+                                                new DataColumn("LETTER_SPEC", typeof(double)), 
+                                                new DataColumn("DRAWING_LETTER_WORD1", typeof(String)), 
+                                                new DataColumn("DRAWING_LETTER_WORD2", typeof(String)), 
+                                                new DataColumn("DRAWING_LETTER_WORD3", typeof(String)), 
+                                                new DataColumn("DRAWING_LETTER_WORD4", typeof(String)), 
+                                                new DataColumn("SCHEDULE_DATE_CCYYMMDD", typeof(int)),
+                                                new DataColumn("SCHEDULE_DATE_MMDDCCYY", typeof(DateTime))
+                                            };
+                        dataTable.Columns.AddRange(cols);
+
+                        try {
+                            adapter.Fill(dataTable);
+                        } catch(InvalidCastException ex) {
+                            DataTable dtClone = dataTable.Clone();
+                            dtClone.Columns["HOUSE"].DataType = typeof(String);
+                            dtClone.Columns["SCHEDULE_DATE_MMDDCCYY"].DataType = typeof(DateTime);
+                            dtClone.Columns["ORDER_NO"].DataType = typeof(Int32);
+                            dtClone.Columns["ORDER_VOUCH"].DataType = typeof(Int32);
+                            dtClone.Columns["ITEM_NO"].DataType = typeof(String);
+                            dtClone.Columns["LETTER_SIZE"].DataType = typeof(Double);
+                            dtClone.Columns["LETTER_SPEC"].DataType = typeof(Double);
+                            dtClone.Columns["DRAWING_LETTER_WORD1"].DataType = typeof(String);
+                            dtClone.Columns["DRAWING_LETTER_WORD2"].DataType = typeof(String);
+                            dtClone.Columns["DRAWING_LETTER_WORD3"].DataType = typeof(String);
+                            dtClone.Columns["DRAWING_LETTER_WORD4"].DataType = typeof(String);
+
+                            foreach(DataRow row in dataTable.Rows) {
+                                object[] vals = row.ItemArray;
+
+                                vals[0] = ((String)vals[0]).Replace("\"", "");                      // HOUSE
+                                vals[1] = int.Parse(((String)vals[1]).Replace("\"", ""));           // ORDER_NO
+                                vals[2] = int.Parse(((String)vals[2]).Replace("\"", ""));           // ORDER_VOUCH
+                                vals[3] = int.Parse(((String)vals[3]).Replace("\"", ""));           // PARENT_VOUCH
+                                vals[4] = ((String)vals[4]).Replace("\"", "");                      // ITEM_NO
+                                vals[5] = double.Parse(((String)vals[5]).Replace("\"", ""));        // LETTER_SIZE
+                                vals[6] = double.Parse(((String)vals[6]).Replace("\"", ""));        // LETTER_SPEC
+                                vals[7] = ((String)vals[7]).Replace("\"", "");                      // DRAWING_LETTER_WORD1
+                                vals[8] = ((String)vals[8]).Replace("\"", "");                      // DRAWING_LETTER_WORD2
+                                vals[9] = ((String)vals[9]).Replace("\"", "");                      // DRAWING_LETTER_WORD3
+                                vals[10] = ((String)vals[10]).Replace("\"", "");                    // DRAWING_LETTER_WORD4
+                                vals[11] = int.Parse(((String)vals[11]).Replace("\"", ""));         // SCHEDULE_DATE_CCYYMMDD
+                                vals[12] = DateTime.Parse(((String)vals[12]).Replace("\"", ""));    // SCHEDULE_DATE_MMDDCCYY
+
+                                dtClone.NewRow().ItemArray = vals;
+                            }
+
+                            unifyHeaders(dtClone);
+                            return dtClone;
+                        }
 
                         unifyHeaders(dataTable);
-
                         return dataTable;
                     }
                 } else {
@@ -35,7 +90,7 @@ namespace Lettering {
 
                     return null;
                 }
-            } catch(Exception ex) {
+            } catch(Exception ex) {     // should use specific exceptions
                 MessageBox.Show("Error: Could not read file.\n\n" + ex.Message);
 
                 return null;

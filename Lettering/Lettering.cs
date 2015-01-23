@@ -81,8 +81,12 @@ namespace Lettering {
 
                 // if built, continue
                 string orderPath = config.constructPath(order);
+                if(File.Exists(orderPath)) {
+                    continue;
+                }
 
                 // build
+                //MessageBox.Show("To build: " + order.itemCode);
             }
 
             DataWriter.writeLog(missingOrders);
