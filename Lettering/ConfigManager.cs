@@ -239,9 +239,11 @@ namespace Lettering {
             return fileName.TrimEnd('-') + ".cdr";
         }
 
-        public string constructPath(OrderData order) {
+        public string constructPath(OrderData order) {      // operating on copy to preserve original data
+            // replace item code if mirror style
+            if(types[paths[order.itemCode].type] == "mirror") order.itemCode = paths[order.itemCode].mirrorStyle;
+            
             string startPath = "";
-
             // test for exceptions
             List<ExceptionData> possibleExceptions;
             if(exceptions.TryGetValue(order.itemCode, out possibleExceptions)) {
@@ -274,7 +276,7 @@ namespace Lettering {
 
             finalPath += makeFileName(order);
 
-            MessageBox.Show("start: " + startPath + "\n  end: " + finalPath);
+            MessageBox.Show(" item: " + order.itemCode + "\nstart: " + startPath + "\n  end: " + finalPath);
 
             return finalPath;
         }
