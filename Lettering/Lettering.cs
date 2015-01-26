@@ -57,16 +57,17 @@ namespace Lettering {
 
         [STAThread]
         static void Main(string[] args) {
+            LauncherWindow launcher = new LauncherWindow();
+            launcher.ShowDialog();
+            //Lettering.Run();
+        }
+
+        public static void Run() {
             ConfigData config = ConfigManager.getConfig();
 
             List<OrderData> missingOrders = new List<OrderData>();
 
             DataTable data = DataReader.getCsvData();
-            if(data == null) {
-                MessageBox.Show("Error: Data could not be retrieved.");
-                return;
-            }
-
             foreach(DataRow row in data.Rows) {
                 OrderData order = new OrderData(row);
                 string trimmedCode = config.trimStyleCode(order.itemCode);
@@ -81,6 +82,7 @@ namespace Lettering {
 
                 // if built, continue
                 string orderPath = config.constructPath(order);
+
                 if(File.Exists(orderPath)) {
                     continue;
                 }

@@ -5,7 +5,7 @@
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProjectGuid>{DEDB73E8-0E97-4978-8AE3-F6C7B6B47B05}</ProjectGuid>
-    <OutputType>Exe</OutputType>
+    <OutputType>WinExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Lettering</RootNamespace>
     <AssemblyName>Lettering</AssemblyName>
@@ -31,12 +31,16 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
+  <PropertyGroup>
+    <StartupObject />
+  </PropertyGroup>
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.XML" />
   </ItemGroup>
@@ -44,6 +48,12 @@
     <Compile Include="ConfigManager.cs" />
     <Compile Include="DataReader.cs" />
     <Compile Include="DataWriter.cs" />
+    <Compile Include="LauncherWindow.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="LauncherWindow.Designer.cs">
+      <DependentUpon>LauncherWindow.cs</DependentUpon>
+    </Compile>
     <Compile Include="Lettering.cs" />
     <Compile Include="Reference\Headers.cs" />
   </ItemGroup>
@@ -66,6 +76,11 @@
       <Isolated>False</Isolated>
       <EmbedInteropTypes>True</EmbedInteropTypes>
     </COMReference>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="LauncherWindow.resx">
+      <DependentUpon>LauncherWindow.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

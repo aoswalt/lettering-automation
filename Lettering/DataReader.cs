@@ -44,7 +44,7 @@ namespace Lettering {
 
                         try {
                             adapter.Fill(dataTable);
-                        } catch(InvalidCastException ex) {
+                        } catch(InvalidCastException) {
                             DataTable dtClone = dataTable.Clone();
                             dtClone.Columns["HOUSE"].DataType = typeof(String);
                             dtClone.Columns["SCHEDULE_DATE_MMDDCCYY"].DataType = typeof(DateTime);
@@ -86,9 +86,9 @@ namespace Lettering {
                         return dataTable;
                     }
                 } else {
-                    MessageBox.Show("No file chosen.");
+                    //MessageBox.Show("No file chosen.");
 
-                    return null;
+                    return new DataTable();
                 }
             } catch(Exception ex) {     // should use specific exceptions
                 MessageBox.Show("Error: Could not read file.\n\n" + ex.Message);
