@@ -4,7 +4,7 @@ using System.Text;
 using System.Data;
 using System.Data.Odbc;
 using System.Windows.Forms;
-using CorelDRAW;
+using VGCore;
 using System.IO;
 
 namespace Lettering {
@@ -52,8 +52,7 @@ namespace Lettering {
 
     public class Lettering {
         public static string errors = "";
-
-        //CorelDRAW.Application corel = new CorelDRAW.Application();
+        public static CorelDRAW.Application corel = new CorelDRAW.Application();
 
         [STAThread]
         static void Main(string[] args) {
@@ -88,12 +87,33 @@ namespace Lettering {
                 }
 
                 // build
-                MessageBox.Show("To build: " + order.itemCode + "\n Template: " + config.getTemplatePath(order));
+                // MessageBox.Show("To build: " + order.itemCode + "\n Template: " + config.getTemplatePath(order));
+                String templatePath = config.getTemplatePath(order);
+                if(!File.Exists(templatePath)) {
+                    MessageBox.Show("Template not found:\n" + templatePath, "Missing Template", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
+                    missingOrders.Add(order);
+                } else {
+                    BuildOrder(order);
+                }
             }
 
             DataWriter.writeLog(missingOrders);
 
             if(errors.Length > 0) MessageBox.Show(errors, "Error Log");
+        }
+
+        private static void BuildOrder(OrderData order) {
+            Shape orderShape = corel.ActiveLayer.CreateRectangle2(0, 0, 0.1, 0.1);
+            orderShape.Name = "OrderData";
+            orderShape.Properties["order", 1] = order.size;
+            orderShape.Properties["order", 2] = order.spec;
+            orderShape.Properties["order", 3] = order.word1;
+            orderShape.Properties["order", 4] = order.word2;
+            orderShape.Properties["order", 5] = order.word3;
+            orderShape.Properties["order", 6] = order.word4;
+            orderShape.Properties["order", 7] = new string[] { "" };    // need to flesh out handling names
+
+            corel.ActivePage.CreateLayer("Automate");
         }
     }
 }
