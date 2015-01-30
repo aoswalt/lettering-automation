@@ -56,6 +56,7 @@
     </Compile>
     <Compile Include="Lettering.cs" />
     <Compile Include="Reference\Headers.cs" />
+    <Compile Include="SetupManager.cs" />
   </ItemGroup>
   <ItemGroup>
     <COMReference Include="CorelDRAW">

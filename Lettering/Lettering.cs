@@ -56,9 +56,13 @@ namespace Lettering {
 
         [STAThread]
         static void Main(string[] args) {
+            // if setup had to be done, do not open launcher
+            if(!SetupManager.CheckSetup()) {
+                return;
+            }
+
             LauncherWindow launcher = new LauncherWindow();
             launcher.ShowDialog();
-            //Lettering.Run();
         }
 
         public static void Run() {
@@ -111,7 +115,7 @@ namespace Lettering {
             orderShape.Properties["order", 4] = order.word2;
             orderShape.Properties["order", 5] = order.word3;
             orderShape.Properties["order", 6] = order.word4;
-            orderShape.Properties["order", 7] = new string[] { "" };    // need to flesh out handling names
+            orderShape.Properties["order", 7] = new string[] { "" };    //TODO: flesh out handling names
 
             corel.ActivePage.CreateLayer("Automate");
         }
