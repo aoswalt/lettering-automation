@@ -25,31 +25,6 @@ namespace Lettering {
                 writer.Flush();
                 writer.Close();
             }
-
-            /*
-            // delete file if exists
-            if(System.IO.File.Exists(pathToRes + outFileName)) {
-                System.IO.File.Delete(pathToRes + outFileName);
-            }
-
-            System.IO.StreamReader sr = new System.IO.StreamReader(pathToRes + inFileName);
-            System.IO.StreamWriter sw = new System.IO.StreamWriter(pathToRes + outFileName);
-
-            // copy header
-            String line = sr.ReadLine();
-            sw.WriteLine(line);
-
-            while((line = sr.ReadLine()) != null) {
-                String[] tokens = line.Split(',');
-
-                if(tokens[0] == "\"34\"") {     // csv contains quotes around info
-                    sw.WriteLine(line);
-                }
-            }
-
-            sw.Flush();
-            sw.Close();
-             * */
         }
 
         private static string getHeaderString() {

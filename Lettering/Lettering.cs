@@ -57,16 +57,17 @@ namespace Lettering {
         [STAThread]
         static void Main(string[] args) {
             // if setup had to be done, do not open launcher
-            if(!SetupManager.CheckSetup()) {
-                return;
+            if(SetupManager.CheckSetup()) {
+                LauncherWindow launcher = new LauncherWindow();
+                launcher.ShowDialog();
             }
-
-            LauncherWindow launcher = new LauncherWindow();
-            launcher.ShowDialog();
         }
 
         public static void Run() {
+            bool cancelBuilding = true;
+
             ConfigData config = ConfigManager.getConfig();
+            ActiveOrderWindow activeOrderWindow = new ActiveOrderWindow();
 
             List<OrderData> missingOrders = new List<OrderData>();
 
@@ -90,6 +91,11 @@ namespace Lettering {
                     continue;
                 }
 
+                if(cancelBuilding) {
+                    missingOrders.Add(order);
+                    continue;
+                }
+
                 // build
                 // MessageBox.Show("To build: " + order.itemCode + "\n Template: " + config.getTemplatePath(order));
                 String templatePath = config.getTemplatePath(order);
@@ -97,7 +103,15 @@ namespace Lettering {
                     MessageBox.Show("Template not found:\n" + templatePath, "Missing Template", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
                     missingOrders.Add(order);
                 } else {
-                    BuildOrder(order);
+                    //BuildOrder(order);
+                    activeOrderWindow.ShowDialog();
+
+                    if(activeOrderWindow.selection == WindowSelection.REJECT) {
+                        missingOrders.Add(order);
+                    } else if(activeOrderWindow.selection == WindowSelection.CANCEL) {
+                        cancelBuilding = true;
+                        missingOrders.Add(order);
+                    }
                 }
             }
 
@@ -121,101 +135,3 @@ namespace Lettering {
         }
     }
 }
-
-/*
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Diagnostics;
-
-namespace Automation {
-    class CorelAccess {
-        static void Main(string[] args) {
-
-            //corel.Visible = true;
-            //corel.InitializeVBA();
-            //corel.CreateDocument();
-            //corel.ActiveLayer.CreateRectangle(0, 0, 1, 1);
-            //corel.ActiveDocument.SaveAs(@"L:\Corel\WORK FOLDERS\Adam\Templates\Macro Templates\Embedded\test.cdr");
-            //corel.OpenDocument(@"L:\Corel\WORK FOLDERS\Adam\Templates\Macro Templates\Embedded\TestFile.cdr");
-
-            object[] vars = new object[4];
-            vars[0] = "DAR";
-            vars[1] = "TIGERS";
-            vars[2] = 2;
-            vars[3] = 10.5;
-            //corel.GMSManager.RunMacro("VBAProject", "ThisDocument.Start", vars);   // Start(style As String, word As String, size As Integer, spec As Double)
-
-            //
-            object[] i = new object[1];
-            i[0] = 0;
-            //corel.GMSManager.RunMacro("Test", "Functions.Alert", i);
-            //corel.GMSManager.RunMacro("VBAProject", "ThisDocument.Alert", i);
-            //
-
-
-            /*
-            try {
-                //corel.GMSManager.RunMacro("Test", "Functions.Alert", i);
-                corel.GMSManager.RunMacro("VBAProject", "Module.Alert", i);
-                //
-            } catch(Exception e) {
-                Debug.WriteLine("ERROR: " + e.Message);
-                Debug.WriteLine( e.StackTrace);
-            }
-             * *
-        }
-    }
-}
-using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
-using System.Text;
-
-namespace Intro {
-    class FileFilter {
-        private string pathToRes = "../../res/";        // backup from debug to res folder
-        private string inFileName = "lterror.csv";
-        private string outFileName = "filtered.csv";
-
-        private void Filter() {
-            // delete file if exists
-            if(System.IO.File.Exists(pathToRes + outFileName)) {
-                System.IO.File.Delete(pathToRes + outFileName);
-            }
-
-            System.IO.StreamReader sr = new System.IO.StreamReader(pathToRes + inFileName);
-            System.IO.StreamWriter sw = new System.IO.StreamWriter(pathToRes + outFileName);
-
-            // copy header
-            String line = sr.ReadLine();
-            sw.WriteLine(line);
-
-            while((line = sr.ReadLine()) != null) {
-                String[] tokens = line.Split(',');
-
-                /*
-                foreach(String s in tokens) {
-                    Debug.Write(s + "\t");
-                }
-                Debug.Write("\n");
-                *
-
-                if(tokens[0] == "\"34\"") {     // csv contains quotes around info
-                    sw.WriteLine(line);
-                }
-            }
-
-            sw.Flush();
-            sw.Close();
-        }
-
-        static void Main(String[] args) {
-            FileFilter ff = new FileFilter();
-            ff.Filter();
-        }
-    }
-}
-*/

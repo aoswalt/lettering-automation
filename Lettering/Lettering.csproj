@@ -45,6 +45,12 @@
     <Reference Include="System.XML" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ActiveOrderWindow.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ActiveOrderWindow.Designer.cs">
+      <DependentUpon>ActiveOrderWindow.cs</DependentUpon>
+    </Compile>
     <Compile Include="ConfigManager.cs" />
     <Compile Include="DataReader.cs" />
     <Compile Include="DataWriter.cs" />
@@ -79,6 +85,9 @@
     </COMReference>
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="ActiveOrderWindow.resx">
+      <DependentUpon>ActiveOrderWindow.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="LauncherWindow.resx">
       <DependentUpon>LauncherWindow.cs</DependentUpon>
     </EmbeddedResource>
