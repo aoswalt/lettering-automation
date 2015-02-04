@@ -1,6 +1,9 @@
-﻿using System;
+﻿using Microsoft.Win32;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Drawing;
+using System.Drawing.Text;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices;
@@ -27,10 +30,11 @@ namespace Lettering {
 
             string msg = "";
             msg += (libInstall ? "Library had to be updated.\n" : "");
-            msg += (fontInstall ? "Font(s) had to be updated.\n" : "");
+            //msg += (fontInstall ? "Font(s) had to be updated.\n" : "");
             msg += "\nCorel must be restarted before continuing.";
+            msg += "\n\nPlease save all work and press OK to close Corel.";
 
-            if(libInstall || fontInstall) {
+            if(libInstall && Lettering.corel.Visible) {
                 MessageBox.Show(msg, "Corel Restart Required", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 return false;
             } else {
@@ -65,34 +69,99 @@ namespace Lettering {
 
             foreach(string fullFontPath in Directory.GetFiles(fontFolder)) {
                 string fontFileName = Path.GetFileName(fullFontPath);
-                string installedFontPath = installedFontFolder + '\\' + fontFileName;
+                List<string> installedFonts = GetInstalledFonts();
 
-                if(!File.Exists(installedFontPath)) {
+                string fontName = GetFontNameFromFile(fontFileName);
+                string installedFontFile = "";
+                if(!installedFonts.Contains(fontName)) {
+                    // font not installed
                     needFontInstall = true;
                 } else {
-                    DateTime installedFontDT = File.GetLastWriteTime(installedFontPath);
-                    DateTime fontDT = File.GetLastWriteTime(fullFontPath);
+                    // font installed, check file date
+                    installedFontFile = GetInstalledFontFileName(fontName);
 
-                    // is saved is newer than installed
-                    if(fontDT > installedFontDT) {
+                    if(installedFontFile == null) {
                         needFontInstall = true;
+                    } else {
+                        DateTime installedFontDT = File.GetLastWriteTime(installedFontFile);
+                        DateTime fontDT = File.GetLastWriteTime(fullFontPath);
+
+                        // is saved is newer than installed
+                        if(fontDT > installedFontDT) {
+                            needFontInstall = true;
+                        }
                     }
                 }
+                string newInstalledFontFileName = installedFontFile.Length > 0 ? installedFontFile.Insert(installedFontFile.Length - 4, "_") :
+                                                                                 fontFileName.Insert(fontFileName.Length - 4, "_");
+                string newInstalledFontPath = installedFontFolder + '\\' + newInstalledFontFileName;
 
                 if(needFontInstall) {
-                    // copy to font folder, then install font to current session
-                    File.Copy(fullFontPath, installedFontPath, true);
+                    // cannot install fonts if corel is open
+                    if(Lettering.corel.Visible) {
+                        MessageBox.Show("Fonts must be updated. Please save all documents and press OK to close Corel.", "Font Update Required");
 
-                    int result = AddFontResource(installedFontPath);
+                        // set all documents as clean to prevent error on quit
+                        foreach(VGCore.Document document in Lettering.corel.Documents) {
+                            document.Dirty = false;
+                        }
+
+                        Lettering.corel.Quit();
+                    }
+
+                    // copy to font folder, then install font to current session
+                    File.Copy(fullFontPath, newInstalledFontPath, true);
+
+                    int result = AddFontResource(newInstalledFontPath);
                     int error = Marshal.GetLastWin32Error();
 
                     if(error != 0) {
                         MessageBox.Show(error + "\n" + new Win32Exception(error).Message + "\n\n" + fullFontPath);
+                    } else {
+                        // add to registry
+                        RegistryKey key = Registry.LocalMachine.CreateSubKey(@"Software\Microsoft\Windows NT\CurrentVersion\Fonts");
+                        key.SetValue(fontName + " (TrueType)", Path.GetFileName(newInstalledFontPath));
+                        key.Close();
                     }
                 }
             }
 
             return needFontInstall;
+        }
+
+        private static List<string> GetInstalledFonts() {
+            InstalledFontCollection fontsCollection = new InstalledFontCollection();
+            FontFamily[] fontFamilies = fontsCollection.Families;
+            List<string> installedFonts = new List<string>();
+            foreach(FontFamily font in fontFamilies) {
+                installedFonts.Add(font.Name);
+            }
+
+            return installedFonts;
+        }
+
+        private static string GetInstalledFontFileName(string fontName) {
+            string regFontName = fontName + " (TrueType)";
+            RegistryKey fonts = Registry.LocalMachine.OpenSubKey(@"Software\Microsoft\Windows NT\CurrentVersion\Fonts", false);
+            if(fonts == null) {
+                fonts = Registry.LocalMachine.OpenSubKey(@"Software\Microsoft\Windows\CurrentVersion\Fonts", false);
+                if(fonts == null) {
+                    throw new Exception("Can't find font registry database.");
+                }
+            }
+
+            foreach(string fontKey in fonts.GetValueNames()) {
+                if(fontKey == regFontName) {
+                    return fonts.GetValue(fontKey).ToString();
+                }
+            }
+            return null;
+        }
+
+        private static string GetFontNameFromFile(string fontFilePath) {
+            PrivateFontCollection fontColl = new PrivateFontCollection();
+            fontColl.AddFontFile(fontFilePath);
+            return fontColl.Families[0].Name;
         }
     }
 }

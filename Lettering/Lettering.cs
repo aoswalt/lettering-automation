@@ -56,11 +56,11 @@ namespace Lettering {
 
         [STAThread]
         static void Main(string[] args) {
-            // if setup had to be done, do not open launcher
-            if(SetupManager.CheckSetup()) {
-                LauncherWindow launcher = new LauncherWindow();
-                launcher.ShowDialog();
-            }
+            // check setup will close corel as necessary
+            SetupManager.CheckSetup();
+
+            LauncherWindow launcher = new LauncherWindow();
+            launcher.ShowDialog();
         }
 
         public static void Run() {
