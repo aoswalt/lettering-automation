@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Lettering {
     class DataWriter {
-        public static void writeLog(List<OrderData> orders, string fileName = "log") {
+        public static void writeLog(List<OrderData> orders, string fileName = "LetteringLog") {
             string outFilePath = Environment.GetFolderPath(Environment.SpecialFolder.Desktop) + '/' + fileName + ".csv";
 
             // delete file if exists
@@ -46,7 +46,8 @@ namespace Lettering {
             ret += Headers.COLOR2 + ",";
             ret += Headers.COLOR3 + ",";
             ret += Headers.COLOR4 + ",";
-            ret += Headers.RUSH_DATE;
+            ret += Headers.RUSH_DATE + ",";
+            ret += Headers.COMMENTS;
 
             return ret;
         }
@@ -70,7 +71,8 @@ namespace Lettering {
             ret += order.color2 + ",";
             ret += order.color3 + ",";
             ret += order.color4 + ",";
-            ret += order.rushDate;
+            ret += order.rushDate + ",";
+            ret += order.comment;
 
             return ret;
         }

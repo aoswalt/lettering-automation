@@ -28,6 +28,7 @@ namespace Lettering {
             color3 = row[Headers.COLOR3] != System.DBNull.Value ? (string)row[Headers.COLOR3] : "";
             color4 = row[Headers.COLOR4] != System.DBNull.Value ? (string)row[Headers.COLOR4] : "";
             rushDate = row[Headers.RUSH_DATE] != System.DBNull.Value ? ((System.DateTime)row[Headers.RUSH_DATE]).ToString("d") : "";
+            comment = "";
         }
 
         public string cutHouse;
@@ -48,6 +49,7 @@ namespace Lettering {
         public string color3;
         public string color4;
         public string rushDate;
+        public string comment;
     }
 
     public class Lettering {
@@ -64,12 +66,12 @@ namespace Lettering {
         }
 
         public static void Run() {
-            bool cancelBuilding = true;
+            bool cancelBuilding = false;
 
             ConfigData config = ConfigManager.getConfig();
             ActiveOrderWindow activeOrderWindow = new ActiveOrderWindow();
 
-            List<OrderData> missingOrders = new List<OrderData>();
+            List<OrderData> ordersToLog = new List<OrderData>();
 
             DataTable data = DataReader.getCsvData();
             foreach(DataRow row in data.Rows) {
@@ -78,7 +80,8 @@ namespace Lettering {
 
                 // if not in config, continue; else, store the trimmed code
                 if(trimmedCode.Length == 0) {
-                    missingOrders.Add(order);
+                    order.comment += "Not in config.";
+                    ordersToLog.Add(order);
                     continue;
                 } else {
                     order.itemCode = trimmedCode;
@@ -92,7 +95,8 @@ namespace Lettering {
                 }
 
                 if(cancelBuilding) {
-                    missingOrders.Add(order);
+                    order.comment += "Cancelled building.";
+                    ordersToLog.Add(order);
                     continue;
                 }
 
@@ -101,21 +105,27 @@ namespace Lettering {
                 String templatePath = config.getTemplatePath(order);
                 if(!File.Exists(templatePath)) {
                     MessageBox.Show("Template not found:\n" + templatePath, "Missing Template", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
-                    missingOrders.Add(order);
+                    order.comment += "Template not found.";
+                    ordersToLog.Add(order);
                 } else {
                     //BuildOrder(order);
                     activeOrderWindow.ShowDialog();
 
-                    if(activeOrderWindow.selection == WindowSelection.REJECT) {
-                        missingOrders.Add(order);
+                    if(activeOrderWindow.selection == WindowSelection.NEXT) {
+                        order.comment += "Completed.";
+                        ordersToLog.Add(order);
+                    } else if(activeOrderWindow.selection == WindowSelection.REJECT) {
+                        order.comment += "Manually rejected.";
+                        ordersToLog.Add(order);
                     } else if(activeOrderWindow.selection == WindowSelection.CANCEL) {
                         cancelBuilding = true;
-                        missingOrders.Add(order);
+                        order.comment += "Cancelled building.";
+                        ordersToLog.Add(order);
                     }
                 }
             }
 
-            DataWriter.writeLog(missingOrders);
+            DataWriter.writeLog(ordersToLog);
 
             if(errors.Length > 0) MessageBox.Show(errors, "Error Log");
         }

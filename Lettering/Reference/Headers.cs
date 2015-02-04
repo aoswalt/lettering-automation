@@ -18,5 +18,6 @@
         public static string COLOR3 = "DCLR3";
         public static string COLOR4 = "DCLR4";
         public static string RUSH_DATE = "RUDAT";
+        public static string COMMENTS = "COMMENTS";
     }
 }

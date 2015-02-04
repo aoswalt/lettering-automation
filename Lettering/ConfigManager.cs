@@ -286,7 +286,7 @@ namespace Lettering {
 
             finalPath += makeFileName(order);
 
-            MessageBox.Show(" item: " + order.itemCode + "\nstart: " + startPath + "\n  end: " + finalPath);
+            //MessageBox.Show(" item: " + order.itemCode + "\nstart: " + startPath + "\n  end: " + finalPath);
 
             return finalPath;
         }
