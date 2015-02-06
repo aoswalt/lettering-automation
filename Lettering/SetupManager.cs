@@ -87,7 +87,7 @@ namespace Lettering {
                 string fontName = GetFontNameFromFile(fontFileName);
                 if(!installedFonts.Contains(fontName)) {
                     // font not installed
-                    MessageBox.Show(fontName + " not installed.");
+                    //MessageBox.Show(fontName + " not installed.");
                     missingFonts += fontName + "\n";
                     needFontInstall = true;
                 } else {
@@ -96,7 +96,7 @@ namespace Lettering {
 
                     if(installedFontFile == null) {
                         // can't find font file (shouldn't happen)
-                        MessageBox.Show(fontName + " installed file name not found.");
+                        //MessageBox.Show(fontName + " installed file name not found.");
                         missingFonts += fontName + "\n";
                         needFontInstall = true;
                     } else {
@@ -106,7 +106,7 @@ namespace Lettering {
                         // is saved is newer than installed
                         if(fontDT > installedFontDT) {
                             // font out of date
-                            MessageBox.Show(fontName + " has date difference.\nServer:    " + fontDT + "\nInstalled: " + installedFontDT);
+                            //MessageBox.Show(fontName + " has date difference.\nServer:    " + fontDT + "\nInstalled: " + installedFontDT);
                             missingFonts += fontName + "\n";
                             needFontInstall = true;
                         }

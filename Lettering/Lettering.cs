@@ -55,13 +55,13 @@ namespace Lettering {
     public class Lettering {
         public static string errors = "";
         public static CorelDRAW.Application corel = new CorelDRAW.Application();
+        private static LauncherWindow launcher = new LauncherWindow();
 
         [STAThread]
         static void Main(string[] args) {
             // check setup will close corel as necessary
             SetupManager.CheckSetup();
 
-            LauncherWindow launcher = new LauncherWindow();
             launcher.ShowDialog();
         }
 
@@ -74,6 +74,12 @@ namespace Lettering {
             List<OrderData> ordersToLog = new List<OrderData>();
 
             DataTable data = DataReader.getCsvData();
+            if(data == null) {
+                return;
+            } else {
+                launcher.Close();
+            }
+
             foreach(DataRow row in data.Rows) {
                 OrderData order = new OrderData(row);
                 string trimmedCode = config.trimStyleCode(order.itemCode);

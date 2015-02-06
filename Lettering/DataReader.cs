@@ -88,7 +88,7 @@ namespace Lettering {
                 } else {
                     //MessageBox.Show("No file chosen.");
 
-                    return new DataTable();
+                    return null;
                 }
             } catch(Exception ex) {     // should use specific exceptions
                 MessageBox.Show("Error: Could not read file.\n\n" + ex.Message);

@@ -21,5 +21,9 @@ namespace Lettering {
         private void openButton_Click(object sender, EventArgs e) {
             Lettering.Run();
         }
+
+        private void runButton_Click(object sender, EventArgs e) {
+
+        }
     }
 }

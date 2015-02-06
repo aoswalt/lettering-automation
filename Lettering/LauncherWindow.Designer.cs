@@ -36,6 +36,7 @@
             this.runButton.TabIndex = 0;
             this.runButton.Text = "Run Report";
             this.runButton.UseVisualStyleBackColor = true;
+            this.runButton.Click += new System.EventHandler(this.runButton_Click);
             // 
             // openButton
             // 
