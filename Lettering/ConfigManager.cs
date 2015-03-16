@@ -223,7 +223,7 @@ namespace Lettering {
             return true;
         }
 
-        private string makeFileName(OrderData order) {
+        public string makeFileName(OrderData order) {
             PathData pathData = paths[order.itemCode];
             string fileName = "";
 
@@ -249,7 +249,11 @@ namespace Lettering {
             return fileName.TrimEnd('-') + ".cdr";
         }
 
-        public string constructPath(OrderData order) {      // operating on copy to preserve original data
+        public string constructPath(OrderData order) {
+            return rootPath + constructPartialPath(order) + makeFileName(order);
+        }
+
+        public string constructPartialPath(OrderData order) {      // operating on copy to preserve original data
             // replace item code if mirror style
             if(types[paths[order.itemCode].type] == "mirror") order.itemCode = paths[order.itemCode].mirrorStyle;
             
@@ -260,17 +264,17 @@ namespace Lettering {
                 bool noException = true;
                 foreach(ExceptionData ex in possibleExceptions) {
                     if(exceptionChecks[ex.tag.ToLower()](order, ex)) {
-                        startPath = rootPath + '\\' + ex.path;
+                        startPath = '\\' + ex.path;
                         noException = false;
                         break;
                     }
                 }
                 // fallthrough if no exception match
                 if(noException) {
-                    startPath = rootPath + '\\' + types[paths[order.itemCode].type];
+                    startPath = '\\' + types[paths[order.itemCode].type];
                 }
             } else {
-                startPath = rootPath + '\\' + types[paths[order.itemCode].type];
+                startPath = '\\' + types[paths[order.itemCode].type];
             }
 
             string[] tokens = startPath.Split('\\');
@@ -284,7 +288,7 @@ namespace Lettering {
                 }
             }
 
-            finalPath += makeFileName(order);
+            //finalPath += makeFileName(order);
 
             //MessageBox.Show(" item: " + order.itemCode + "\nstart: " + startPath + "\n  end: " + finalPath);
 

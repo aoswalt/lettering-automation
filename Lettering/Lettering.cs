@@ -54,6 +54,7 @@ namespace Lettering {
 
     public class Lettering {
         public static string errors = "";
+        private static string destPath = Environment.GetFolderPath(Environment.SpecialFolder.Desktop) + @"\1 CUT FILES";
         public static CorelDRAW.Application corel = new CorelDRAW.Application();
         private static LauncherWindow launcher = new LauncherWindow();
 
@@ -114,10 +115,21 @@ namespace Lettering {
                     order.comment += "Template not found.";
                     ordersToLog.Add(order);
                 } else {
-                    //BuildOrder(order);
+                    BuildOrder(templatePath, order);
                     activeOrderWindow.ShowDialog();
 
                     if(activeOrderWindow.selection == WindowSelection.NEXT) {
+                        if(corel.ActiveDocument.Dirty) {
+                            System.IO.Directory.CreateDirectory(destPath + config.constructPartialPath(order));
+                            corel.ActiveDocument.SaveAs(destPath + config.constructPartialPath(order) + config.makeFileName(order));
+                        }
+                        
+                        /*
+                        while(corel.Documents.Count > 0) {
+                            corel.ActiveDocument.Close();
+                        }
+                         */
+
                         order.comment += "Completed.";
                         ordersToLog.Add(order);
                     } else if(activeOrderWindow.selection == WindowSelection.REJECT) {
@@ -136,7 +148,9 @@ namespace Lettering {
             if(errors.Length > 0) MessageBox.Show(errors, "Error Log");
         }
 
-        private static void BuildOrder(OrderData order) {
+        private static void BuildOrder(string templatePath, OrderData order) {
+            corel.OpenDocument(templatePath);
+
             Shape orderShape = corel.ActiveLayer.CreateRectangle2(0, 0, 0.1, 0.1);
             orderShape.Name = "OrderData";
             orderShape.Properties["order", 1] = order.size;
