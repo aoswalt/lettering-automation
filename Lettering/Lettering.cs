@@ -119,7 +119,10 @@ namespace Lettering {
                     activeOrderWindow.ShowDialog();
 
                     if(activeOrderWindow.selection == WindowSelection.NEXT) {
-                        if(corel.ActiveDocument.Dirty) {
+                        if(corel.Documents.Count > 0 && corel.ActiveDocument.Dirty) {
+                            ShapeRange shapes = corel.ActiveDocument.ActivePage.FindShapes(null, cdrShapeType.cdrTextShape);
+                            shapes.ConvertToCurves();
+
                             System.IO.Directory.CreateDirectory(destPath + config.constructPartialPath(order));
                             corel.ActiveDocument.SaveAs(destPath + config.constructPartialPath(order) + config.makeFileName(order));
                         }
