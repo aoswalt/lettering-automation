@@ -131,7 +131,7 @@ namespace Lettering {
                 }
             }
 
-            DataWriter.writeLog(ordersToLog);
+            DataWriter.writeLog(ordersToLog, "LetteringLog-" + DateTime.Now.ToString("yyyymmdd_HHmm"));
 
             if(errors.Length > 0) MessageBox.Show(errors, "Error Log");
         }

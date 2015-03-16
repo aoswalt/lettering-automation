@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Lettering {
     class DataWriter {
-        public static void writeLog(List<OrderData> orders, string fileName = "LetteringLog") {
+        public static void writeLog(List<OrderData> orders, string fileName) {
             string outFilePath = Environment.GetFolderPath(Environment.SpecialFolder.Desktop) + '/' + fileName + ".csv";
 
             // delete file if exists
