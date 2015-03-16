@@ -13,7 +13,7 @@ using System.Windows.Forms;
 
 namespace Lettering {
     class SetupManager {
-        private static string installedLibPath = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + 
+        private static string installedLibPath = Environment.GetFolderPath(Environment.SpecialFolder.ProgramFiles) + 
                 @"\Corel\CorelDRAW Graphics Suite X7\Draw\GMS\Automation.gms";
         private static string libPath = @"\\production\Lettering\Corel\WORK FOLDERS\Automation\Automation.gms";
         private static string installedFontFolder = Environment.GetFolderPath(Environment.SpecialFolder.Fonts);
