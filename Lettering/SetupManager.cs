@@ -84,7 +84,7 @@ namespace Lettering {
                 string fontFileName = Path.GetFileName(fullFontPath);
                 List<string> installedFonts = GetInstalledFonts();
 
-                string fontName = GetFontNameFromFile(fontFileName);
+                string fontName = GetFontNameFromFile(fullFontPath);
                 if(!installedFonts.Contains(fontName)) {
                     // font not installed
                     //MessageBox.Show(fontName + " not installed.");
