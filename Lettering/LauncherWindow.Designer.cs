@@ -56,7 +56,9 @@
             this.Controls.Add(this.openButton);
             this.Controls.Add(this.runButton);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
+            this.MaximizeBox = false;
             this.Name = "LauncherWindow";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Lettering";
             this.Load += new System.EventHandler(this.LauncherWindow_Load);
             this.ResumeLayout(false);

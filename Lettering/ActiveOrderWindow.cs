@@ -20,17 +20,17 @@ namespace Lettering {
 
         private void nextButton_Click(object sender, EventArgs e) {
             selection = WindowSelection.NEXT;
-            this.Close();
+            this.Hide();
         }
 
         private void rejectButton_Click(object sender, EventArgs e) {
             selection = WindowSelection.REJECT;
-            this.Close();
+            this.Hide();
         }
 
         private void cancelButton_Click(object sender, EventArgs e) {
             selection = WindowSelection.CANCEL;
-            this.Close();
+            this.Hide();
         }
     }
 }

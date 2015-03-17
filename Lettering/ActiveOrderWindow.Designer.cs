@@ -71,8 +71,12 @@
             this.Controls.Add(this.rejectButton);
             this.Controls.Add(this.nextButton);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
+            this.Location = new System.Drawing.Point(300, 300);
+            this.MaximizeBox = false;
             this.Name = "ActiveOrderWindow";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.Manual;
             this.Text = "Active Order";
+            this.TopMost = true;
             this.ResumeLayout(false);
 
         }

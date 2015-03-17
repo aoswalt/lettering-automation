@@ -248,7 +248,8 @@ namespace Lettering {
                 }
             }
 
-            return fileName.TrimEnd('-') + ".cdr";
+            fileName = fileName.TrimEnd('-');
+            return (fileName != "" ? fileName.ToUpper() : order.name.ToUpper()) + ".cdr";
         }
 
         public string constructPath(OrderData order) {

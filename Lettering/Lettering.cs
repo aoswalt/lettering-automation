@@ -78,7 +78,7 @@ namespace Lettering {
             if(data == null) {
                 return;
             } else {
-                launcher.Close();
+                launcher.Hide();
             }
 
             MessageBox.Show(data.Rows.Count + " orders found.");
