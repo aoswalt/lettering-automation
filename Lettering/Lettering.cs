@@ -81,6 +81,8 @@ namespace Lettering {
                 launcher.Close();
             }
 
+            MessageBox.Show(data.Rows.Count + " orders found.");
+
             foreach(DataRow row in data.Rows) {
                 OrderData order = new OrderData(row);
                 string trimmedCode = config.trimStyleCode(order.itemCode);
@@ -98,6 +100,8 @@ namespace Lettering {
                 string orderPath = config.constructPath(order);
 
                 if(File.Exists(orderPath)) {
+                    order.comment += "Already made.";
+                    ordersToLog.Add(order);
                     continue;
                 }
 
@@ -125,6 +129,8 @@ namespace Lettering {
 
                             System.IO.Directory.CreateDirectory(destPath + config.constructPartialPath(order));
                             corel.ActiveDocument.SaveAs(destPath + config.constructPartialPath(order) + config.makeFileName(order));
+                            corel.ActiveDocument.Close();   // new file
+                            //corel.ActiveDocument.Close();   // template
                         }
                         
                         /*
@@ -148,11 +154,15 @@ namespace Lettering {
 
             DataWriter.writeLog(ordersToLog, "LetteringLog-" + DateTime.Now.ToString("yyyymmdd_HHmm"));
 
+            MessageBox.Show("Done!");
             if(errors.Length > 0) MessageBox.Show(errors, "Error Log");
         }
 
         private static void BuildOrder(string templatePath, OrderData order) {
+            corel.Visible = true;
             corel.OpenDocument(templatePath);
+
+            if(corel.Documents.Count < 1) MessageBox.Show("No documents open.");
 
             Shape orderShape = corel.ActiveLayer.CreateRectangle2(0, 0, 0.1, 0.1);
             orderShape.Name = "OrderData";
@@ -162,7 +172,8 @@ namespace Lettering {
             orderShape.Properties["order", 4] = order.word2;
             orderShape.Properties["order", 5] = order.word3;
             orderShape.Properties["order", 6] = order.word4;
-            orderShape.Properties["order", 7] = new string[] { "" };    //TODO: flesh out handling names
+            orderShape.Properties["order", 7] = new string[] { "", order.name };    // working around 1-based arrays in VBA
+            //TODO: flesh out handling names
 
             corel.ActivePage.CreateLayer("Automate");
         }

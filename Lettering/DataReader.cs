@@ -38,7 +38,8 @@ namespace Lettering {
                                                 new DataColumn("DRAWING_LETTER_WORD3", typeof(String)), 
                                                 new DataColumn("DRAWING_LETTER_WORD4", typeof(String)), 
                                                 new DataColumn("SCHEDULE_DATE_CCYYMMDD", typeof(int)),
-                                                new DataColumn("SCHEDULE_DATE_MMDDCCYY", typeof(DateTime))
+                                                new DataColumn("SCHEDULE_DATE_MMDDCCYY", typeof(DateTime)),
+                                                new DataColumn("NAME", typeof(String))
                                             };
                         dataTable.Columns.AddRange(cols);
 
@@ -57,6 +58,7 @@ namespace Lettering {
                             dtClone.Columns["DRAWING_LETTER_WORD2"].DataType = typeof(String);
                             dtClone.Columns["DRAWING_LETTER_WORD3"].DataType = typeof(String);
                             dtClone.Columns["DRAWING_LETTER_WORD4"].DataType = typeof(String);
+                            dtClone.Columns["NAME"].DataType = typeof(String);
 
                             foreach(DataRow row in dataTable.Rows) {
                                 object[] vals = row.ItemArray;
@@ -74,6 +76,7 @@ namespace Lettering {
                                 vals[10] = ((String)vals[10]).Replace("\"", "");                    // DRAWING_LETTER_WORD4
                                 vals[11] = int.Parse(((String)vals[11]).Replace("\"", ""));         // SCHEDULE_DATE_CCYYMMDD
                                 vals[12] = DateTime.Parse(((String)vals[12]).Replace("\"", ""));    // SCHEDULE_DATE_MMDDCCYY
+                                vals[13] = ((String)vals[13]).Replace("\"", "");                    // NAME
 
                                 dtClone.NewRow().ItemArray = vals;
                             }
@@ -106,7 +109,7 @@ namespace Lettering {
             data.Columns["ITEM_NO"].ColumnName = Headers.ITEM;
             data.Columns["LETTER_SIZE"].ColumnName = Headers.SIZE;
             data.Columns["LETTER_SPEC"].ColumnName = Headers.SPEC;
-            data.Columns.Add(Headers.NAME);
+            data.Columns["NAME"].ColumnName = Headers.NAME;
             data.Columns["DRAWING_LETTER_WORD1"].ColumnName = Headers.WORD1;
             data.Columns["DRAWING_LETTER_WORD2"].ColumnName = Headers.WORD2;
             data.Columns["DRAWING_LETTER_WORD3"].ColumnName = Headers.WORD3;

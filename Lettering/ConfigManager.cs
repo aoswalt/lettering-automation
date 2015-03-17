@@ -96,6 +96,8 @@ namespace Lettering {
                 // "TTstyle" becomes "TT STYLES\TT style
                 foreach(string pre in prefixes) {
                     if(order.itemCode.StartsWith(pre)) {
+                        if(types[paths[order.itemCode].type] == "mirror") order.itemCode = paths[order.itemCode].mirrorStyle;
+
                         return pre + " STYLES\\" + pre + " " + Regex.Replace(order.itemCode, pre, "");
                     }
                 }
