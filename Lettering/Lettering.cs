@@ -120,6 +120,7 @@ namespace Lettering {
                     ordersToLog.Add(order);
                 } else {
                     BuildOrder(templatePath, order);
+                    activeOrderWindow.SetInfoDisplay(order);
                     activeOrderWindow.ShowDialog();
 
                     if(activeOrderWindow.selection == WindowSelection.NEXT) {

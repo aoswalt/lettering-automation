@@ -32,5 +32,15 @@ namespace Lettering {
             selection = WindowSelection.CANCEL;
             this.Hide();
         }
+
+        public void SetInfoDisplay(OrderData order) {
+            lblStyle.Text = order.itemCode;
+            lblSize.Text = order.size.ToString();
+            lblSpec.Text = order.spec.ToString();
+            lblWord1.Text = (order.word1 != "" ? order.word1 : order.name);
+            lblWord2.Text = order.word2;
+            lblWord3.Text = order.word3;
+            lblWord4.Text = order.word4;
+        }
     }
 }
