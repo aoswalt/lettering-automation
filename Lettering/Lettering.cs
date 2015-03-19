@@ -54,16 +54,17 @@ namespace Lettering {
 
     public class Lettering {
         public static string errors = "";
+        public static string tempFolder = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + "\\TemporaryAutomationFiles\\";
         private static string destPath = Environment.GetFolderPath(Environment.SpecialFolder.Desktop) + @"\1 CUT FILES";
         public static CorelDRAW.Application corel = new CorelDRAW.Application();
         private static LauncherWindow launcher = new LauncherWindow();
 
         [STAThread]
         static void Main(string[] args) {
-            // check setup will close corel as necessary
-            SetupManager.CheckSetup();
-
-            launcher.ShowDialog();
+            // check setup will close corel as necessary & prevents continuing if necessary
+            if(SetupManager.CheckSetup()) {
+                launcher.ShowDialog();
+            }
         }
 
         public static void Run() {

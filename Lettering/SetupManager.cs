@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Diagnostics;
 using System.Drawing;
 using System.Drawing.Text;
 using System.IO;
@@ -17,17 +18,23 @@ namespace Lettering {
                 @"C:\Program Files\Corel\CorelDRAW Graphics Suite X7\Draw\GMS\Automation.gms";
         private static string libPath = @"\\production\Lettering\Corel\WORK FOLDERS\Automation\Automation.gms";
         private static string installedFontFolder = Environment.GetFolderPath(Environment.SpecialFolder.Fonts);
-        private static string fontFolder = @"\\production\Lettering\Corel\WORK FOLDERS\VS Fonts";
+        private static string networkFontFolder = @"\\production\Lettering\Corel\WORK FOLDERS\VS Fonts";
+        private static string fontFolder = Lettering.tempFolder;
+        private static List<string> loadedFonts = new List<string>();
         private static string missingFonts = "";
 
         // font installer function
         [DllImport("gdi32.dll", EntryPoint = "AddFontResourceW", SetLastError = true)]
         public static extern int AddFontResource([In][MarshalAs(UnmanagedType.LPWStr)] string lpFileName);
 
-        // returns true if no setup was required
+        // font remover function
+        [DllImport("gdi32.dll", EntryPoint = "AddFontResourceW", SetLastError = true)]
+        public static extern int RemoveFontResource([In][MarshalAs(UnmanagedType.LPWStr)] string lpFileName);
+
+        // returns true if safe to continue
         public static bool CheckSetup() {
             bool libInstall = InstallLibrary();
-            bool fontInstall = InstallFonts();
+            bool fontInstall = CheckFontInstall();
 
             string msg = "";
             msg += (libInstall ? "Library had to be updated.\n\n" : "");
@@ -45,11 +52,15 @@ namespace Lettering {
                     }
 
                     Lettering.corel.Quit();
-                } else {
-                    MessageBox.Show("Font(s) need to be installed or updated:\n" + missingFonts, "Missing Fonts", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
 
-                return false;
+                if(fontInstall) {
+                    Process.Start(networkFontFolder);
+                    MessageBox.Show("Font(s) need to be installed or updated:\n" + missingFonts, "Missing Fonts", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    return false;   // prevent continuing without fonts installed
+                } else {
+                    return true;
+                }
             } else {
                 return true;
             }
@@ -77,8 +88,14 @@ namespace Lettering {
         }
 
         // returns true if fonts were installed
-        private static bool InstallFonts() {
+        private static bool CheckFontInstall() {
             bool needFontInstall = false;
+
+            System.IO.Directory.CreateDirectory(fontFolder);
+            string[] files = System.IO.Directory.GetFiles(networkFontFolder);
+            foreach(string file in files) {
+                System.IO.File.Copy(file, fontFolder + System.IO.Path.GetFileName(file), true);
+            }
 
             foreach(string fullFontPath in Directory.GetFiles(fontFolder)) {
                 string fontFileName = Path.GetFileName(fullFontPath);
@@ -113,17 +130,35 @@ namespace Lettering {
                     }
                 }
 
+                /*
                 if(needFontInstall) {
                     int result = AddFontResource(fullFontPath);
+                    loadedFonts.Add(fullFontPath);
                     int error = Marshal.GetLastWin32Error();
 
                     if(error != 0 && error != 1400) {
                         MessageBox.Show("Error no: " + error + "\n" + new Win32Exception(error).Message + "\n\n" + fullFontPath);
                     }
                 }
+                 */
             }
 
             return needFontInstall;
+        }
+
+        // doesn't work if fonts installed on system already
+        public static void ReleaseFonts() {
+            foreach(string f in loadedFonts) {
+                int result;
+                while((result = RemoveFontResource(f)) > 0) {
+                    MessageBox.Show("Result: " + result + "\n\nRemoved font:\n" + f);
+                    int error = Marshal.GetLastWin32Error();
+
+                    if(error != 0 && error != 1400) {
+                        MessageBox.Show("Error no: " + error + "\n" + new Win32Exception(error).Message + "\n\n" + f);
+                    }
+                }
+            }
         }
 
         private static List<string> GetInstalledFonts() {
@@ -162,7 +197,9 @@ namespace Lettering {
             } catch(FileNotFoundException ex) {
                 return "";
             }
-            return fontColl.Families[0].Name;
+            string name = fontColl.Families[0].Name;
+            fontColl.Dispose();
+            return name;
         }
     }
 }
