@@ -91,13 +91,15 @@ namespace Lettering {
         private static bool CheckFontInstall() {
             bool needFontInstall = false;
 
+            /*
             System.IO.Directory.CreateDirectory(fontFolder);
             string[] files = System.IO.Directory.GetFiles(networkFontFolder);
             foreach(string file in files) {
                 System.IO.File.Copy(file, fontFolder + System.IO.Path.GetFileName(file), true);
             }
+             * */
 
-            foreach(string fullFontPath in Directory.GetFiles(fontFolder)) {
+            foreach(string fullFontPath in Directory.GetFiles(networkFontFolder, "*.otf")) {
                 string fontFileName = Path.GetFileName(fullFontPath);
                 List<string> installedFonts = GetInstalledFonts();
 
@@ -194,12 +196,11 @@ namespace Lettering {
             PrivateFontCollection fontColl = new PrivateFontCollection();
             try {
                 fontColl.AddFontFile(fontFilePath);
+                string name = fontColl.Families[0].Name;
+                return name;
             } catch(FileNotFoundException ex) {
                 return "";
             }
-            string name = fontColl.Families[0].Name;
-            fontColl.Dispose();
-            return name;
         }
     }
 }

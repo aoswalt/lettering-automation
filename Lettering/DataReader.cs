@@ -14,12 +14,15 @@ namespace Lettering {
 
             try {
                 if(openFileDialog.ShowDialog() == DialogResult.OK) {
-                    string pathOnly = Path.GetDirectoryName(openFileDialog.FileName);
+                    //string pathOnly = Path.GetDirectoryName(openFileDialog.FileName);
                     string fileName = Path.GetFileName(openFileDialog.FileName);
+
+                    System.IO.Directory.CreateDirectory(Lettering.tempFolder);
+                    System.IO.File.Copy(openFileDialog.FileName, Lettering.tempFolder + fileName, true);
 
                     string query = @"SELECT * FROM [" + fileName + "]";
 
-                    using(OdbcConnection conn = new OdbcConnection("Driver={Microsoft Text Driver (*.txt; *.csv)};DBQ=" + pathOnly)) {
+                    using(OdbcConnection conn = new OdbcConnection("Driver={Microsoft Text Driver (*.txt; *.csv)};DBQ=" + Lettering.tempFolder)) {
                         OdbcCommand command = new OdbcCommand(query, conn);
                         OdbcDataAdapter adapter = new OdbcDataAdapter(command);
 
@@ -84,6 +87,8 @@ namespace Lettering {
                             unifyHeaders(dtClone);
                             return dtClone;
                         }
+
+                        System.IO.Directory.Delete(Lettering.tempFolder, true);
 
                         unifyHeaders(dataTable);
                         return dataTable;
