@@ -99,8 +99,9 @@ namespace Lettering {
 
                 // if built, continue
                 string orderPath = config.constructPath(order);
+                string newMadePath = destPath + config.constructPartialPath(order) + config.makeFileName(order);
 
-                if(File.Exists(orderPath)) {
+                if(File.Exists(orderPath) || File.Exists(newMadePath)) {
                     order.comment += "Already made.";
                     ordersToLog.Add(order);
                     continue;
@@ -130,7 +131,7 @@ namespace Lettering {
                             shapes.ConvertToCurves();
 
                             System.IO.Directory.CreateDirectory(destPath + config.constructPartialPath(order));
-                            corel.ActiveDocument.SaveAs(destPath + config.constructPartialPath(order) + config.makeFileName(order));
+                            corel.ActiveDocument.SaveAs(newMadePath);
                             corel.ActiveDocument.Close();   // new file
                             //corel.ActiveDocument.Close();   // template
                         }
