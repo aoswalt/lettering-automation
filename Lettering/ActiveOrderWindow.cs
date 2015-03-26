@@ -37,7 +37,17 @@ namespace Lettering {
             lblStyle.Text = order.itemCode;
             lblSize.Text = order.size.ToString();
             lblSpec.Text = order.spec.ToString();
-            lblWord1.Text = (order.word1 != "" ? order.word1 : order.name);
+
+            //lblWord1.Text = (order.word1 != "" ? order.word1 : order.name);
+            if(order.word1 != "") {
+                lblWord1.Text = order.word1;
+            } else {
+                if(order.nameList.Count == 1) {
+                    lblWord1.Text = order.name;
+                } else {
+                    lblWord1.Text = "<name list>";
+                }
+            }
             lblWord2.Text = order.word2;
             lblWord3.Text = order.word3;
             lblWord4.Text = order.word4;

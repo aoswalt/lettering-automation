@@ -29,6 +29,7 @@ namespace Lettering {
             color4 = row[Headers.COLOR4] != System.DBNull.Value ? (string)row[Headers.COLOR4] : "";
             rushDate = row[Headers.RUSH_DATE] != System.DBNull.Value ? ((System.DateTime)row[Headers.RUSH_DATE]).ToString("d") : "";
             comment = "";
+            nameList = new List<string>();
         }
 
         public string cutHouse;
@@ -50,6 +51,7 @@ namespace Lettering {
         public string color4;
         public string rushDate;
         public string comment;
+        public List<string> nameList;
     }
 
     public class Lettering {
@@ -72,7 +74,7 @@ namespace Lettering {
 
             ConfigData config = ConfigManager.getConfig();
             ActiveOrderWindow activeOrderWindow = new ActiveOrderWindow();
-
+            List<string> currentNames = new List<string>();
             List<OrderData> ordersToLog = new List<OrderData>();
 
             DataTable data = DataReader.getCsvData();
@@ -84,8 +86,14 @@ namespace Lettering {
 
             MessageBox.Show(data.Rows.Count + " orders found.");
 
+            // convert rows to data entries before loop to allow lookahead
+            List<OrderData> orders = new List<OrderData>();
             foreach(DataRow row in data.Rows) {
-                OrderData order = new OrderData(row);
+                orders.Add(new OrderData(row));
+            }
+
+            for(int i = 0; i != orders.Count; ++i) {
+                OrderData order = orders[i];
                 string trimmedCode = config.trimStyleCode(order.itemCode);
 
                 // if not in config, continue; else, store the trimmed code
@@ -121,6 +129,21 @@ namespace Lettering {
                     order.comment += "Template not found.";
                     ordersToLog.Add(order);
                 } else {
+                    if(config.isNameStyle(order)) {
+                        currentNames.Add(order.name);
+
+                        // if following is name style and same order/voucher, skip processing current list
+                        if(i + 1 != orders.Count && config.isNameStyle(orders[i + 1]) && 
+                           (order.orderNumber == orders[i + 1].orderNumber) && 
+                           (order.voucherNumber == orders[i + 1].voucherNumber)) {
+                            order.comment += "Name style";
+                            ordersToLog.Add(order);
+                            continue;
+                        }
+                    }
+
+                    order.nameList = currentNames;
+
                     BuildOrder(templatePath, order);
                     activeOrderWindow.SetInfoDisplay(order);
                     activeOrderWindow.ShowDialog();
@@ -130,12 +153,18 @@ namespace Lettering {
                             ShapeRange shapes = corel.ActiveDocument.ActivePage.FindShapes(null, cdrShapeType.cdrTextShape);
                             shapes.ConvertToCurves();
 
-                            System.IO.Directory.CreateDirectory(destPath + config.constructPartialPath(order));
-                            corel.ActiveDocument.SaveAs(newMadePath);
+                            if(config.isNameStyle(order)) {
+                                string namesDir = Environment.GetFolderPath(Environment.SpecialFolder.Desktop) + @"\Name Styles\" + order.cutHouse + "\\";
+                                System.IO.Directory.CreateDirectory(namesDir);
+                                corel.ActiveDocument.SaveAs(namesDir + order.orderNumber + order.voucherNumber.ToString("D3"));
+                            } else {
+                                System.IO.Directory.CreateDirectory(destPath + config.constructPartialPath(order));
+                                corel.ActiveDocument.SaveAs(newMadePath);
+                            }
                             corel.ActiveDocument.Close();   // new file
                             //corel.ActiveDocument.Close();   // template
                         }
-                        
+
                         /*
                         while(corel.Documents.Count > 0) {
                             corel.ActiveDocument.Close();
@@ -152,6 +181,8 @@ namespace Lettering {
                         order.comment += "Cancelled building.";
                         ordersToLog.Add(order);
                     }
+
+                    currentNames.Clear();
                 }
             }
 
@@ -165,7 +196,17 @@ namespace Lettering {
             corel.Visible = true;
             corel.OpenDocument(templatePath);
 
-            if(corel.Documents.Count < 1) MessageBox.Show("No documents open.");
+            if(corel.Documents.Count < 1) {
+                MessageBox.Show("No documents open.");
+                return;
+            }
+
+            if(order.nameList.Count == 0) {
+                order.nameList.Add("");
+            }
+
+            // work around 1-based array in VBA
+            order.nameList.Insert(0, "");
 
             Shape orderShape = corel.ActiveLayer.CreateRectangle2(0, 0, 0.1, 0.1);
             orderShape.Name = "OrderData";
@@ -175,8 +216,7 @@ namespace Lettering {
             orderShape.Properties["order", 4] = order.word2;
             orderShape.Properties["order", 5] = order.word3;
             orderShape.Properties["order", 6] = order.word4;
-            orderShape.Properties["order", 7] = new string[] { "", order.name };    // working around 1-based arrays in VBA
-            //TODO: flesh out handling names
+            orderShape.Properties["order", 7] = order.nameList.ToArray();
 
             corel.ActivePage.CreateLayer("Automate");
         }

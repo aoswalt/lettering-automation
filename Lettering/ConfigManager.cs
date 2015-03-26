@@ -97,6 +97,7 @@ namespace Lettering {
                 foreach(string pre in prefixes) {
                     if(order.itemCode.StartsWith(pre)) {
                         if(types[paths[order.itemCode].type] == "mirror") order.itemCode = paths[order.itemCode].mirrorStyle;
+                        if(types[paths[order.itemCode].type] == "names") order.itemCode = paths[order.itemCode].mirrorStyle;
 
                         return pre + " STYLES\\" + pre + " " + Regex.Replace(order.itemCode, pre, "");
                     }
@@ -296,6 +297,10 @@ namespace Lettering {
             //MessageBox.Show(" item: " + order.itemCode + "\nstart: " + startPath + "\n  end: " + finalPath);
 
             return finalPath;
+        }
+
+        public bool isNameStyle(OrderData order) {
+            return types[paths[trimStyleCode(order.itemCode)].type] == "names";
         }
     }
 
