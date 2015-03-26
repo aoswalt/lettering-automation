@@ -156,7 +156,7 @@ namespace Lettering {
                             if(config.isNameStyle(order)) {
                                 string namesDir = Environment.GetFolderPath(Environment.SpecialFolder.Desktop) + @"\Name Styles\" + order.cutHouse + "\\";
                                 System.IO.Directory.CreateDirectory(namesDir);
-                                corel.ActiveDocument.SaveAs(namesDir + order.orderNumber + order.voucherNumber.ToString("D3"));
+                                corel.ActiveDocument.SaveAs(namesDir + order.orderNumber + order.voucherNumber.ToString("D3") + ".cdr");
                             } else {
                                 System.IO.Directory.CreateDirectory(destPath + config.constructPartialPath(order));
                                 corel.ActiveDocument.SaveAs(newMadePath);
