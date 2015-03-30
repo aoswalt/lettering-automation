@@ -60,6 +60,7 @@ namespace Lettering {
         private static string destPath = Environment.GetFolderPath(Environment.SpecialFolder.Desktop) + @"\1 CUT FILES";
         public static CorelDRAW.Application corel = new CorelDRAW.Application();
         private static LauncherWindow launcher = new LauncherWindow();
+        private static ConfigData config;
 
         [STAThread]
         static void Main(string[] args) {
@@ -72,7 +73,7 @@ namespace Lettering {
         public static void Run() {
             bool cancelBuilding = false;
 
-            ConfigData config = ConfigManager.getConfig();
+            config = ConfigManager.getConfig();
             ActiveOrderWindow activeOrderWindow = new ActiveOrderWindow();
             List<string> currentNames = new List<string>();
             List<OrderData> ordersToLog = new List<OrderData>();
@@ -160,6 +161,7 @@ namespace Lettering {
                             } else {
                                 System.IO.Directory.CreateDirectory(destPath + config.constructPartialPath(order));
                                 corel.ActiveDocument.SaveAs(newMadePath);
+                                ExportOrder(order);
                             }
                             corel.ActiveDocument.Close();   // new file
                             //corel.ActiveDocument.Close();   // template
@@ -219,6 +221,75 @@ namespace Lettering {
             orderShape.Properties["order", 7] = order.nameList.ToArray();
 
             corel.ActivePage.CreateLayer("Automate");
+        }
+
+        private static void ExportOrder(OrderData order) {
+            string orderWords = config.makeFileName(order).Replace(".cdr", String.Empty);
+            ConfigData.ExportType exportType = config.getExportType(order);
+
+
+            corel.ActiveDocument.ClearSelection();
+
+            // try selecting specific sew shape
+            if(exportType == ConfigData.ExportType.PLT) {
+                Shape sewShape = corel.ActivePage.FindShape(orderWords + "_sew");
+                if(sewShape != null) sewShape.AddToSelection();
+            }
+
+            // if no shapes found, try selecting by order words
+            if(corel.ActiveSelection.Shapes.Count == 0) {
+                corel.ActivePage.FindShape(orderWords);
+            }
+
+            // if no shapes found, select bottom right
+            if(corel.ActiveSelection.Shapes.Count == 0) {
+                corel.ActiveDocument.ReferencePoint = cdrReferencePoint.cdrTopLeft;
+                corel.ActivePage.SelectShapesFromRectangle(corel.ActivePage.SizeWidth / 2,
+                                                           corel.ActivePage.SizeHeight / 2,
+                                                           corel.ActivePage.SizeWidth,
+                                                           corel.ActivePage.SizeHeight,
+                                                           false);
+            }
+
+            // if no shapes found, select on whole page
+            if(corel.ActiveSelection.Shapes.Count == 0) {
+                corel.ActiveDocument.ReferencePoint = cdrReferencePoint.cdrTopLeft;
+                corel.ActivePage.SelectShapesFromRectangle(0,
+                                                           0,
+                                                           corel.ActivePage.SizeWidth,
+                                                           corel.ActivePage.SizeHeight,
+                                                           false);
+            }
+
+            // if no shapes found, select all
+            if(corel.ActiveSelection.Shapes.Count == 0) {
+                corel.ActivePage.SelectableShapes.All().AddToSelection();
+            }
+
+            switch(exportType) {
+                case ConfigData.ExportType.PLT: {
+                    if(corel.ActiveSelection.Shapes.Count == 0) {
+                        MessageBox.Show("Could no get shapes for exporting. Manual export required.");
+                    } else {
+                        string exportPath = destPath + config.constructPartialPath(order) + "PLT\\";
+                        System.IO.Directory.CreateDirectory(exportPath);
+                        // options need to be specified within Corel previously
+                        corel.ActiveDocument.Export(exportPath + orderWords + ".plt", cdrFilter.cdrPLT, cdrExportRange.cdrSelection);
+                    }
+                    } break;
+                case ConfigData.ExportType.EPS: {
+                    if(corel.ActiveSelection.Shapes.Count == 0) {
+                        MessageBox.Show("Could no get shapes for exporting. Manual export required.");
+                    } else {
+                        string exportPath = destPath + config.constructPartialPath(order) + "EPS\\";
+                        System.IO.Directory.CreateDirectory(exportPath);
+                        // options need to be specified within Corel previously
+                        corel.ActiveDocument.Export(exportPath + orderWords + ".eps", cdrFilter.cdrEPS, cdrExportRange.cdrSelection);
+                    }
+                    } break;
+                default:
+                    break;
+            }
         }
     }
 }

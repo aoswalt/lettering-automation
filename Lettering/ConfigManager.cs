@@ -7,7 +7,7 @@ using System.Text.RegularExpressions;
 namespace Lettering {
     public class ConfigManager {
         private const string configPath = @"./configs/automation.cfg";
-        private enum Sections {Void, Root, Types, Prefixes, Paths, Exceptions, Trims};
+        private enum Sections { Void, Root, Types, Prefixes, Paths, Exports, Exceptions, Trims };
 
         public static ConfigData getConfig() {
             ConfigData config = new ConfigData();
@@ -34,6 +34,8 @@ namespace Lettering {
                             curSection = Sections.Prefixes;
                         } else if(line.Contains("PATHS")) {
                             curSection = Sections.Paths;
+                        } else if(line.Contains("EXPORTS")) {
+                            curSection = Sections.Exports;
                         } else if(line.Contains("EXCEPTIONS")) {
                             curSection = Sections.Exceptions;
                         } else if(line.Contains("TRIMS")) {
@@ -54,6 +56,9 @@ namespace Lettering {
                                 break;
                             case Sections.Paths:
                                 if(!config.parsePath(line)) Lettering.errors += "config " + lineNumber + ": Path parse error\n";
+                                break;
+                            case Sections.Exports:
+                                if(!config.parseExport(line)) Lettering.errors += "config " + lineNumber + ": Export parse error\n";
                                 break;
                             case Sections.Exceptions:
                                 if(!config.parseException(line)) Lettering.errors += "config " + lineNumber + ": Exception parse error\n";
@@ -78,6 +83,8 @@ namespace Lettering {
     }
 
     public class ConfigData {
+        public enum ExportType { NONE, PLT, EPS };
+
         private delegate string PathBuilderDelegate(OrderData order);
         private delegate bool ExceptionCheckDelegate(OrderData order, ExceptionData exception);
 
@@ -86,6 +93,7 @@ namespace Lettering {
         private List<string> prefixes = new List<string>();
         private Dictionary<string, PathData> paths = new Dictionary<string, PathData>();
         private Dictionary<string, PathBuilderDelegate> pathBuilders = new Dictionary<string, PathBuilderDelegate>();
+        private Dictionary<string, ExportType> exports = new Dictionary<string, ExportType>();
         private Dictionary<string, List<ExceptionData>> exceptions = new Dictionary<string, List<ExceptionData>>();
         private Dictionary<string, ExceptionCheckDelegate> exceptionChecks = new Dictionary<string, ExceptionCheckDelegate>();
         private List<string> trims = new List<string>();
@@ -212,6 +220,35 @@ namespace Lettering {
             }
         }
 
+        public bool parseExport(string line) {
+            string[] tokens = line.Split(':');
+            if(tokens.Length < 2) return false;     // improper line formatting
+
+            for(int i = 0; i != tokens.Length; ++i) {
+                tokens[i] = tokens[i].Replace(" ", String.Empty).ToUpper();
+            }
+
+            ExportType e;
+            switch(tokens[1]) {
+                case "PLT":
+                    e = ExportType.PLT;
+                    break;
+                case "EPS":
+                    e = ExportType.EPS;
+                    break;
+                default:
+                    return false;
+                    //break;
+            }
+
+            String pattern = "^" + tokens[0];
+            pattern.Replace('?', '.');
+            pattern.Replace("*", ".+");
+
+            exports.Add(pattern, e);
+            return true;
+        }
+
         public bool parseException(string line) {
             string[] tokens = line.Split(':');
             if(tokens.Length < 3) return false;     // improper line formatting
@@ -301,6 +338,15 @@ namespace Lettering {
 
         public bool isNameStyle(OrderData order) {
             return types[paths[trimStyleCode(order.itemCode)].type] == "names";
+        }
+
+        public ExportType getExportType(OrderData order) {
+            foreach(string pattern in exports.Keys) {
+                if(Regex.IsMatch(trimStyleCode(order.itemCode), pattern)) {
+                    return exports[pattern];
+                }
+            }
+            return ExportType.NONE;
         }
     }
 
