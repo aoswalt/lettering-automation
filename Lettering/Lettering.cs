@@ -22,7 +22,8 @@ namespace Lettering {
             word1 = row[Headers.WORD1] != System.DBNull.Value ? (string)row[Headers.WORD1] : "";
             word2 = row[Headers.WORD2] != System.DBNull.Value ? (string)row[Headers.WORD2] : "";
             word3 = row[Headers.WORD3] != System.DBNull.Value ? (string)row[Headers.WORD3] : "";
-            word4 = row[Headers.WORD4] != System.DBNull.Value ? (string)row[Headers.WORD4] : "";
+            word4 = row[Headers.WORD4].ToString();
+            //word4 = row[Headers.WORD4] != System.DBNull.Value ? (string)row[Headers.WORD4] : "";
             color1 = row[Headers.COLOR1] != System.DBNull.Value ? (string)row[Headers.COLOR1] : "";
             color2 = row[Headers.COLOR2] != System.DBNull.Value ? (string)row[Headers.COLOR2] : "";
             color3 = row[Headers.COLOR3] != System.DBNull.Value ? (string)row[Headers.COLOR3] : "";
@@ -179,14 +180,14 @@ namespace Lettering {
                         }
                          */
 
-                        order.comment += "Completed.";
+                        order.comment += "Completed";
                         ordersToLog.Add(order);
                     } else if(activeOrderWindow.selection == WindowSelection.REJECT) {
-                        order.comment += "Manually rejected.";
+                        order.comment += "Manually rejected";
                         ordersToLog.Add(order);
                     } else if(activeOrderWindow.selection == WindowSelection.CANCEL) {
                         cancelBuilding = true;
-                        order.comment += "Cancelled building.";
+                        order.comment += "Cancelled building";
                         ordersToLog.Add(order);
                     }
 

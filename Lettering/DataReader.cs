@@ -12,7 +12,7 @@ namespace Lettering {
             openFileDialog.Filter = "csv file (*.csv)|*.csv|txt file (*.txt)|*.txt";
             openFileDialog.RestoreDirectory = true;
 
-            try {
+            //try {
                 if(openFileDialog.ShowDialog() == DialogResult.OK) {
                     //string pathOnly = Path.GetDirectoryName(openFileDialog.FileName);
                     string fileName = Path.GetFileName(openFileDialog.FileName);
@@ -27,7 +27,7 @@ namespace Lettering {
                         OdbcDataAdapter adapter = new OdbcDataAdapter(command);
 
                         DataTable dataTable = new DataTable();
-
+                        
                         DataColumn[] cols = {
                                                 new DataColumn("HOUSE", typeof(String)), 
                                                 new DataColumn("ORDER_NO", typeof(int)), 
@@ -45,10 +45,11 @@ namespace Lettering {
                                                 new DataColumn("NAME", typeof(String))
                                             };
                         dataTable.Columns.AddRange(cols);
-
+                        
                         try {
                             adapter.Fill(dataTable);
                         } catch(InvalidCastException) {
+
                             DataTable dtClone = dataTable.Clone();
                             dtClone.Columns["HOUSE"].DataType = typeof(String);
                             dtClone.Columns["SCHEDULE_DATE_MMDDCCYY"].DataType = typeof(DateTime);
@@ -98,32 +99,34 @@ namespace Lettering {
 
                     return null;
                 }
+            /*
             } catch(Exception ex) {     // should use specific exceptions
                 MessageBox.Show("Error: Could not read file.\n\n" + ex.Message);
 
                 return null;
             }
+             * */
         }
 
         private static void unifyHeaders(DataTable data) {
-            data.Columns["HOUSE"].ColumnName = Headers.CUT_HOUSE;
-            data.Columns["SCHEDULE_DATE_MMDDCCYY"].ColumnName = Headers.SCHEDULE_DATE;
-            data.Columns.Add(Headers.ENTER_DATE);
-            data.Columns["ORDER_NO"].ColumnName = Headers.ORDER_NUMBER;
-            data.Columns["ORDER_VOUCH"].ColumnName = Headers.VOUCHER;
-            data.Columns["ITEM_NO"].ColumnName = Headers.ITEM;
-            data.Columns["LETTER_SIZE"].ColumnName = Headers.SIZE;
-            data.Columns["LETTER_SPEC"].ColumnName = Headers.SPEC;
-            data.Columns["NAME"].ColumnName = Headers.NAME;
-            data.Columns["DRAWING_LETTER_WORD1"].ColumnName = Headers.WORD1;
-            data.Columns["DRAWING_LETTER_WORD2"].ColumnName = Headers.WORD2;
-            data.Columns["DRAWING_LETTER_WORD3"].ColumnName = Headers.WORD3;
-            data.Columns["DRAWING_LETTER_WORD4"].ColumnName = Headers.WORD4;
-            data.Columns.Add(Headers.COLOR1);
-            data.Columns.Add(Headers.COLOR2);
-            data.Columns.Add(Headers.COLOR3);
-            data.Columns.Add(Headers.COLOR4);
-            data.Columns.Add(Headers.RUSH_DATE);
+            if(data.Columns.Contains("HOUSE") && !data.Columns.Contains(Headers.CUT_HOUSE)) data.Columns["HOUSE"].ColumnName = Headers.CUT_HOUSE;
+            if(data.Columns.Contains("SCHEDULE_DATE_MMDDCCYY") && !data.Columns.Contains(Headers.SCHEDULE_DATE)) data.Columns["SCHEDULE_DATE_MMDDCCYY"].ColumnName = Headers.SCHEDULE_DATE;
+            if(!data.Columns.Contains(Headers.ENTER_DATE)) data.Columns.Add(Headers.ENTER_DATE);
+            if(data.Columns.Contains("ORDER_NO") && !data.Columns.Contains(Headers.ORDER_NUMBER)) data.Columns["ORDER_NO"].ColumnName = Headers.ORDER_NUMBER;
+            if(data.Columns.Contains("ORDER_VOUCH") && !data.Columns.Contains(Headers.VOUCHER)) data.Columns["ORDER_VOUCH"].ColumnName = Headers.VOUCHER;
+            if(data.Columns.Contains("ITEM_NO") && !data.Columns.Contains(Headers.ITEM)) data.Columns["ITEM_NO"].ColumnName = Headers.ITEM;
+            if(data.Columns.Contains("LETTER_SIZE") && !data.Columns.Contains(Headers.SIZE)) data.Columns["LETTER_SIZE"].ColumnName = Headers.SIZE;
+            if(data.Columns.Contains("LETTER_SPEC") && !data.Columns.Contains(Headers.SPEC)) data.Columns["LETTER_SPEC"].ColumnName = Headers.SPEC;
+            if(data.Columns.Contains("NAME") && !data.Columns.Contains(Headers.NAME)) data.Columns["NAME"].ColumnName = Headers.NAME;
+            if(data.Columns.Contains("DRAWING_LETTER_WORD1") && !data.Columns.Contains(Headers.WORD1)) data.Columns["DRAWING_LETTER_WORD1"].ColumnName = Headers.WORD1;
+            if(data.Columns.Contains("DRAWING_LETTER_WORD2") && !data.Columns.Contains(Headers.WORD2)) data.Columns["DRAWING_LETTER_WORD2"].ColumnName = Headers.WORD2;
+            if(data.Columns.Contains("DRAWING_LETTER_WORD3") && !data.Columns.Contains(Headers.WORD3)) data.Columns["DRAWING_LETTER_WORD3"].ColumnName = Headers.WORD3;
+            if(data.Columns.Contains("DRAWING_LETTER_WORD4") && !data.Columns.Contains(Headers.WORD4)) data.Columns["DRAWING_LETTER_WORD4"].ColumnName = Headers.WORD4;
+            if(!data.Columns.Contains(Headers.COLOR1)) data.Columns.Add(Headers.COLOR1);
+            if(!data.Columns.Contains(Headers.COLOR2)) data.Columns.Add(Headers.COLOR2);
+            if(!data.Columns.Contains(Headers.COLOR3)) data.Columns.Add(Headers.COLOR3);
+            if(!data.Columns.Contains(Headers.COLOR4)) data.Columns.Add(Headers.COLOR4);
+            if(!data.Columns.Contains(Headers.RUSH_DATE)) data.Columns.Add(Headers.RUSH_DATE);
 
             //data.Columns["PARENT_VOUCH"].ColumnName = "";
             //data.Columns["SCHEDULE_DATE_CCYYMMDD"].ColumnName = "";
