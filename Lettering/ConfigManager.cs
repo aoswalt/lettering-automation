@@ -348,6 +348,12 @@ namespace Lettering {
             }
             return ExportType.NONE;
         }
+
+        public bool isIgnoredStyle(OrderData order) {
+            return types[paths[trimStyleCode(order.itemCode)].type] == "ignore" ||
+                   (paths[trimStyleCode(order.itemCode)].mirrorStyle != "" &&
+                    types[paths[paths[trimStyleCode(order.itemCode)].mirrorStyle].type] == "ignore");
+        }
     }
 
     // data structs

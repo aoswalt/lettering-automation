@@ -196,10 +196,9 @@ namespace Lettering {
             PrivateFontCollection fontColl = new PrivateFontCollection();
             try {
                 fontColl.AddFontFile(fontFilePath);
-                string name = fontColl.Families[0].Name;
-                return name;
+                return fontColl.Families[0].Name;
             } catch(FileNotFoundException ex) {
-                return "";
+                return "Error with " + System.IO.Path.GetFileName(fontFilePath) + ": " + ex.Message;
             }
         }
     }

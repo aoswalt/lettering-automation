@@ -85,7 +85,7 @@ namespace Lettering {
                 launcher.Hide();
             }
 
-            MessageBox.Show(data.Rows.Count + " orders found.");
+            MessageBox.Show(data.Rows.Count + " entries found");
 
             // convert rows to data entries before loop to allow lookahead
             List<OrderData> orders = new List<OrderData>();
@@ -99,7 +99,7 @@ namespace Lettering {
 
                 // if not in config, continue; else, store the trimmed code
                 if(trimmedCode.Length == 0) {
-                    order.comment += "Not in config.";
+                    order.comment += "Not in config";
                     ordersToLog.Add(order);
                     continue;
                 } else {
@@ -111,13 +111,19 @@ namespace Lettering {
                 string newMadePath = destPath + config.constructPartialPath(order) + config.makeFileName(order);
 
                 if(File.Exists(orderPath) || File.Exists(newMadePath)) {
-                    order.comment += "Already made.";
+                    order.comment += "Already made";
+                    ordersToLog.Add(order);
+                    continue;
+                }
+
+                if(config.isIgnoredStyle(order)) {
+                    order.comment += "Ignored style";
                     ordersToLog.Add(order);
                     continue;
                 }
 
                 if(cancelBuilding) {
-                    order.comment += "Cancelled building.";
+                    order.comment += "Cancelled building";
                     ordersToLog.Add(order);
                     continue;
                 }
@@ -127,7 +133,7 @@ namespace Lettering {
                 String templatePath = config.getTemplatePath(order);
                 if(!File.Exists(templatePath)) {
                     MessageBox.Show("Template not found:\n" + templatePath, "Missing Template", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
-                    order.comment += "Template not found.";
+                    order.comment += "Template not found";
                     ordersToLog.Add(order);
                 } else {
                     if(config.isNameStyle(order)) {
