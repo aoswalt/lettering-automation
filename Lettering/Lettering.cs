@@ -217,7 +217,7 @@ namespace Lettering {
             // work around 1-based array in VBA
             order.nameList.Insert(0, "");
 
-            Shape orderShape = corel.ActiveLayer.CreateRectangle2(0, 0, 0.1, 0.1);
+            Shape orderShape = corel.ActivePage.Layers["Layer 1"].CreateRectangle2(0, 0, 0.1, 0.1);
             orderShape.Name = "OrderData";
             orderShape.Properties["order", 1] = order.size;
             orderShape.Properties["order", 2] = order.spec;
