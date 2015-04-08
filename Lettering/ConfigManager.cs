@@ -115,7 +115,20 @@ namespace Lettering {
             pathBuilders.Add("!size", (order) => { return (int)order.size + "INCH"; });
             pathBuilders.Add("!spec", (order) => { return String.Format("{0:0.#}", order.spec); });
             pathBuilders.Add("!ya", (order) => { return order.spec < 10 ? "YOUTH" : "ADULT"; });
-            pathBuilders.Add("!cd", (order) => { return order.word2.ToUpper(); });  // current styles only use word 2
+            pathBuilders.Add("!cd", (order) => {
+                // using last entered word
+                if(order.word4 != "") {
+                    return order.word4.ToUpper();
+                } else if(order.word3 != "") {
+                    return order.word3.ToUpper();
+                } else if(order.word2 != "") {
+                    return order.word2.ToUpper();
+                } else if(order.word1 != "") {
+                    return order.word1.ToUpper();
+                } else {
+                    return "";
+                }
+            });
 
             // add exception checking functions
             exceptionChecks.Add("size", (order, exception) => { return order.size == exception.value; });
