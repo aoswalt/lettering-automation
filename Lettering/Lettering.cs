@@ -8,26 +8,27 @@ using VGCore;
 using System.IO;
 
 namespace Lettering {
+    public enum ReportType { CSV, SQL };
+
     public struct OrderData {
         public OrderData(DataRow row) {
-            cutHouse = row[Headers.CUT_HOUSE] != System.DBNull.Value ? (string)row[Headers.CUT_HOUSE] : "";
+            cutHouse = (row[Headers.CUT_HOUSE].ToString()).Trim();
             scheduleDate = row[Headers.SCHEDULE_DATE] != System.DBNull.Value ? ((System.DateTime)row[Headers.SCHEDULE_DATE]).ToString("d") : "";
             enterDate = row[Headers.ENTER_DATE] != System.DBNull.Value ? ((System.DateTime)row[Headers.ENTER_DATE]).ToString("d") : "";
-            orderNumber = row[Headers.ORDER_NUMBER] != System.DBNull.Value ? (int)row[Headers.ORDER_NUMBER] : 0;
-            voucherNumber = row[Headers.VOUCHER] != System.DBNull.Value ? (int)row[Headers.VOUCHER] : 0;
-            itemCode = row[Headers.ITEM] != System.DBNull.Value ? (string)row[Headers.ITEM] : "";
+            orderNumber = row[Headers.ORDER_NUMBER] != System.DBNull.Value ? Convert.ToInt32(row[Headers.ORDER_NUMBER]) : 0;
+            voucherNumber = row[Headers.VOUCHER] != System.DBNull.Value ? Convert.ToInt32(row[Headers.VOUCHER]) : 0;
+            itemCode = (row[Headers.ITEM].ToString()).Trim();
             size = row[Headers.SIZE] != System.DBNull.Value ? Convert.ToDouble(row[Headers.SIZE]) : 0;
-            spec = row[Headers.SPEC] != System.DBNull.Value ? (double)row[Headers.SPEC] : 0;
-            name = row[Headers.NAME] != System.DBNull.Value ? (string)row[Headers.NAME] : "";
-            word1 = row[Headers.WORD1] != System.DBNull.Value ? (string)row[Headers.WORD1] : "";
-            word2 = row[Headers.WORD2] != System.DBNull.Value ? (string)row[Headers.WORD2] : "";
-            word3 = row[Headers.WORD3] != System.DBNull.Value ? (string)row[Headers.WORD3] : "";
-            word4 = row[Headers.WORD4].ToString();
-            //word4 = row[Headers.WORD4] != System.DBNull.Value ? (string)row[Headers.WORD4] : "";
-            color1 = row[Headers.COLOR1] != System.DBNull.Value ? (string)row[Headers.COLOR1] : "";
-            color2 = row[Headers.COLOR2] != System.DBNull.Value ? (string)row[Headers.COLOR2] : "";
-            color3 = row[Headers.COLOR3] != System.DBNull.Value ? (string)row[Headers.COLOR3] : "";
-            color4 = row[Headers.COLOR4] != System.DBNull.Value ? (string)row[Headers.COLOR4] : "";
+            spec = row[Headers.SPEC] != System.DBNull.Value ? Convert.ToDouble(row[Headers.SPEC]) : 0;
+            name = (row[Headers.NAME].ToString()).Trim();
+            word1 = (row[Headers.WORD1].ToString()).Trim();
+            word2 = (row[Headers.WORD2].ToString()).Trim();
+            word3 = (row[Headers.WORD3].ToString()).Trim();
+            word4 = (row[Headers.WORD4].ToString()).Trim();
+            color1 = (row[Headers.COLOR1].ToString()).Trim();
+            color2 = (row[Headers.COLOR2].ToString()).Trim();
+            color3 = (row[Headers.COLOR3].ToString()).Trim();
+            color4 = (row[Headers.COLOR4].ToString()).Trim();
             rushDate = row[Headers.RUSH_DATE] != System.DBNull.Value ? ((System.DateTime)row[Headers.RUSH_DATE]).ToString("d") : "";
             comment = "";
             nameList = new List<string>();
@@ -71,7 +72,7 @@ namespace Lettering {
             }
         }
 
-        public static void Run() {
+        public static void Run(ReportType reportType) {
             bool cancelBuilding = false;
 
             config = ConfigManager.getConfig();
@@ -79,7 +80,7 @@ namespace Lettering {
             List<string> currentNames = new List<string>();
             List<OrderData> ordersToLog = new List<OrderData>();
 
-            DataTable data = DataReader.getCsvData();
+            DataTable data = ((reportType == ReportType.CSV) ? DataReader.getCsvData() : DataReader.runReport());
             if(data == null) {
                 return;
             } else {

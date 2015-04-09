@@ -108,6 +108,90 @@ namespace Lettering {
              * */
         }
 
+        public static DataTable runReport() {
+            string connectionString = "Driver={iSeries Access ODBC Driver}; System=USC; SignOn=4;";
+
+            try {
+                using(OdbcConnection conn = new OdbcConnection(connectionString)) {
+                    conn.Open();
+
+                    DateTime date = DateTime.Today.AddDays(-1);
+
+                    string query = @"
+                        SELECT det.dhous, det.scdat, det.endat, det.ordnr, det.orvch, 
+                               det.ditem, det.dlsiz, siz.letwid, nam.letname, 
+                               det.dlwr1, det.dlwr2, det.dlwr3, det.dlwr4, det.dclr1, det.dclr2, det.dclr3, det.dclr4, det.rudat
+                        FROM (
+                              SELECT d.dhous,
+                                     CASE WHEN d.dscmo = 0 THEN NULL ELSE DATE(d.dsccy||d.dscyr||'-'||RIGHT('00'||d.dscmo, 2)||'-'||RIGHT('00'||d.dscda, 2)) END AS scdat,
+                                     DATE(d.dorcy||d.doryr||'-'||RIGHT('00'||d.dormo, 2)||'-'||RIGHT('00'||d.dorda, 2)) AS endat,
+                                     d.ordnr, d.orvch, d.dpvch, d.ditem, d.dlsiz, 
+                                     d.dlwr1, d.dlwr2, d.dlwr3, d.dlwr4, d.dclr1, d.dclr2, d.dclr3, d.dclr4,
+                                     CASE d.drumo WHEN 0 THEN NULL ELSE DATE(d.drucy||d.druyr||'-'||RIGHT('00'||d.drumo, 2)||'-'||RIGHT('00'||d.druda, 2)) END AS rudat
+
+                              FROM VARSITYF.DETAIL AS d
+                              WHERE (" +
+                                        String.Format("((d.dorcy = {0}) AND (d.doryr = {1}) AND (d.dormo = {2}) AND (d.dorda = {3}))", 
+                                                     date.Year / 100, date.Year % 100, date.Month, date.Day);
+
+                                        // add days to search for to cover no working days
+                                        while(date.DayOfWeek == DayOfWeek.Saturday || date.DayOfWeek == DayOfWeek.Sunday) {
+                                            date = date.AddDays(-1);
+                                            query += String.Format(" OR ((d.dorcy = {0}) AND (d.doryr = {1}) AND (d.dormo = {2}) AND (d.dorda = {3}))", 
+                                                                   date.Year / 100, date.Year % 100, date.Month, date.Day); 
+                                        }
+
+                                        query += @") AND 
+                                    (d.dclas IN ('041', '049', '04C', '04D', '04Y', 'F09', 'PS3', 'L02', 'L05', 'L10', 'S03', 'SKL', 'VTT')) AND 
+                                    (d.ditem NOT LIKE 'OZ%') AND
+                                    (d.dscda > 0)
+                        ) AS det
+
+                        LEFT JOIN 
+                                    DJLIBR.ORD_NAM_C 
+                         AS nam
+                        ON det.ordnr = nam.ordnr AND det.orvch = nam.orvch AND nam.letname <> ''
+
+                        LEFT JOIN (
+                                    SELECT DISTINCT s.ordnr, s.orvch, s.letwid
+                                    FROM VARSITYF.HLDSIZ AS s
+                        ) AS siz
+                        ON det.ordnr = siz.ordnr AND det.dpvch = siz.orvch AND (nam.letname = '' OR nam.letname IS NULL)
+
+                        ORDER BY det.ditem";
+
+                    OdbcCommand command = new OdbcCommand(query);
+                    command.Connection = conn;
+                    OdbcDataAdapter adapter = new OdbcDataAdapter(command);
+
+                    DataTable table = new DataTable();
+                    adapter.Fill(table);
+
+                    conn.Close();
+                    return table;
+                }
+            } catch(OdbcException e) {
+                if(e.Errors[0].SQLState == "IM002") {
+                    MessageBox.Show("Driver not found.\n\nPlease contact the IT Department to install the ODBC Driver for IBM iSeries Access.", "Driver Not Found");
+                    return null;
+                } else {
+                    string errorLog = "";
+                    for(int i = 0; i != e.Errors.Count; ++i) {
+                        errorLog += ("Error " + (i + 1) + " of " + e.Errors.Count + "\n");
+                        errorLog += ("SQLState:  " + e.Errors[i].SQLState + "\n");
+                        errorLog += ("NativErr:  " + e.Errors[i].NativeError + "\n");
+                        errorLog += ("EMessage:  " + e.Errors[i].Message + "\n");
+                        errorLog += ("ESource:   " + e.Errors[i].Source + "\n\n");
+                    }
+                    MessageBox.Show(errorLog, "Errors Encountered");
+                    return null;
+                }
+            } catch(Exception e) {
+                MessageBox.Show("Exception: " + e.Message);
+                return null;
+            }
+        }
+
         private static void unifyHeaders(DataTable data) {
             if(data.Columns.Contains("HOUSE") && !data.Columns.Contains(Headers.CUT_HOUSE)) data.Columns["HOUSE"].ColumnName = Headers.CUT_HOUSE;
             if(data.Columns.Contains("SCHEDULE_DATE_MMDDCCYY") && !data.Columns.Contains(Headers.SCHEDULE_DATE)) data.Columns["SCHEDULE_DATE_MMDDCCYY"].ColumnName = Headers.SCHEDULE_DATE;
