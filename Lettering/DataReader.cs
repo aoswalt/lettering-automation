@@ -3,6 +3,7 @@ using System.Data;
 using System.Data.Odbc;
 using System.Windows.Forms;
 using System.IO;
+using System.Collections.Generic;
 
 namespace Lettering {
     class DataReader {
@@ -111,6 +112,8 @@ namespace Lettering {
         public static DataTable runReport() {
             string connectionString = "Driver={iSeries Access ODBC Driver}; System=USC; SignOn=4;";
 
+            List<DateTime> holidays = ReadHolidays();
+
             try {
                 using(OdbcConnection conn = new OdbcConnection(connectionString)) {
                     conn.Open();
@@ -135,7 +138,7 @@ namespace Lettering {
                                                      date.Year / 100, date.Year % 100, date.Month, date.Day);
 
                                         // add days to search for to cover no working days
-                                        while(date.DayOfWeek == DayOfWeek.Saturday || date.DayOfWeek == DayOfWeek.Sunday) {
+                                        while(date.DayOfWeek == DayOfWeek.Saturday || date.DayOfWeek == DayOfWeek.Sunday || holidays.Contains(date)) {
                                             date = date.AddDays(-1);
                                             query += String.Format(" OR ((d.dorcy = {0}) AND (d.doryr = {1}) AND (d.dormo = {2}) AND (d.dorda = {3}))", 
                                                                    date.Year / 100, date.Year % 100, date.Month, date.Day); 
@@ -214,6 +217,25 @@ namespace Lettering {
 
             //data.Columns["PARENT_VOUCH"].ColumnName = "";
             //data.Columns["SCHEDULE_DATE_CCYYMMDD"].ColumnName = "";
+        }
+
+        private static List<DateTime> ReadHolidays() {
+            List<DateTime> holidays = new List<DateTime>();
+
+            using(StreamReader sr = new StreamReader(@"./configs/holidays.txt")) {
+                string line;
+                while(sr.Peek() > -1) {
+                    line = sr.ReadLine().Trim();
+
+                    try {
+                        holidays.Add(DateTime.Parse(line));
+                    } catch(FormatException ex) {
+                        continue;
+                    }
+                }
+            }
+
+            return holidays;
         }
     }
 }
