@@ -42,7 +42,7 @@ namespace Lettering {
             if(order.word1 != "") {
                 lblWord1.Text = order.word1;
             } else {
-                if(order.nameList.Count == 1) {
+                if(order.nameList.Count == 2) {     // "" is appended to name list before reaching here
                     lblWord1.Text = order.name;
                 } else {
                     lblWord1.Text = "<name list>";

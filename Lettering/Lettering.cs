@@ -138,9 +138,9 @@ namespace Lettering {
                     order.comment += "Template not found";
                     ordersToLog.Add(order);
                 } else {
-                    if(config.isNameStyle(order)) {
-                        currentNames.Add(order.name);
+                    currentNames.Add(order.name);
 
+                    if(config.isNameStyle(order)) {
                         // if following is name style and same order/voucher, skip processing current list
                         if(i + 1 != orders.Count && config.isNameStyle(orders[i + 1]) && 
                            (order.orderNumber == orders[i + 1].orderNumber) && 
