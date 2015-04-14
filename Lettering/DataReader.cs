@@ -161,7 +161,7 @@ namespace Lettering {
                                     SELECT DISTINCT s.ordnr, s.orvch, s.letwid
                                     FROM VARSITYF.HLDSIZ AS s
                         ) AS siz
-                        ON det.ordnr = siz.ordnr AND det.dpvch = siz.orvch AND (nam.letname = '' OR nam.letname IS NULL)
+                        ON det.ordnr = siz.ordnr AND det.dpvch = siz.orvch
 
                         ORDER BY det.ditem";
 
