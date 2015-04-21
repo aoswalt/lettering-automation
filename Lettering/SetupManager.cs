@@ -56,6 +56,7 @@ namespace Lettering {
 
                 if(fontInstall) {
                     Process.Start(networkFontFolder);
+                    System.Threading.Thread.Sleep(200);     // ensure dialog on top of folder window
                     MessageBox.Show("Font(s) need to be installed or updated:\n" + missingFonts, "Missing Fonts", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     return false;   // prevent continuing without fonts installed
                 } else {
