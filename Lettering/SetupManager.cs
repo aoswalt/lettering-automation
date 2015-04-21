@@ -34,7 +34,7 @@ namespace Lettering {
         // returns true if safe to continue
         public static bool CheckSetup() {
             bool libInstall = InstallLibrary();
-            bool fontInstall = CheckFontInstall();
+            bool fontInstall = false; // CheckFontInstall();
 
             string msg = "";
             msg += (libInstall ? "Library had to be updated.\n\n" : "");

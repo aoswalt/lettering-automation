@@ -171,15 +171,7 @@ namespace Lettering {
                                 corel.ActiveDocument.SaveAs(newMadePath);
                                 ExportOrder(order);
                             }
-                            corel.ActiveDocument.Close();   // new file
-                            //corel.ActiveDocument.Close();   // template
                         }
-
-                        /*
-                        while(corel.Documents.Count > 0) {
-                            corel.ActiveDocument.Close();
-                        }
-                         */
 
                         order.comment += "Completed";
                         ordersToLog.Add(order);
@@ -191,6 +183,11 @@ namespace Lettering {
                         order.comment += "Cancelled building";
                         ordersToLog.Add(order);
                     }
+
+                    while(corel.Documents.Count > 0) {
+                        corel.ActiveDocument.Close();
+                    }
+                    System.Threading.Thread.Sleep(50);      // prevent error on closing templates
 
                     currentNames.Clear();
                 }
