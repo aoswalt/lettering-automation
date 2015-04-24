@@ -169,7 +169,7 @@ namespace Lettering {
                             } else {
                                 System.IO.Directory.CreateDirectory(destPath + config.constructPartialPath(order));
                                 corel.ActiveDocument.SaveAs(newMadePath);
-                                ExportOrder(order);
+                                if(config.getExportType(order) != ConfigData.ExportType.NONE) ExportOrder(order);
                             }
                         }
 
@@ -243,7 +243,8 @@ namespace Lettering {
 
             // if no shapes found, try selecting by order words
             if(corel.ActiveSelection.Shapes.Count == 0) {
-                corel.ActivePage.FindShape(orderWords).AddToSelection();
+                Shape found = corel.ActivePage.FindShape(orderWords);
+                if(found != null) found.AddToSelection();
             }
 
             // if no shapes found, select bottom right
