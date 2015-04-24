@@ -243,7 +243,7 @@ namespace Lettering {
 
             // if no shapes found, try selecting by order words
             if(corel.ActiveSelection.Shapes.Count == 0) {
-                corel.ActivePage.FindShape(orderWords);
+                corel.ActivePage.FindShape(orderWords).AddToSelection();
             }
 
             // if no shapes found, select bottom right
