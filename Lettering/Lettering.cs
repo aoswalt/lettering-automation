@@ -193,7 +193,7 @@ namespace Lettering {
                 }
             }
 
-            DataWriter.writeLog(ordersToLog, "LetteringLog-" + DateTime.Now.ToString("yyyymmdd_HHmm"));
+            DataWriter.writeLog(ordersToLog, "LetteringLog-" + DateTime.Now.ToString("yyyyMMdd_HHmm"));
 
             MessageBox.Show("Done!");
             if(errors.Length > 0) MessageBox.Show(errors, "Error Log");

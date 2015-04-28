@@ -277,7 +277,8 @@ namespace Lettering {
         }
 
         public string makeFileName(OrderData order) {
-            PathData pathData = paths[order.itemCode];
+            PathData pathData = ((paths[order.itemCode].mirrorStyle == "") ? 
+                paths[order.itemCode] : paths[paths[order.itemCode].mirrorStyle]);
             string fileName = "";
 
             for(int i = 0; i != pathData.wordOrder.Length; ++i) {
