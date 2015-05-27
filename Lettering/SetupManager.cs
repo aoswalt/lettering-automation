@@ -177,6 +177,7 @@ namespace Lettering {
 
         private static string GetInstalledFontFileName(string fontName) {
             string regFontName = fontName + " (TrueType)";
+            string regFontNameTrim = fontName.Replace(" ", "") + " (TrueType)";  // NOTE(adam): handle FontLab fonts that remove spaces from name
             RegistryKey fonts = Registry.LocalMachine.OpenSubKey(@"Software\Microsoft\Windows NT\CurrentVersion\Fonts", false);
             if(fonts == null) {
                 fonts = Registry.LocalMachine.OpenSubKey(@"Software\Microsoft\Windows\CurrentVersion\Fonts", false);
@@ -186,10 +187,11 @@ namespace Lettering {
             }
 
             foreach(string fontKey in fonts.GetValueNames()) {
-                if(fontKey == regFontName) {
+                if(fontKey == regFontName || fontKey == regFontNameTrim) {
                     return fonts.GetValue(fontKey).ToString();
                 }
             }
+
             return null;
         }
 
