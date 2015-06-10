@@ -11,6 +11,7 @@ using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Windows.Media;
 
 namespace Lettering {
     class SetupManager {
@@ -165,13 +166,23 @@ namespace Lettering {
         }
 
         private static List<string> GetInstalledFonts() {
+            /*
             InstalledFontCollection fontsCollection = new InstalledFontCollection();
-            FontFamily[] fontFamilies = fontsCollection.Families;
+            System.Drawing.FontFamily[] fontFamilies = fontsCollection.Families;
             List<string> installedFonts = new List<string>();
-            foreach(FontFamily font in fontFamilies) {
+            foreach(System.Drawing.FontFamily font in fontFamilies) {
                 installedFonts.Add(font.Name);
             }
 
+            return installedFonts;
+             */
+
+            List<System.Windows.Media.FontFamily> installedFontFamilies = Fonts.SystemFontFamilies.ToList();
+            List<string> installedFonts = new List<string>();
+
+            foreach(System.Windows.Media.FontFamily fontFamily in installedFontFamilies) {
+                installedFonts.Add(fontFamily.ToString().Split('#')[fontFamily.ToString().Split('#').Count() - 1]);
+            }
             return installedFonts;
         }
 
@@ -196,6 +207,13 @@ namespace Lettering {
         }
 
         private static string GetFontNameFromFile(string fontFilePath) {
+            foreach(System.Windows.Media.FontFamily fontFamily in Fonts.GetFontFamilies(fontFilePath)) {
+                string fontName = fontFamily.ToString().Split('#')[fontFamily.ToString().Split('#').Count() - 1];
+                return fontName;
+            }
+            return "Error with " + System.IO.Path.GetFileName(fontFilePath) + ": " + "No font families found.";
+
+            /*
             PrivateFontCollection fontColl = new PrivateFontCollection();
             try {
                 fontColl.AddFontFile(fontFilePath);
@@ -203,6 +221,7 @@ namespace Lettering {
             } catch(FileNotFoundException ex) {
                 return "Error with " + System.IO.Path.GetFileName(fontFilePath) + ": " + ex.Message;
             }
+             */
         }
     }
 }
