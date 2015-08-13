@@ -142,7 +142,7 @@ namespace Lettering {
 
                     if(config.isNameStyle(order)) {
                         // if following is name style and same order/voucher, skip processing current list
-                        if(i + 1 != orders.Count && config.isNameStyle(orders[i + 1]) && 
+                        if((i + 1 != orders.Count) && (config.trimStyleCode(orders[i + 1].itemCode).Length > 0) && (config.isNameStyle(orders[i + 1])) && 
                            (order.orderNumber == orders[i + 1].orderNumber) && 
                            (order.voucherNumber == orders[i + 1].voucherNumber)) {
                             order.comment += "Name style";
