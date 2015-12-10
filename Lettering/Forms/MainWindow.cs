@@ -9,8 +9,8 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace Lettering {
-    public partial class LauncherWindow : Form {
-        public LauncherWindow() {
+    public partial class MainWindow : Form {
+        public MainWindow() {
             InitializeComponent();
         }
 
@@ -19,11 +19,11 @@ namespace Lettering {
         }
 
         private void openButton_Click(object sender, EventArgs e) {
-            Lettering.Run(ReportType.CSV);
+            Program.Run(ReportType.CSV);
         }
 
         private void runButton_Click(object sender, EventArgs e) {
-            Lettering.Run(ReportType.SQL);
+            Program.Run(ReportType.SQL);
         }
     }
 }

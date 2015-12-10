@@ -10,67 +10,12 @@ using System.IO;
 namespace Lettering {
     public enum ReportType { CSV, SQL };
 
-    public struct OrderData {
-        public OrderData(DataRow row) {
-            cutHouse = (row[Headers.CUT_HOUSE].ToString()).Trim();
-            scheduleDate = row[Headers.SCHEDULE_DATE] != System.DBNull.Value ? ((System.DateTime)row[Headers.SCHEDULE_DATE]).ToString("d") : "";
-            enterDate = row[Headers.ENTER_DATE] != System.DBNull.Value ? ((System.DateTime)row[Headers.ENTER_DATE]).ToString("d") : "";
-            orderNumber = row[Headers.ORDER_NUMBER] != System.DBNull.Value ? Convert.ToInt32(row[Headers.ORDER_NUMBER]) : 0;
-            voucherNumber = row[Headers.VOUCHER] != System.DBNull.Value ? Convert.ToInt32(row[Headers.VOUCHER]) : 0;
-            itemCode = (row[Headers.ITEM].ToString()).Trim();
-            size = row[Headers.SIZE] != System.DBNull.Value ? Convert.ToDouble(row[Headers.SIZE]) : 0;
-            spec = row[Headers.SPEC] != System.DBNull.Value ? Convert.ToDouble(row[Headers.SPEC]) : 0;
-            name = (row[Headers.NAME].ToString()).Trim();
-            word1 = (row[Headers.WORD1].ToString()).Trim();
-            word2 = (row[Headers.WORD2].ToString()).Trim();
-            word3 = (row[Headers.WORD3].ToString()).Trim();
-            word4 = (row[Headers.WORD4].ToString()).Trim();
-            color1 = (row[Headers.COLOR1].ToString()).Trim();
-            color2 = (row[Headers.COLOR2].ToString()).Trim();
-            color3 = (row[Headers.COLOR3].ToString()).Trim();
-            color4 = (row[Headers.COLOR4].ToString()).Trim();
-            rushDate = row[Headers.RUSH_DATE] != System.DBNull.Value ? ((System.DateTime)row[Headers.RUSH_DATE]).ToString("d") : "";
-            comment = "";
-            nameList = new List<string>();
-        }
-
-        public string cutHouse;
-        public string scheduleDate;
-        public string enterDate;
-        public int orderNumber;
-        public int voucherNumber;
-        public string itemCode;
-        public double size;
-        public double spec;
-        public string name;
-        public string word1;
-        public string word2;
-        public string word3;
-        public string word4;
-        public string color1;
-        public string color2;
-        public string color3;
-        public string color4;
-        public string rushDate;
-        public string comment;
-        public List<string> nameList;
-    }
-
-    public class Lettering {
+    internal class Lettering {
         public static string errors = "";
         public static string tempFolder = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + "\\TemporaryAutomationFiles\\";
         private static string destPath = Environment.GetFolderPath(Environment.SpecialFolder.Desktop) + @"\1 CUT FILES";
         public static CorelDRAW.Application corel = new CorelDRAW.Application();
-        private static LauncherWindow launcher = new LauncherWindow();
         private static ConfigData config;
-
-        [STAThread]
-        static void Main(string[] args) {
-            // check setup will close corel as necessary & prevents continuing if necessary
-            if(SetupManager.CheckSetup()) {
-                launcher.ShowDialog();
-            }
-        }
 
         public static void Run(ReportType reportType) {
             bool cancelBuilding = false;
@@ -89,17 +34,40 @@ namespace Lettering {
 
             MessageBox.Show(data.Rows.Count + " entries found");
 
-            // convert rows to data entries before loop to allow lookahead
+            //NOTE(adam): convert rows to data entries before loop to allow lookahead
             List<OrderData> orders = new List<OrderData>();
             foreach(DataRow row in data.Rows) {
-                orders.Add(new OrderData(row));
+                OrderData order = new OrderData();
+                
+                order.cutHouse = (row[QueryHeaders.CUT_HOUSE].ToString()).Trim();
+                order.scheduleDate = row[QueryHeaders.SCHEDULE_DATE] != System.DBNull.Value ? ((System.DateTime)row[QueryHeaders.SCHEDULE_DATE]).ToString("d") : "";
+                order.enterDate = row[QueryHeaders.ENTER_DATE] != System.DBNull.Value ? ((System.DateTime)row[QueryHeaders.ENTER_DATE]).ToString("d") : "";
+                order.orderNumber = row[QueryHeaders.ORDER_NUMBER] != System.DBNull.Value ? Convert.ToInt32(row[QueryHeaders.ORDER_NUMBER]) : 0;
+                order.voucherNumber = row[QueryHeaders.VOUCHER] != System.DBNull.Value ? Convert.ToInt32(row[QueryHeaders.VOUCHER]) : 0;
+                order.itemCode = (row[QueryHeaders.ITEM].ToString()).Trim();
+                order.size = row[QueryHeaders.SIZE] != System.DBNull.Value ? Convert.ToDouble(row[QueryHeaders.SIZE]) : 0;
+                order.spec = row[QueryHeaders.SPEC] != System.DBNull.Value ? Convert.ToDouble(row[QueryHeaders.SPEC]) : 0;
+                order.name = (row[QueryHeaders.NAME].ToString()).Trim();
+                order.word1 = (row[QueryHeaders.WORD1].ToString()).Trim();
+                order.word2 = (row[QueryHeaders.WORD2].ToString()).Trim();
+                order.word3 = (row[QueryHeaders.WORD3].ToString()).Trim();
+                order.word4 = (row[QueryHeaders.WORD4].ToString()).Trim();
+                order.color1 = (row[QueryHeaders.COLOR1].ToString()).Trim();
+                order.color2 = (row[QueryHeaders.COLOR2].ToString()).Trim();
+                order.color3 = (row[QueryHeaders.COLOR3].ToString()).Trim();
+                order.color4 = (row[QueryHeaders.COLOR4].ToString()).Trim();
+                order.rushDate = row[QueryHeaders.RUSH_DATE] != System.DBNull.Value ? ((System.DateTime)row[QueryHeaders.RUSH_DATE]).ToString("d") : "";
+                order.comment = "";
+                order.nameList = new List<string>();
+
+                orders.Add(order);
             }
 
             for(int i = 0; i != orders.Count; ++i) {
                 OrderData order = orders[i];
                 string trimmedCode = config.trimStyleCode(order.itemCode);
 
-                // if not in config, continue; else, store the trimmed code
+                //NOTE(adam): if not in config, continue; else, store the trimmed code
                 if(trimmedCode.Length == 0) {
                     order.comment += "Not in config";
                     ordersToLog.Add(order);
@@ -108,7 +76,7 @@ namespace Lettering {
                     order.itemCode = trimmedCode;
                 }
 
-                // if built, continue
+                //NOTE(adam): if built, continue
                 string orderPath = config.constructPath(order);
                 string newMadePath = destPath + config.constructPartialPath(order) + config.makeFileName(order);
 
@@ -130,7 +98,7 @@ namespace Lettering {
                     continue;
                 }
 
-                // build
+                //NOTE(adam): build point
                 // MessageBox.Show("To build: " + order.itemCode + "\n Template: " + config.getTemplatePath(order));
                 String templatePath = config.getTemplatePath(order);
                 if(!File.Exists(templatePath)) {
@@ -141,7 +109,7 @@ namespace Lettering {
                     currentNames.Add(order.name);
 
                     if(config.isNameStyle(order)) {
-                        // if following is name style and same order/voucher, skip processing current list
+                        //NOTE(adam): if following is name style and same order/voucher, skip processing current list
                         if((i + 1 != orders.Count) && (config.trimStyleCode(orders[i + 1].itemCode).Length > 0) && (config.isNameStyle(orders[i + 1])) && 
                            (order.orderNumber == orders[i + 1].orderNumber) && 
                            (order.voucherNumber == orders[i + 1].voucherNumber)) {
@@ -212,7 +180,7 @@ namespace Lettering {
                 order.nameList.Add("");
             }
 
-            // work around 1-based array in VBA
+            //NOTE(adam): work around 1-based array in VBA
             order.nameList.Insert(0, "");
 
             Shape orderShape = corel.ActivePage.Layers["Layer 1"].CreateRectangle2(0, 0, 0.1, 0.1);
@@ -235,19 +203,19 @@ namespace Lettering {
 
             corel.ActiveDocument.ClearSelection();
 
-            // try selecting specific sew shape
+            //NOTE(adam): try selecting specific sew shape
             if(exportType == ConfigData.ExportType.PLT) {
                 Shape sewShape = corel.ActivePage.FindShape(orderWords + "_sew");
                 if(sewShape != null) sewShape.AddToSelection();
             }
 
-            // if no shapes found, try selecting by order words
+            //NOTE(adam): if no shapes found, try selecting by order words
             if(corel.ActiveSelection.Shapes.Count == 0) {
                 Shape found = corel.ActivePage.FindShape(orderWords);
                 if(found != null) found.AddToSelection();
             }
 
-            // if no shapes found, select bottom right
+            //NOTE(adam): if no shapes found, select bottom right
             if(corel.ActiveSelection.Shapes.Count == 0) {
                 corel.ActiveDocument.ReferencePoint = cdrReferencePoint.cdrTopLeft;
                 corel.ActivePage.SelectShapesFromRectangle(corel.ActivePage.SizeWidth / 2,
@@ -257,7 +225,7 @@ namespace Lettering {
                                                            false);
             }
 
-            // if no shapes found, select on whole page
+            //NOTE(adam): if no shapes found, select on whole page
             if(corel.ActiveSelection.Shapes.Count == 0) {
                 corel.ActiveDocument.ReferencePoint = cdrReferencePoint.cdrTopLeft;
                 corel.ActivePage.SelectShapesFromRectangle(0,
@@ -267,7 +235,7 @@ namespace Lettering {
                                                            false);
             }
 
-            // if no shapes found, select all
+            //NOTE(adam): if no shapes found, select all
             if(corel.ActiveSelection.Shapes.Count == 0) {
                 corel.ActivePage.SelectableShapes.All().AddToSelection();
             }
@@ -279,7 +247,7 @@ namespace Lettering {
                     } else {
                         string exportPath = destPath + config.constructPartialPath(order) + "PLT\\";
                         System.IO.Directory.CreateDirectory(exportPath);
-                        // options need to be specified within Corel previously
+                        //NOTE(adam): options need to be specified within Corel previously
                         corel.ActiveDocument.Export(exportPath + orderWords + ".plt", cdrFilter.cdrPLT, cdrExportRange.cdrSelection);
                     }
                     } break;
@@ -289,7 +257,7 @@ namespace Lettering {
                     } else {
                         string exportPath = destPath + config.constructPartialPath(order) + "EPS\\";
                         System.IO.Directory.CreateDirectory(exportPath);
-                        // options need to be specified within Corel previously
+                        //NOTE(adam): options need to be specified within Corel previously
                         corel.ActiveDocument.Export(exportPath + orderWords + ".eps", cdrFilter.cdrEPS, cdrExportRange.cdrSelection);
                     }
                     } break;

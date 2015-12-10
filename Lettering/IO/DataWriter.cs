@@ -29,25 +29,25 @@ namespace Lettering {
 
         private static string getHeaderString() {
             string ret = "";
-            ret += Headers.CUT_HOUSE + ",";
-            ret += Headers.SCHEDULE_DATE + ",";
-            ret += Headers.ENTER_DATE + ",";
-            ret += Headers.ORDER_NUMBER + ",";
-            ret += Headers.VOUCHER + ",";
-            ret += Headers.ITEM + ",";
-            ret += Headers.SIZE + ",";
-            ret += Headers.SPEC + ",";
-            ret += Headers.NAME + ",";
-            ret += Headers.WORD1 + ",";
-            ret += Headers.WORD2 + ",";
-            ret += Headers.WORD3 + ",";
-            ret += Headers.WORD4 + ",";
-            ret += Headers.COLOR1 + ",";
-            ret += Headers.COLOR2 + ",";
-            ret += Headers.COLOR3 + ",";
-            ret += Headers.COLOR4 + ",";
-            ret += Headers.RUSH_DATE + ",";
-            ret += Headers.COMMENTS;
+            ret += QueryHeaders.CUT_HOUSE + ",";
+            ret += QueryHeaders.SCHEDULE_DATE + ",";
+            ret += QueryHeaders.ENTER_DATE + ",";
+            ret += QueryHeaders.ORDER_NUMBER + ",";
+            ret += QueryHeaders.VOUCHER + ",";
+            ret += QueryHeaders.ITEM + ",";
+            ret += QueryHeaders.SIZE + ",";
+            ret += QueryHeaders.SPEC + ",";
+            ret += QueryHeaders.NAME + ",";
+            ret += QueryHeaders.WORD1 + ",";
+            ret += QueryHeaders.WORD2 + ",";
+            ret += QueryHeaders.WORD3 + ",";
+            ret += QueryHeaders.WORD4 + ",";
+            ret += QueryHeaders.COLOR1 + ",";
+            ret += QueryHeaders.COLOR2 + ",";
+            ret += QueryHeaders.COLOR3 + ",";
+            ret += QueryHeaders.COLOR4 + ",";
+            ret += QueryHeaders.RUSH_DATE + ",";
+            ret += QueryHeaders.COMMENTS;
 
             return ret;
         }

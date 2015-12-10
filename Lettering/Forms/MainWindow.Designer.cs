@@ -1,5 +1,5 @@
 ﻿namespace Lettering {
-    partial class LauncherWindow {
+    partial class MainWindow {
         /// <summary>
         /// Required designer variable.
         /// </summary>
