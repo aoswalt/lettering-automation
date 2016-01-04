@@ -39,24 +39,24 @@ namespace Lettering {
             foreach(DataRow row in data.Rows) {
                 OrderData order = new OrderData();
                 
-                order.cutHouse = (row[QueryHeaders.CUT_HOUSE].ToString()).Trim();
-                order.scheduleDate = row[QueryHeaders.SCHEDULE_DATE] != System.DBNull.Value ? ((System.DateTime)row[QueryHeaders.SCHEDULE_DATE]).ToString("d") : "";
-                order.enterDate = row[QueryHeaders.ENTER_DATE] != System.DBNull.Value ? ((System.DateTime)row[QueryHeaders.ENTER_DATE]).ToString("d") : "";
-                order.orderNumber = row[QueryHeaders.ORDER_NUMBER] != System.DBNull.Value ? Convert.ToInt32(row[QueryHeaders.ORDER_NUMBER]) : 0;
-                order.voucherNumber = row[QueryHeaders.VOUCHER] != System.DBNull.Value ? Convert.ToInt32(row[QueryHeaders.VOUCHER]) : 0;
-                order.itemCode = (row[QueryHeaders.ITEM].ToString()).Trim();
-                order.size = row[QueryHeaders.SIZE] != System.DBNull.Value ? Convert.ToDouble(row[QueryHeaders.SIZE]) : 0;
-                order.spec = row[QueryHeaders.SPEC] != System.DBNull.Value ? Convert.ToDouble(row[QueryHeaders.SPEC]) : 0;
-                order.name = (row[QueryHeaders.NAME].ToString()).Trim();
-                order.word1 = (row[QueryHeaders.WORD1].ToString()).Trim();
-                order.word2 = (row[QueryHeaders.WORD2].ToString()).Trim();
-                order.word3 = (row[QueryHeaders.WORD3].ToString()).Trim();
-                order.word4 = (row[QueryHeaders.WORD4].ToString()).Trim();
-                order.color1 = (row[QueryHeaders.COLOR1].ToString()).Trim();
-                order.color2 = (row[QueryHeaders.COLOR2].ToString()).Trim();
-                order.color3 = (row[QueryHeaders.COLOR3].ToString()).Trim();
-                order.color4 = (row[QueryHeaders.COLOR4].ToString()).Trim();
-                order.rushDate = row[QueryHeaders.RUSH_DATE] != System.DBNull.Value ? ((System.DateTime)row[QueryHeaders.RUSH_DATE]).ToString("d") : "";
+                order.cutHouse = (row[DbHeaders.CUT_HOUSE].ToString()).Trim();
+                order.scheduleDate = row[DbHeaders.SCHEDULE_DATE] != System.DBNull.Value ? ((System.DateTime)row[DbHeaders.SCHEDULE_DATE]).ToString("d") : "";
+                order.enterDate = row[DbHeaders.ENTER_DATE] != System.DBNull.Value ? ((System.DateTime)row[DbHeaders.ENTER_DATE]).ToString("d") : "";
+                order.orderNumber = row[DbHeaders.ORDER_NUMBER] != System.DBNull.Value ? Convert.ToInt32(row[DbHeaders.ORDER_NUMBER]) : 0;
+                order.voucherNumber = row[DbHeaders.VOUCHER] != System.DBNull.Value ? Convert.ToInt32(row[DbHeaders.VOUCHER]) : 0;
+                order.itemCode = (row[DbHeaders.ITEM].ToString()).Trim();
+                order.size = row[DbHeaders.SIZE] != System.DBNull.Value ? Convert.ToDouble(row[DbHeaders.SIZE]) : 0;
+                order.spec = row[DbHeaders.SPEC] != System.DBNull.Value ? Convert.ToDouble(row[DbHeaders.SPEC]) : 0;
+                order.name = (row[DbHeaders.NAME].ToString()).Trim();
+                order.word1 = (row[DbHeaders.WORD1].ToString()).Trim();
+                order.word2 = (row[DbHeaders.WORD2].ToString()).Trim();
+                order.word3 = (row[DbHeaders.WORD3].ToString()).Trim();
+                order.word4 = (row[DbHeaders.WORD4].ToString()).Trim();
+                order.color1 = (row[DbHeaders.COLOR1].ToString()).Trim();
+                order.color2 = (row[DbHeaders.COLOR2].ToString()).Trim();
+                order.color3 = (row[DbHeaders.COLOR3].ToString()).Trim();
+                order.color4 = (row[DbHeaders.COLOR4].ToString()).Trim();
+                order.rushDate = row[DbHeaders.RUSH_DATE] != System.DBNull.Value ? ((System.DateTime)row[DbHeaders.RUSH_DATE]).ToString("d") : "";
                 order.comment = "";
                 order.nameList = new List<string>();
 

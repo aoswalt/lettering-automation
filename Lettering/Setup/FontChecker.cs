@@ -8,10 +8,12 @@ using System.Threading.Tasks;
 using System.Windows.Media;
 
 namespace Lettering {
+    //TODO(adam): font processing needs to be cleaned up and try to handle the obscure issues
+
     internal class FontChecker {
         private static string installedFontFolder = Environment.GetFolderPath(Environment.SpecialFolder.Fonts);
         private static string networkFontFolder = @"\\production\Lettering\Corel\WORK FOLDERS\VS Fonts";
-        private static string fontFolder = Program.tempFolder;
+        private static string fontFolder = Lettering.tempFolder;
         private static string missingFonts = "";
         private static List<string> loadedFonts = new List<string>();
 

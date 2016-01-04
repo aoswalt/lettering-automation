@@ -1,5 +1,6 @@
 ﻿namespace Lettering {
-    internal struct QueryHeaders {
+    internal struct DbHeaders {
+        //NOTE(adam): these are the headers as stored in the 400
         internal const string CUT_HOUSE = "DHOUS";
         internal const string SCHEDULE_DATE = "SCDAT";
         internal const string ENTER_DATE = "ENDAT";

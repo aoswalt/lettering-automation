@@ -6,10 +6,10 @@ using System.Threading.Tasks;
 
 namespace Lettering {
     internal class Program {
-        private MainWindow launcher = new MainWindow();
-
         [STAThread]
-        static void Main(string[] args) {
+        internal static void Main(string[] args) {
+            MainWindow launcher = new MainWindow();
+
             //NOTE(adam): check setup will close corel as necessary & prevents continuing if necessary
             if(SetupManager.CheckSetup()) {
                 launcher.ShowDialog();

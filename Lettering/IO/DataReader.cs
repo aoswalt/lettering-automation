@@ -7,6 +7,8 @@ using System.Collections.Generic;
 
 namespace Lettering {
     internal class DataReader {
+        //TODO(adam): this class should be REMOVED! it is too ambiguous
+
         internal static DataTable getCsvData() {
             OpenFileDialog openFileDialog = new OpenFileDialog();
             openFileDialog.InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
@@ -18,12 +20,12 @@ namespace Lettering {
                     //string pathOnly = Path.GetDirectoryName(openFileDialog.FileName);
                     string fileName = Path.GetFileName(openFileDialog.FileName);
 
-                    System.IO.Directory.CreateDirectory(Program.tempFolder);
-                    System.IO.File.Copy(openFileDialog.FileName, Program.tempFolder + fileName, true);
+                    System.IO.Directory.CreateDirectory(Lettering.tempFolder);
+                    System.IO.File.Copy(openFileDialog.FileName, Lettering.tempFolder + fileName, true);
 
                     string query = @"SELECT * FROM [" + fileName + "]";
 
-                    using(OdbcConnection conn = new OdbcConnection("Driver={Microsoft Text Driver (*.txt; *.csv)};DBQ=" + Program.tempFolder)) {
+                    using(OdbcConnection conn = new OdbcConnection("Driver={Microsoft Text Driver (*.txt; *.csv)};DBQ=" + Lettering.tempFolder)) {
                         OdbcCommand command = new OdbcCommand(query, conn);
                         OdbcDataAdapter adapter = new OdbcDataAdapter(command);
 
@@ -90,7 +92,7 @@ namespace Lettering {
                             return dtClone;
                         }
 
-                        System.IO.Directory.Delete(Program.tempFolder, true);
+                        System.IO.Directory.Delete(Lettering.tempFolder, true);
 
                         unifyHeaders(dataTable);
                         return dataTable;
@@ -206,24 +208,24 @@ namespace Lettering {
         }
 
         private static void unifyHeaders(DataTable data) {
-            if(data.Columns.Contains("HOUSE") && !data.Columns.Contains(QueryHeaders.CUT_HOUSE)) data.Columns["HOUSE"].ColumnName = QueryHeaders.CUT_HOUSE;
-            if(data.Columns.Contains("SCHEDULE_DATE_MMDDCCYY") && !data.Columns.Contains(QueryHeaders.SCHEDULE_DATE)) data.Columns["SCHEDULE_DATE_MMDDCCYY"].ColumnName = QueryHeaders.SCHEDULE_DATE;
-            if(!data.Columns.Contains(QueryHeaders.ENTER_DATE)) data.Columns.Add(QueryHeaders.ENTER_DATE);
-            if(data.Columns.Contains("ORDER_NO") && !data.Columns.Contains(QueryHeaders.ORDER_NUMBER)) data.Columns["ORDER_NO"].ColumnName = QueryHeaders.ORDER_NUMBER;
-            if(data.Columns.Contains("ORDER_VOUCH") && !data.Columns.Contains(QueryHeaders.VOUCHER)) data.Columns["ORDER_VOUCH"].ColumnName = QueryHeaders.VOUCHER;
-            if(data.Columns.Contains("ITEM_NO") && !data.Columns.Contains(QueryHeaders.ITEM)) data.Columns["ITEM_NO"].ColumnName = QueryHeaders.ITEM;
-            if(data.Columns.Contains("LETTER_SIZE") && !data.Columns.Contains(QueryHeaders.SIZE)) data.Columns["LETTER_SIZE"].ColumnName = QueryHeaders.SIZE;
-            if(data.Columns.Contains("LETTER_SPEC") && !data.Columns.Contains(QueryHeaders.SPEC)) data.Columns["LETTER_SPEC"].ColumnName = QueryHeaders.SPEC;
-            if(data.Columns.Contains("NAME") && !data.Columns.Contains(QueryHeaders.NAME)) data.Columns["NAME"].ColumnName = QueryHeaders.NAME;
-            if(data.Columns.Contains("DRAWING_LETTER_WORD1") && !data.Columns.Contains(QueryHeaders.WORD1)) data.Columns["DRAWING_LETTER_WORD1"].ColumnName = QueryHeaders.WORD1;
-            if(data.Columns.Contains("DRAWING_LETTER_WORD2") && !data.Columns.Contains(QueryHeaders.WORD2)) data.Columns["DRAWING_LETTER_WORD2"].ColumnName = QueryHeaders.WORD2;
-            if(data.Columns.Contains("DRAWING_LETTER_WORD3") && !data.Columns.Contains(QueryHeaders.WORD3)) data.Columns["DRAWING_LETTER_WORD3"].ColumnName = QueryHeaders.WORD3;
-            if(data.Columns.Contains("DRAWING_LETTER_WORD4") && !data.Columns.Contains(QueryHeaders.WORD4)) data.Columns["DRAWING_LETTER_WORD4"].ColumnName = QueryHeaders.WORD4;
-            if(!data.Columns.Contains(QueryHeaders.COLOR1)) data.Columns.Add(QueryHeaders.COLOR1);
-            if(!data.Columns.Contains(QueryHeaders.COLOR2)) data.Columns.Add(QueryHeaders.COLOR2);
-            if(!data.Columns.Contains(QueryHeaders.COLOR3)) data.Columns.Add(QueryHeaders.COLOR3);
-            if(!data.Columns.Contains(QueryHeaders.COLOR4)) data.Columns.Add(QueryHeaders.COLOR4);
-            if(!data.Columns.Contains(QueryHeaders.RUSH_DATE)) data.Columns.Add(QueryHeaders.RUSH_DATE);
+            if(data.Columns.Contains("HOUSE") && !data.Columns.Contains(DbHeaders.CUT_HOUSE)) data.Columns["HOUSE"].ColumnName = DbHeaders.CUT_HOUSE;
+            if(data.Columns.Contains("SCHEDULE_DATE_MMDDCCYY") && !data.Columns.Contains(DbHeaders.SCHEDULE_DATE)) data.Columns["SCHEDULE_DATE_MMDDCCYY"].ColumnName = DbHeaders.SCHEDULE_DATE;
+            if(!data.Columns.Contains(DbHeaders.ENTER_DATE)) data.Columns.Add(DbHeaders.ENTER_DATE);
+            if(data.Columns.Contains("ORDER_NO") && !data.Columns.Contains(DbHeaders.ORDER_NUMBER)) data.Columns["ORDER_NO"].ColumnName = DbHeaders.ORDER_NUMBER;
+            if(data.Columns.Contains("ORDER_VOUCH") && !data.Columns.Contains(DbHeaders.VOUCHER)) data.Columns["ORDER_VOUCH"].ColumnName = DbHeaders.VOUCHER;
+            if(data.Columns.Contains("ITEM_NO") && !data.Columns.Contains(DbHeaders.ITEM)) data.Columns["ITEM_NO"].ColumnName = DbHeaders.ITEM;
+            if(data.Columns.Contains("LETTER_SIZE") && !data.Columns.Contains(DbHeaders.SIZE)) data.Columns["LETTER_SIZE"].ColumnName = DbHeaders.SIZE;
+            if(data.Columns.Contains("LETTER_SPEC") && !data.Columns.Contains(DbHeaders.SPEC)) data.Columns["LETTER_SPEC"].ColumnName = DbHeaders.SPEC;
+            if(data.Columns.Contains("NAME") && !data.Columns.Contains(DbHeaders.NAME)) data.Columns["NAME"].ColumnName = DbHeaders.NAME;
+            if(data.Columns.Contains("DRAWING_LETTER_WORD1") && !data.Columns.Contains(DbHeaders.WORD1)) data.Columns["DRAWING_LETTER_WORD1"].ColumnName = DbHeaders.WORD1;
+            if(data.Columns.Contains("DRAWING_LETTER_WORD2") && !data.Columns.Contains(DbHeaders.WORD2)) data.Columns["DRAWING_LETTER_WORD2"].ColumnName = DbHeaders.WORD2;
+            if(data.Columns.Contains("DRAWING_LETTER_WORD3") && !data.Columns.Contains(DbHeaders.WORD3)) data.Columns["DRAWING_LETTER_WORD3"].ColumnName = DbHeaders.WORD3;
+            if(data.Columns.Contains("DRAWING_LETTER_WORD4") && !data.Columns.Contains(DbHeaders.WORD4)) data.Columns["DRAWING_LETTER_WORD4"].ColumnName = DbHeaders.WORD4;
+            if(!data.Columns.Contains(DbHeaders.COLOR1)) data.Columns.Add(DbHeaders.COLOR1);
+            if(!data.Columns.Contains(DbHeaders.COLOR2)) data.Columns.Add(DbHeaders.COLOR2);
+            if(!data.Columns.Contains(DbHeaders.COLOR3)) data.Columns.Add(DbHeaders.COLOR3);
+            if(!data.Columns.Contains(DbHeaders.COLOR4)) data.Columns.Add(DbHeaders.COLOR4);
+            if(!data.Columns.Contains(DbHeaders.RUSH_DATE)) data.Columns.Add(DbHeaders.RUSH_DATE);
 
             //data.Columns["PARENT_VOUCH"].ColumnName = "";
             //data.Columns["SCHEDULE_DATE_CCYYMMDD"].ColumnName = "";
@@ -240,6 +242,7 @@ namespace Lettering {
                     try {
                         holidays.Add(DateTime.Parse(line));
                     } catch(FormatException ex) {
+                        //TODO(adam): log/warn about invalid date
                         continue;
                     }
                 }

@@ -41,7 +41,7 @@ namespace Lettering {
                         } else if(line.Contains("TRIMS")) {
                             curSection = Sections.Trims;
                         } else {
-                            Program.errors += "config " + lineNumber + ": Invalid section header\n";
+                            Lettering.errors += "config " + lineNumber + ": Invalid section header\n";
                         }
                     } else {
                         switch(curSection) {
@@ -49,25 +49,25 @@ namespace Lettering {
                                 config.rootPath = line;
                                 break;
                             case Sections.Types:
-                                if(!config.parseType(line)) Program.errors += "config " + lineNumber + ": Type parse error\n";
+                                if(!config.parseType(line)) Lettering.errors += "config " + lineNumber + ": Type parse error\n";
                                 break;
                             case Sections.Prefixes:
-                                if(!config.parsePrefix(line)) Program.errors += "config " + lineNumber + ": Prefix parse error\n";
+                                if(!config.parsePrefix(line)) Lettering.errors += "config " + lineNumber + ": Prefix parse error\n";
                                 break;
                             case Sections.Paths:
-                                if(!config.parsePath(line)) Program.errors += "config " + lineNumber + ": Path parse error\n";
+                                if(!config.parsePath(line)) Lettering.errors += "config " + lineNumber + ": Path parse error\n";
                                 break;
                             case Sections.Exports:
-                                if(!config.parseExport(line)) Program.errors += "config " + lineNumber + ": Export parse error\n";
+                                if(!config.parseExport(line)) Lettering.errors += "config " + lineNumber + ": Export parse error\n";
                                 break;
                             case Sections.Exceptions:
-                                if(!config.parseException(line)) Program.errors += "config " + lineNumber + ": Exception parse error\n";
+                                if(!config.parseException(line)) Lettering.errors += "config " + lineNumber + ": Exception parse error\n";
                                 break;
                             case Sections.Trims:
-                                if(!config.parseTrim(line)) Program.errors += "config " + lineNumber + ": Trim parse error\n";
+                                if(!config.parseTrim(line)) Lettering.errors += "config " + lineNumber + ": Trim parse error\n";
                                 break;
                             default:
-                                Program.errors += "config " + lineNumber + ": Unspecified section\n";
+                                Lettering.errors += "config " + lineNumber + ": Unspecified section\n";
                                 break;
                         }
                     }

@@ -27,15 +27,15 @@ namespace Lettering {
             msg += "\n\nPlease save all work and press OK to close Corel.";
 
             if(libInstall || fontInstall) {
-                if(Program.corel.Visible) {
+                if(Lettering.corel.Visible) {
                     MessageBox.Show(msg, "Corel Restart Required", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
                     //NOTE(adam): set all documents as clean to prevent error on quit
-                    foreach(VGCore.Document document in Program.corel.Documents) {
+                    foreach(VGCore.Document document in Lettering.corel.Documents) {
                         document.Dirty = false;
                     }
 
-                    Program.corel.Quit();
+                    Lettering.corel.Quit();
                 }
 
                 if(fontInstall) {

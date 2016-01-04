@@ -10,16 +10,16 @@ namespace Lettering {
             string outFilePath = Environment.GetFolderPath(Environment.SpecialFolder.Desktop) + '/' + fileName + ".csv";
 
             // delete file if exists
-            // SHOULD PROMPT
+            //TODO(adam): SHOULD PROMPT if file exists
             if(System.IO.File.Exists(outFilePath)) {
                 System.IO.File.Delete(outFilePath);
             }
 
             using(System.IO.StreamWriter writer = new System.IO.StreamWriter(outFilePath)) {
-                writer.WriteLine(getHeaderString());
+                writer.WriteLine(buildHeaderString());
 
                 foreach(OrderData order in orders) {
-                    writer.WriteLine(assembleLine(order));
+                    writer.WriteLine(buildRowString(order));
                 }
 
                 writer.Flush();
@@ -27,32 +27,32 @@ namespace Lettering {
             }
         }
 
-        private static string getHeaderString() {
+        private static string buildHeaderString() {
             string ret = "";
-            ret += QueryHeaders.CUT_HOUSE + ",";
-            ret += QueryHeaders.SCHEDULE_DATE + ",";
-            ret += QueryHeaders.ENTER_DATE + ",";
-            ret += QueryHeaders.ORDER_NUMBER + ",";
-            ret += QueryHeaders.VOUCHER + ",";
-            ret += QueryHeaders.ITEM + ",";
-            ret += QueryHeaders.SIZE + ",";
-            ret += QueryHeaders.SPEC + ",";
-            ret += QueryHeaders.NAME + ",";
-            ret += QueryHeaders.WORD1 + ",";
-            ret += QueryHeaders.WORD2 + ",";
-            ret += QueryHeaders.WORD3 + ",";
-            ret += QueryHeaders.WORD4 + ",";
-            ret += QueryHeaders.COLOR1 + ",";
-            ret += QueryHeaders.COLOR2 + ",";
-            ret += QueryHeaders.COLOR3 + ",";
-            ret += QueryHeaders.COLOR4 + ",";
-            ret += QueryHeaders.RUSH_DATE + ",";
-            ret += QueryHeaders.COMMENTS;
+            ret += DbHeaders.CUT_HOUSE + ",";
+            ret += DbHeaders.SCHEDULE_DATE + ",";
+            ret += DbHeaders.ENTER_DATE + ",";
+            ret += DbHeaders.ORDER_NUMBER + ",";
+            ret += DbHeaders.VOUCHER + ",";
+            ret += DbHeaders.ITEM + ",";
+            ret += DbHeaders.SIZE + ",";
+            ret += DbHeaders.SPEC + ",";
+            ret += DbHeaders.NAME + ",";
+            ret += DbHeaders.WORD1 + ",";
+            ret += DbHeaders.WORD2 + ",";
+            ret += DbHeaders.WORD3 + ",";
+            ret += DbHeaders.WORD4 + ",";
+            ret += DbHeaders.COLOR1 + ",";
+            ret += DbHeaders.COLOR2 + ",";
+            ret += DbHeaders.COLOR3 + ",";
+            ret += DbHeaders.COLOR4 + ",";
+            ret += DbHeaders.RUSH_DATE + ",";
+            ret += DbHeaders.COMMENTS;
 
             return ret;
         }
 
-        private static string assembleLine(OrderData order) {
+        private static string buildRowString(OrderData order) {
             string ret = "";
             ret += order.cutHouse + ",";
             ret += order.scheduleDate + ",";

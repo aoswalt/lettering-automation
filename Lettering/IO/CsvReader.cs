@@ -6,5 +6,6 @@ using System.Threading.Tasks;
 
 namespace Lettering.IO {
     internal class CsvReader {
+        //TODO(adam): support varying csv report layouts
     }
 }
