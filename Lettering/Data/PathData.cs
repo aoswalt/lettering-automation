@@ -5,9 +5,9 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace Lettering.Data {
-    public struct PathData {
-        public int type;
-        public int[] wordOrder;
-        public string mirrorStyle;
+    internal struct PathData {
+        internal int type;
+        internal int[] wordOrder;
+        internal string mirrorStyle;
     }
 }

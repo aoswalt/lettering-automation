@@ -6,8 +6,8 @@ using System.Threading.Tasks;
 
 namespace Lettering.Data {
     internal struct ExceptionData {
-        public string path;
-        public string tag;
-        public double value;
+        internal string path;
+        internal string tag;
+        internal double value;
     }
 }

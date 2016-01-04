@@ -6,12 +6,12 @@ using System.Threading.Tasks;
 
 namespace Lettering.Data {
     internal class ConfigData {
-        public enum ExportType { NONE, PLT, EPS };
+        internal enum ExportType { NONE, PLT, EPS };
 
         private delegate string PathBuilderDelegate(OrderData order);
         private delegate bool ExceptionCheckDelegate(OrderData order, ExceptionData exception);
 
-        public string rootPath;
+        internal string rootPath;
         private Dictionary<int, string> types = new Dictionary<int, string>();
         private List<string> prefixes = new List<string>();
         private Dictionary<string, PathData> paths = new Dictionary<string, PathData>();
@@ -21,7 +21,7 @@ namespace Lettering.Data {
         private Dictionary<string, ExceptionCheckDelegate> exceptionChecks = new Dictionary<string, ExceptionCheckDelegate>();
         private List<string> trims = new List<string>();
 
-        public ConfigData() {
+        internal ConfigData() {
             //NOTE(adam): add path building functions
             pathBuilders.Add("!style", (order) => {
                 //NOTE(adam): example: "TTstyle" becomes "TT STYLES\TT style
@@ -58,11 +58,11 @@ namespace Lettering.Data {
             exceptionChecks.Add("spec", (order, exception) => { return order.spec == exception.value; });
         }
 
-        public bool pathDataExists(string style) {
+        internal bool pathDataExists(string style) {
             return paths.ContainsKey(style);
         }
 
-        public string trimStyleCode(string style) {
+        internal string trimStyleCode(string style) {
             style = style.Replace(" ", String.Empty);
             style = Regex.Replace(style, @"^CF", "TT");     //NOTE(adam): treat CF as TT
 
@@ -76,7 +76,7 @@ namespace Lettering.Data {
             return "";
         }
 
-        public string getTemplatePath(OrderData order) {
+        internal string getTemplatePath(OrderData order) {
             string dir = rootPath + '\\' + pathBuilders["!style"](order);
             string[] pathTokens = dir.Split('\\');
             string file = pathTokens[pathTokens.Length - 1] + " TEMPLATE.cdr";
@@ -84,11 +84,11 @@ namespace Lettering.Data {
             return dir + '\\' + file;
         }
 
-        public void insertType(int i, string desc) {
+        internal void insertType(int i, string desc) {
             types.Add(i, desc);
         }
 
-        public bool parseType(string line) {
+        internal bool parseType(string line) {
             string[] tokens = line.Split(':');
             if(tokens.Length < 2) {
                 return false;
@@ -98,17 +98,17 @@ namespace Lettering.Data {
             }
         }
 
-        public bool parsePrefix(string line) {
+        internal bool parsePrefix(string line) {
             prefixes.Add(line);
             return true;
         }
 
-        public void insertPath(string style, int type, int[] wordOrder = null, string mirrorStyle = "") {
+        internal void insertPath(string style, int type, int[] wordOrder = null, string mirrorStyle = "") {
             paths.Add(style.Replace(" ", String.Empty),
                       new PathData(type, wordOrder != null ? wordOrder : new int[] { 1, 2, 3, 4 }, mirrorStyle.Replace(" ", String.Empty)));
         }
 
-        public bool parsePath(string line) {
+        internal bool parsePath(string line) {
             string[] tokens = line.Split(':');
             if(tokens.Length < 2) return false;     //NOTE(adam): need at least style and type
 
@@ -146,7 +146,7 @@ namespace Lettering.Data {
             }
         }
 
-        public void insertException(string style, string path, string tag, double value) {
+        internal void insertException(string style, string path, string tag, double value) {
             //NOTE(adam): if there is an entry for the style, add to it; otherwise, create new entry
             List<ExceptionData> exceptionList;
             if(exceptions.TryGetValue(style.Replace(" ", String.Empty), out exceptionList)) {
@@ -156,7 +156,7 @@ namespace Lettering.Data {
             }
         }
 
-        public bool parseExport(string line) {
+        internal bool parseExport(string line) {
             string[] tokens = line.Split(':');
             if(tokens.Length < 2) return false;     //NOTE(adam): improper line formatting
 
@@ -185,7 +185,7 @@ namespace Lettering.Data {
             return true;
         }
 
-        public bool parseException(string line) {
+        internal bool parseException(string line) {
             string[] tokens = line.Split(':');
             if(tokens.Length < 3) return false;     //NOTE(adam): improper line formatting
 
@@ -194,12 +194,12 @@ namespace Lettering.Data {
             return true;
         }
 
-        public bool parseTrim(string line) {
+        internal bool parseTrim(string line) {
             trims.Add(line);
             return true;
         }
 
-        public string makeFileName(OrderData order) {
+        internal string makeFileName(OrderData order) {
             PathData pathData = ((paths[order.itemCode].mirrorStyle == "") ?
                 paths[order.itemCode] : paths[paths[order.itemCode].mirrorStyle]);
             string fileName = "";
@@ -227,11 +227,11 @@ namespace Lettering.Data {
             return (fileName != "" ? fileName.ToUpper() : order.name.ToUpper()) + ".cdr";
         }
 
-        public string constructPath(OrderData order) {
+        internal string constructPath(OrderData order) {
             return rootPath + constructPartialPath(order) + makeFileName(order);
         }
 
-        public string constructPartialPath(OrderData order) {      //NOTE(adam): operating on copy to preserve original data
+        internal string constructPartialPath(OrderData order) {      //NOTE(adam): operating on copy to preserve original data
             //NOTE(adam): replace item code if mirror style
             if(types[paths[order.itemCode].type] == "mirror") order.itemCode = paths[order.itemCode].mirrorStyle;
 
@@ -273,11 +273,11 @@ namespace Lettering.Data {
             return finalPath;
         }
 
-        public bool isNameStyle(OrderData order) {
+        internal bool isNameStyle(OrderData order) {
             return types[paths[trimStyleCode(order.itemCode)].type] == "names";
         }
 
-        public ExportType getExportType(OrderData order) {
+        internal ExportType getExportType(OrderData order) {
             foreach(string pattern in exports.Keys) {
                 if(Regex.IsMatch(trimStyleCode(order.itemCode), pattern)) {
                     return exports[pattern];
@@ -286,7 +286,7 @@ namespace Lettering.Data {
             return ExportType.NONE;
         }
 
-        public bool isIgnoredStyle(OrderData order) {
+        internal bool isIgnoredStyle(OrderData order) {
             return types[paths[trimStyleCode(order.itemCode)].type] == "ignore" ||
                    (paths[trimStyleCode(order.itemCode)].mirrorStyle != "" &&
                     types[paths[paths[trimStyleCode(order.itemCode)].mirrorStyle].type] == "ignore");

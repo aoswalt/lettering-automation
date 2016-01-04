@@ -9,12 +9,12 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace Lettering {
-    public enum WindowSelection { NEXT, REJECT, CANCEL }
+    internal enum WindowSelection { NEXT, REJECT, CANCEL }
 
-    public partial class ActiveOrderWindow : Form {
-        public WindowSelection selection;
+    internal partial class ActiveOrderWindow : Form {
+        internal WindowSelection selection;
 
-        public ActiveOrderWindow() {
+        internal ActiveOrderWindow() {
             InitializeComponent();
         }
 
@@ -33,7 +33,7 @@ namespace Lettering {
             this.Hide();
         }
 
-        public void SetInfoDisplay(OrderData order) {
+        internal void SetInfoDisplay(OrderData order) {
             lblStyle.Text = order.itemCode;
             lblSize.Text = order.size.ToString();
             lblSpec.Text = order.spec.ToString();

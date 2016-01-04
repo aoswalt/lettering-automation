@@ -9,8 +9,8 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace Lettering {
-    public partial class MainWindow : Form {
-        public MainWindow() {
+    internal partial class MainWindow : Form {
+        internal MainWindow() {
             InitializeComponent();
         }
 

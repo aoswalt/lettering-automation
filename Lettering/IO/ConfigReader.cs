@@ -9,7 +9,7 @@ namespace Lettering {
         private const string configPath = @"./configs/automation.cfg";
         private enum Sections { Void, Root, Types, Prefixes, Paths, Exports, Exceptions, Trims };
 
-        public static ConfigData ReadFile() {
+        internal static ConfigData ReadFile() {
             ConfigData config = new ConfigData();
             Sections curSection = Sections.Void;
 

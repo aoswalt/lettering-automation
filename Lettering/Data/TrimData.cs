@@ -5,8 +5,8 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace Lettering.Data {
-    public struct TrimData {
-        public int length;
-        public string pattern;
+    internal struct TrimData {
+        internal int length;
+        internal string pattern;
     }
 }

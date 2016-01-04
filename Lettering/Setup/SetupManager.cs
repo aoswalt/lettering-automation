@@ -16,7 +16,7 @@ using System.Windows.Media;
 namespace Lettering {
     internal class SetupManager {
         //NOTE(adam): returns true if safe to continue
-        public static bool CheckSetup() {
+        internal static bool CheckSetup() {
             bool libInstall = InstallLibrary();
             bool fontInstall = CheckFontInstall();
 

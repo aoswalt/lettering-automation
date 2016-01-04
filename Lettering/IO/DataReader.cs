@@ -7,7 +7,7 @@ using System.Collections.Generic;
 
 namespace Lettering {
     internal class DataReader {
-        public static DataTable getCsvData() {
+        internal static DataTable getCsvData() {
             OpenFileDialog openFileDialog = new OpenFileDialog();
             openFileDialog.InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
             openFileDialog.Filter = "csv file (*.csv)|*.csv|txt file (*.txt)|*.txt";
@@ -109,7 +109,7 @@ namespace Lettering {
              * */
         }
 
-        public static DataTable runReport() {
+        internal static DataTable runReport() {
             string connectionString = "Driver={iSeries Access ODBC Driver}; System=USC; SignOn=4;";
 
             List<DateTime> holidays = ReadHolidays();

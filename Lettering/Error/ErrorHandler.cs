@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 namespace Lettering {
     internal class ErrorHandler {
         /* general idea possibility
-        public static void HandleError(Exception e) {
+        internal static void HandleError(Exception e) {
             if(e is Exception) {
 
             }

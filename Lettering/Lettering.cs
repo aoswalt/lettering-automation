@@ -8,16 +8,16 @@ using VGCore;
 using System.IO;
 
 namespace Lettering {
-    public enum ReportType { CSV, SQL };
+    internal enum ReportType { CSV, SQL };
 
     internal class Lettering {
-        public static string errors = "";
-        public static string tempFolder = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + "\\TemporaryAutomationFiles\\";
+        internal static string errors = "";
+        internal static string tempFolder = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + "\\TemporaryAutomationFiles\\";
         private static string destPath = Environment.GetFolderPath(Environment.SpecialFolder.Desktop) + @"\1 CUT FILES";
-        public static CorelDRAW.Application corel = new CorelDRAW.Application();
+        internal static CorelDRAW.Application corel = new CorelDRAW.Application();
         private static ConfigData config;
 
-        public static void Run(ReportType reportType) {
+        internal static void Run(ReportType reportType) {
             bool cancelBuilding = false;
 
             config = ConfigManager.getConfig();
