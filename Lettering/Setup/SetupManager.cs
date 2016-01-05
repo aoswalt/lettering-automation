@@ -1,17 +1,6 @@
-﻿using Microsoft.Win32;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
+﻿using System;
 using System.Diagnostics;
-using System.Drawing;
-using System.Drawing.Text;
-using System.IO;
-using System.Linq;
-using System.Runtime.InteropServices;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
-using System.Windows.Media;
 
 namespace Lettering {
     internal class SetupManager {
@@ -39,6 +28,7 @@ namespace Lettering {
                 }
 
                 if(fontInstall) {
+                    //NOTE(adam): open font folder and display message listing needed fonts
                     Process.Start(networkFontFolder);
                     System.Threading.Thread.Sleep(200);     //NOTE(adam): delay to ensure dialog on top of folder window
                     MessageBox.Show("Font(s) need to be installed or updated:\n" + missingFonts, "Missing Fonts", MessageBoxButtons.OK, MessageBoxIcon.Information);

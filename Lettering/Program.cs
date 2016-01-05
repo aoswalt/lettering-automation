@@ -8,12 +8,8 @@ namespace Lettering {
     internal class Program {
         [STAThread]
         internal static void Main(string[] args) {
-            MainWindow launcher = new MainWindow();
-
-            //NOTE(adam): check setup will close corel as necessary & prevents continuing if necessary
-            if(SetupManager.CheckSetup()) {
-                launcher.ShowDialog();
-            }
+            MainWindow window = new MainWindow();
+            window.ShowDialog();
         }
     }
 }
