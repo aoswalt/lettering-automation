@@ -1,11 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
 using System.Data;
-using System.Data.Odbc;
 using System.Windows.Forms;
 using VGCore;
 using System.IO;
+using Lettering.Data;
 
 namespace Lettering {
     internal enum ReportType { CSV, SQL };
@@ -15,12 +14,12 @@ namespace Lettering {
         internal static string tempFolder = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + "\\TemporaryAutomationFiles\\";
         private static string destPath = Environment.GetFolderPath(Environment.SpecialFolder.Desktop) + @"\1 CUT FILES";
         internal static CorelDRAW.Application corel = new CorelDRAW.Application();
-        private static ConfigData config;
+        private static ConfigData config = new ConfigData();
 
         internal static void Run(ReportType reportType) {
             bool cancelBuilding = false;
 
-            config = ConfigManager.getConfig();
+            //config = ConfigManager.getConfig();
             ActiveOrderWindow activeOrderWindow = new ActiveOrderWindow();
             List<string> currentNames = new List<string>();
             List<OrderData> ordersToLog = new List<OrderData>();
@@ -29,7 +28,7 @@ namespace Lettering {
             if(data == null) {
                 return;
             } else {
-                launcher.Hide();
+                //launcher.Hide();
             }
 
             MessageBox.Show(data.Rows.Count + " entries found");

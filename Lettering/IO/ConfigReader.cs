@@ -1,8 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Windows.Forms;
 using System.IO;
-using System.Text.RegularExpressions;
+using Lettering.Data;
 
 namespace Lettering {
     internal class ConfigReader {

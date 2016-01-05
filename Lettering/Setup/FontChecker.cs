@@ -12,14 +12,14 @@ namespace Lettering {
 
     internal class FontChecker {
         private static string installedFontFolder = Environment.GetFolderPath(Environment.SpecialFolder.Fonts);
-        private static string networkFontFolder = @"\\production\Lettering\Corel\WORK FOLDERS\VS Fonts";
+        internal static string networkFontFolder = @"\\production\Lettering\Corel\WORK FOLDERS\VS Fonts";
         private static string fontFolder = Lettering.tempFolder;
-        private static string missingFonts = "";
+        internal static string missingFonts = "";
         private static List<string> loadedFonts = new List<string>();
 
 
         //NOTE(adam): returns true if fonts were installed
-        private static bool CheckFontInstall() {
+        internal static bool CheckFontInstall() {
             bool needFontInstall = false;
 
             /*

@@ -6,12 +6,12 @@ namespace Lettering {
     internal class SetupManager {
         //NOTE(adam): returns true if safe to continue
         internal static bool CheckSetup() {
-            bool libInstall = InstallLibrary();
-            bool fontInstall = CheckFontInstall();
+            bool libInstall = LibraryInstaller.InstallLibrary();
+            bool fontInstall = FontChecker.CheckFontInstall();
 
             string msg = "";
             msg += (libInstall ? "Library had to be updated.\n\n" : "");
-            msg += (fontInstall ? "Font(s) missing or need to be updated:\n" + missingFonts : "");
+            msg += (fontInstall ? "Font(s) missing or need to be updated:\n" + FontChecker.missingFonts : "");
             msg += "\nCorel must be restarted before continuing.";
             msg += "\n\nPlease save all work and press OK to close Corel.";
 
@@ -29,9 +29,9 @@ namespace Lettering {
 
                 if(fontInstall) {
                     //NOTE(adam): open font folder and display message listing needed fonts
-                    Process.Start(networkFontFolder);
+                    Process.Start(FontChecker.networkFontFolder);
                     System.Threading.Thread.Sleep(200);     //NOTE(adam): delay to ensure dialog on top of folder window
-                    MessageBox.Show("Font(s) need to be installed or updated:\n" + missingFonts, "Missing Fonts", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    MessageBox.Show("Font(s) need to be installed or updated:\n" + FontChecker.missingFonts, "Missing Fonts", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     return false;   //NOTE(adam): prevent continuing without fonts installed
                 } else {
                     return true;

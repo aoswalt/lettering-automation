@@ -105,8 +105,12 @@ namespace Lettering.Data {
         }
 
         internal void insertPath(string style, int type, int[] wordOrder = null, string mirrorStyle = "") {
-            paths.Add(style.Replace(" ", String.Empty),
-                      new PathData(type, wordOrder != null ? wordOrder : new int[] { 1, 2, 3, 4 }, mirrorStyle.Replace(" ", String.Empty)));
+            PathData path = new PathData();
+            path.type = type;
+            path.wordOrder = wordOrder != null ? wordOrder : new int[] { 1, 2, 3, 4 };
+            path.mirrorStyle = mirrorStyle.Replace(" ", String.Empty);
+
+            paths.Add(style.Replace(" ", String.Empty), path);
         }
 
         internal bool parsePath(string line) {
@@ -149,11 +153,17 @@ namespace Lettering.Data {
 
         internal void insertException(string style, string path, string tag, double value) {
             //NOTE(adam): if there is an entry for the style, add to it; otherwise, create new entry
+
+            ExceptionData exception = new ExceptionData();
+            exception.path = path;
+            exception.tag = tag;
+            exception.value = value;
+
             List<ExceptionData> exceptionList;
             if(exceptions.TryGetValue(style.Replace(" ", String.Empty), out exceptionList)) {
-                exceptionList.Add(new ExceptionData(path, tag, value));
+                exceptionList.Add(exception);
             } else {
-                exceptions.Add(style.Replace(" ", String.Empty), new List<ExceptionData> { new ExceptionData(path, tag, value) });
+                exceptions.Add(style.Replace(" ", String.Empty), new List<ExceptionData> { exception });
             }
         }
 

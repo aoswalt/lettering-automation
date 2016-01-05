@@ -11,7 +11,7 @@ namespace Lettering {
         private static string libPath = @"\\production\Lettering\Corel\WORK FOLDERS\Automation\Automation.gms";
 
         //NOTE(adam): returns true if library was installed
-        private static bool InstallLibrary() {
+        internal static bool InstallLibrary() {
             bool needLibInstall = false;
 
             if(!File.Exists(installedLibPath)) {
