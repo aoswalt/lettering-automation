@@ -64,6 +64,12 @@
     <Compile Include="Data\PathData.cs" />
     <Compile Include="Data\TrimData.cs" />
     <Compile Include="Error\ErrorHandler.cs" />
+    <Compile Include="Forms\LoadingWindow.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\LoadingWindow.Designer.cs">
+      <DependentUpon>LoadingWindow.cs</DependentUpon>
+    </Compile>
     <Compile Include="IO\CsvReader.cs" />
     <Compile Include="IO\SqlConnector.cs" />
     <Compile Include="Setup\FontChecker.cs" />
@@ -113,6 +119,9 @@
   <ItemGroup>
     <EmbeddedResource Include="Forms\ActiveOrderWindow.resx">
       <DependentUpon>ActiveOrderWindow.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\LoadingWindow.resx">
+      <DependentUpon>LoadingWindow.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\MainWindow.resx">
       <DependentUpon>MainWindow.cs</DependentUpon>

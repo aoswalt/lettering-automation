@@ -38,6 +38,7 @@
             this.editConfigsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.loadAllConfigsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -146,6 +147,7 @@
             // fileToolStripMenuItem
             // 
             this.fileToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.loadAllConfigsToolStripMenuItem,
             this.editConfigsToolStripMenuItem,
             this.toolStripSeparator1,
             this.exitToolStripMenuItem});
@@ -156,19 +158,25 @@
             // editConfigsToolStripMenuItem
             // 
             this.editConfigsToolStripMenuItem.Name = "editConfigsToolStripMenuItem";
-            this.editConfigsToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.editConfigsToolStripMenuItem.Size = new System.Drawing.Size(161, 22);
             this.editConfigsToolStripMenuItem.Text = "Edit &Configs";
             // 
             // toolStripSeparator1
             // 
             this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(149, 6);
+            this.toolStripSeparator1.Size = new System.Drawing.Size(158, 6);
             // 
             // exitToolStripMenuItem
             // 
             this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
-            this.exitToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.exitToolStripMenuItem.Size = new System.Drawing.Size(161, 22);
             this.exitToolStripMenuItem.Text = "E&xit";
+            // 
+            // loadAllConfigsToolStripMenuItem
+            // 
+            this.loadAllConfigsToolStripMenuItem.Name = "loadAllConfigsToolStripMenuItem";
+            this.loadAllConfigsToolStripMenuItem.Size = new System.Drawing.Size(161, 22);
+            this.loadAllConfigsToolStripMenuItem.Text = "&Load All Configs";
             // 
             // MainWindow
             // 
@@ -216,5 +224,6 @@
         private System.Windows.Forms.ToolStripMenuItem editConfigsToolStripMenuItem;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
         private System.Windows.Forms.ToolStripMenuItem exitToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem loadAllConfigsToolStripMenuItem;
     }
 }
