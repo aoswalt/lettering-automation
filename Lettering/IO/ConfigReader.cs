@@ -18,11 +18,12 @@ namespace Lettering {
                     line = sr.ReadLine().Trim();
                     ++lineNumber;
 
-                    //NOTE(adam): do nothing if blank line or comment
-                    if(invalidLine(line)) {
+                    //NOTE(adam): if is blank line or comment, skip
+                    if(!(line.Length > 0 && line[0] != '#')) {
                         continue;
                     }
 
+                    //NOTE(adam): set section or parse line based on current section
                     if(line[0] == '>') {
                         if(line.Contains("ROOT")) {
                             curSection = Sections.Root;
@@ -44,25 +45,55 @@ namespace Lettering {
                     } else {
                         switch(curSection) {
                             case Sections.Root:
-                                config.rootPath = line;
+                                config.SetRootPath(line);
                                 break;
                             case Sections.Types:
-                                if(!config.parseType(line)) Lettering.errors += "config " + lineNumber + ": Type parse error\n";
+                                {
+                                    string[] tokens = line.Split(':');
+                                    //NOTE(adam): expecting line as #:desc
+                                    if(tokens.Length < 2) {
+                                        Lettering.errors += "config " + lineNumber + ": Type parse error\n";
+                                        //TODO(adam): example LogError(new FileReadError(type, lineNumber, message);
+                                    } else {
+                                        config.InsertPathType(int.Parse(tokens[0]), tokens[1]);
+                                    }
+                                }
                                 break;
                             case Sections.Prefixes:
-                                if(!config.parsePrefix(line)) Lettering.errors += "config " + lineNumber + ": Prefix parse error\n";
+                                config.InsertStylePrefix(line);
                                 break;
                             case Sections.Paths:
-                                if(!config.parsePath(line)) Lettering.errors += "config " + lineNumber + ": Path parse error\n";
+                                {
+                                    StylePathData path = ParsePath(line);
+                                    if(path == null) {
+                                        Lettering.errors += "config " + lineNumber + ": Path parse error\n";
+                                    } else {
+                                        config.InsertPath(path);
+                                    }
+                                }
                                 break;
                             case Sections.Exports:
-                                if(!config.parseExport(line)) Lettering.errors += "config " + lineNumber + ": Export parse error\n";
+                                {
+                                    ExportData export = ParseExport(line);
+                                    if(export == null) {
+                                        Lettering.errors += "config " + lineNumber + ": Export parse error\n";
+                                    } else {
+                                        config.InsertExport(export);
+                                    }
+                                }
                                 break;
                             case Sections.Exceptions:
-                                if(!config.parseException(line)) Lettering.errors += "config " + lineNumber + ": Exception parse error\n";
+                                {
+                                    ExceptionData exception = ParseException(line);
+                                    if(exception == null) {
+                                        Lettering.errors += "config " + lineNumber + ": Exception parse error\n";
+                                    } else {
+                                        config.InsertException(exception);
+                                    }
+                                }
                                 break;
                             case Sections.Trims:
-                                if(!config.parseTrim(line)) Lettering.errors += "config " + lineNumber + ": Trim parse error\n";
+                                config.InsertTrim(line);
                                 break;
                             default:
                                 Lettering.errors += "config " + lineNumber + ": Unspecified section\n";
@@ -75,8 +106,78 @@ namespace Lettering {
             return config;
         }
 
-        private static bool invalidLine(string line) {
-            return !(line.Length > 0 && line[0] != '#');
+        internal static StylePathData ParsePath(string line) {
+            string[] tokens = line.Split(':');
+            if(tokens.Length < 2) return null;     //NOTE(adam): expecting style:type:(wordOrder):(mirrorStyle)
+
+            StylePathData path = new StylePathData();
+            string style = tokens[0];
+            int type = int.Parse(tokens[1]);
+            int[] wordOrder = null;
+            string mirrorStyle = "";
+
+            //NOTE(adam): if potential custom word order
+            if(tokens.Length >= 3) {
+                //NOTE(adam): if there is a custom word order, set the array
+                if(tokens[2] != String.Empty) {
+                    wordOrder = new int[4];     //NOTE(adam): default empty since using custom
+                    int[] customWordOrder = Array.ConvertAll(tokens[2].Split(new char[] { ',', ' ' }, StringSplitOptions.None), s => int.Parse(s));
+
+                    for(int i = 0; i != customWordOrder.Length; ++i) {
+                        wordOrder[i] = customWordOrder[i];
+                    }
+                } else {
+                    wordOrder = new int[] { 1, 2, 3, 4 };     //NOTE(adam): default all words
+                }
+            }
+
+            //NOTE(adam): if mirror style
+            if(tokens.Length >= 4) {
+                mirrorStyle = tokens[3];
+            }
+
+            path.style = style;
+            path.type = type;
+            path.wordOrder = wordOrder;
+            path.mirrorStyle = mirrorStyle;
+            return path;
+        }
+
+        internal static ExportData ParseExport(string line) {
+            ExportData export = new ExportData();
+
+            string[] tokens = line.Split(':');
+            if(tokens.Length != 2) return null;     //NOTE(adam): expecting style:filetype
+
+            //NOTE(adam): convert style and generic wildcards to regex pattern
+            String pattern = "^" + tokens[0].ToUpper();
+            pattern.Replace('?', '.');
+            pattern.Replace("*", ".+");
+
+            ExportType e;
+            if(!Enum.TryParse(tokens[1], true, out e)) {
+                return null;
+            }
+
+            export.styleRegex = pattern;
+            export.fileType = e;
+            return export;
+        }
+
+        internal static ExceptionData ParseException(string line) {
+            ExceptionData exception = new ExceptionData();
+
+            string[] tokens = line.Split(':');
+            if(tokens.Length != 3) return null;      //NOTE(adam): expecting style:path:detail
+
+            string[] detail = tokens[2].Split('=');
+            if(detail.Length != 2) return null;     //NOTE(adam): expecting tag=value
+
+            exception.style = tokens[0];
+            exception.path = tokens[1];
+            exception.tag = detail[0];
+            exception.value = double.Parse(detail[1]);
+            return exception;
         }
     }
 }

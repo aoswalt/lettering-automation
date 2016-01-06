@@ -11,6 +11,7 @@
     <AssemblyName>Lettering</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
     <PublishUrl>publish\</PublishUrl>
     <Install>true</Install>
     <InstallFrom>Disk</InstallFrom>
@@ -23,7 +24,6 @@
     <MapFileExtensions>true</MapFileExtensions>
     <ApplicationRevision>0</ApplicationRevision>
     <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
-    <IsWebBootstrapper>false</IsWebBootstrapper>
     <UseApplicationTrust>false</UseApplicationTrust>
     <BootstrapperEnabled>true</BootstrapperEnabled>
   </PropertyGroup>
@@ -61,7 +61,9 @@
   <ItemGroup>
     <Compile Include="Data\ConfigData.cs" />
     <Compile Include="Data\ExceptionData.cs" />
-    <Compile Include="Data\PathData.cs" />
+    <Compile Include="Data\ExportData.cs" />
+    <Compile Include="Data\FilePaths.cs" />
+    <Compile Include="Data\StylePathData.cs" />
     <Compile Include="Data\TrimData.cs" />
     <Compile Include="Error\ErrorHandler.cs" />
     <Compile Include="Forms\LoadingWindow.cs">
