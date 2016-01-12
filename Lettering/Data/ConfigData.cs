@@ -37,6 +37,7 @@ namespace Lettering.Data {
                     }
                 }
                 //NOTE(adam): can insert other custom style paths here?
+                //TODO(adam): errors
                 return "";  //NOTE(adam): ensures failure if no match
             });
             pathBuilders.Add("!size", (order) => { return (int)order.size + "INCH"; });
@@ -53,6 +54,7 @@ namespace Lettering.Data {
                 } else if(order.word1 != "") {
                     return order.word1.ToUpper();
                 } else {
+                    //TODO(adam): errors
                     return "";
                 }
             });
@@ -109,6 +111,7 @@ namespace Lettering.Data {
                 if(paths.ContainsKey(style)) return style;     //NOTE(adam): path data found
             }
 
+            //TODO(adam): errors
             return "";
         }
 
@@ -130,7 +133,7 @@ namespace Lettering.Data {
                     return exports[pattern];
                 }
             }
-            return ExportType.NONE;
+            return ExportType.None;
         }
 
         internal void SetRootPath(string rootPath) {

@@ -102,6 +102,7 @@ namespace Lettering {
 
                     return null;
                 }
+            //TODO(adam): errors
             /*
             } catch(Exception ex) {     // should use specific exceptions
                 MessageBox.Show("Error: Could not read file.\n\n" + ex.Message);
@@ -186,6 +187,7 @@ namespace Lettering {
                     return table;
                 }
             } catch(OdbcException e) {
+                //TODO(adam): errors
                 if(e.Errors[0].SQLState == "IM002") {
                     MessageBox.Show("Driver not found.\n\nPlease contact the IT Department to install the ODBC Driver for IBM iSeries Access.", "Driver Not Found");
                     return null;
@@ -202,6 +204,7 @@ namespace Lettering {
                     return null;
                 }
             } catch(Exception e) {
+                //TODO(adam): errors
                 MessageBox.Show("Exception: " + e.Message);
                 return null;
             }
@@ -242,7 +245,7 @@ namespace Lettering {
                     try {
                         holidays.Add(DateTime.Parse(line));
                     } catch(FormatException) {
-                        //TODO(adam): log/warn about invalid date
+                        //TODO(adam): errors - log/warn about invalid date
                         continue;
                     }
                 }

@@ -31,6 +31,7 @@ namespace Lettering {
                     //NOTE(adam): open font folder and display message listing needed fonts
                     Process.Start(FontChecker.networkFontFolder);
                     System.Threading.Thread.Sleep(200);     //NOTE(adam): delay to ensure dialog on top of folder window
+                    //TODO(adam): messaging
                     MessageBox.Show("Font(s) need to be installed or updated:\n" + FontChecker.missingFonts, "Missing Fonts", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     return false;   //NOTE(adam): prevent continuing without fonts installed
                 } else {

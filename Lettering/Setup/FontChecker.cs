@@ -107,6 +107,7 @@ namespace Lettering {
             if(fonts == null) {
                 fonts = Registry.LocalMachine.OpenSubKey(@"Software\Microsoft\Windows\CurrentVersion\Fonts", false);
                 if(fonts == null) {
+                    //TODO(adam): errors
                     throw new Exception("Can't find font registry database.");
                 }
             }

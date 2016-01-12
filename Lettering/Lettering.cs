@@ -5,11 +5,12 @@ using System.Windows.Forms;
 using VGCore;
 using System.IO;
 using Lettering.Data;
+using Lettering.Errors;
 
 namespace Lettering {
-    internal enum ReportType { CSV, SQL };
-    internal enum ExportType { NONE, PLT, EPS };
-    internal enum ActionType { CUT, SEW, STONE };
+    internal enum ReportType { Csv, Sql };
+    internal enum ExportType { None, Plt, Eps };
+    internal enum ActionType { Cut, Sew, STONE };
 
     internal class Lettering {
         internal static string errors = "";
@@ -30,13 +31,14 @@ namespace Lettering {
             List<string> currentNames = new List<string>();
             List<OrderData> ordersToLog = new List<OrderData>();
 
-            DataTable data = ((reportType == ReportType.CSV) ? DataReader.getCsvData() : DataReader.runReport());
+            DataTable data = ((reportType == ReportType.Csv) ? DataReader.getCsvData() : DataReader.runReport());
             if(data == null) {
                 return;
             } else {
                 //launcher.Hide();
             }
 
+            //TODO(adam): messaging
             MessageBox.Show(data.Rows.Count + " entries found");
 
             //NOTE(adam): convert rows to data entries before loop to allow lookahead
@@ -107,7 +109,7 @@ namespace Lettering {
                 // MessageBox.Show("To build: " + order.itemCode + "\n Template: " + config.getTemplatePath(order));
                 String templatePath = config.filePaths.ConstructTemplatePath(order);
                 if(!File.Exists(templatePath)) {
-                    MessageBox.Show("Template not found:\n" + templatePath, "Missing Template", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
+                    ErrorHandler.HandleError(new Error(ErrorType.Alert, "Template not found:\n" + templatePath));
                     order.comment += "Template not found";
                     ordersToLog.Add(order);
                 } else {
@@ -142,7 +144,7 @@ namespace Lettering {
                             } else {
                                 System.IO.Directory.CreateDirectory(config.filePaths.ConstructSavePathFolder(order));
                                 corel.ActiveDocument.SaveAs(newMadePath);
-                                if(config.GetExportType(order.itemCode) != ExportType.NONE) ExportOrder(order);
+                                if(config.GetExportType(order.itemCode) != ExportType.None) ExportOrder(order);
                             }
                         }
 
@@ -168,7 +170,9 @@ namespace Lettering {
 
             DataWriter.writeLog(ordersToLog, "LetteringLog-" + DateTime.Now.ToString("yyyyMMdd_HHmm"));
 
+            //TODO(adam): messaging
             MessageBox.Show("Done!");
+            //TODO(adam): errors display
             if(errors.Length > 0) MessageBox.Show(errors, "Error Log");
         }
 
@@ -177,7 +181,7 @@ namespace Lettering {
             corel.OpenDocument(templatePath);
 
             if(corel.Documents.Count < 1) {
-                MessageBox.Show("No documents open.");
+                ErrorHandler.HandleError(new Error(ErrorType.Alert, "No documents open."));
                 return;
             }
 
@@ -209,7 +213,7 @@ namespace Lettering {
             corel.ActiveDocument.ClearSelection();
 
             //NOTE(adam): try selecting specific sew shape
-            if(exportType == ExportType.PLT) {
+            if(exportType == ExportType.Plt) {
                 Shape sewShape = corel.ActivePage.FindShape(orderWords + "_sew");
                 if(sewShape != null) sewShape.AddToSelection();
             }
@@ -247,7 +251,7 @@ namespace Lettering {
 
             //TODO(adam): condense section since overall format repeated
             switch(exportType) {
-                case ExportType.PLT: {
+                case ExportType.Plt: {
                     if(corel.ActiveSelection.Shapes.Count == 0) {
                         MessageBox.Show("Could no get shapes for exporting. Manual export required.");
                     } else {
@@ -256,7 +260,7 @@ namespace Lettering {
                         corel.ActiveDocument.Export(config.filePaths.ConstructExportPath(order, "PLT"), cdrFilter.cdrPLT, cdrExportRange.cdrSelection);
                     }
                     } break;
-                case ExportType.EPS: {
+                case ExportType.Eps: {
                     if(corel.ActiveSelection.Shapes.Count == 0) {
                         MessageBox.Show("Could no get shapes for exporting. Manual export required.");
                     } else {

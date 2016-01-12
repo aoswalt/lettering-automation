@@ -12,11 +12,11 @@ namespace Lettering {
         }
 
         private void openButton_Click(object sender, EventArgs e) {
-            Lettering.Run(ReportType.CSV);
+            Lettering.Run(ReportType.Csv);
         }
 
         private void runButton_Click(object sender, EventArgs e) {
-            Lettering.Run(ReportType.SQL);
+            Lettering.Run(ReportType.Sql);
         }
     }
 }

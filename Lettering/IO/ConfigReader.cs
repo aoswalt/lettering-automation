@@ -40,6 +40,7 @@ namespace Lettering {
                         } else if(line.Contains("TRIMS")) {
                             curSection = Sections.Trims;
                         } else {
+                            //TODO(adam): errors
                             Lettering.errors += "config " + lineNumber + ": Invalid section header\n";
                         }
                     } else {
@@ -52,6 +53,7 @@ namespace Lettering {
                                     string[] tokens = line.Split(':');
                                     //NOTE(adam): expecting line as #:desc
                                     if(tokens.Length < 2) {
+                                        //TODO(adam): errors
                                         Lettering.errors += "config " + lineNumber + ": Type parse error\n";
                                         //TODO(adam): example LogError(new FileReadError(type, lineNumber, message);
                                     } else {
@@ -66,6 +68,7 @@ namespace Lettering {
                                 {
                                     StylePathData path = ParsePath(line);
                                     if(path == null) {
+                                        //TODO(adam): errors
                                         Lettering.errors += "config " + lineNumber + ": Path parse error\n";
                                     } else {
                                         config.InsertPath(path);
@@ -76,6 +79,7 @@ namespace Lettering {
                                 {
                                     ExportData export = ParseExport(line);
                                     if(export == null) {
+                                        //TODO(adam): errors
                                         Lettering.errors += "config " + lineNumber + ": Export parse error\n";
                                     } else {
                                         config.InsertExport(export);
@@ -86,6 +90,7 @@ namespace Lettering {
                                 {
                                     ExceptionData exception = ParseException(line);
                                     if(exception == null) {
+                                        //TODO(adam): errors
                                         Lettering.errors += "config " + lineNumber + ": Exception parse error\n";
                                     } else {
                                         config.InsertException(exception);
@@ -96,6 +101,7 @@ namespace Lettering {
                                 config.InsertTrim(line);
                                 break;
                             default:
+                                //TODO(adam): errors
                                 Lettering.errors += "config " + lineNumber + ": Unspecified section\n";
                                 break;
                         }
