@@ -134,7 +134,7 @@ namespace Lettering.Data {
         }
 
         internal void SetRootPath(string rootPath) {
-            filePaths.rootPath = rootPath;
+            filePaths.SetCutPath(rootPath);
         }
     }
 }

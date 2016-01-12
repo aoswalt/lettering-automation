@@ -9,13 +9,18 @@ using Lettering.Data;
 namespace Lettering {
     internal enum ReportType { CSV, SQL };
     internal enum ExportType { NONE, PLT, EPS };
+    internal enum ActionType { CUT, SEW, STONE };
 
     internal class Lettering {
         internal static string errors = "";
         internal static string tempFolder = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + "\\TemporaryAutomationFiles\\";
-        private static string destPath = Environment.GetFolderPath(Environment.SpecialFolder.Desktop) + @"\1 CUT FILES";
         internal static CorelDRAW.Application corel = new CorelDRAW.Application();
         private static ConfigData config = new ConfigData();
+
+        internal Lettering() {
+            string destPath = Environment.GetFolderPath(Environment.SpecialFolder.Desktop) + @"\1 CUT FILES";
+            config.filePaths.SetDestPath(destPath);
+        }
 
         internal static void Run(ReportType reportType) {
             bool cancelBuilding = false;
@@ -77,8 +82,8 @@ namespace Lettering {
                 }
 
                 //NOTE(adam): if built, continue
-                string orderPath = config.filePaths.ConstructPath(order);
-                string newMadePath = destPath + config.filePaths.ConstructPartialPath(order) + config.filePaths.MakeFileName(order);
+                string orderPath = config.filePaths.ConstructSavePath(order);
+                string newMadePath = config.filePaths.ConstructSavePath(order);
 
                 if(File.Exists(orderPath) || File.Exists(newMadePath)) {
                     order.comment += "Already made";
@@ -100,7 +105,7 @@ namespace Lettering {
 
                 //NOTE(adam): build point
                 // MessageBox.Show("To build: " + order.itemCode + "\n Template: " + config.getTemplatePath(order));
-                String templatePath = config.filePaths.GetTemplatePath(order);
+                String templatePath = config.filePaths.ConstructTemplatePath(order);
                 if(!File.Exists(templatePath)) {
                     MessageBox.Show("Template not found:\n" + templatePath, "Missing Template", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
                     order.comment += "Template not found";
@@ -135,7 +140,7 @@ namespace Lettering {
                                 System.IO.Directory.CreateDirectory(namesDir);
                                 corel.ActiveDocument.SaveAs(namesDir + order.orderNumber + order.voucherNumber.ToString("D3") + ".cdr");
                             } else {
-                                System.IO.Directory.CreateDirectory(destPath + config.filePaths.ConstructPartialPath(order));
+                                System.IO.Directory.CreateDirectory(config.filePaths.ConstructSavePathFolder(order));
                                 corel.ActiveDocument.SaveAs(newMadePath);
                                 if(config.GetExportType(order.itemCode) != ExportType.NONE) ExportOrder(order);
                             }
@@ -197,7 +202,7 @@ namespace Lettering {
         }
 
         private static void ExportOrder(OrderData order) {
-            string orderWords = config.filePaths.MakeFileName(order).Replace(".cdr", String.Empty);
+            string orderWords = config.filePaths.ConstructFileName(order).Replace(".cdr", String.Empty);
             ExportType exportType = config.GetExportType(order.itemCode);
 
 
@@ -240,25 +245,24 @@ namespace Lettering {
                 corel.ActivePage.SelectableShapes.All().AddToSelection();
             }
 
+            //TODO(adam): condense section since overall format repeated
             switch(exportType) {
                 case ExportType.PLT: {
                     if(corel.ActiveSelection.Shapes.Count == 0) {
                         MessageBox.Show("Could no get shapes for exporting. Manual export required.");
                     } else {
-                        string exportPath = destPath + config.filePaths.ConstructPartialPath(order) + "PLT\\";
-                        System.IO.Directory.CreateDirectory(exportPath);
+                        System.IO.Directory.CreateDirectory(config.filePaths.ConstructExportPathFolder(order, "PLT"));
                         //NOTE(adam): options need to be specified within Corel previously
-                        corel.ActiveDocument.Export(exportPath + orderWords + ".plt", cdrFilter.cdrPLT, cdrExportRange.cdrSelection);
+                        corel.ActiveDocument.Export(config.filePaths.ConstructExportPath(order, "PLT"), cdrFilter.cdrPLT, cdrExportRange.cdrSelection);
                     }
                     } break;
                 case ExportType.EPS: {
                     if(corel.ActiveSelection.Shapes.Count == 0) {
                         MessageBox.Show("Could no get shapes for exporting. Manual export required.");
                     } else {
-                        string exportPath = destPath + config.filePaths.ConstructPartialPath(order) + "EPS\\";
-                        System.IO.Directory.CreateDirectory(exportPath);
+                        System.IO.Directory.CreateDirectory(config.filePaths.ConstructExportPathFolder(order, "EPS"));
                         //NOTE(adam): options need to be specified within Corel previously
-                        corel.ActiveDocument.Export(exportPath + orderWords + ".eps", cdrFilter.cdrEPS, cdrExportRange.cdrSelection);
+                        corel.ActiveDocument.Export(config.filePaths.ConstructExportPath(order, "EPS"), cdrFilter.cdrEPS, cdrExportRange.cdrSelection);
                     }
                     } break;
                 default:

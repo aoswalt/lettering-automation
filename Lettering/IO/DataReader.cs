@@ -241,7 +241,7 @@ namespace Lettering {
 
                     try {
                         holidays.Add(DateTime.Parse(line));
-                    } catch(FormatException ex) {
+                    } catch(FormatException) {
                         //TODO(adam): log/warn about invalid date
                         continue;
                     }

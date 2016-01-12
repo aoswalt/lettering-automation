@@ -64,7 +64,6 @@
     <Compile Include="Data\ExportData.cs" />
     <Compile Include="Data\FilePaths.cs" />
     <Compile Include="Data\StylePathData.cs" />
-    <Compile Include="Data\TrimData.cs" />
     <Compile Include="Error\ErrorHandler.cs" />
     <Compile Include="Forms\LoadingWindow.cs">
       <SubType>Form</SubType>

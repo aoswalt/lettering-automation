@@ -5,21 +5,44 @@ namespace Lettering.Data {
     internal class FilePaths {
         private readonly ConfigData config;
 
-        internal string rootPath;
+        //TODO(adam): simplify access to constructing file paths
 
+        //TODO(adam): switch to dictionary with key of path type?
+        private string rootCutPath;
+        private string rootSewPath;
+        private string rootStonePath;
+        private string destPath;
+
+        //TODO(adam): change paths so always end in \ unless file
         internal FilePaths(ConfigData config) {
             this.config = config;
         }
 
-        internal string GetTemplatePath(OrderData order) {
-            string dir = rootPath + '\\' + config.pathBuilders["!style"](order);
+        internal void SetCutPath(string rootCutPath) {
+            this.rootCutPath = rootCutPath;
+        }
+
+        internal void SetSewPath(string rootSewPath) {
+            this.rootSewPath = rootSewPath;
+        }
+
+        internal void SetStonePath(string rootStonePath) {
+            this.rootStonePath = rootStonePath;
+        }
+
+        internal void SetDestPath(string destPath) {
+            this.destPath = destPath;
+        }
+
+        internal string ConstructTemplatePath(OrderData order) {
+            string dir = rootCutPath + '\\' + config.pathBuilders["!style"](order);
             string[] pathTokens = dir.Split('\\');
             string file = pathTokens[pathTokens.Length - 1] + " TEMPLATE.cdr";
 
             return dir + '\\' + file;
         }
 
-        internal string MakeFileName(OrderData order) {
+        internal string ConstructFileName(OrderData order) {
             StylePathData pathData = ((config.paths[order.itemCode].mirrorStyle == "") ?
                 config.paths[order.itemCode] : config.paths[config.paths[order.itemCode].mirrorStyle]);
             string fileName = "";
@@ -44,24 +67,39 @@ namespace Lettering.Data {
             }
 
             fileName = fileName.TrimEnd('-');
-            return (fileName != "" ? fileName.ToUpper() : order.name.ToUpper()) + ".cdr";
+            return (fileName != "" ? fileName.ToUpper() : order.name.ToUpper());
         }
 
-        internal string ConstructPath(OrderData order) {
-            return rootPath + ConstructPartialPath(order) + MakeFileName(order);
+        internal string ConstructSavePathFolder(OrderData order) {
+            return destPath + ConstructStylePathPart(order);
         }
 
-        internal string ConstructPartialPath(OrderData order) {      //NOTE(adam): operating on copy to preserve original data
+        internal string ConstructSavePath(OrderData order) {
+            return ConstructSavePathFolder(order) + ConstructFileName(order) + ".cdr";
+        }
+
+        internal string ConstructExportPathFolder(OrderData order, string extension) {
+            return destPath + ConstructStylePathPart(order) + extension.ToUpper() + '\\';
+        }
+
+        internal string ConstructExportPath(OrderData order, string extension) {
+            return ConstructExportPathFolder(order, extension) + ConstructFileName(order) + '.' + extension;
+        }
+
+        private string ConstructStylePathPart(OrderData order) {
+            //NOTE(adam): operating on copy to preserve original data
+            OrderData tempOrder = order;
+
             //NOTE(adam): replace item code if mirror style
-            if(config.pathTypes[config.paths[order.itemCode].type] == "mirror") order.itemCode = config.paths[order.itemCode].mirrorStyle;
+            if(config.pathTypes[config.paths[tempOrder.itemCode].type] == "mirror") tempOrder.itemCode = config.paths[tempOrder.itemCode].mirrorStyle;
 
             string startPath = "";
             //NOTE(adam): test for exceptions
             List<ExceptionData> possibleExceptions;
-            if(config.exceptions.TryGetValue(order.itemCode, out possibleExceptions)) {
+            if(config.exceptions.TryGetValue(tempOrder.itemCode, out possibleExceptions)) {
                 bool noException = true;
                 foreach(ExceptionData ex in possibleExceptions) {
-                    if(config.exceptionChecks[ex.tag.ToLower()](order, ex)) {
+                    if(config.exceptionChecks[ex.tag.ToLower()](tempOrder, ex)) {
                         startPath = '\\' + ex.path;
                         noException = false;
                         break;
@@ -69,10 +107,10 @@ namespace Lettering.Data {
                 }
                 //NOTE(adam): fallthrough if no exception match
                 if(noException) {
-                    startPath = '\\' + config.pathTypes[config.paths[order.itemCode].type];
+                    startPath = '\\' + config.pathTypes[config.paths[tempOrder.itemCode].type];
                 }
             } else {
-                startPath = '\\' + config.pathTypes[config.paths[order.itemCode].type];
+                startPath = '\\' + config.pathTypes[config.paths[tempOrder.itemCode].type];
             }
 
             string[] tokens = startPath.Split('\\');
@@ -80,15 +118,11 @@ namespace Lettering.Data {
 
             foreach(string token in tokens) {
                 if(token.StartsWith("!") && config.pathBuilders.ContainsKey(token)) {
-                    finalPath += config.pathBuilders[token](order) + '\\';
+                    finalPath += config.pathBuilders[token](tempOrder) + '\\';
                 } else {
                     finalPath += token + '\\';
                 }
             }
-
-            //finalPath += makeFileName(order);
-
-            //MessageBox.Show(" item: " + order.itemCode + "\nstart: " + startPath + "\n  end: " + finalPath);
 
             return finalPath;
         }
