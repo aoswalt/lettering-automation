@@ -1,23 +1,27 @@
 ﻿using System;
 using System.IO;
+using System.Linq;
 using Lettering.Data;
 using Lettering.Errors;
+using Lettering.Forms;
 
 namespace Lettering {
     internal class ConfigReader {
-        private const string configPath = @"./configs/automation.cfg";
         private enum Sections { Void, Root, Types, Prefixes, Paths, Exports, Exceptions, Trims };
 
-        internal static ConfigData ReadFile() {
+        internal static ConfigData ReadFile(string configFilePath, LoadingWindow loadingWindow) {
             ConfigData config = new ConfigData();
             Sections curSection = Sections.Void;
+            int totalLines = File.ReadLines(configFilePath).Count();
 
-            using(StreamReader sr = new StreamReader(configPath)) {
+            using(StreamReader sr = new StreamReader(configFilePath)) {
                 int lineNumber = 0;
                 string line;
                 while(sr.Peek() > -1) {
                     line = sr.ReadLine().Trim();
                     ++lineNumber;
+
+                    loadingWindow.SetLinesProgress(lineNumber, totalLines);
 
                     //NOTE(adam): if is blank line or comment, skip
                     if(!(line.Length > 0 && line[0] != '#')) {

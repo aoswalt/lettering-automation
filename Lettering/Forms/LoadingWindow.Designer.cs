@@ -85,7 +85,7 @@
             // labelFilename
             // 
             this.labelFilename.AutoSize = true;
-            this.labelFilename.Location = new System.Drawing.Point(51, 28);
+            this.labelFilename.Location = new System.Drawing.Point(51, 22);
             this.labelFilename.Name = "labelFilename";
             this.labelFilename.Size = new System.Drawing.Size(67, 13);
             this.labelFilename.TabIndex = 6;

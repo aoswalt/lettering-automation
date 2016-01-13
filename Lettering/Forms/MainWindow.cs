@@ -18,5 +18,9 @@ namespace Lettering {
         private void runButton_Click(object sender, EventArgs e) {
             Lettering.Run(ReportType.Sql);
         }
+
+        private void loadAllConfigsToolStripMenuItem_Click(object sender, EventArgs e) {
+            Lettering.LoadAllConfigs();
+        }
     }
 }

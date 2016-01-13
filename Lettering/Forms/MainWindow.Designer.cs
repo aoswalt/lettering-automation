@@ -69,6 +69,7 @@
             this.loadAllConfigsToolStripMenuItem.Name = "loadAllConfigsToolStripMenuItem";
             this.loadAllConfigsToolStripMenuItem.Size = new System.Drawing.Size(161, 22);
             this.loadAllConfigsToolStripMenuItem.Text = "&Load All Configs";
+            this.loadAllConfigsToolStripMenuItem.Click += new System.EventHandler(this.loadAllConfigsToolStripMenuItem_Click);
             // 
             // editConfigsToolStripMenuItem
             // 

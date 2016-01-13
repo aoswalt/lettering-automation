@@ -6,6 +6,7 @@ using VGCore;
 using System.IO;
 using Lettering.Data;
 using Lettering.Errors;
+using Lettering.Forms;
 
 namespace Lettering {
     internal enum ReportType { Csv, Sql };
@@ -21,6 +22,19 @@ namespace Lettering {
         internal Lettering() {
             string destPath = Environment.GetFolderPath(Environment.SpecialFolder.Desktop) + @"\1 CUT FILES";
             config.filePaths.SetDestPath(destPath);
+        }
+
+        internal static void LoadAllConfigs() {
+            //TODO(adam): test for folder & files first
+            string[] configFiles = Directory.GetFiles(@".\configs\", "*.cfg");
+            
+            LoadingWindow loadingWindow = new LoadingWindow();
+            loadingWindow.Show();
+            for(int i = 0; i != configFiles.Length; ++i) {
+                loadingWindow.SetFilesProgress(Path.GetFileName(configFiles[i]), i + 1, configFiles.Length);
+                ConfigReader.ReadFile(configFiles[i], loadingWindow);
+            }
+            loadingWindow.Hide();
         }
 
         internal static void Run(ReportType reportType) {

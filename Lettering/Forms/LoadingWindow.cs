@@ -1,17 +1,22 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
+﻿using System.Windows.Forms;
 
 namespace Lettering.Forms {
-    public partial class LoadingWindow : Form {
-        public LoadingWindow() {
+    internal partial class LoadingWindow : Form {
+        internal LoadingWindow() {
             InitializeComponent();
+        }
+
+        internal void SetFilesProgress(string fileName, int fileNumber, int totalFiles) {
+            this.labelFileNumber.Text = $"{fileNumber}/{totalFiles}";
+            this.labelFilename.Text = fileName;
+            this.progressFiles.Maximum = totalFiles;
+            this.progressFiles.Value = fileNumber;
+        }
+
+        internal void SetLinesProgress(int lineNumber, int totalLines) {
+            this.labelLineNumber.Text = $"{lineNumber}/{totalLines}";
+            this.progressLines.Maximum = totalLines;
+            this.progressLines.Value = lineNumber;
         }
     }
 }
