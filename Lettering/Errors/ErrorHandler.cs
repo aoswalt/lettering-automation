@@ -6,21 +6,21 @@ namespace Lettering.Errors {
     internal enum ErrorType { Log, Alert, Critical }
 
     internal class ErrorHandler {
-        internal static void HandleError(Error e) {
-            switch(e.Type) {
+        internal static void HandleError(ErrorType type, string message) {
+            switch(type) {
                 case ErrorType.Log:
                     {
-                        Debug.WriteLine(e.Message + '\n');
+                        Debug.WriteLine(message + '\n');
                     }
                     break;
                 case ErrorType.Alert:
                     {
-                        MessageBox.Show(e.Message);
+                        MessageBox.Show(message, "Error!");
                     }
                     break;
                 case ErrorType.Critical:
                     {
-                        MessageBox.Show(e.Message);
+                        MessageBox.Show(message, "Critical Error!");
                         //TODO(adam): abort from here?
                     }
                     break;

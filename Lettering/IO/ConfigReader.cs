@@ -1,6 +1,7 @@
 ﻿using System;
 using System.IO;
 using Lettering.Data;
+using Lettering.Errors;
 
 namespace Lettering {
     internal class ConfigReader {
@@ -40,8 +41,7 @@ namespace Lettering {
                         } else if(line.Contains("TRIMS")) {
                             curSection = Sections.Trims;
                         } else {
-                            //TODO(adam): errors
-                            Lettering.errors += "config " + lineNumber + ": Invalid section header\n";
+                            ErrorHandler.HandleError(ErrorType.Log, $"config {lineNumber}: Invalid section header.");
                         }
                     } else {
                         switch(curSection) {
@@ -53,9 +53,7 @@ namespace Lettering {
                                     string[] tokens = line.Split(':');
                                     //NOTE(adam): expecting line as #:desc
                                     if(tokens.Length < 2) {
-                                        //TODO(adam): errors
-                                        Lettering.errors += "config " + lineNumber + ": Type parse error\n";
-                                        //TODO(adam): example LogError(new FileReadError(type, lineNumber, message);
+                                        ErrorHandler.HandleError(ErrorType.Log, $"config {lineNumber}: Type parse error.");
                                     } else {
                                         config.InsertPathType(int.Parse(tokens[0]), tokens[1]);
                                     }
@@ -68,8 +66,7 @@ namespace Lettering {
                                 {
                                     StylePathData path = ParsePath(line);
                                     if(path == null) {
-                                        //TODO(adam): errors
-                                        Lettering.errors += "config " + lineNumber + ": Path parse error\n";
+                                        ErrorHandler.HandleError(ErrorType.Log, $"config {lineNumber}: Path parse error.");
                                     } else {
                                         config.InsertPath(path);
                                     }
@@ -79,8 +76,7 @@ namespace Lettering {
                                 {
                                     ExportData export = ParseExport(line);
                                     if(export == null) {
-                                        //TODO(adam): errors
-                                        Lettering.errors += "config " + lineNumber + ": Export parse error\n";
+                                        ErrorHandler.HandleError(ErrorType.Log, $"config {lineNumber}: Export parse error.");
                                     } else {
                                         config.InsertExport(export);
                                     }
@@ -90,8 +86,7 @@ namespace Lettering {
                                 {
                                     ExceptionData exception = ParseException(line);
                                     if(exception == null) {
-                                        //TODO(adam): errors
-                                        Lettering.errors += "config " + lineNumber + ": Exception parse error\n";
+                                        ErrorHandler.HandleError(ErrorType.Log, $"config {lineNumber}: Exception parse error.");
                                     } else {
                                         config.InsertException(exception);
                                     }
@@ -101,8 +96,7 @@ namespace Lettering {
                                 config.InsertTrim(line);
                                 break;
                             default:
-                                //TODO(adam): errors
-                                Lettering.errors += "config " + lineNumber + ": Unspecified section\n";
+                                ErrorHandler.HandleError(ErrorType.Log, $"config {lineNumber}: Unspecified section.");
                                 break;
                         }
                     }

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text.RegularExpressions;
+using Lettering.Errors;
 
 namespace Lettering.Data {
     internal class ConfigData {
@@ -37,7 +38,7 @@ namespace Lettering.Data {
                     }
                 }
                 //NOTE(adam): can insert other custom style paths here?
-                //TODO(adam): errors
+                ErrorHandler.HandleError(ErrorType.Log, "No style prefix found for !style path builder.");
                 return "";  //NOTE(adam): ensures failure if no match
             });
             pathBuilders.Add("!size", (order) => { return (int)order.size + "INCH"; });
@@ -54,7 +55,7 @@ namespace Lettering.Data {
                 } else if(order.word1 != "") {
                     return order.word1.ToUpper();
                 } else {
-                    //TODO(adam): errors
+                    ErrorHandler.HandleError(ErrorType.Log, "No words for !cd path builder.");
                     return "";
                 }
             });
@@ -110,8 +111,8 @@ namespace Lettering.Data {
                 style = Regex.Replace(style, pattern, "");
                 if(paths.ContainsKey(style)) return style;     //NOTE(adam): path data found
             }
-
-            //TODO(adam): errors
+            
+            ErrorHandler.HandleError(ErrorType.Log, "No style found in TryTrimStyleCode.");
             return "";
         }
 

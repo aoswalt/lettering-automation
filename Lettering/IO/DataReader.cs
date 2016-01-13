@@ -4,6 +4,7 @@ using System.Data.Odbc;
 using System.Windows.Forms;
 using System.IO;
 using System.Collections.Generic;
+using Lettering.Errors;
 
 namespace Lettering {
     internal class DataReader {
@@ -187,25 +188,23 @@ namespace Lettering {
                     return table;
                 }
             } catch(OdbcException e) {
-                //TODO(adam): errors
                 if(e.Errors[0].SQLState == "IM002") {
-                    MessageBox.Show("Driver not found.\n\nPlease contact the IT Department to install the ODBC Driver for IBM iSeries Access.", "Driver Not Found");
+                    ErrorHandler.HandleError(ErrorType.Alert, "Driver not found.\n\nPlease contact the IT Department to install the ODBC Driver for IBM iSeries Access.");
                     return null;
                 } else {
-                    string errorLog = "";
+                    string odbcErrorLog = "";
                     for(int i = 0; i != e.Errors.Count; ++i) {
-                        errorLog += ("Error " + (i + 1) + " of " + e.Errors.Count + "\n");
-                        errorLog += ("SQLState:  " + e.Errors[i].SQLState + "\n");
-                        errorLog += ("NativErr:  " + e.Errors[i].NativeError + "\n");
-                        errorLog += ("EMessage:  " + e.Errors[i].Message + "\n");
-                        errorLog += ("ESource:   " + e.Errors[i].Source + "\n\n");
+                        odbcErrorLog += ("Error " + (i + 1) + " of " + e.Errors.Count + "\n");
+                        odbcErrorLog += ("SQLState:  " + e.Errors[i].SQLState + "\n");
+                        odbcErrorLog += ("NativErr:  " + e.Errors[i].NativeError + "\n");
+                        odbcErrorLog += ("EMessage:  " + e.Errors[i].Message + "\n");
+                        odbcErrorLog += ("ESource:   " + e.Errors[i].Source + "\n\n");
                     }
-                    MessageBox.Show(errorLog, "Errors Encountered");
+                    ErrorHandler.HandleError(ErrorType.Alert, odbcErrorLog);
                     return null;
                 }
             } catch(Exception e) {
-                //TODO(adam): errors
-                MessageBox.Show("Exception: " + e.Message);
+                ErrorHandler.HandleError(ErrorType.Alert, "Exception: " + e.Message);
                 return null;
             }
         }
@@ -238,14 +237,16 @@ namespace Lettering {
             List<DateTime> holidays = new List<DateTime>();
 
             using(StreamReader sr = new StreamReader(@"./configs/holidays.txt")) {
+                int lineNumber = 0;
                 string line;
                 while(sr.Peek() > -1) {
                     line = sr.ReadLine().Trim();
+                    ++lineNumber;
 
                     try {
                         holidays.Add(DateTime.Parse(line));
                     } catch(FormatException) {
-                        //TODO(adam): errors - log/warn about invalid date
+                        ErrorHandler.HandleError(ErrorType.Log, $"holidays {lineNumber}: Invalid date.");
                         continue;
                     }
                 }

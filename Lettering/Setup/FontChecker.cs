@@ -3,9 +3,8 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Media;
+using Lettering.Errors;
 
 namespace Lettering {
     //TODO(adam): font processing needs to be cleaned up and try to handle the obscure issues
@@ -21,6 +20,7 @@ namespace Lettering {
         //NOTE(adam): returns true if fonts were installed
         internal static bool CheckFontInstall() {
             bool needFontInstall = false;
+            missingFonts = "";
 
             /*
             System.IO.Directory.CreateDirectory(fontFolder);
@@ -35,7 +35,7 @@ namespace Lettering {
                 List<string> installedFonts = GetInstalledFonts();
 
                 string fontName = GetFontNameFromFile(fullFontPath);
-                if(!installedFonts.Contains(fontName)) {
+                if(fontName != null && !installedFonts.Contains(fontName)) {
                     //NOTE(adam): font not installed
                     //MessageBox.Show(fontName + " not installed.");
                     missingFonts += fontName + "\n";
@@ -91,10 +91,10 @@ namespace Lettering {
             return installedFonts;
              */
 
-            List<System.Windows.Media.FontFamily> installedFontFamilies = Fonts.SystemFontFamilies.ToList();
+            List<FontFamily> installedFontFamilies = Fonts.SystemFontFamilies.ToList();
             List<string> installedFonts = new List<string>();
 
-            foreach(System.Windows.Media.FontFamily fontFamily in installedFontFamilies) {
+            foreach(FontFamily fontFamily in installedFontFamilies) {
                 installedFonts.Add(fontFamily.ToString().Split('#')[fontFamily.ToString().Split('#').Count() - 1]);
             }
             return installedFonts;
@@ -107,8 +107,7 @@ namespace Lettering {
             if(fonts == null) {
                 fonts = Registry.LocalMachine.OpenSubKey(@"Software\Microsoft\Windows\CurrentVersion\Fonts", false);
                 if(fonts == null) {
-                    //TODO(adam): errors
-                    throw new Exception("Can't find font registry database.");
+                    ErrorHandler.HandleError(ErrorType.Critical, "Cannot find font registry database for GetInstalledFontFileName.");
                 }
             }
 
@@ -122,11 +121,12 @@ namespace Lettering {
         }
 
         private static string GetFontNameFromFile(string fontFilePath) {
-            foreach(System.Windows.Media.FontFamily fontFamily in Fonts.GetFontFamilies(fontFilePath)) {
+            foreach(FontFamily fontFamily in Fonts.GetFontFamilies(fontFilePath)) {
                 string fontName = fontFamily.ToString().Split('#')[fontFamily.ToString().Split('#').Count() - 1];
                 return fontName;
             }
-            return "Error with " + System.IO.Path.GetFileName(fontFilePath) + ": " + "No font families found.";
+            ErrorHandler.HandleError(ErrorType.Alert, $"Error with {Path.GetFileName(fontFilePath)}: No font families found.");
+            return null;
 
             /*
             PrivateFontCollection fontColl = new PrivateFontCollection();

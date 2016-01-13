@@ -109,7 +109,7 @@ namespace Lettering {
                 // MessageBox.Show("To build: " + order.itemCode + "\n Template: " + config.getTemplatePath(order));
                 String templatePath = config.filePaths.ConstructTemplatePath(order);
                 if(!File.Exists(templatePath)) {
-                    ErrorHandler.HandleError(new Error(ErrorType.Alert, "Template not found:\n" + templatePath));
+                    ErrorHandler.HandleError(ErrorType.Alert, "Template not found:\n" + templatePath);
                     order.comment += "Template not found";
                     ordersToLog.Add(order);
                 } else {
@@ -181,7 +181,7 @@ namespace Lettering {
             corel.OpenDocument(templatePath);
 
             if(corel.Documents.Count < 1) {
-                ErrorHandler.HandleError(new Error(ErrorType.Alert, "No documents open."));
+                ErrorHandler.HandleError(ErrorType.Alert, "No documents open.");
                 return;
             }
 
