@@ -37,20 +37,33 @@ namespace Lettering {
             loadingWindow.Hide();
         }
 
-        internal static void Run(ReportType reportType) {
+        internal static void AutomateReport(DateTime? startDate, DateTime? endDate) {
+            DataTable data = DataReader.RunReport(startDate, endDate);
+            if(data == null) {
+                ErrorHandler.HandleError(ErrorType.Alert, "No data from report.");
+                return;
+            }
+
+            ProcessOrders(data);
+        }
+
+        internal static void AutomateCsv() {
+            DataTable data = DataReader.GetCsvData();
+            if(data == null) {
+                ErrorHandler.HandleError(ErrorType.Alert, "No data from csv.");
+                return;
+            }
+
+            ProcessOrders(data);
+        }
+
+        private static void ProcessOrders(DataTable data) { 
             bool cancelBuilding = false;
 
             //config = ConfigManager.getConfig();
             ActiveOrderWindow activeOrderWindow = new ActiveOrderWindow();
             List<string> currentNames = new List<string>();
             List<OrderData> ordersToLog = new List<OrderData>();
-
-            DataTable data = ((reportType == ReportType.Csv) ? DataReader.getCsvData() : DataReader.runReport());
-            if(data == null) {
-                return;
-            } else {
-                //launcher.Hide();
-            }
 
             //TODO(adam): messaging
             MessageBox.Show(data.Rows.Count + " entries found");

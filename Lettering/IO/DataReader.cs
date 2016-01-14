@@ -10,7 +10,7 @@ namespace Lettering {
     internal class DataReader {
         //TODO(adam): this class should be REMOVED! it is too ambiguous
 
-        internal static DataTable getCsvData() {
+        internal static DataTable GetCsvData() {
             OpenFileDialog openFileDialog = new OpenFileDialog();
             openFileDialog.InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
             openFileDialog.Filter = "csv file (*.csv)|*.csv|txt file (*.txt)|*.txt";
@@ -89,13 +89,13 @@ namespace Lettering {
                                 dtClone.NewRow().ItemArray = vals;
                             }
 
-                            unifyHeaders(dtClone);
+                            UnifyHeaders(dtClone);
                             return dtClone;
                         }
 
                         System.IO.Directory.Delete(Lettering.tempFolder, true);
 
-                        unifyHeaders(dataTable);
+                        UnifyHeaders(dataTable);
                         return dataTable;
                     }
                 } else {
@@ -113,18 +113,55 @@ namespace Lettering {
              * */
         }
 
-        internal static DataTable runReport() {
-            string connectionString = "Driver={iSeries Access ODBC Driver}; System=USC; SignOn=4;";
+        internal static DataTable RunReport(DateTime? startDate, DateTime? endDate) {
+            string dateClause;
 
-            List<DateTime> holidays = ReadHolidays();
+            if(startDate.HasValue && endDate.HasValue) {
+                //NOTE(adam): start and end could be reversed or same
+                DateTime start;
+                DateTime end;
+                if(startDate.Value <= endDate.Value) {
+                    start = startDate.Value;
+                    end = endDate.Value;
+                } else {
+                    start = endDate.Value;
+                    end = startDate.Value;
+                }
+
+                dateClause = String.Format("((d.dorcy = {0}) AND (d.doryr = {1}) AND (d.dormo = {2}) AND (d.dorda = {3}))",
+                                           start.Year / 100, start.Year % 100, start.Month, start.Day);
+                start = start.AddDays(1);
+                while(start <= end) {
+                    dateClause += String.Format(" OR ((d.dorcy = {0}) AND (d.doryr = {1}) AND (d.dormo = {2}) AND (d.dorda = {3}))",
+                                               start.Year / 100, start.Year % 100, start.Month, start.Day);
+                    start = start.AddDays(1);
+                }
+            } else if(startDate.HasValue || endDate.HasValue) {
+                DateTime date = (startDate.HasValue ? startDate.Value : endDate.Value);
+                dateClause = String.Format("((d.dorcy = {0}) AND (d.doryr = {1}) AND (d.dormo = {2}) AND (d.dorda = {3}))",
+                                           date.Year / 100, date.Year % 100, date.Month, date.Day);
+            } else { 
+                //NOTE(adam): default is yesterday
+                List<DateTime> holidays = ReadHolidays();   //TODO(adam): move reading of holidays to config
+                DateTime date = DateTime.Today.AddDays(-1);
+
+                dateClause = String.Format("((d.dorcy = {0}) AND (d.doryr = {1}) AND (d.dormo = {2}) AND (d.dorda = {3}))",
+                                           date.Year / 100, date.Year % 100, date.Month, date.Day);
+
+                //NOTE(adam): adding days to search for to cover non work days (weekends, holidays, etc)
+                while(date.DayOfWeek == DayOfWeek.Saturday || date.DayOfWeek == DayOfWeek.Sunday || holidays.Contains(date)) {
+                    date = date.AddDays(-1);
+                    dateClause += String.Format(" OR ((d.dorcy = {0}) AND (d.doryr = {1}) AND (d.dormo = {2}) AND (d.dorda = {3}))",
+                                           date.Year / 100, date.Year % 100, date.Month, date.Day);
+                }
+            }
 
             try {
+                string connectionString = "Driver={iSeries Access ODBC Driver}; System=USC; SignOn=4;";
                 using(OdbcConnection conn = new OdbcConnection(connectionString)) {
                     conn.Open();
 
-                    DateTime date = DateTime.Today.AddDays(-1);
-
-                    string query = @"
+                    string query = $@"
                         SELECT det.dhous, det.scdat, det.endat, det.ordnr, det.orvch, 
                                det.ditem, det.dlsiz, siz.letwid, nam.letname, 
                                det.dlwr1, det.dlwr2, det.dlwr3, det.dlwr4, 
@@ -139,18 +176,7 @@ namespace Lettering {
                                      CASE d.drumo WHEN 0 THEN NULL ELSE DATE(d.drucy||d.druyr||'-'||RIGHT('00'||d.drumo, 2)||'-'||RIGHT('00'||d.druda, 2)) END AS rudat 
 
                               FROM VARSITYF.DETAIL AS d
-                              WHERE (" +
-                                        String.Format("((d.dorcy = {0}) AND (d.doryr = {1}) AND (d.dormo = {2}) AND (d.dorda = {3}))", 
-                                                     date.Year / 100, date.Year % 100, date.Month, date.Day);
-
-                                        //NOTE(adam): add days to search for to cover no working days
-                                        while(date.DayOfWeek == DayOfWeek.Saturday || date.DayOfWeek == DayOfWeek.Sunday || holidays.Contains(date)) {
-                                            date = date.AddDays(-1);
-                                            query += String.Format(" OR ((d.dorcy = {0}) AND (d.doryr = {1}) AND (d.dormo = {2}) AND (d.dorda = {3}))", 
-                                                                   date.Year / 100, date.Year % 100, date.Month, date.Day); 
-                                        }
-
-                                        query += @") AND 
+                              WHERE ({dateClause}) AND 
                                     ((d.dclas IN ('041', '049', '04C', '04D', '04Y', 'F09', 'PS3', 'L02', 'L05', 'L10', 'S03', 'SKL', 'VTT', '04G')) OR
                                      (d.ditem LIKE 'SIGN%')) AND 
                                     (d.ditem NOT LIKE 'OZ%') AND (d.ditem NOT LIKE 'COZ%') AND 
@@ -209,7 +235,7 @@ namespace Lettering {
             }
         }
 
-        private static void unifyHeaders(DataTable data) {
+        private static void UnifyHeaders(DataTable data) {
             if(data.Columns.Contains("HOUSE") && !data.Columns.Contains(DbHeaders.CUT_HOUSE)) data.Columns["HOUSE"].ColumnName = DbHeaders.CUT_HOUSE;
             if(data.Columns.Contains("SCHEDULE_DATE_MMDDCCYY") && !data.Columns.Contains(DbHeaders.SCHEDULE_DATE)) data.Columns["SCHEDULE_DATE_MMDDCCYY"].ColumnName = DbHeaders.SCHEDULE_DATE;
             if(!data.Columns.Contains(DbHeaders.ENTER_DATE)) data.Columns.Add(DbHeaders.ENTER_DATE);

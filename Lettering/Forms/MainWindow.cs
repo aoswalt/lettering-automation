@@ -12,11 +12,21 @@ namespace Lettering {
         }
 
         private void openButton_Click(object sender, EventArgs e) {
-            Lettering.Run(ReportType.Csv);
+            Lettering.AutomateCsv();
         }
 
         private void runButton_Click(object sender, EventArgs e) {
-            Lettering.Run(ReportType.Sql);
+            DateTime? startDate = null;
+            if(datePickerStart.Checked) {
+                startDate = datePickerStart.Value;
+            }
+
+            DateTime? endDate = null;
+            if(datePickerEnd.Checked) {
+                endDate = datePickerEnd.Value;
+            }
+
+            Lettering.AutomateReport(startDate, endDate);
         }
 
         private void loadAllConfigsToolStripMenuItem_Click(object sender, EventArgs e) {
