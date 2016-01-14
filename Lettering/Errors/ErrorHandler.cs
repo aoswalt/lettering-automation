@@ -10,7 +10,7 @@ namespace Lettering.Errors {
             switch(type) {
                 case ErrorType.Log:
                     {
-                        Debug.WriteLine(message + '\n');
+                        Debug.WriteLine(message);
                     }
                     break;
                 case ErrorType.Alert:

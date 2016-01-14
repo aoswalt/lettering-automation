@@ -32,7 +32,7 @@ namespace Lettering {
             loadingWindow.Show();
             for(int i = 0; i != configFiles.Length; ++i) {
                 loadingWindow.SetFilesProgress(Path.GetFileName(configFiles[i]), i + 1, configFiles.Length);
-                ConfigReader.ReadFile(configFiles[i], loadingWindow);
+                ConfigReader.ReadFile(configFiles[i], config, loadingWindow);
             }
             loadingWindow.Hide();
         }

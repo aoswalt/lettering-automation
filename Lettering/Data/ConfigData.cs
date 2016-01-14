@@ -67,29 +67,58 @@ namespace Lettering.Data {
         }
 
         internal void InsertPathType(int id, string desc) {
+            if(pathTypes.ContainsKey(id)) {
+                ErrorHandler.HandleError(ErrorType.Log, $"Config already contains pathType.  id: {id}");
+                return;
+            }
+
             pathTypes.Add(id, desc);
         }
 
         internal void InsertStylePrefix(string prefix) {
+            if(stylePrefixes.Contains(prefix)) {
+                ErrorHandler.HandleError(ErrorType.Log, $"Config already contains stylePrefix.  prefix: {prefix}");
+                return;
+            }
+
             stylePrefixes.Add(prefix);
         }
 
         internal void InsertPath(StylePathData path) {
+            path.style = path.style.Replace(" ", String.Empty);
+
+            if(paths.ContainsKey(path.style)) {
+                ErrorHandler.HandleError(ErrorType.Log, $"Config already contains stylePath.  path: {path.style}");
+                return;
+            }
+
             path.wordOrder = path.wordOrder != null ? path.wordOrder : new int[] { 1, 2, 3, 4 };
             path.mirrorStyle = path.mirrorStyle.Replace(" ", String.Empty);
 
-            paths.Add(path.style.Replace(" ", String.Empty), path);
+            paths.Add(path.style, path);
         }
 
         internal void InsertExport(ExportData export) {
+            if(exports.ContainsKey(export.styleRegex)) {
+                ErrorHandler.HandleError(ErrorType.Log, $"Config already contains export.  regex: {export.styleRegex}");
+                return;
+            }
+
             exports.Add(export.styleRegex, export.fileType);
         }
 
         internal void InsertException(ExceptionData exception) {
-            //NOTE(adam): if there is an entry for the style, add to it; otherwise, create new entry
+            //NOTE(adam): if there is an entry for the style, try to add to it; otherwise, create new entry
             string style = exception.style.Replace(" ", String.Empty);
             List<ExceptionData> exceptionList;
             if(exceptions.TryGetValue(style, out exceptionList)) {
+                foreach(ExceptionData exl in exceptionList) {
+                    if(exl.style == exception.style && exl.tag == exception.tag && exl.value == exception.value) {
+                        ErrorHandler.HandleError(ErrorType.Log, $"Config already contains exception.  exception: {exception.style}:{exception.tag}={exception.value}");
+                        return;
+                    }
+                }
+
                 exceptionList.Add(exception);
             } else {
                 exceptions.Add(style, new List<ExceptionData> { exception });
@@ -97,6 +126,11 @@ namespace Lettering.Data {
         }
 
         internal void InsertTrim(string trim) {
+            if(trims.Contains(trim)) {
+                ErrorHandler.HandleError(ErrorType.Log, $"Config already contains trim.  trim: {trim}");
+                return;
+            }
+
             trims.Add(trim);
         }
 

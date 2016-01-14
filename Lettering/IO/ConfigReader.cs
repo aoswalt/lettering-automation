@@ -9,8 +9,7 @@ namespace Lettering {
     internal class ConfigReader {
         private enum Sections { Void, Root, Types, Prefixes, Paths, Exports, Exceptions, Trims };
 
-        internal static ConfigData ReadFile(string configFilePath, LoadingWindow loadingWindow) {
-            ConfigData config = new ConfigData();
+        internal static ConfigData ReadFile(string configFilePath, ConfigData config, LoadingWindow loadingWindow) {
             Sections curSection = Sections.Void;
             int totalLines = File.ReadLines(configFilePath).Count();
 
