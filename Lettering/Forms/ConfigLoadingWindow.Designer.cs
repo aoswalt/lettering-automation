@@ -1,5 +1,5 @@
 ﻿namespace Lettering.Forms {
-    partial class LoadingWindow {
+    partial class ConfigLoadingWindow {
         /// <summary>
         /// Required designer variable.
         /// </summary>
@@ -35,7 +35,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(51, 9);
+            this.label1.Location = new System.Drawing.Point(25, 8);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(26, 13);
             this.label1.TabIndex = 0;
@@ -44,7 +44,7 @@
             // labelFileNumber
             // 
             this.labelFileNumber.AutoSize = true;
-            this.labelFileNumber.Location = new System.Drawing.Point(87, 9);
+            this.labelFileNumber.Location = new System.Drawing.Point(61, 8);
             this.labelFileNumber.Name = "labelFileNumber";
             this.labelFileNumber.Size = new System.Drawing.Size(30, 13);
             this.labelFileNumber.TabIndex = 1;
@@ -53,7 +53,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(51, 74);
+            this.label3.Location = new System.Drawing.Point(25, 73);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(30, 13);
             this.label3.TabIndex = 2;
@@ -62,7 +62,7 @@
             // labelLineNumber
             // 
             this.labelLineNumber.AutoSize = true;
-            this.labelLineNumber.Location = new System.Drawing.Point(87, 74);
+            this.labelLineNumber.Location = new System.Drawing.Point(61, 73);
             this.labelLineNumber.Name = "labelLineNumber";
             this.labelLineNumber.Size = new System.Drawing.Size(30, 13);
             this.labelLineNumber.TabIndex = 3;
@@ -70,33 +70,33 @@
             // 
             // progressFiles
             // 
-            this.progressFiles.Location = new System.Drawing.Point(38, 44);
+            this.progressFiles.Location = new System.Drawing.Point(12, 43);
             this.progressFiles.Name = "progressFiles";
             this.progressFiles.Size = new System.Drawing.Size(100, 16);
             this.progressFiles.TabIndex = 4;
             // 
             // progressLines
             // 
-            this.progressLines.Location = new System.Drawing.Point(38, 90);
+            this.progressLines.Location = new System.Drawing.Point(12, 89);
             this.progressLines.Name = "progressLines";
             this.progressLines.Size = new System.Drawing.Size(100, 16);
             this.progressLines.TabIndex = 5;
             // 
             // labelFilename
             // 
-            this.labelFilename.AutoSize = true;
-            this.labelFilename.Location = new System.Drawing.Point(51, 22);
+            this.labelFilename.Location = new System.Drawing.Point(2, 21);
             this.labelFilename.Name = "labelFilename";
-            this.labelFilename.Size = new System.Drawing.Size(67, 13);
+            this.labelFilename.Size = new System.Drawing.Size(119, 13);
             this.labelFilename.TabIndex = 6;
             this.labelFilename.Text = "cutLetter.cfg";
             this.labelFilename.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // LoadingWindow
+            // ConfigLoadingWindow
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(176, 117);
+            this.ClientSize = new System.Drawing.Size(124, 117);
+            this.ControlBox = false;
             this.Controls.Add(this.labelFilename);
             this.Controls.Add(this.progressLines);
             this.Controls.Add(this.progressFiles);
@@ -104,8 +104,10 @@
             this.Controls.Add(this.label3);
             this.Controls.Add(this.labelFileNumber);
             this.Controls.Add(this.label1);
-            this.Name = "LoadingWindow";
-            this.Text = "Loading";
+            this.MaximizeBox = false;
+            this.MinimizeBox = false;
+            this.Name = "ConfigLoadingWindow";
+            this.Text = "Loading Configs";
             this.ResumeLayout(false);
             this.PerformLayout();
 

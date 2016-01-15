@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Diagnostics;
 using System.IO;
 using System.Windows.Forms;
 using Lettering.Data;
@@ -13,6 +14,7 @@ namespace Lettering {
     internal enum ActionType { Cut, Sew, Stone };
 
     internal class Lettering {
+        internal static MainWindow mainWindow;
         internal static string errors = "";
         internal static CorelDRAW.Application corel = new CorelDRAW.Application();
         private static ConfigData config = new ConfigData();
@@ -21,14 +23,32 @@ namespace Lettering {
             //TODO(adam): test for folder & files first
             string[] configFiles = Directory.GetFiles(@".\configs\", "*.cfg");
             
-            LoadingWindow loadingWindow = new LoadingWindow();
-            loadingWindow.Show();
+            ConfigLoadingWindow configLoadingWindow = new ConfigLoadingWindow();
+            configLoadingWindow.Show();
+            configLoadingWindow.Location = new System.Drawing.Point(mainWindow.Location.X + (mainWindow.Width - configLoadingWindow.Width) / 2,
+                                                                    mainWindow.Location.Y + (mainWindow.Height - configLoadingWindow.Height) / 2);
             for(int i = 0; i != configFiles.Length; ++i) {
-                loadingWindow.SetFilesProgress(Path.GetFileName(configFiles[i]), i + 1, configFiles.Length);
-                ConfigReader.ReadFile(configFiles[i], config, loadingWindow);
+                configLoadingWindow.SetFilesProgress(Path.GetFileName(configFiles[i]), i + 1, configFiles.Length);
+                ConfigReader.ReadFile(configFiles[i], config, configLoadingWindow);
             }
-            loadingWindow.Hide();
+            configLoadingWindow.Hide();
             //TODO(adam): investigate program freeze after reading config file
+        }
+
+        internal static void CheckFonts() {
+            FontCheckingWindow fontCheckingWindow = new FontCheckingWindow();
+            fontCheckingWindow.Show();
+            fontCheckingWindow.Location = new System.Drawing.Point(mainWindow.Location.X + (mainWindow.Width - fontCheckingWindow.Width) / 2,
+                                                                   mainWindow.Location.Y + (mainWindow.Height - fontCheckingWindow.Height) / 2);
+            string neededFonts = FontChecker.GetNeededFonts(fontCheckingWindow);
+            fontCheckingWindow.Hide();
+
+            if(neededFonts.Length > 0) {
+                //NOTE(adam): open font folder and display message listing needed fonts
+                Process.Start(FilePaths.networkFontsPath);
+                System.Threading.Thread.Sleep(200);     //NOTE(adam): delay to ensure dialog on top of folder window
+                ErrorHandler.HandleError(ErrorType.Alert, $"Font(s) need to be installed or updated:\n{neededFonts}");
+            }
         }
 
         internal static void AutomateReport(DateTime? startDate, DateTime? endDate) {

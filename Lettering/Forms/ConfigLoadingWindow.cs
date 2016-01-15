@@ -1,8 +1,8 @@
 ﻿using System.Windows.Forms;
 
 namespace Lettering.Forms {
-    internal partial class LoadingWindow : Form {
-        internal LoadingWindow() {
+    internal partial class ConfigLoadingWindow : Form {
+        internal ConfigLoadingWindow() {
             InitializeComponent();
         }
 

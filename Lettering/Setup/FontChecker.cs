@@ -1,119 +1,87 @@
-﻿using Microsoft.Win32;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Windows.Media;
-using Lettering.Errors;
 using Lettering.Data;
+using Lettering.Errors;
+using Lettering.Forms;
+using Microsoft.Win32;
 
 namespace Lettering {
-    //TODO(adam): font processing needs to be cleaned up and try to handle the obscure issues
-
     internal class FontChecker {
-        private static string installedFontFolder = Environment.GetFolderPath(Environment.SpecialFolder.Fonts);
-        internal static string networkFontFolder = @"\\production\Lettering\Corel\WORK FOLDERS\VS Fonts";
-        internal static string missingFonts = "";
-        private static List<string> loadedFonts = new List<string>();
 
+        //NOTE(adam): returns string list of needed fonts
+        internal static string GetNeededFonts(FontCheckingWindow fontCheckingWindow) {
+            string missingFonts = "";
+            RegistryKey registryFonts = GetRegistryFonts();
 
-        //NOTE(adam): returns true if fonts were installed
-        internal static bool CheckFontInstall() {
-            bool needFontInstall = false;
-            missingFonts = "";
-
-            /*
-            System.IO.Directory.CreateDirectory(fontFolder);
-            string[] files = System.IO.Directory.GetFiles(networkFontFolder);
-            foreach(string file in files) {
-                System.IO.File.Copy(file, fontFolder + System.IO.Path.GetFileName(file), true);
+            List<string> installedFontNames = new List<string>();
+            foreach(FontFamily fontFamily in Fonts.SystemFontFamilies.ToList()) {
+                installedFontNames.Add(fontFamily.ToString().Split('#')[fontFamily.ToString().Split('#').Count() - 1]);
             }
-             * */
 
-            foreach(string fullFontPath in Directory.GetFiles(networkFontFolder, "*.otf")) {
-                string fontFileName = Path.GetFileName(fullFontPath);
-                List<string> installedFonts = GetInstalledFonts();
+            string[] networkFontFiles = Directory.GetFiles(FilePaths.networkFontsPath, "*.otf");
 
-                string fontName = GetFontNameFromFile(fullFontPath);
-                if(fontName != null && !installedFonts.Contains(fontName)) {
+            //TODO(adam): investigate why it takes time to check each font
+            for(int i = 0; i != networkFontFiles.Length; ++i) {
+                string networkFontFile = networkFontFiles[i];
+
+                if(fontCheckingWindow != null) {
+                    fontCheckingWindow.SetFontsProgress(Path.GetFileName(networkFontFile), i + 1, networkFontFiles.Length);
+                    fontCheckingWindow.Refresh();
+                }
+
+                string networkFontName = GetFontNameFromFile(networkFontFile);
+
+                if(networkFontName != null && !installedFontNames.Contains(networkFontName)) {
                     //NOTE(adam): font not installed
-                    //MessageBox.Show(fontName + " not installed.");
-                    missingFonts += fontName + "\n";
-                    needFontInstall = true;
-                } else {
-                    //NOTE(adam): font installed, check file date
-                    string installedFontFile = GetInstalledFontFileName(fontName);
+                    ErrorHandler.HandleError(ErrorType.Log, $"Font not installed: {networkFontFile}");
+                    missingFonts += networkFontName + '\n';
+                    continue;
+                }
+                
+                string installedFontFileName = GetInstalledFontFileName(registryFonts, networkFontName);
 
-                    if(installedFontFile == null) {
-                        //NOTE(adam): can't find font file (shouldn't happen)
-                        //MessageBox.Show(fontName + " installed file name not found.");
-                        missingFonts += fontName + "\n";
-                        needFontInstall = true;
-                    } else {
-                        DateTime installedFontDT = File.GetLastWriteTime(installedFontFolder + "\\" + installedFontFile);
-                        DateTime fontDT = File.GetLastWriteTime(fullFontPath);
-
-                        //NOTE(adam): is saved is newer than installed
-                        if(fontDT > installedFontDT) {
-                            // font out of date
-                            //MessageBox.Show(fontName + " has date difference.\nServer:    " + fontDT + "\nInstalled: " + installedFontDT);
-                            missingFonts += fontName + "\n";
-                            needFontInstall = true;
-                        }
-                    }
+                if(installedFontFileName == null) {
+                    //NOTE(adam): can't find installed font file (shouldn't happen)
+                    ErrorHandler.HandleError(ErrorType.Log, $"Font missing from registry: {networkFontFile}");
+                    missingFonts += networkFontName + '\n';
+                    continue;
                 }
 
-                /*
-                if(needFontInstall) {
-                    int result = AddFontResource(fullFontPath);
-                    loadedFonts.Add(fullFontPath);
-                    int error = Marshal.GetLastWin32Error();
+                DateTime installedFontDateTime = File.GetLastWriteTime(FilePaths.installedFontsPath + '\\' + installedFontFileName);
+                DateTime networkFontDateTime = File.GetLastWriteTime(networkFontFile);
 
-                    if(error != 0 && error != 1400) {
-                        MessageBox.Show("Error no: " + error + "\n" + new Win32Exception(error).Message + "\n\n" + fullFontPath);
-                    }
+                if(networkFontDateTime > installedFontDateTime) {
+                    //NOTE(adam): network font newer than installed font
+                    ErrorHandler.HandleError(ErrorType.Log, $"Font out of date: {installedFontFileName}");
+                    missingFonts += networkFontName + '\n';
                 }
-                 */
             }
 
-            return needFontInstall;
+            return missingFonts;
         }
 
-        private static List<string> GetInstalledFonts() {
-            /*
-            InstalledFontCollection fontsCollection = new InstalledFontCollection();
-            System.Drawing.FontFamily[] fontFamilies = fontsCollection.Families;
-            List<string> installedFonts = new List<string>();
-            foreach(System.Drawing.FontFamily font in fontFamilies) {
-                installedFonts.Add(font.Name);
-            }
-
-            return installedFonts;
-             */
-
-            List<FontFamily> installedFontFamilies = Fonts.SystemFontFamilies.ToList();
-            List<string> installedFonts = new List<string>();
-
-            foreach(FontFamily fontFamily in installedFontFamilies) {
-                installedFonts.Add(fontFamily.ToString().Split('#')[fontFamily.ToString().Split('#').Count() - 1]);
-            }
-            return installedFonts;
-        }
-
-        private static string GetInstalledFontFileName(string fontName) {
-            string regFontName = fontName + " (TrueType)";
-            string regFontNameTrim = fontName.Replace(" ", "") + " (TrueType)";  //NOTE(adam): handle FontLab fonts that remove spaces from name
-            RegistryKey fonts = Registry.LocalMachine.OpenSubKey(@"Software\Microsoft\Windows NT\CurrentVersion\Fonts", false);
-            if(fonts == null) {
-                fonts = Registry.LocalMachine.OpenSubKey(@"Software\Microsoft\Windows\CurrentVersion\Fonts", false);
-                if(fonts == null) {
-                    ErrorHandler.HandleError(ErrorType.Critical, "Cannot find font registry database for GetInstalledFontFileName.");
+        private static RegistryKey GetRegistryFonts() {
+            RegistryKey registryFonts = Registry.LocalMachine.OpenSubKey(@"Software\Microsoft\Windows NT\CurrentVersion\Fonts", false);
+            if(registryFonts == null) {
+                registryFonts = Registry.LocalMachine.OpenSubKey(@"Software\Microsoft\Windows\CurrentVersion\Fonts", false);
+                if(registryFonts == null) {
+                    ErrorHandler.HandleError(ErrorType.Critical, "Cannot find font registry database for GetRegistryFonts.");
                 }
             }
 
-            foreach(string fontKey in fonts.GetValueNames()) {
-                if(fontKey == regFontName || fontKey == regFontNameTrim) {
-                    return fonts.GetValue(fontKey).ToString();
+            return registryFonts;
+        }
+
+        private static string GetInstalledFontFileName(RegistryKey registryFonts, string fontName) {
+            string fontNameTT = fontName + " (TrueType)";
+            string fontNameTrimmedTT = fontName.Replace(" ", "") + " (TrueType)";   //NOTE(adam): handle FontLab fonts that remove spaces from name
+
+            foreach(string registryFontName in registryFonts.GetValueNames()) {
+                if(registryFontName == fontNameTT || registryFontName == fontNameTrimmedTT) {
+                    return registryFonts.GetValue(registryFontName).ToString();
                 }
             }
 
@@ -127,16 +95,6 @@ namespace Lettering {
             }
             ErrorHandler.HandleError(ErrorType.Alert, $"Error with {Path.GetFileName(fontFilePath)}: No font families found.");
             return null;
-
-            /*
-            PrivateFontCollection fontColl = new PrivateFontCollection();
-            try {
-                fontColl.AddFontFile(fontFilePath);
-                return fontColl.Families[0].Name;
-            } catch(FileNotFoundException ex) {
-                return "Error with " + System.IO.Path.GetFileName(fontFilePath) + ": " + ex.Message;
-            }
-             */
         }
     }
 }

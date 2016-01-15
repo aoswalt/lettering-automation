@@ -9,7 +9,7 @@ namespace Lettering {
     internal class ConfigReader {
         private enum Sections { Void, Root, Types, Prefixes, Paths, Exports, Exceptions, Trims };
 
-        internal static ConfigData ReadFile(string configFilePath, ConfigData config, LoadingWindow loadingWindow) {
+        internal static ConfigData ReadFile(string configFilePath, ConfigData config, ConfigLoadingWindow configLoadingWindow) {
             Sections curSection = Sections.Void;
             int totalLines = File.ReadLines(configFilePath).Count();
 
@@ -20,7 +20,7 @@ namespace Lettering {
                     line = sr.ReadLine().Trim();
                     ++lineNumber;
 
-                    loadingWindow.SetLinesProgress(lineNumber, totalLines);
+                    configLoadingWindow.SetLinesProgress(lineNumber, totalLines);
 
                     //NOTE(adam): if is blank line or comment, skip
                     if(!(line.Length > 0 && line[0] != '#')) {

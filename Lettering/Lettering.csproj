@@ -65,11 +65,17 @@
     <Compile Include="Data\FilePaths.cs" />
     <Compile Include="Data\StylePathData.cs" />
     <Compile Include="Errors\ErrorHandler.cs" />
-    <Compile Include="Forms\LoadingWindow.cs">
+    <Compile Include="Forms\ConfigLoadingWindow.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\LoadingWindow.Designer.cs">
-      <DependentUpon>LoadingWindow.cs</DependentUpon>
+    <Compile Include="Forms\ConfigLoadingWindow.Designer.cs">
+      <DependentUpon>ConfigLoadingWindow.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\FontCheckingWindow.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\FontCheckingWindow.Designer.cs">
+      <DependentUpon>FontCheckingWindow.cs</DependentUpon>
     </Compile>
     <Compile Include="IO\CsvReader.cs" />
     <Compile Include="IO\SqlConnector.cs" />
@@ -121,8 +127,11 @@
     <EmbeddedResource Include="Forms\ActiveOrderWindow.resx">
       <DependentUpon>ActiveOrderWindow.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\LoadingWindow.resx">
-      <DependentUpon>LoadingWindow.cs</DependentUpon>
+    <EmbeddedResource Include="Forms\ConfigLoadingWindow.resx">
+      <DependentUpon>ConfigLoadingWindow.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\FontCheckingWindow.resx">
+      <DependentUpon>FontCheckingWindow.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\MainWindow.resx">
       <DependentUpon>MainWindow.cs</DependentUpon>

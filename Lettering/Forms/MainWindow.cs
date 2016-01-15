@@ -32,5 +32,9 @@ namespace Lettering {
         private void loadAllConfigsToolStripMenuItem_Click(object sender, EventArgs e) {
             Lettering.LoadAllConfigs();
         }
+
+        private void checkFontsToolStripMenuItem_Click(object sender, EventArgs e) {
+            Lettering.CheckFonts();
+        }
     }
 }

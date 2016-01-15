@@ -39,6 +39,7 @@
             this.btnCsvAutomation = new System.Windows.Forms.Button();
             this.btnCheckSetup = new System.Windows.Forms.Button();
             this.label2 = new System.Windows.Forms.Label();
+            this.checkFontsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -58,6 +59,7 @@
             this.fileToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.loadAllConfigsToolStripMenuItem,
             this.editConfigsToolStripMenuItem,
+            this.checkFontsToolStripMenuItem,
             this.toolStripSeparator1,
             this.exitToolStripMenuItem});
             this.fileToolStripMenuItem.Name = "fileToolStripMenuItem";
@@ -187,6 +189,13 @@
             this.label2.TabIndex = 13;
             this.label2.Text = "End Date:";
             // 
+            // checkFontsToolStripMenuItem
+            // 
+            this.checkFontsToolStripMenuItem.Name = "checkFontsToolStripMenuItem";
+            this.checkFontsToolStripMenuItem.Size = new System.Drawing.Size(161, 22);
+            this.checkFontsToolStripMenuItem.Text = "Check &Fonts";
+            this.checkFontsToolStripMenuItem.Click += new System.EventHandler(this.checkFontsToolStripMenuItem_Click);
+            // 
             // MainWindow
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -235,5 +244,6 @@
         private System.Windows.Forms.Button btnCsvAutomation;
         private System.Windows.Forms.Button btnCheckSetup;
         private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.ToolStripMenuItem checkFontsToolStripMenuItem;
     }
 }
