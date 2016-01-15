@@ -3,6 +3,9 @@ using System.Collections.Generic;
 
 namespace Lettering.Data {
     internal class FilePaths {
+        internal static string tempPath = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + "\\TemporaryAutomationFiles\\";
+        internal static string desktopPath = Environment.GetFolderPath(Environment.SpecialFolder.Desktop) + '\\';
+
         private readonly ConfigData config;
 
         //TODO(adam): simplify access to constructing file paths
@@ -11,9 +14,9 @@ namespace Lettering.Data {
         private string rootCutPath;
         private string rootSewPath;
         private string rootStonePath;
-        private string destPath;
+        private string destPath = FilePaths.desktopPath + @"\1 CUT FILES\";
 
-        //TODO(adam): change paths so always end in \ unless file
+        //TODO(adam): ensure paths always end in \ unless file
         internal FilePaths(ConfigData config) {
             this.config = config;
         }
@@ -28,10 +31,6 @@ namespace Lettering.Data {
 
         internal void SetStonePath(string rootStonePath) {
             this.rootStonePath = rootStonePath;
-        }
-
-        internal void SetDestPath(string destPath) {
-            this.destPath = destPath;
         }
 
         internal string ConstructTemplatePath(OrderData order) {
@@ -100,17 +99,17 @@ namespace Lettering.Data {
                 bool noException = true;
                 foreach(ExceptionData ex in possibleExceptions) {
                     if(config.exceptionChecks[ex.tag.ToLower()](tempOrder, ex)) {
-                        startPath = '\\' + ex.path;
+                        startPath = ex.path;
                         noException = false;
                         break;
                     }
                 }
                 //NOTE(adam): fallthrough if no exception match
                 if(noException) {
-                    startPath = '\\' + config.pathTypes[config.paths[tempOrder.itemCode].type];
+                    startPath = config.pathTypes[config.paths[tempOrder.itemCode].type];
                 }
             } else {
-                startPath = '\\' + config.pathTypes[config.paths[tempOrder.itemCode].type];
+                startPath = config.pathTypes[config.paths[tempOrder.itemCode].type];
             }
 
             string[] tokens = startPath.Split('\\');

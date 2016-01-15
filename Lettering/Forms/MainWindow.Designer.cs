@@ -130,6 +130,7 @@
             // 
             // btnCutReport
             // 
+            this.btnCutReport.Enabled = false;
             this.btnCutReport.Location = new System.Drawing.Point(193, 60);
             this.btnCutReport.Name = "btnCutReport";
             this.btnCutReport.Size = new System.Drawing.Size(141, 29);
@@ -139,6 +140,7 @@
             // 
             // btnSewReport
             // 
+            this.btnSewReport.Enabled = false;
             this.btnSewReport.Location = new System.Drawing.Point(193, 95);
             this.btnSewReport.Name = "btnSewReport";
             this.btnSewReport.Size = new System.Drawing.Size(141, 29);
@@ -148,6 +150,7 @@
             // 
             // btnStoneReport
             // 
+            this.btnStoneReport.Enabled = false;
             this.btnStoneReport.Location = new System.Drawing.Point(193, 130);
             this.btnStoneReport.Name = "btnStoneReport";
             this.btnStoneReport.Size = new System.Drawing.Size(141, 29);
@@ -167,6 +170,7 @@
             // 
             // btnCheckSetup
             // 
+            this.btnCheckSetup.Enabled = false;
             this.btnCheckSetup.Location = new System.Drawing.Point(67, 133);
             this.btnCheckSetup.Name = "btnCheckSetup";
             this.btnCheckSetup.Size = new System.Drawing.Size(87, 23);

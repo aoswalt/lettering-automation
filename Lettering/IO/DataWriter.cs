@@ -1,25 +1,27 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.IO;
+using System.Windows.Forms;
+using Lettering.Data;
 
 namespace Lettering {
-    class DataWriter {
-        internal static void writeLog(List<OrderData> orders, string fileName) {
-            string outFilePath = Environment.GetFolderPath(Environment.SpecialFolder.Desktop) + '/' + fileName + ".csv";
-
-            // delete file if exists
-            //TODO(adam): SHOULD PROMPT if file exists
-            if(System.IO.File.Exists(outFilePath)) {
-                System.IO.File.Delete(outFilePath);
+    internal class CsvWriter {
+        internal static void WriteReport(List<OrderData> orders, string fileName) {
+            string reportFile = FilePaths.desktopPath + fileName + ".csv";
+            
+            if(File.Exists(reportFile)) {
+                if(MessageBox.Show($"Report with name {fileName} already exists. Overwrite?", "Overwrite", MessageBoxButtons.YesNo) == DialogResult.No) {
+                    return;
+                } else {
+                    File.Delete(reportFile);
+                }
             }
 
-            using(System.IO.StreamWriter writer = new System.IO.StreamWriter(outFilePath)) {
-                writer.WriteLine(buildHeaderString());
+            using(StreamWriter writer = new StreamWriter(reportFile)) {
+                writer.WriteLine(BuildHeaderString());
 
                 foreach(OrderData order in orders) {
-                    writer.WriteLine(buildRowString(order));
+                    writer.WriteLine(BuildRowString(order));
                 }
 
                 writer.Flush();
@@ -27,7 +29,7 @@ namespace Lettering {
             }
         }
 
-        private static string buildHeaderString() {
+        private static string BuildHeaderString() {
             string ret = "";
             ret += DbHeaders.CUT_HOUSE + ",";
             ret += DbHeaders.SCHEDULE_DATE + ",";
@@ -52,7 +54,7 @@ namespace Lettering {
             return ret;
         }
 
-        private static string buildRowString(OrderData order) {
+        private static string BuildRowString(OrderData order) {
             string ret = "";
             ret += order.cutHouse + ",";
             ret += order.scheduleDate + ",";

@@ -5,6 +5,7 @@ using System.Windows.Forms;
 using System.IO;
 using System.Collections.Generic;
 using Lettering.Errors;
+using Lettering.Data;
 
 namespace Lettering {
     internal class DataReader {
@@ -21,12 +22,12 @@ namespace Lettering {
                     //string pathOnly = Path.GetDirectoryName(openFileDialog.FileName);
                     string fileName = Path.GetFileName(openFileDialog.FileName);
 
-                    System.IO.Directory.CreateDirectory(Lettering.tempFolder);
-                    System.IO.File.Copy(openFileDialog.FileName, Lettering.tempFolder + fileName, true);
+                    System.IO.Directory.CreateDirectory(FilePaths.tempPath);
+                    System.IO.File.Copy(openFileDialog.FileName, FilePaths.tempPath + fileName, true);
 
                     string query = @"SELECT * FROM [" + fileName + "]";
 
-                    using(OdbcConnection conn = new OdbcConnection("Driver={Microsoft Text Driver (*.txt; *.csv)};DBQ=" + Lettering.tempFolder)) {
+                    using(OdbcConnection conn = new OdbcConnection("Driver={Microsoft Text Driver (*.txt; *.csv)};DBQ=" + FilePaths.tempPath)) {
                         OdbcCommand command = new OdbcCommand(query, conn);
                         OdbcDataAdapter adapter = new OdbcDataAdapter(command);
 
@@ -93,7 +94,7 @@ namespace Lettering {
                             return dtClone;
                         }
 
-                        System.IO.Directory.Delete(Lettering.tempFolder, true);
+                        System.IO.Directory.Delete(FilePaths.tempPath, true);
 
                         UnifyHeaders(dataTable);
                         return dataTable;

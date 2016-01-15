@@ -1,28 +1,21 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data;
-using System.Windows.Forms;
-using VGCore;
 using System.IO;
+using System.Windows.Forms;
 using Lettering.Data;
 using Lettering.Errors;
 using Lettering.Forms;
+using VGCore;
 
 namespace Lettering {
-    internal enum ReportType { Csv, Sql };
     internal enum ExportType { None, Plt, Eps };
-    internal enum ActionType { Cut, Sew, STONE };
+    internal enum ActionType { Cut, Sew, Stone };
 
     internal class Lettering {
         internal static string errors = "";
-        internal static string tempFolder = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + "\\TemporaryAutomationFiles\\";
         internal static CorelDRAW.Application corel = new CorelDRAW.Application();
         private static ConfigData config = new ConfigData();
-
-        internal Lettering() {
-            string destPath = Environment.GetFolderPath(Environment.SpecialFolder.Desktop) + @"\1 CUT FILES";
-            config.filePaths.SetDestPath(destPath);
-        }
 
         internal static void LoadAllConfigs() {
             //TODO(adam): test for folder & files first
@@ -35,6 +28,7 @@ namespace Lettering {
                 ConfigReader.ReadFile(configFiles[i], config, loadingWindow);
             }
             loadingWindow.Hide();
+            //TODO(adam): investigate program freeze after reading config file
         }
 
         internal static void AutomateReport(DateTime? startDate, DateTime? endDate) {
@@ -195,7 +189,7 @@ namespace Lettering {
                 }
             }
 
-            DataWriter.writeLog(ordersToLog, "LetteringLog-" + DateTime.Now.ToString("yyyyMMdd_HHmm"));
+            CsvWriter.WriteReport(ordersToLog, "LetteringLog-" + DateTime.Now.ToString("yyyyMMdd_HHmm"));
 
             //TODO(adam): messaging
             MessageBox.Show("Done!");

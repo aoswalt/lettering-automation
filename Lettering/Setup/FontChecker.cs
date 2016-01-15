@@ -5,6 +5,7 @@ using System.IO;
 using System.Linq;
 using System.Windows.Media;
 using Lettering.Errors;
+using Lettering.Data;
 
 namespace Lettering {
     //TODO(adam): font processing needs to be cleaned up and try to handle the obscure issues
@@ -12,7 +13,6 @@ namespace Lettering {
     internal class FontChecker {
         private static string installedFontFolder = Environment.GetFolderPath(Environment.SpecialFolder.Fonts);
         internal static string networkFontFolder = @"\\production\Lettering\Corel\WORK FOLDERS\VS Fonts";
-        private static string fontFolder = Lettering.tempFolder;
         internal static string missingFonts = "";
         private static List<string> loadedFonts = new List<string>();
 
