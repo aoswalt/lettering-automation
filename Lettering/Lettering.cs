@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Data;
 using System.Diagnostics;
 using System.IO;
-using System.Windows.Forms;
 using Lettering.Data;
 using Lettering.Errors;
 using Lettering.Forms;
@@ -12,6 +11,8 @@ using VGCore;
 namespace Lettering {
     internal enum ExportType { None, Plt, Eps };
     internal enum ActionType { Cut, Sew, Stone };
+
+    //TODO(adam): rethink all of Lettering being static
 
     internal class Lettering {
         internal static MainWindow mainWindow;
@@ -78,9 +79,8 @@ namespace Lettering {
             ActiveOrderWindow activeOrderWindow = new ActiveOrderWindow();
             List<string> currentNames = new List<string>();
             List<OrderData> ordersToLog = new List<OrderData>();
-
-            //TODO(adam): messaging
-            MessageBox.Show(data.Rows.Count + " entries found");
+            
+            Messenger.Show(data.Rows.Count + " entries found");
 
             //NOTE(adam): convert rows to data entries before loop to allow lookahead
             List<OrderData> orders = new List<OrderData>();
@@ -210,11 +210,10 @@ namespace Lettering {
             }
 
             CsvWriter.WriteReport(ordersToLog, "LetteringLog-" + DateTime.Now.ToString("yyyyMMdd_HHmm"));
-
-            //TODO(adam): messaging
-            MessageBox.Show("Done!");
-            //TODO(adam): errors display
-            if(errors.Length > 0) MessageBox.Show(errors, "Error Log");
+            
+            Messenger.Show("Done!");
+            //TODO(adam): proper errors display
+            if(errors.Length > 0) Messenger.Show(errors, "Error Log");
         }
 
         private static void BuildOrder(string templatePath, OrderData order) {
@@ -294,7 +293,7 @@ namespace Lettering {
             switch(exportType) {
                 case ExportType.Plt: {
                     if(corel.ActiveSelection.Shapes.Count == 0) {
-                        MessageBox.Show("Could no get shapes for exporting. Manual export required.");
+                        Messenger.Show("Could no get shapes for exporting. Manual export required.");
                     } else {
                         System.IO.Directory.CreateDirectory(config.filePaths.ConstructExportPathFolder(order, "PLT"));
                         //NOTE(adam): options need to be specified within Corel previously
@@ -303,7 +302,7 @@ namespace Lettering {
                     } break;
                 case ExportType.Eps: {
                     if(corel.ActiveSelection.Shapes.Count == 0) {
-                        MessageBox.Show("Could no get shapes for exporting. Manual export required.");
+                        Messenger.Show("Could no get shapes for exporting. Manual export required.");
                     } else {
                         System.IO.Directory.CreateDirectory(config.filePaths.ConstructExportPathFolder(order, "EPS"));
                         //NOTE(adam): options need to be specified within Corel previously

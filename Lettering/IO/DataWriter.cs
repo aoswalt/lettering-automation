@@ -10,6 +10,7 @@ namespace Lettering {
             string reportFile = FilePaths.desktopPath + fileName + ".csv";
             
             if(File.Exists(reportFile)) {
+                //TODO(adam): messenger yes/no prompt
                 if(MessageBox.Show($"Report with name {fileName} already exists. Overwrite?", "Overwrite", MessageBoxButtons.YesNo) == DialogResult.No) {
                     return;
                 } else {

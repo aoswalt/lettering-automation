@@ -104,7 +104,6 @@ namespace Lettering {
 
                     return null;
                 }
-            //TODO(adam): errors
             /*
             } catch(Exception ex) {     // should use specific exceptions
                 MessageBox.Show("Error: Could not read file.\n\n" + ex.Message);

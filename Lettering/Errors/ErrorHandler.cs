@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Diagnostics;
-using System.Windows.Forms;
 
 namespace Lettering.Errors {
     internal enum ErrorType { Log, Alert, Critical }
@@ -15,12 +14,12 @@ namespace Lettering.Errors {
                     break;
                 case ErrorType.Alert:
                     {
-                        MessageBox.Show(message, "Error!");
+                        Messenger.Show(message, "Error!");
                     }
                     break;
                 case ErrorType.Critical:
                     {
-                        MessageBox.Show(message, "Critical Error!");
+                        Messenger.Show(message, "Critical Error!");
                         //TODO(adam): abort from here?
                     }
                     break;

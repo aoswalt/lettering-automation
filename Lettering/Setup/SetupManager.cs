@@ -1,6 +1,4 @@
-﻿using System;
-using System.Diagnostics;
-using System.Windows.Forms;
+﻿using System.Diagnostics;
 using Lettering.Data;
 
 namespace Lettering {
@@ -19,7 +17,7 @@ namespace Lettering {
 
             if(libInstall || fontInstall) {
                 if(Lettering.corel.Visible) {
-                    MessageBox.Show(msg, "Corel Restart Required", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    Messenger.Show(msg, "Corel Restart Required");
 
                     //NOTE(adam): set all documents as clean to prevent error on quit
                     foreach(VGCore.Document document in Lettering.corel.Documents) {
@@ -33,8 +31,7 @@ namespace Lettering {
                     //NOTE(adam): open font folder and display message listing needed fonts
                     Process.Start(FilePaths.networkFontsPath);
                     System.Threading.Thread.Sleep(200);     //NOTE(adam): delay to ensure dialog on top of folder window
-                    //TODO(adam): messaging
-                    MessageBox.Show("Font(s) need to be installed or updated:\n" + neededFonts, "Missing Fonts", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    Messenger.Show("Font(s) need to be installed or updated:\n" + neededFonts, "Missing Fonts");
                     return false;   //NOTE(adam): prevent continuing without fonts installed
                 } else {
                     return true;
