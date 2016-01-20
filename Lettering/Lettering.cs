@@ -41,7 +41,7 @@ namespace Lettering {
         }
 
         internal static void CheckFonts() {
-            string neededFonts = FontChecker.CheckFonts(mainWindow);
+            string neededFonts = FontChecker.GetNeededFonts(mainWindow);
 
             if(neededFonts.Length > 0) {
                 //NOTE(adam): open font folder and display message listing needed fonts

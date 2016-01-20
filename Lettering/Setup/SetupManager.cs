@@ -6,7 +6,7 @@ namespace Lettering {
         //NOTE(adam): returns true if safe to continue
         internal static bool CheckSetup(MainWindow mainWindow) {
             bool libInstall = LibraryInstaller.InstallLibrary();
-            string neededFonts = FontChecker.CheckFonts(mainWindow);
+            string neededFonts = FontChecker.GetNeededFonts(mainWindow);
             bool fontInstall = neededFonts.Length > 0;
 
             string msg = "";

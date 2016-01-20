@@ -11,19 +11,8 @@ using Microsoft.Win32;
 namespace Lettering {
     internal class FontChecker {
         //NOTE(adam): returns string of needed fonts
-        internal static string CheckFonts(MainWindow mainWindow) {
-            FontCheckingWindow fontCheckingWindow = new FontCheckingWindow();
-            fontCheckingWindow.Show();
-            fontCheckingWindow.Location = new System.Drawing.Point(mainWindow.Location.X + (mainWindow.Width - fontCheckingWindow.Width) / 2,
-                                                                   mainWindow.Location.Y + (mainWindow.Height - fontCheckingWindow.Height) / 2);
-            string neededFonts = FontChecker.GetNeededFonts(fontCheckingWindow);
-            fontCheckingWindow.Close();
-            return neededFonts;
-        }
-
-        //NOTE(adam): returns string of needed fonts
-        private static string GetNeededFonts(FontCheckingWindow fontCheckingWindow) {
-            string missingFonts = "";
+        internal static string GetNeededFonts(MainWindow mainWindow) {
+            string neededFonts = "";
             RegistryKey registryFonts = GetRegistryFonts();
 
             List<string> installedFontNames = new List<string>();
@@ -32,6 +21,11 @@ namespace Lettering {
             }
 
             string[] networkFontFiles = Directory.GetFiles(FilePaths.networkFontsPath, "*.otf");
+
+            FontCheckingWindow fontCheckingWindow = new FontCheckingWindow();
+            fontCheckingWindow.Show();
+            fontCheckingWindow.Location = new System.Drawing.Point(mainWindow.Location.X + (mainWindow.Width - fontCheckingWindow.Width) / 2,
+                                                                   mainWindow.Location.Y + (mainWindow.Height - fontCheckingWindow.Height) / 2);
 
             //TODO(adam): investigate why it takes time to check each font
             for(int i = 0; i != networkFontFiles.Length; ++i) {
@@ -47,7 +41,7 @@ namespace Lettering {
                 if(networkFontName != null && !installedFontNames.Contains(networkFontName)) {
                     //NOTE(adam): font not installed
                     ErrorHandler.HandleError(ErrorType.Log, $"Font not installed: {networkFontFile}");
-                    missingFonts += networkFontName + '\n';
+                    neededFonts += networkFontName + '\n';
                     continue;
                 }
                 
@@ -56,7 +50,7 @@ namespace Lettering {
                 if(installedFontFileName == null) {
                     //NOTE(adam): can't find installed font file (shouldn't happen)
                     ErrorHandler.HandleError(ErrorType.Log, $"Font missing from registry: {networkFontFile}");
-                    missingFonts += networkFontName + '\n';
+                    neededFonts += networkFontName + '\n';
                     continue;
                 }
 
@@ -66,11 +60,12 @@ namespace Lettering {
                 if(networkFontDateTime > installedFontDateTime) {
                     //NOTE(adam): network font newer than installed font
                     ErrorHandler.HandleError(ErrorType.Log, $"Font out of date: {installedFontFileName}");
-                    missingFonts += networkFontName + '\n';
+                    neededFonts += networkFontName + '\n';
                 }
             }
 
-            return missingFonts;
+            fontCheckingWindow.Close();
+            return neededFonts;
         }
 
         private static RegistryKey GetRegistryFonts() {
