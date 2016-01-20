@@ -6,7 +6,7 @@ namespace Lettering {
         internal static void Main(string[] args) {
             System.Windows.Forms.Application.EnableVisualStyles();
             MainWindow window = new MainWindow();
-            Lettering.mainWindow = window;
+            Lettering.SetMainWindow(window);
             window.ShowDialog();
         }
     }

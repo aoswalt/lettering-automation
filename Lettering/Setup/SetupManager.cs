@@ -4,9 +4,9 @@ using Lettering.Data;
 namespace Lettering {
     internal class SetupManager {
         //NOTE(adam): returns true if safe to continue
-        internal static bool CheckSetup() {
+        internal static bool CheckSetup(MainWindow mainWindow) {
             bool libInstall = LibraryInstaller.InstallLibrary();
-            string neededFonts = FontChecker.GetNeededFonts(null);
+            string neededFonts = FontChecker.CheckFonts(mainWindow);
             bool fontInstall = neededFonts.Length > 0;
 
             string msg = "";

@@ -10,9 +10,19 @@ using Microsoft.Win32;
 
 namespace Lettering {
     internal class FontChecker {
+        //NOTE(adam): returns string of needed fonts
+        internal static string CheckFonts(MainWindow mainWindow) {
+            FontCheckingWindow fontCheckingWindow = new FontCheckingWindow();
+            fontCheckingWindow.Show();
+            fontCheckingWindow.Location = new System.Drawing.Point(mainWindow.Location.X + (mainWindow.Width - fontCheckingWindow.Width) / 2,
+                                                                   mainWindow.Location.Y + (mainWindow.Height - fontCheckingWindow.Height) / 2);
+            string neededFonts = FontChecker.GetNeededFonts(fontCheckingWindow);
+            fontCheckingWindow.Close();
+            return neededFonts;
+        }
 
-        //NOTE(adam): returns string list of needed fonts
-        internal static string GetNeededFonts(FontCheckingWindow fontCheckingWindow) {
+        //NOTE(adam): returns string of needed fonts
+        private static string GetNeededFonts(FontCheckingWindow fontCheckingWindow) {
             string missingFonts = "";
             RegistryKey registryFonts = GetRegistryFonts();
 

@@ -7,15 +7,11 @@ namespace Lettering {
             InitializeComponent();
         }
 
-        private void LauncherWindow_Load(object sender, EventArgs e) {
-
-        }
-
-        private void openButton_Click(object sender, EventArgs e) {
+        private void btnCsvAutomation_Click(object sender, EventArgs e) {
             Lettering.AutomateCsv();
         }
 
-        private void runButton_Click(object sender, EventArgs e) {
+        private void btnCutAutomation_Click(object sender, EventArgs e) {
             DateTime? startDate = null;
             if(datePickerStart.Checked) {
                 startDate = datePickerStart.Value;
@@ -27,6 +23,10 @@ namespace Lettering {
             }
 
             Lettering.AutomateReport(startDate, endDate);
+        }
+
+        private void btnCheckSetup_Click(object sender, EventArgs e) {
+            Lettering.CheckSetup();
         }
 
         private void loadAllConfigsToolStripMenuItem_Click(object sender, EventArgs e) {

@@ -12,13 +12,17 @@ namespace Lettering {
     internal enum ExportType { None, Plt, Eps };
     internal enum ActionType { Cut, Sew, Stone };
 
-    //TODO(adam): rethink all of Lettering being static
+    //TODO(adam): rethink all of the static usage
 
     internal class Lettering {
-        internal static MainWindow mainWindow;
+        private static MainWindow mainWindow;
         internal static string errors = "";
         internal static CorelDRAW.Application corel = new CorelDRAW.Application();
         private static ConfigData config = new ConfigData();
+
+        internal static void SetMainWindow(MainWindow mainWindow) {
+            Lettering.mainWindow = mainWindow;
+        }
 
         internal static void LoadAllConfigs() {
             //TODO(adam): test for folder & files first
@@ -37,12 +41,7 @@ namespace Lettering {
         }
 
         internal static void CheckFonts() {
-            FontCheckingWindow fontCheckingWindow = new FontCheckingWindow();
-            fontCheckingWindow.Show();
-            fontCheckingWindow.Location = new System.Drawing.Point(mainWindow.Location.X + (mainWindow.Width - fontCheckingWindow.Width) / 2,
-                                                                   mainWindow.Location.Y + (mainWindow.Height - fontCheckingWindow.Height) / 2);
-            string neededFonts = FontChecker.GetNeededFonts(fontCheckingWindow);
-            fontCheckingWindow.Hide();
+            string neededFonts = FontChecker.CheckFonts(mainWindow);
 
             if(neededFonts.Length > 0) {
                 //NOTE(adam): open font folder and display message listing needed fonts
@@ -50,6 +49,10 @@ namespace Lettering {
                 System.Threading.Thread.Sleep(200);     //NOTE(adam): delay to ensure dialog on top of folder window
                 ErrorHandler.HandleError(ErrorType.Alert, $"Font(s) need to be installed or updated:\n{neededFonts}");
             }
+        }
+
+        internal static void CheckSetup() {
+            SetupManager.CheckSetup(mainWindow);
         }
 
         internal static void AutomateReport(DateTime? startDate, DateTime? endDate) {

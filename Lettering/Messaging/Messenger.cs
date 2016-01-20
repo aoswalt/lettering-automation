@@ -14,7 +14,7 @@ namespace Lettering {
         }
 
         internal static void Show(string message) {
-            Show(message, "Lettering Message");
+            Show(message, "Lettering");
         }
 
         internal static void Show(string message, string title) {

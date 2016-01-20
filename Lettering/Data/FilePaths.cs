@@ -3,10 +3,13 @@ using System.Collections.Generic;
 
 namespace Lettering.Data {
     internal class FilePaths {
+        //TODO(adam): decide on naming convention for folder vs file path
         internal static string desktopPath = Environment.GetFolderPath(Environment.SpecialFolder.Desktop) + '\\';
         internal static string tempPath = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + "\\TemporaryAutomationFiles\\";
         internal static string installedFontsPath = Environment.GetFolderPath(Environment.SpecialFolder.Fonts) + '\\';
         internal static string networkFontsPath = @"\\production\Lettering\Corel\WORK FOLDERS\VS Fonts\";
+        internal static string installedLibraryFilePath = @"C:\Program Files\Corel\CorelDRAW Graphics Suite X7\Draw\GMS\Automation.gms";
+        internal static string networkLibraryFilePath = @"\\production\Lettering\Corel\WORK FOLDERS\Automation\Automation.gms";
 
         private readonly ConfigData config;
 

@@ -27,6 +27,7 @@
             this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.loadAllConfigsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.editConfigsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.checkFontsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.label1 = new System.Windows.Forms.Label();
@@ -39,7 +40,6 @@
             this.btnCsvAutomation = new System.Windows.Forms.Button();
             this.btnCheckSetup = new System.Windows.Forms.Button();
             this.label2 = new System.Windows.Forms.Label();
-            this.checkFontsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -79,6 +79,13 @@
             this.editConfigsToolStripMenuItem.Name = "editConfigsToolStripMenuItem";
             this.editConfigsToolStripMenuItem.Size = new System.Drawing.Size(161, 22);
             this.editConfigsToolStripMenuItem.Text = "Edit &Configs";
+            // 
+            // checkFontsToolStripMenuItem
+            // 
+            this.checkFontsToolStripMenuItem.Name = "checkFontsToolStripMenuItem";
+            this.checkFontsToolStripMenuItem.Size = new System.Drawing.Size(161, 22);
+            this.checkFontsToolStripMenuItem.Text = "Check &Fonts";
+            this.checkFontsToolStripMenuItem.Click += new System.EventHandler(this.checkFontsToolStripMenuItem_Click);
             // 
             // toolStripSeparator1
             // 
@@ -128,7 +135,7 @@
             this.btnCutAutomation.TabIndex = 6;
             this.btnCutAutomation.Text = "Cut Lettering Automation";
             this.btnCutAutomation.UseVisualStyleBackColor = true;
-            this.btnCutAutomation.Click += new System.EventHandler(this.runButton_Click);
+            this.btnCutAutomation.Click += new System.EventHandler(this.btnCutAutomation_Click);
             // 
             // btnCutReport
             // 
@@ -168,17 +175,17 @@
             this.btnCsvAutomation.TabIndex = 10;
             this.btnCsvAutomation.Text = "CSV Automation";
             this.btnCsvAutomation.UseVisualStyleBackColor = true;
-            this.btnCsvAutomation.Click += new System.EventHandler(this.openButton_Click);
+            this.btnCsvAutomation.Click += new System.EventHandler(this.btnCsvAutomation_Click);
             // 
             // btnCheckSetup
             // 
-            this.btnCheckSetup.Enabled = false;
             this.btnCheckSetup.Location = new System.Drawing.Point(67, 133);
             this.btnCheckSetup.Name = "btnCheckSetup";
             this.btnCheckSetup.Size = new System.Drawing.Size(87, 23);
             this.btnCheckSetup.TabIndex = 11;
             this.btnCheckSetup.Text = "Check Setup";
             this.btnCheckSetup.UseVisualStyleBackColor = true;
+            this.btnCheckSetup.Click += new System.EventHandler(this.btnCheckSetup_Click);
             // 
             // label2
             // 
@@ -188,13 +195,6 @@
             this.label2.Size = new System.Drawing.Size(55, 13);
             this.label2.TabIndex = 13;
             this.label2.Text = "End Date:";
-            // 
-            // checkFontsToolStripMenuItem
-            // 
-            this.checkFontsToolStripMenuItem.Name = "checkFontsToolStripMenuItem";
-            this.checkFontsToolStripMenuItem.Size = new System.Drawing.Size(161, 22);
-            this.checkFontsToolStripMenuItem.Text = "Check &Fonts";
-            this.checkFontsToolStripMenuItem.Click += new System.EventHandler(this.checkFontsToolStripMenuItem_Click);
             // 
             // MainWindow
             // 
@@ -219,7 +219,6 @@
             this.Name = "MainWindow";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Lettering";
-            this.Load += new System.EventHandler(this.LauncherWindow_Load);
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
             this.ResumeLayout(false);
