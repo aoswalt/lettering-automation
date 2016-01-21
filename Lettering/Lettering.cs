@@ -52,7 +52,9 @@ namespace Lettering {
         }
 
         internal static void CheckSetup() {
-            SetupManager.CheckSetup(mainWindow);
+            //TODO(adam): save if has been run to enable continuing anyway
+
+            SetupManager.CheckSetupOld(mainWindow, false);
         }
 
         internal static void AutomateReport(DateTime? startDate, DateTime? endDate) {
