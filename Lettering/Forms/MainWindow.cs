@@ -7,6 +7,11 @@ namespace Lettering {
             InitializeComponent();
         }
 
+        internal void MoveToTop() {
+            WindowState = FormWindowState.Minimized;
+            WindowState = FormWindowState.Normal;
+        }
+
         private void btnCsvAutomation_Click(object sender, EventArgs e) {
             Lettering.AutomateCsv();
         }
@@ -26,7 +31,9 @@ namespace Lettering {
         }
 
         private void btnCheckSetup_Click(object sender, EventArgs e) {
-            Lettering.CheckSetup();
+            if(Lettering.CheckSetup()) {
+                Messenger.Show("Setup is Ok!");
+            }
         }
 
         private void loadAllConfigsToolStripMenuItem_Click(object sender, EventArgs e) {

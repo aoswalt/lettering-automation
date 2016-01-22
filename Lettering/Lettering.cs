@@ -19,9 +19,15 @@ namespace Lettering {
         internal static string errors = "";
         internal static CorelDRAW.Application corel = new CorelDRAW.Application();
         private static ConfigData config = new ConfigData();
+        private static bool hasCheckedSetup = false;
+        private static bool isSetupOk = false;
 
         internal static void SetMainWindow(MainWindow mainWindow) {
             Lettering.mainWindow = mainWindow;
+        }
+
+        internal static void MoveWindowToTop() {
+            mainWindow.MoveToTop();
         }
 
         internal static void LoadAllConfigs() {
@@ -51,13 +57,19 @@ namespace Lettering {
             }
         }
 
-        internal static void CheckSetup() {
-            //TODO(adam): save if has been run to enable continuing anyway
+        internal static bool CheckSetup() {
+            if(!isSetupOk) {
+                isSetupOk = SetupManager.CheckSetup(mainWindow, hasCheckedSetup);
+                hasCheckedSetup = true;
+            }
 
-            SetupManager.CheckSetupOld(mainWindow, false);
+            return isSetupOk;
         }
 
         internal static void AutomateReport(DateTime? startDate, DateTime? endDate) {
+            CheckSetup();
+            if(!isSetupOk) { return; }
+
             DataTable data = DataReader.RunReport(startDate, endDate);
             if(data == null) {
                 ErrorHandler.HandleError(ErrorType.Alert, "No data from report.");
@@ -68,6 +80,9 @@ namespace Lettering {
         }
 
         internal static void AutomateCsv() {
+            CheckSetup();
+            if(!isSetupOk) { return; }
+
             DataTable data = DataReader.GetCsvData();
             if(data == null) {
                 ErrorHandler.HandleError(ErrorType.Alert, "No data from csv.");
