@@ -87,7 +87,7 @@
       <DependentUpon>ActiveOrderWindow.cs</DependentUpon>
     </Compile>
     <Compile Include="IO\ConfigReader.cs" />
-    <Compile Include="IO\DataReader.cs" />
+    <Compile Include="IO\ReportReader.cs" />
     <Compile Include="IO\DataWriter.cs" />
     <Compile Include="Forms\MainWindow.cs">
       <SubType>Form</SubType>

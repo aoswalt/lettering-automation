@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using Lettering.Data;
@@ -8,6 +9,28 @@ using Lettering.Forms;
 namespace Lettering {
     internal class ConfigReader {
         private enum Sections { Void, Root, Types, Prefixes, Paths, Exports, Exceptions, Trims };
+
+        internal static List<DateTime> ReadHolidays() {
+            List<DateTime> holidays = new List<DateTime>();
+
+            using(StreamReader sr = new StreamReader(FilePaths.holidaysFilePath)) {
+                int lineNumber = 0;
+                string line;
+                while(sr.Peek() > -1) {
+                    line = sr.ReadLine().Trim();
+                    ++lineNumber;
+
+                    try {
+                        holidays.Add(DateTime.Parse(line));
+                    } catch(FormatException) {
+                        ErrorHandler.HandleError(ErrorType.Log, $"holidays {lineNumber}: Invalid date.");
+                        continue;
+                    }
+                }
+            }
+
+            return holidays;
+        }
 
         internal static ConfigData ReadFile(string configFilePath, ConfigData config, ConfigLoadingWindow configLoadingWindow) {
             Sections curSection = Sections.Void;

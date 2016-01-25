@@ -6,9 +6,11 @@ using System.IO;
 using Lettering.Data;
 using Lettering.Errors;
 using Lettering.Forms;
+using Lettering.IO;
 using VGCore;
 
 namespace Lettering {
+    internal enum ReportType { Cut, Sew, Stone };
     internal enum ExportType { None, Plt, Eps };
     internal enum ActionType { Cut, Sew, Stone };
 
@@ -70,7 +72,7 @@ namespace Lettering {
             CheckSetup();
             if(!isSetupOk) { return; }
 
-            DataTable data = DataReader.RunReport(startDate, endDate);
+            DataTable data = ReportReader.RunReport(startDate, endDate, ReportType.Cut);
             if(data == null) {
                 ErrorHandler.HandleError(ErrorType.Alert, "No data from report.");
                 return;
@@ -83,7 +85,7 @@ namespace Lettering {
             CheckSetup();
             if(!isSetupOk) { return; }
 
-            DataTable data = DataReader.GetCsvData();
+            DataTable data = CsvReader.GetCsvData();
             if(data == null) {
                 ErrorHandler.HandleError(ErrorType.Alert, "No data from csv.");
                 return;

@@ -10,6 +10,7 @@ namespace Lettering.Data {
         internal static string networkFontsPath = @"\\production\Lettering\Corel\WORK FOLDERS\VS Fonts\";
         internal static string installedLibraryFilePath = @"C:\Program Files\Corel\CorelDRAW Graphics Suite X7\Draw\GMS\Automation.gms";
         internal static string networkLibraryFilePath = @"\\production\Lettering\Corel\WORK FOLDERS\Automation\Automation.gms";
+        internal static string holidaysFilePath = @".\configs\holidays.txt";
 
         private readonly ConfigData config;
 
