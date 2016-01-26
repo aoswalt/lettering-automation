@@ -17,9 +17,9 @@ namespace Lettering {
     //TODO(adam): rethink all of the static usage
 
     internal class Lettering {
-        private static MainWindow mainWindow;
-        internal static string errors = "";
         internal static CorelDRAW.Application corel = new CorelDRAW.Application();
+
+        private static MainWindow mainWindow;
         private static ConfigData config = new ConfigData();
         private static bool hasCheckedSetup = false;
         private static bool isSetupOk = false;
@@ -69,6 +69,11 @@ namespace Lettering {
         }
 
         internal static void AutomateReport(DateTime? startDate, DateTime? endDate) {
+            //TODO(adam): sort out proper config loading
+            if(config.paths.Keys.Count == 0) {
+                LoadAllConfigs();
+            }
+            
             CheckSetup();
             if(!isSetupOk) { return; }
 
@@ -82,6 +87,11 @@ namespace Lettering {
         }
 
         internal static void AutomateCsv() {
+            //TODO(adam): sort out proper config loading
+            if(config.paths.Keys.Count == 0) {
+                LoadAllConfigs();
+            }
+
             CheckSetup();
             if(!isSetupOk) { return; }
 
@@ -94,43 +104,38 @@ namespace Lettering {
             ProcessOrders(data);
         }
 
-        private static void ProcessOrders(DataTable data) { 
-            bool cancelBuilding = false;
+        internal static void ExportCutReport(DateTime? startDate, DateTime? endDate) {
+            //TODO(adam): sort out proper config loading
+            if(config.paths.Keys.Count == 0) {
+                LoadAllConfigs();
+            }
 
-            //config = ConfigManager.getConfig();
-            ActiveOrderWindow activeOrderWindow = new ActiveOrderWindow();
-            List<string> currentNames = new List<string>();
-            List<OrderData> ordersToLog = new List<OrderData>();
+            CheckSetup();
+            if(!isSetupOk) { return; }
             
-            Messenger.Show(data.Rows.Count + " entries found");
+            DataTable data = ReportReader.RunReport(startDate, endDate, ReportType.Cut);
+            if(data == null) {
+                ErrorHandler.HandleError(ErrorType.Alert, "No data from report.");
+                return;
+            }
 
-            //NOTE(adam): convert rows to data entries before loop to allow lookahead
+            CheckForDoneOrders(data);
+        }
+
+        //TODO(adam): combine repeating in CheckForDoneOrders and ProcssOrders
+
+        //TODO(adam): progress bar?
+        private static void CheckForDoneOrders(DataTable data) {
+            string errors = "";
+
+            List<OrderData> ordersToLog = new List<OrderData>();
+
+            Messenger.Show(data.Rows.Count + " total orders found");
+
+            //NOTE(adam): convert rows to data entries before loop to match processing
             List<OrderData> orders = new List<OrderData>();
             foreach(DataRow row in data.Rows) {
-                OrderData order = new OrderData();
-                
-                order.cutHouse = (row[DbHeaders.CUT_HOUSE].ToString()).Trim();
-                order.scheduleDate = row[DbHeaders.SCHEDULE_DATE] != System.DBNull.Value ? ((System.DateTime)row[DbHeaders.SCHEDULE_DATE]).ToString("d") : "";
-                order.enterDate = row[DbHeaders.ENTER_DATE] != System.DBNull.Value ? ((System.DateTime)row[DbHeaders.ENTER_DATE]).ToString("d") : "";
-                order.orderNumber = row[DbHeaders.ORDER_NUMBER] != System.DBNull.Value ? Convert.ToInt32(row[DbHeaders.ORDER_NUMBER]) : 0;
-                order.voucherNumber = row[DbHeaders.VOUCHER] != System.DBNull.Value ? Convert.ToInt32(row[DbHeaders.VOUCHER]) : 0;
-                order.itemCode = (row[DbHeaders.ITEM].ToString()).Trim();
-                order.size = row[DbHeaders.SIZE] != System.DBNull.Value ? Convert.ToDouble(row[DbHeaders.SIZE]) : 0;
-                order.spec = row[DbHeaders.SPEC] != System.DBNull.Value ? Convert.ToDouble(row[DbHeaders.SPEC]) : 0;
-                order.name = (row[DbHeaders.NAME].ToString()).Trim();
-                order.word1 = (row[DbHeaders.WORD1].ToString()).Trim();
-                order.word2 = (row[DbHeaders.WORD2].ToString()).Trim();
-                order.word3 = (row[DbHeaders.WORD3].ToString()).Trim();
-                order.word4 = (row[DbHeaders.WORD4].ToString()).Trim();
-                order.color1 = (row[DbHeaders.COLOR1].ToString()).Trim();
-                order.color2 = (row[DbHeaders.COLOR2].ToString()).Trim();
-                order.color3 = (row[DbHeaders.COLOR3].ToString()).Trim();
-                order.color4 = (row[DbHeaders.COLOR4].ToString()).Trim();
-                order.rushDate = row[DbHeaders.RUSH_DATE] != System.DBNull.Value ? ((System.DateTime)row[DbHeaders.RUSH_DATE]).ToString("d") : "";
-                order.comment = "";
-                order.nameList = new List<string>();
-
-                orders.Add(order);
+                orders.Add(new OrderData(row));
             }
 
             for(int i = 0; i != orders.Count; ++i) {
@@ -147,17 +152,74 @@ namespace Lettering {
                 }
 
                 //NOTE(adam): if built, continue
-                string orderPath = config.filePaths.ConstructSavePath(order);
+                string orderPath = config.filePaths.ConstructNetworkPath(order);
                 string newMadePath = config.filePaths.ConstructSavePath(order);
+
+                if(config.IsIgnoredStyle(order)) {
+                    order.comment += "Ignored style";
+                    ordersToLog.Add(order);
+                    continue;
+                }
 
                 if(File.Exists(orderPath) || File.Exists(newMadePath)) {
                     order.comment += "Already made";
                     ordersToLog.Add(order);
                     continue;
+                } else {
+                    order.comment += "Need to build";
+                    ordersToLog.Add(order);
                 }
+            }
+            string reportFileName = "LetteringReport-" + DateTime.Now.ToString("yyyyMMdd_HHmm");
+            CsvWriter.WriteReport(ordersToLog, reportFileName);
+            Messenger.Show($"Report saved as {reportFileName}.csv");
+
+            //TODO(adam): proper errors display
+            if(errors.Length > 0) Messenger.Show(errors, "Error Log");
+        }
+
+        private static void ProcessOrders(DataTable data) {
+            bool cancelBuilding = false;
+            string errors = "";
+
+            ActiveOrderWindow activeOrderWindow = new ActiveOrderWindow();
+            List<string> currentNames = new List<string>();
+            List<OrderData> ordersToLog = new List<OrderData>();
+
+            mainWindow.Hide();
+            Messenger.Show(data.Rows.Count + " entries found");
+
+            //NOTE(adam): convert rows to data entries before loop to allow lookahead
+            List<OrderData> orders = new List<OrderData>();
+            foreach(DataRow row in data.Rows) {
+                orders.Add(new OrderData(row));
+            }
+
+            for(int i = 0; i != orders.Count; ++i) {
+                OrderData order = orders[i];
+                string trimmedCode = config.TryTrimStyleCode(order.itemCode);
+
+                //NOTE(adam): if not in config, continue; else, store the trimmed code
+                if(trimmedCode.Length == 0) {
+                    order.comment += "Not in config";
+                    ordersToLog.Add(order);
+                    continue;
+                } else {
+                    order.itemCode = trimmedCode;
+                }
+
+                //NOTE(adam): if built, continue
+                string orderPath = config.filePaths.ConstructNetworkPath(order);
+                string newMadePath = config.filePaths.ConstructSavePath(order);
 
                 if(config.IsIgnoredStyle(order)) {
                     order.comment += "Ignored style";
+                    ordersToLog.Add(order);
+                    continue;
+                }
+
+                if(File.Exists(orderPath) || File.Exists(newMadePath)) {
+                    order.comment += "Already made";
                     ordersToLog.Add(order);
                     continue;
                 }
@@ -202,10 +264,10 @@ namespace Lettering {
 
                             if(config.IsNameStyle(order.itemCode)) {
                                 string namesDir = Environment.GetFolderPath(Environment.SpecialFolder.Desktop) + @"\Name Styles\" + order.cutHouse + "\\";
-                                System.IO.Directory.CreateDirectory(namesDir);
+                                Directory.CreateDirectory(namesDir);
                                 corel.ActiveDocument.SaveAs(namesDir + order.orderNumber + order.voucherNumber.ToString("D3") + ".cdr");
                             } else {
-                                System.IO.Directory.CreateDirectory(config.filePaths.ConstructSavePathFolder(order));
+                                Directory.CreateDirectory(config.filePaths.ConstructSavePathFolder(order));
                                 corel.ActiveDocument.SaveAs(newMadePath);
                                 if(config.GetExportType(order.itemCode) != ExportType.None) ExportOrder(order);
                             }
@@ -225,7 +287,7 @@ namespace Lettering {
                     while(corel.Documents.Count > 0) {
                         corel.ActiveDocument.Close();
                     }
-                    System.Threading.Thread.Sleep(50);      // prevent error on closing templates
+                    System.Threading.Thread.Sleep(50);      //NOTE(adamf): delay prevents error on closing templates
 
                     currentNames.Clear();
                 }
@@ -236,6 +298,7 @@ namespace Lettering {
             Messenger.Show("Done!");
             //TODO(adam): proper errors display
             if(errors.Length > 0) Messenger.Show(errors, "Error Log");
+            mainWindow.Show();
         }
 
         private static void BuildOrder(string templatePath, OrderData order) {
@@ -317,7 +380,7 @@ namespace Lettering {
                     if(corel.ActiveSelection.Shapes.Count == 0) {
                         Messenger.Show("Could no get shapes for exporting. Manual export required.");
                     } else {
-                        System.IO.Directory.CreateDirectory(config.filePaths.ConstructExportPathFolder(order, "PLT"));
+                        Directory.CreateDirectory(config.filePaths.ConstructExportPathFolder(order, "PLT"));
                         //NOTE(adam): options need to be specified within Corel previously
                         corel.ActiveDocument.Export(config.filePaths.ConstructExportPath(order, "PLT"), cdrFilter.cdrPLT, cdrExportRange.cdrSelection);
                     }
@@ -326,7 +389,7 @@ namespace Lettering {
                     if(corel.ActiveSelection.Shapes.Count == 0) {
                         Messenger.Show("Could no get shapes for exporting. Manual export required.");
                     } else {
-                        System.IO.Directory.CreateDirectory(config.filePaths.ConstructExportPathFolder(order, "EPS"));
+                        Directory.CreateDirectory(config.filePaths.ConstructExportPathFolder(order, "EPS"));
                         //NOTE(adam): options need to be specified within Corel previously
                         corel.ActiveDocument.Export(config.filePaths.ConstructExportPath(order, "EPS"), cdrFilter.cdrEPS, cdrExportRange.cdrSelection);
                     }

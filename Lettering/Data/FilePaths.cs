@@ -40,7 +40,7 @@ namespace Lettering.Data {
         }
 
         internal string ConstructTemplatePath(OrderData order) {
-            string dir = rootCutPath + '\\' + config.pathBuilders["!style"](order);
+            string dir = rootCutPath + config.pathBuilders["!style"](order);
             string[] pathTokens = dir.Split('\\');
             string file = pathTokens[pathTokens.Length - 1] + " TEMPLATE.cdr";
 
@@ -73,6 +73,10 @@ namespace Lettering.Data {
 
             fileName = fileName.TrimEnd('-');
             return (fileName != "" ? fileName.ToUpper() : order.name.ToUpper());
+        }
+
+        internal string ConstructNetworkPath(OrderData order) {
+            return rootCutPath + ConstructStylePathPart(order) + ConstructFileName(order) + ".cdr";
         }
 
         internal string ConstructSavePathFolder(OrderData order) {

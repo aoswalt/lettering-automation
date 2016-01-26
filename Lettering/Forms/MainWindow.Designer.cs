@@ -139,13 +139,13 @@
             // 
             // btnCutReport
             // 
-            this.btnCutReport.Enabled = false;
             this.btnCutReport.Location = new System.Drawing.Point(193, 60);
             this.btnCutReport.Name = "btnCutReport";
             this.btnCutReport.Size = new System.Drawing.Size(141, 29);
             this.btnCutReport.TabIndex = 7;
             this.btnCutReport.Text = "Cut Lettering Report";
             this.btnCutReport.UseVisualStyleBackColor = true;
+            this.btnCutReport.Click += new System.EventHandler(this.btnCutReport_Click);
             // 
             // btnSewReport
             // 

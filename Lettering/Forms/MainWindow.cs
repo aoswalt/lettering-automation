@@ -8,8 +8,8 @@ namespace Lettering {
         }
 
         internal void MoveToTop() {
-            WindowState = FormWindowState.Minimized;
-            WindowState = FormWindowState.Normal;
+            this.TopMost = true;
+            this.TopMost = false;
         }
 
         private void btnCsvAutomation_Click(object sender, EventArgs e) {
@@ -34,6 +34,20 @@ namespace Lettering {
             if(Lettering.CheckSetup()) {
                 Messenger.Show("Setup is Ok!");
             }
+        }
+
+        private void btnCutReport_Click(object sender, EventArgs e) {
+            DateTime? startDate = null;
+            if(datePickerStart.Checked) {
+                startDate = datePickerStart.Value;
+            }
+
+            DateTime? endDate = null;
+            if(datePickerEnd.Checked) {
+                endDate = datePickerEnd.Value;
+            }
+
+            Lettering.ExportCutReport(startDate, endDate);
         }
 
         private void loadAllConfigsToolStripMenuItem_Click(object sender, EventArgs e) {

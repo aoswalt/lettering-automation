@@ -146,7 +146,7 @@ namespace Lettering.Data {
                 if(paths.ContainsKey(style)) return style;     //NOTE(adam): path data found
             }
             
-            ErrorHandler.HandleError(ErrorType.Log, "No style found in TryTrimStyleCode.");
+            ErrorHandler.HandleError(ErrorType.Log, $"No style found in TryTrimStyleCode for final style code {style}");
             return "";
         }
 
@@ -172,6 +172,10 @@ namespace Lettering.Data {
         }
 
         internal void SetRootPath(string rootPath) {
+            if(rootPath[rootPath.Length - 1] != '\\') {
+                rootPath += '\\';
+            }
+
             filePaths.SetCutPath(rootPath);
         }
     }
