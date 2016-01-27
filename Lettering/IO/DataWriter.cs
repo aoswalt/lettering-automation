@@ -7,11 +7,10 @@ using Lettering.Data;
 namespace Lettering {
     internal class CsvWriter {
         internal static void WriteReport(List<OrderData> orders, string fileName) {
-            string reportFile = FilePaths.desktopPath + fileName + ".csv";
+            string reportFile = FilePaths.desktopFolderPath + fileName + ".csv";
             
             if(File.Exists(reportFile)) {
-                //TODO(adam): messenger yes/no prompt
-                if(MessageBox.Show($"Report with name {fileName} already exists. Overwrite?", "Overwrite", MessageBoxButtons.YesNo) == DialogResult.No) {
+                if(!Messenger.Show($"Report with name {fileName} already exists. Overwrite?", "Overwrite", MessageButtons.YesNo)) {
                     return;
                 } else {
                     File.Delete(reportFile);

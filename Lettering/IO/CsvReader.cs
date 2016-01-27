@@ -20,12 +20,12 @@ namespace Lettering.IO {
                 //string pathOnly = Path.GetDirectoryName(openFileDialog.FileName);
                 string fileName = Path.GetFileName(openFileDialog.FileName);
 
-                Directory.CreateDirectory(FilePaths.tempPath);
-                File.Copy(openFileDialog.FileName, FilePaths.tempPath + fileName, true);
+                Directory.CreateDirectory(FilePaths.tempFolderPath);
+                File.Copy(openFileDialog.FileName, FilePaths.tempFolderPath + fileName, true);
 
                 string query = @"SELECT * FROM [" + fileName + "]";
 
-                using(OdbcConnection conn = new OdbcConnection("Driver={Microsoft Text Driver (*.txt; *.csv)};DBQ=" + FilePaths.tempPath)) {
+                using(OdbcConnection conn = new OdbcConnection("Driver={Microsoft Text Driver (*.txt; *.csv)};DBQ=" + FilePaths.tempFolderPath)) {
                     OdbcCommand command = new OdbcCommand(query, conn);
                     OdbcDataAdapter adapter = new OdbcDataAdapter(command);
 
@@ -92,7 +92,7 @@ namespace Lettering.IO {
                         return dtClone;
                     }
 
-                    Directory.Delete(FilePaths.tempPath, true);
+                    Directory.Delete(FilePaths.tempFolderPath, true);
 
                     ReportReader.UnifyHeaders(dataTable);
                     return dataTable;

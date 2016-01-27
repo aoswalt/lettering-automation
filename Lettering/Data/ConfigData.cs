@@ -172,11 +172,7 @@ namespace Lettering.Data {
         }
 
         internal void SetRootPath(string rootPath) {
-            if(rootPath[rootPath.Length - 1] != '\\') {
-                rootPath += '\\';
-            }
-
-            filePaths.SetCutPath(rootPath);
+            filePaths.SetCutFolderPath(rootPath);
         }
     }
 }

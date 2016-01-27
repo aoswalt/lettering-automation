@@ -33,8 +33,12 @@ namespace Lettering {
         }
 
         internal static void LoadAllConfigs() {
-            //TODO(adam): test for folder & files first
             string[] configFiles = Directory.GetFiles(@".\configs\", "*.cfg");
+
+            if(configFiles.Length == 0) {
+                ErrorHandler.HandleError(ErrorType.Critical, "Could not find config files.");
+                return;
+            }
             
             ConfigLoadingWindow configLoadingWindow = new ConfigLoadingWindow();
             configLoadingWindow.Show();
@@ -53,7 +57,7 @@ namespace Lettering {
 
             if(neededFonts.Length > 0) {
                 //NOTE(adam): open font folder and display message listing needed fonts
-                Process.Start(FilePaths.networkFontsPath);
+                Process.Start(FilePaths.networkFontsFolderPath);
                 System.Threading.Thread.Sleep(200);     //NOTE(adam): delay to ensure dialog on top of folder window
                 ErrorHandler.HandleError(ErrorType.Alert, $"Font(s) need to be installed or updated:\n{neededFonts}");
             }
@@ -152,8 +156,8 @@ namespace Lettering {
                 }
 
                 //NOTE(adam): if built, continue
-                string orderPath = config.filePaths.ConstructNetworkPath(order);
-                string newMadePath = config.filePaths.ConstructSavePath(order);
+                string orderPath = config.filePaths.ConstructNetworkCutFilePath(order);
+                string newMadePath = config.filePaths.ConstructSaveFilePath(order);
 
                 if(config.IsIgnoredStyle(order)) {
                     order.comment += "Ignored style";
@@ -209,8 +213,8 @@ namespace Lettering {
                 }
 
                 //NOTE(adam): if built, continue
-                string orderPath = config.filePaths.ConstructNetworkPath(order);
-                string newMadePath = config.filePaths.ConstructSavePath(order);
+                string orderPath = config.filePaths.ConstructNetworkCutFilePath(order);
+                string newMadePath = config.filePaths.ConstructSaveFilePath(order);
 
                 if(config.IsIgnoredStyle(order)) {
                     order.comment += "Ignored style";
@@ -232,7 +236,7 @@ namespace Lettering {
 
                 //NOTE(adam): build point
                 // MessageBox.Show("To build: " + order.itemCode + "\n Template: " + config.getTemplatePath(order));
-                String templatePath = config.filePaths.ConstructTemplatePath(order);
+                String templatePath = config.filePaths.ConstructTemplateFilePath(order);
                 if(!File.Exists(templatePath)) {
                     ErrorHandler.HandleError(ErrorType.Alert, "Template not found:\n" + templatePath);
                     order.comment += "Template not found";
@@ -267,7 +271,7 @@ namespace Lettering {
                                 Directory.CreateDirectory(namesDir);
                                 corel.ActiveDocument.SaveAs(namesDir + order.orderNumber + order.voucherNumber.ToString("D3") + ".cdr");
                             } else {
-                                Directory.CreateDirectory(config.filePaths.ConstructSavePathFolder(order));
+                                Directory.CreateDirectory(config.filePaths.ConstructSaveFolderPath(order));
                                 corel.ActiveDocument.SaveAs(newMadePath);
                                 if(config.GetExportType(order.itemCode) != ExportType.None) ExportOrder(order);
                             }
@@ -380,18 +384,18 @@ namespace Lettering {
                     if(corel.ActiveSelection.Shapes.Count == 0) {
                         Messenger.Show("Could no get shapes for exporting. Manual export required.");
                     } else {
-                        Directory.CreateDirectory(config.filePaths.ConstructExportPathFolder(order, "PLT"));
+                        Directory.CreateDirectory(config.filePaths.ConstructExportFolderPath(order, "PLT"));
                         //NOTE(adam): options need to be specified within Corel previously
-                        corel.ActiveDocument.Export(config.filePaths.ConstructExportPath(order, "PLT"), cdrFilter.cdrPLT, cdrExportRange.cdrSelection);
+                        corel.ActiveDocument.Export(config.filePaths.ConstructExportFilePath(order, "PLT"), cdrFilter.cdrPLT, cdrExportRange.cdrSelection);
                     }
                     } break;
                 case ExportType.Eps: {
                     if(corel.ActiveSelection.Shapes.Count == 0) {
                         Messenger.Show("Could no get shapes for exporting. Manual export required.");
                     } else {
-                        Directory.CreateDirectory(config.filePaths.ConstructExportPathFolder(order, "EPS"));
+                        Directory.CreateDirectory(config.filePaths.ConstructExportFolderPath(order, "EPS"));
                         //NOTE(adam): options need to be specified within Corel previously
-                        corel.ActiveDocument.Export(config.filePaths.ConstructExportPath(order, "EPS"), cdrFilter.cdrEPS, cdrExportRange.cdrSelection);
+                        corel.ActiveDocument.Export(config.filePaths.ConstructExportFilePath(order, "EPS"), cdrFilter.cdrEPS, cdrExportRange.cdrSelection);
                     }
                     } break;
                 default:

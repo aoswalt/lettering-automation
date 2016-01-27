@@ -3,11 +3,10 @@ using System.Collections.Generic;
 
 namespace Lettering.Data {
     internal class FilePaths {
-        //TODO(adam): decide on naming convention for folder vs file path
-        internal static string desktopPath = Environment.GetFolderPath(Environment.SpecialFolder.Desktop) + '\\';
-        internal static string tempPath = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + "\\TemporaryAutomationFiles\\";
-        internal static string installedFontsPath = Environment.GetFolderPath(Environment.SpecialFolder.Fonts) + '\\';
-        internal static string networkFontsPath = @"\\production\Lettering\Corel\WORK FOLDERS\VS Fonts\";
+        internal static string desktopFolderPath = Environment.GetFolderPath(Environment.SpecialFolder.Desktop) + '\\';
+        internal static string tempFolderPath = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + "\\TemporaryAutomationFiles\\";
+        internal static string installedFontsFolderPath = Environment.GetFolderPath(Environment.SpecialFolder.Fonts) + '\\';
+        internal static string networkFontsFolderPath = @"\\production\Lettering\Corel\WORK FOLDERS\VS Fonts\";
         internal static string installedLibraryFilePath = @"C:\Program Files\Corel\CorelDRAW Graphics Suite X7\Draw\GMS\Automation.gms";
         internal static string networkLibraryFilePath = @"\\production\Lettering\Corel\WORK FOLDERS\Automation\Automation.gms";
         internal static string holidaysFilePath = @".\configs\holidays.txt";
@@ -17,30 +16,41 @@ namespace Lettering.Data {
         //TODO(adam): simplify access to constructing file paths
 
         //TODO(adam): switch to dictionary with key of path type?
-        private string rootCutPath;
-        private string rootSewPath;
-        private string rootStonePath;
-        private string destPath = FilePaths.desktopPath + @"\1 CUT FILES\";
-
-        //TODO(adam): ensure paths always end in \ unless file
+        private string rootCutFolderPath;
+        private string rootSewFolderPath;
+        private string rootStoneFolderPath;
+        private string destFolderPath = FilePaths.desktopFolderPath + @"\1 CUT FILES\";
+        
         internal FilePaths(ConfigData config) {
             this.config = config;
         }
 
-        internal void SetCutPath(string rootCutPath) {
-            this.rootCutPath = rootCutPath;
+        internal void SetCutFolderPath(string rootCutFolderPath) {
+            if(rootCutFolderPath[rootCutFolderPath.Length - 1] != '\\') {
+                rootCutFolderPath += '\\';
+            }
+
+            this.rootCutFolderPath = rootCutFolderPath;
         }
 
-        internal void SetSewPath(string rootSewPath) {
-            this.rootSewPath = rootSewPath;
+        internal void SetSewFolderPath(string rootSewFolderPath) {
+            if(rootSewFolderPath[rootSewFolderPath.Length - 1] != '\\') {
+                rootSewFolderPath += '\\';
+            }
+
+            this.rootSewFolderPath = rootSewFolderPath;
         }
 
-        internal void SetStonePath(string rootStonePath) {
-            this.rootStonePath = rootStonePath;
+        internal void SetStoneFolderPath(string rootStoneFolderPath) {
+            if(rootStoneFolderPath[rootStoneFolderPath.Length - 1] != '\\') {
+                rootStoneFolderPath += '\\';
+            }
+
+            this.rootStoneFolderPath = rootStoneFolderPath;
         }
 
-        internal string ConstructTemplatePath(OrderData order) {
-            string dir = rootCutPath + config.pathBuilders["!style"](order);
+        internal string ConstructTemplateFilePath(OrderData order) {
+            string dir = rootCutFolderPath + config.pathBuilders["!style"](order);
             string[] pathTokens = dir.Split('\\');
             string file = pathTokens[pathTokens.Length - 1] + " TEMPLATE.cdr";
 
@@ -75,24 +85,24 @@ namespace Lettering.Data {
             return (fileName != "" ? fileName.ToUpper() : order.name.ToUpper());
         }
 
-        internal string ConstructNetworkPath(OrderData order) {
-            return rootCutPath + ConstructStylePathPart(order) + ConstructFileName(order) + ".cdr";
+        internal string ConstructNetworkCutFilePath(OrderData order) {
+            return rootCutFolderPath + ConstructStylePathPart(order) + ConstructFileName(order) + ".cdr";
         }
 
-        internal string ConstructSavePathFolder(OrderData order) {
-            return destPath + ConstructStylePathPart(order);
+        internal string ConstructSaveFolderPath(OrderData order) {
+            return destFolderPath + ConstructStylePathPart(order);
         }
 
-        internal string ConstructSavePath(OrderData order) {
-            return ConstructSavePathFolder(order) + ConstructFileName(order) + ".cdr";
+        internal string ConstructSaveFilePath(OrderData order) {
+            return ConstructSaveFolderPath(order) + ConstructFileName(order) + ".cdr";
         }
 
-        internal string ConstructExportPathFolder(OrderData order, string extension) {
-            return destPath + ConstructStylePathPart(order) + extension.ToUpper() + '\\';
+        internal string ConstructExportFolderPath(OrderData order, string extension) {
+            return destFolderPath + ConstructStylePathPart(order) + extension.ToUpper() + '\\';
         }
 
-        internal string ConstructExportPath(OrderData order, string extension) {
-            return ConstructExportPathFolder(order, extension) + ConstructFileName(order) + '.' + extension;
+        internal string ConstructExportFilePath(OrderData order, string extension) {
+            return ConstructExportFolderPath(order, extension) + ConstructFileName(order) + '.' + extension;
         }
 
         private string ConstructStylePathPart(OrderData order) {

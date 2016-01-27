@@ -20,14 +20,14 @@ namespace Lettering {
                 installedFontNames.Add(fontFamily.ToString().Split('#')[fontFamily.ToString().Split('#').Count() - 1]);
             }
 
-            string[] networkFontFiles = Directory.GetFiles(FilePaths.networkFontsPath, "*.otf");
+            string[] networkFontFiles = Directory.GetFiles(FilePaths.networkFontsFolderPath, "*.otf");
 
             FontCheckingWindow fontCheckingWindow = new FontCheckingWindow();
             fontCheckingWindow.Show();
             fontCheckingWindow.Location = new System.Drawing.Point(mainWindow.Location.X + (mainWindow.Width - fontCheckingWindow.Width) / 2,
                                                                    mainWindow.Location.Y + (mainWindow.Height - fontCheckingWindow.Height) / 2);
 
-            //TODO(adam): investigate why it takes time to check each font
+            //TODO(adam): investigate why it takes time to check each font (may be slow because of remote connection)
             for(int i = 0; i != networkFontFiles.Length; ++i) {
                 string networkFontFile = networkFontFiles[i];
 
@@ -54,7 +54,7 @@ namespace Lettering {
                     continue;
                 }
 
-                DateTime installedFontDateTime = File.GetLastWriteTime(FilePaths.installedFontsPath + '\\' + installedFontFileName);
+                DateTime installedFontDateTime = File.GetLastWriteTime(FilePaths.installedFontsFolderPath + '\\' + installedFontFileName);
                 DateTime networkFontDateTime = File.GetLastWriteTime(networkFontFile);
 
                 if(networkFontDateTime > installedFontDateTime) {

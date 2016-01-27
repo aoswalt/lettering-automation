@@ -34,7 +34,7 @@ namespace Lettering {
                                            date.Year / 100, date.Year % 100, date.Month, date.Day);
             } else { 
                 //NOTE(adam): default is yesterday
-                List<DateTime> holidays = ConfigReader.ReadHolidays();   //TODO(adam): move reading of holidays to config
+                List<DateTime> holidays = ConfigReader.ReadHolidays();
                 DateTime date = DateTime.Today.AddDays(-1);
 
                 dateClause = string.Format("((d.dorcy = {0}) AND (d.doryr = {1}) AND (d.dormo = {2}) AND (d.dorda = {3}))",
@@ -73,7 +73,7 @@ namespace Lettering {
             return reportTable;
         }
 
-        //TODO(adam): move UnivyHeaders to a more general location
+        //TODO(adam): move UnifyHeaders to a more general location
         internal static void UnifyHeaders(DataTable table) {
             if(table.Columns.Contains("HOUSE") && !table.Columns.Contains(DbHeaders.CUT_HOUSE)) table.Columns["HOUSE"].ColumnName = DbHeaders.CUT_HOUSE;
             if(table.Columns.Contains("SCHEDULE_DATE_MMDDCCYY") && !table.Columns.Contains(DbHeaders.SCHEDULE_DATE)) table.Columns["SCHEDULE_DATE_MMDDCCYY"].ColumnName = DbHeaders.SCHEDULE_DATE;
