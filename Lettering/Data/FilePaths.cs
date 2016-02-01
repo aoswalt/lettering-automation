@@ -3,13 +3,15 @@ using System.Collections.Generic;
 
 namespace Lettering.Data {
     internal class FilePaths {
-        internal static string desktopFolderPath = Environment.GetFolderPath(Environment.SpecialFolder.Desktop) + '\\';
-        internal static string tempFolderPath = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + "\\TemporaryAutomationFiles\\";
-        internal static string installedFontsFolderPath = Environment.GetFolderPath(Environment.SpecialFolder.Fonts) + '\\';
-        internal static string networkFontsFolderPath = @"\\production\Lettering\Corel\WORK FOLDERS\VS Fonts\";
-        internal static string installedLibraryFilePath = @"C:\Program Files\Corel\CorelDRAW Graphics Suite X7\Draw\GMS\Automation.gms";
-        internal static string networkLibraryFilePath = @"\\production\Lettering\Corel\WORK FOLDERS\Automation\Automation.gms";
-        internal static string holidaysFilePath = @".\configs\holidays.txt";
+        internal static readonly string adjacentConfigFolderPath = @".\configs\";
+        internal static readonly string networkConfigFolderPath = @"\\production\Lettering\Corel\WORK FOLDERS\automation\application\configs\";
+        internal static readonly string desktopFolderPath = Environment.GetFolderPath(Environment.SpecialFolder.Desktop) + '\\';
+        internal static readonly string tempFolderPath = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + "\\TemporaryAutomationFiles\\";
+        internal static readonly string installedFontsFolderPath = Environment.GetFolderPath(Environment.SpecialFolder.Fonts) + '\\';
+        internal static readonly string networkFontsFolderPath = @"\\production\Lettering\Corel\WORK FOLDERS\VS Fonts\";
+        internal static readonly string installedLibraryFilePath = @"C:\Program Files\Corel\CorelDRAW Graphics Suite X7\Draw\GMS\Automation.gms";
+        internal static readonly string networkLibraryFilePath = @"\\production\Lettering\Corel\WORK FOLDERS\Automation\Automation.gms";
+        internal static readonly string holidaysFilePath = @".\configs\holidays.txt";
 
         private readonly ConfigData config;
 

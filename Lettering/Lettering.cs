@@ -33,9 +33,15 @@ namespace Lettering {
         }
 
         internal static void LoadAllConfigs() {
-            string[] configFiles = Directory.GetFiles(@".\configs\", "*.cfg");
+            //NOTE(adam): try multiple locations for config files
+            string[] configFiles = null;
+            if(Directory.Exists(FilePaths.adjacentConfigFolderPath)) {
+                configFiles = Directory.GetFiles(FilePaths.adjacentConfigFolderPath, "*.cfg");
+            } else if(Directory.Exists(FilePaths.networkConfigFolderPath)) {
+                configFiles = Directory.GetFiles(FilePaths.networkConfigFolderPath, "*.cfg");
+            }
 
-            if(configFiles.Length == 0) {
+            if(configFiles == null || configFiles.Length == 0) {
                 ErrorHandler.HandleError(ErrorType.Critical, "Could not find config files.");
                 return;
             }
