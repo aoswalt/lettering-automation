@@ -3,56 +3,39 @@ using System.Collections.Generic;
 
 namespace Lettering.Data {
     internal class FilePaths {
+        private static readonly string networkAutomationFolderPath = @"\\production\Lettering\Corel\WORK FOLDERS\Automation\";
         internal static readonly string adjacentConfigFolderPath = @".\configs\";
-        internal static readonly string networkConfigFolderPath = @"\\production\Lettering\Corel\WORK FOLDERS\automation\application\configs\";
+        internal static readonly string networkConfigFolderPath = networkAutomationFolderPath + @"application\configs\";
+        internal static readonly string adjacentHolidaysFilePath = adjacentConfigFolderPath + "holidays.txt";
+        internal static readonly string networkHolidaysFilePath = networkConfigFolderPath + "holidays.txt";
         internal static readonly string desktopFolderPath = Environment.GetFolderPath(Environment.SpecialFolder.Desktop) + '\\';
-        internal static readonly string tempFolderPath = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + "\\TemporaryAutomationFiles\\";
+        internal static readonly string tempFolderPath = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + @"\TemporaryAutomationFiles\";
         internal static readonly string installedFontsFolderPath = Environment.GetFolderPath(Environment.SpecialFolder.Fonts) + '\\';
         internal static readonly string networkFontsFolderPath = @"\\production\Lettering\Corel\WORK FOLDERS\VS Fonts\";
         internal static readonly string installedLibraryFilePath = @"C:\Program Files\Corel\CorelDRAW Graphics Suite X7\Draw\GMS\Automation.gms";
-        internal static readonly string networkLibraryFilePath = @"\\production\Lettering\Corel\WORK FOLDERS\Automation\Automation.gms";
-        internal static readonly string holidaysFilePath = @".\configs\holidays.txt";
+        internal static readonly string networkLibraryFilePath = networkAutomationFolderPath + "Automation.gms";
+
+        private string rootFolderPath;
+        private string destFolderPath = FilePaths.desktopFolderPath + @"\1 CUT FILES\";
 
         private readonly ConfigData config;
 
         //TODO(adam): simplify access to constructing file paths
-
-        //TODO(adam): switch to dictionary with key of path type?
-        private string rootCutFolderPath;
-        private string rootSewFolderPath;
-        private string rootStoneFolderPath;
-        private string destFolderPath = FilePaths.desktopFolderPath + @"\1 CUT FILES\";
         
         internal FilePaths(ConfigData config) {
             this.config = config;
         }
 
-        internal void SetCutFolderPath(string rootCutFolderPath) {
-            if(rootCutFolderPath[rootCutFolderPath.Length - 1] != '\\') {
-                rootCutFolderPath += '\\';
+        internal void SetRootFolderPath(string rootFolderPath) {
+            if(rootFolderPath[rootFolderPath.Length - 1] != '\\') {
+                rootFolderPath += '\\';
             }
 
-            this.rootCutFolderPath = rootCutFolderPath;
-        }
-
-        internal void SetSewFolderPath(string rootSewFolderPath) {
-            if(rootSewFolderPath[rootSewFolderPath.Length - 1] != '\\') {
-                rootSewFolderPath += '\\';
-            }
-
-            this.rootSewFolderPath = rootSewFolderPath;
-        }
-
-        internal void SetStoneFolderPath(string rootStoneFolderPath) {
-            if(rootStoneFolderPath[rootStoneFolderPath.Length - 1] != '\\') {
-                rootStoneFolderPath += '\\';
-            }
-
-            this.rootStoneFolderPath = rootStoneFolderPath;
+            this.rootFolderPath = rootFolderPath;
         }
 
         internal string ConstructTemplateFilePath(OrderData order) {
-            string dir = rootCutFolderPath + config.pathBuilders["!style"](order);
+            string dir = rootFolderPath + config.pathBuilders["!style"](order);
             string[] pathTokens = dir.Split('\\');
             string file = pathTokens[pathTokens.Length - 1] + " TEMPLATE.cdr";
 
@@ -87,8 +70,8 @@ namespace Lettering.Data {
             return (fileName != "" ? fileName.ToUpper() : order.name.ToUpper());
         }
 
-        internal string ConstructNetworkCutFilePath(OrderData order) {
-            return rootCutFolderPath + ConstructStylePathPart(order) + ConstructFileName(order) + ".cdr";
+        internal string ConstructNetworkOrderFilePath(OrderData order) {
+            return rootFolderPath + ConstructStylePathPart(order) + ConstructFileName(order) + ".cdr";
         }
 
         internal string ConstructSaveFolderPath(OrderData order) {

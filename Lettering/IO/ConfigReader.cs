@@ -11,9 +11,18 @@ namespace Lettering {
         private enum Sections { Void, Root, Types, Prefixes, Paths, Exports, Exceptions, Trims };
 
         internal static List<DateTime> ReadHolidays() {
-            List<DateTime> holidays = new List<DateTime>();
+            string holidaysFilePath = FilePaths.adjacentHolidaysFilePath;
+            if(!File.Exists(holidaysFilePath)) {
+                holidaysFilePath = FilePaths.networkHolidaysFilePath;
+            }
 
-            using(StreamReader sr = new StreamReader(FilePaths.holidaysFilePath)) {
+            if(!File.Exists(holidaysFilePath)) {
+                ErrorHandler.HandleError(ErrorType.Alert, "Could not find holidays file.");
+                return new List<DateTime>();
+            }
+
+            List<DateTime> holidays = new List<DateTime>();
+            using(StreamReader sr = new StreamReader(holidaysFilePath)) {
                 int lineNumber = 0;
                 string line;
                 while(sr.Peek() > -1) {
@@ -29,6 +38,9 @@ namespace Lettering {
                 }
             }
 
+            if(holidays.Count == 0) {
+                ErrorHandler.HandleError(ErrorType.Alert, "No holidays loaded!");
+            }
             return holidays;
         }
 

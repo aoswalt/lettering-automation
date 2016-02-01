@@ -162,7 +162,7 @@ namespace Lettering {
                 }
 
                 //NOTE(adam): if built, continue
-                string orderPath = config.filePaths.ConstructNetworkCutFilePath(order);
+                string orderPath = config.filePaths.ConstructNetworkOrderFilePath(order);
                 string newMadePath = config.filePaths.ConstructSaveFilePath(order);
 
                 if(config.IsIgnoredStyle(order)) {
@@ -219,7 +219,7 @@ namespace Lettering {
                 }
 
                 //NOTE(adam): if built, continue
-                string orderPath = config.filePaths.ConstructNetworkCutFilePath(order);
+                string orderPath = config.filePaths.ConstructNetworkOrderFilePath(order);
                 string newMadePath = config.filePaths.ConstructSaveFilePath(order);
 
                 if(config.IsIgnoredStyle(order)) {
