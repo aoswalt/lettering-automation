@@ -71,7 +71,7 @@ namespace Lettering.Data {
         }
 
         internal string ConstructNetworkOrderFilePath(OrderData order) {
-            return rootFolderPath + ConstructStylePathPart(order) + ConstructFileName(order) + ".cdr";
+            return rootFolderPath + ConstructStylePathPart(order) + ConstructFileName(order) + config.fileExtension;
         }
 
         internal string ConstructSaveFolderPath(OrderData order) {
@@ -79,7 +79,7 @@ namespace Lettering.Data {
         }
 
         internal string ConstructSaveFilePath(OrderData order) {
-            return ConstructSaveFolderPath(order) + ConstructFileName(order) + ".cdr";
+            return ConstructSaveFolderPath(order) + ConstructFileName(order) + config.fileExtension;
         }
 
         internal string ConstructExportFolderPath(OrderData order, string extension) {

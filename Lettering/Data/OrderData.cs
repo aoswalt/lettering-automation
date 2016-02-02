@@ -47,5 +47,9 @@ namespace Lettering {
             this.comment = "";
             this.nameList = new List<string>();
         }
+
+        internal OrderData Clone() {
+            return (OrderData)this.MemberwiseClone();
+        }
     }
 }

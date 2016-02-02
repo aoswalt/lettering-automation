@@ -8,7 +8,7 @@ using Lettering.Forms;
 
 namespace Lettering {
     internal class ConfigReader {
-        private enum Sections { Void, Root, Types, Prefixes, Paths, Exports, Exceptions, Trims };
+        private enum Sections { Void, Root, Extension, Types, Prefixes, Paths, Exports, Exceptions, Trims };
 
         internal static List<DateTime> ReadHolidays() {
             string holidaysFilePath = FilePaths.adjacentHolidaysFilePath;
@@ -66,6 +66,8 @@ namespace Lettering {
                     if(line[0] == '>') {
                         if(line.Contains("ROOT")) {
                             curSection = Sections.Root;
+                        } else if(line.Contains("EXTENSION")) {
+                            curSection = Sections.Extension;
                         } else if(line.Contains("TYPES")) {
                             curSection = Sections.Types;
                         } else if(line.Contains("PREFIXES")) {
@@ -85,6 +87,9 @@ namespace Lettering {
                         switch(curSection) {
                             case Sections.Root:
                                 config.SetRootPath(line);
+                                break;
+                            case Sections.Extension:
+                                config.SetFileExtension(line);
                                 break;
                             case Sections.Types:
                                 {

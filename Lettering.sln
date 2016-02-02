@@ -7,8 +7,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lettering", "Lettering\Lett
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "configs", "configs", "{C17E5C16-91DC-4BFC-A648-7D0FEC1E2308}"
 	ProjectSection(SolutionItems) = preProject
-		configs\automation.cfg = configs\automation.cfg
+		configs\cut.cfg = configs\cut.cfg
 		configs\holidays.txt = configs\holidays.txt
+		sew.cfg = sew.cfg
+		stone.cfg = stone.cfg
 	EndProjectSection
 EndProject
 Global

@@ -9,6 +9,7 @@ namespace Lettering.Data {
         internal delegate bool ExceptionCheckDelegate(OrderData order, ExceptionData exception);
 
         internal FilePaths filePaths;
+        internal string fileExtension;
         internal Dictionary<int, string> pathTypes = new Dictionary<int, string>();
         internal List<string> stylePrefixes = new List<string>();
         internal Dictionary<string, StylePathData> paths = new Dictionary<string, StylePathData>();
@@ -29,12 +30,13 @@ namespace Lettering.Data {
             pathBuilders.Add("!style", (order) => {
                 //NOTE(adam): example: "TTstyle" becomes "TT STYLES\TT style
                 foreach(string stylePrefix in stylePrefixes) {
-                    if(order.itemCode.StartsWith(stylePrefix)) {
+                    OrderData tempOrder = order.Clone();
+                    if(tempOrder.itemCode.StartsWith(stylePrefix)) {
                         //TODO(adam): should these be moved out of the if?
-                        if(pathTypes[paths[order.itemCode].type] == "mirror") order.itemCode = paths[order.itemCode].mirrorStyle;
-                        if(pathTypes[paths[order.itemCode].type] == "names") order.itemCode = paths[order.itemCode].mirrorStyle;
+                        if(pathTypes[paths[tempOrder.itemCode].type] == "mirror") tempOrder.itemCode = paths[tempOrder.itemCode].mirrorStyle;
+                        if(pathTypes[paths[tempOrder.itemCode].type] == "names") tempOrder.itemCode = paths[tempOrder.itemCode].mirrorStyle;
 
-                        return stylePrefix + " STYLES\\" + stylePrefix + " " + Regex.Replace(order.itemCode, stylePrefix, "");
+                        return stylePrefix + " STYLES\\" + stylePrefix + " " + Regex.Replace(tempOrder.itemCode, stylePrefix, "");
                     }
                 }
                 //NOTE(adam): can insert other custom style paths here?
@@ -64,6 +66,13 @@ namespace Lettering.Data {
         internal void AddExceptionChecks() {
             exceptionChecks.Add("size", (order, exception) => { return order.size == exception.value; });
             exceptionChecks.Add("spec", (order, exception) => { return order.spec == exception.value; });
+        }
+
+        internal void SetFileExtension(string extension) {
+            if(!(extension[0] == '.')) {
+                extension = '.' + extension;
+            }
+            fileExtension = extension;
         }
 
         internal void InsertPathType(int id, string desc) {

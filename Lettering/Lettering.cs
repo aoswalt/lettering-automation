@@ -241,7 +241,6 @@ namespace Lettering {
                 }
 
                 //NOTE(adam): build point
-                // MessageBox.Show("To build: " + order.itemCode + "\n Template: " + config.getTemplatePath(order));
                 String templatePath = config.filePaths.ConstructTemplateFilePath(order);
                 if(!File.Exists(templatePath)) {
                     ErrorHandler.HandleError(ErrorType.Alert, "Template not found:\n" + templatePath);
