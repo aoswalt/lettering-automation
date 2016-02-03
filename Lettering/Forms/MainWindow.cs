@@ -37,34 +37,18 @@ namespace Lettering {
         }
 
         private void btnCutReport_Click(object sender, EventArgs e) {
-            DateTime? startDate = null;
-            if(datePickerStart.Checked) {
-                startDate = datePickerStart.Value;
-            }
-
-            DateTime? endDate = null;
-            if(datePickerEnd.Checked) {
-                endDate = datePickerEnd.Value;
-            }
-
-            Lettering.ExportCutReport(startDate, endDate);
+            ExportReport(ReportType.Cut);
         }
 
         private void btnSewReport_Click(object sender, EventArgs e) {
-            DateTime? startDate = null;
-            if(datePickerStart.Checked) {
-                startDate = datePickerStart.Value;
-            }
-
-            DateTime? endDate = null;
-            if(datePickerEnd.Checked) {
-                endDate = datePickerEnd.Value;
-            }
-
-            Lettering.ExportSewReport(startDate, endDate);
+            ExportReport(ReportType.Sew);
         }
 
         private void btnStoneReport_Click(object sender, EventArgs e) {
+            ExportReport(ReportType.Stone);
+        }
+
+        private void ExportReport(ReportType type) {
             DateTime? startDate = null;
             if(datePickerStart.Checked) {
                 startDate = datePickerStart.Value;
@@ -75,7 +59,7 @@ namespace Lettering {
                 endDate = datePickerEnd.Value;
             }
 
-            Lettering.ExportStoneReport(startDate, endDate);
+            Lettering.ExportReport(type, startDate, endDate);
         }
 
         private void loadAllConfigsToolStripMenuItem_Click(object sender, EventArgs e) {

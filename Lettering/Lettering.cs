@@ -87,7 +87,6 @@ namespace Lettering {
         }
 
         internal static void AutomateReport(DateTime? startDate, DateTime? endDate) {
-            //TODO(adam): sort out proper config loading
             if(configs.Values.Count == 0) {
                 LoadAllConfigs();
             }
@@ -105,7 +104,6 @@ namespace Lettering {
         }
 
         internal static void AutomateCsv() {
-            //TODO(adam): sort out proper config loading
             if(configs.Values.Count == 0) {
                 LoadAllConfigs();
             }
@@ -122,73 +120,24 @@ namespace Lettering {
             ProcessOrders(data);
         }
 
-        internal static void ExportCutReport(DateTime? startDate, DateTime? endDate) {
-            //TODO(adam): sort out proper config loading
+        //TODO(adam): condense report exports
+        internal static void ExportReport(ReportType type, DateTime? startDate, DateTime? endDate) {
             if(configs.Values.Count == 0) {
                 LoadAllConfigs();
             }
 
-            if(!configs.ContainsKey(ReportType.Cut)) {
-                ErrorHandler.HandleError(ErrorType.Critical, "No config found for cut orders.");
+            if(!configs.ContainsKey(type)) {
+                ErrorHandler.HandleError(ErrorType.Critical, $"No config found for {type} orders.");
                 return;
             }
-
-            CheckSetup();
-            if(!isSetupOk) { return; }
             
-            DataTable data = ReportReader.RunReport(startDate, endDate, ReportType.Cut);
+            DataTable data = ReportReader.RunReport(startDate, endDate, type);
             if(data == null) {
                 ErrorHandler.HandleError(ErrorType.Alert, "No data from report.");
                 return;
             }
 
-            CheckForDoneOrders(data, ReportType.Cut);
-        }
-
-        internal static void ExportSewReport(DateTime? startDate, DateTime? endDate) {
-            //TODO(adam): sort out proper config loading
-            if(configs.Values.Count == 0) {
-                LoadAllConfigs();
-            }
-
-            if(!configs.ContainsKey(ReportType.Sew)) {
-                ErrorHandler.HandleError(ErrorType.Critical, "No config found for sew orders.");
-                return;
-            }
-
-            CheckSetup();
-            if(!isSetupOk) { return; }
-
-            DataTable data = ReportReader.RunReport(startDate, endDate, ReportType.Sew);
-            if(data == null) {
-                ErrorHandler.HandleError(ErrorType.Alert, "No data from report.");
-                return;
-            }
-
-            CheckForDoneOrders(data, ReportType.Sew);
-        }
-
-        internal static void ExportStoneReport(DateTime? startDate, DateTime? endDate) {
-            //TODO(adam): sort out proper config loading
-            if(configs.Values.Count == 0) {
-                LoadAllConfigs();
-            }
-
-            if(!configs.ContainsKey(ReportType.Stone)) {
-                ErrorHandler.HandleError(ErrorType.Critical, "No config found for stone orders.");
-                return;
-            }
-
-            CheckSetup();
-            if(!isSetupOk) { return; }
-
-            DataTable data = ReportReader.RunReport(startDate, endDate, ReportType.Stone);
-            if(data == null) {
-                ErrorHandler.HandleError(ErrorType.Alert, "No data from report.");
-                return;
-            }
-
-            CheckForDoneOrders(data, ReportType.Stone);
+            CheckForDoneOrders(data, type);
         }
 
         //TODO(adam): combine repeating in CheckForDoneOrders and ProcssOrders
@@ -240,7 +189,8 @@ namespace Lettering {
                     ordersToLog.Add(order);
                 }
             }
-            string reportFileName = "LetteringReport-" + DateTime.Now.ToString("yyyyMMdd_HHmm");
+            
+            string reportFileName = $"{type.ToString()}Report-{DateTime.Now.ToString("yyyyMMdd_HHmm")}";
             CsvWriter.WriteReport(ordersToLog, reportFileName);
             Messenger.Show($"Report saved as {reportFileName}.csv");
 
