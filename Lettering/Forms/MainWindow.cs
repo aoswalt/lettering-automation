@@ -50,6 +50,34 @@ namespace Lettering {
             Lettering.ExportCutReport(startDate, endDate);
         }
 
+        private void btnSewReport_Click(object sender, EventArgs e) {
+            DateTime? startDate = null;
+            if(datePickerStart.Checked) {
+                startDate = datePickerStart.Value;
+            }
+
+            DateTime? endDate = null;
+            if(datePickerEnd.Checked) {
+                endDate = datePickerEnd.Value;
+            }
+
+            Lettering.ExportSewReport(startDate, endDate);
+        }
+
+        private void btnStoneReport_Click(object sender, EventArgs e) {
+            DateTime? startDate = null;
+            if(datePickerStart.Checked) {
+                startDate = datePickerStart.Value;
+            }
+
+            DateTime? endDate = null;
+            if(datePickerEnd.Checked) {
+                endDate = datePickerEnd.Value;
+            }
+
+            Lettering.ExportStoneReport(startDate, endDate);
+        }
+
         private void loadAllConfigsToolStripMenuItem_Click(object sender, EventArgs e) {
             Lettering.LoadAllConfigs();
         }

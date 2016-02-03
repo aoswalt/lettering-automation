@@ -12,7 +12,6 @@ using VGCore;
 namespace Lettering {
     internal enum ReportType { Cut, Sew, Stone };
     internal enum ExportType { None, Plt, Eps };
-    internal enum ActionType { Cut, Sew, Stone };
 
     //TODO(adam): rethink all of the static usage
 
@@ -20,7 +19,7 @@ namespace Lettering {
         internal static CorelDRAW.Application corel = new CorelDRAW.Application();
 
         private static MainWindow mainWindow;
-        private static ConfigData config = new ConfigData();
+        private static Dictionary<ReportType, ConfigData> configs = new Dictionary<ReportType, ConfigData>();
         private static bool hasCheckedSetup = false;
         private static bool isSetupOk = false;
 
@@ -51,8 +50,17 @@ namespace Lettering {
             configLoadingWindow.Location = new System.Drawing.Point(mainWindow.Location.X + (mainWindow.Width - configLoadingWindow.Width) / 2,
                                                                     mainWindow.Location.Y + (mainWindow.Height - configLoadingWindow.Height) / 2);
             for(int i = 0; i != configFiles.Length; ++i) {
-                configLoadingWindow.SetFilesProgress(Path.GetFileName(configFiles[i]), i + 1, configFiles.Length);
-                ConfigReader.ReadFile(configFiles[i], config, configLoadingWindow);
+                string fileName = Path.GetFileName(configFiles[i]);
+                ReportType type;
+                if(Enum.TryParse(fileName.Split('.')[0], true, out type)) {
+                    ConfigData config = new ConfigData();
+                    configLoadingWindow.SetFilesProgress(fileName, i + 1, configFiles.Length);
+                    ConfigReader.ReadFile(configFiles[i], config, configLoadingWindow);
+
+                    configs.Add(type, config);
+                } else {
+                    ErrorHandler.HandleError(ErrorType.Alert, $"Could not find type for config file: {fileName}");
+                }
             }
             configLoadingWindow.Hide();
             //TODO(adam): investigate program freeze after reading config file
@@ -80,7 +88,7 @@ namespace Lettering {
 
         internal static void AutomateReport(DateTime? startDate, DateTime? endDate) {
             //TODO(adam): sort out proper config loading
-            if(config.paths.Keys.Count == 0) {
+            if(configs.Values.Count == 0) {
                 LoadAllConfigs();
             }
             
@@ -98,7 +106,7 @@ namespace Lettering {
 
         internal static void AutomateCsv() {
             //TODO(adam): sort out proper config loading
-            if(config.paths.Keys.Count == 0) {
+            if(configs.Values.Count == 0) {
                 LoadAllConfigs();
             }
 
@@ -116,8 +124,13 @@ namespace Lettering {
 
         internal static void ExportCutReport(DateTime? startDate, DateTime? endDate) {
             //TODO(adam): sort out proper config loading
-            if(config.paths.Keys.Count == 0) {
+            if(configs.Values.Count == 0) {
                 LoadAllConfigs();
+            }
+
+            if(!configs.ContainsKey(ReportType.Cut)) {
+                ErrorHandler.HandleError(ErrorType.Critical, "No config found for cut orders.");
+                return;
             }
 
             CheckSetup();
@@ -129,14 +142,61 @@ namespace Lettering {
                 return;
             }
 
-            CheckForDoneOrders(data);
+            CheckForDoneOrders(data, ReportType.Cut);
+        }
+
+        internal static void ExportSewReport(DateTime? startDate, DateTime? endDate) {
+            //TODO(adam): sort out proper config loading
+            if(configs.Values.Count == 0) {
+                LoadAllConfigs();
+            }
+
+            if(!configs.ContainsKey(ReportType.Sew)) {
+                ErrorHandler.HandleError(ErrorType.Critical, "No config found for sew orders.");
+                return;
+            }
+
+            CheckSetup();
+            if(!isSetupOk) { return; }
+
+            DataTable data = ReportReader.RunReport(startDate, endDate, ReportType.Sew);
+            if(data == null) {
+                ErrorHandler.HandleError(ErrorType.Alert, "No data from report.");
+                return;
+            }
+
+            CheckForDoneOrders(data, ReportType.Sew);
+        }
+
+        internal static void ExportStoneReport(DateTime? startDate, DateTime? endDate) {
+            //TODO(adam): sort out proper config loading
+            if(configs.Values.Count == 0) {
+                LoadAllConfigs();
+            }
+
+            if(!configs.ContainsKey(ReportType.Stone)) {
+                ErrorHandler.HandleError(ErrorType.Critical, "No config found for stone orders.");
+                return;
+            }
+
+            CheckSetup();
+            if(!isSetupOk) { return; }
+
+            DataTable data = ReportReader.RunReport(startDate, endDate, ReportType.Stone);
+            if(data == null) {
+                ErrorHandler.HandleError(ErrorType.Alert, "No data from report.");
+                return;
+            }
+
+            CheckForDoneOrders(data, ReportType.Stone);
         }
 
         //TODO(adam): combine repeating in CheckForDoneOrders and ProcssOrders
 
         //TODO(adam): progress bar?
-        private static void CheckForDoneOrders(DataTable data) {
+        private static void CheckForDoneOrders(DataTable data, ReportType type) {
             string errors = "";
+            ConfigData config = configs[type];
 
             List<OrderData> ordersToLog = new List<OrderData>();
 
@@ -191,6 +251,7 @@ namespace Lettering {
         private static void ProcessOrders(DataTable data) {
             bool cancelBuilding = false;
             string errors = "";
+            ConfigData config = configs[ReportType.Cut];
 
             ActiveOrderWindow activeOrderWindow = new ActiveOrderWindow();
             List<string> currentNames = new List<string>();
@@ -278,7 +339,7 @@ namespace Lettering {
                             } else {
                                 Directory.CreateDirectory(config.filePaths.ConstructSaveFolderPath(order));
                                 corel.ActiveDocument.SaveAs(newMadePath);
-                                if(config.GetExportType(order.itemCode) != ExportType.None) ExportOrder(order);
+                                if(config.GetExportType(order.itemCode) != ExportType.None) ExportOrder(order, config);
                             }
                         }
 
@@ -339,7 +400,7 @@ namespace Lettering {
             corel.ActivePage.CreateLayer("Automate");
         }
 
-        private static void ExportOrder(OrderData order) {
+        private static void ExportOrder(OrderData order, ConfigData config) {
             string orderWords = config.filePaths.ConstructFileName(order).Replace(".cdr", String.Empty);
             ExportType exportType = config.GetExportType(order.itemCode);
 

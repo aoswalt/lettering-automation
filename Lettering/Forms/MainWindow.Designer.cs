@@ -150,23 +150,23 @@
             // 
             // btnSewReport
             // 
-            this.btnSewReport.Enabled = false;
             this.btnSewReport.Location = new System.Drawing.Point(193, 95);
             this.btnSewReport.Name = "btnSewReport";
             this.btnSewReport.Size = new System.Drawing.Size(141, 29);
             this.btnSewReport.TabIndex = 8;
             this.btnSewReport.Text = "Sew Report";
             this.btnSewReport.UseVisualStyleBackColor = true;
+            this.btnSewReport.Click += new System.EventHandler(this.btnSewReport_Click);
             // 
             // btnStoneReport
             // 
-            this.btnStoneReport.Enabled = false;
             this.btnStoneReport.Location = new System.Drawing.Point(193, 130);
             this.btnStoneReport.Name = "btnStoneReport";
             this.btnStoneReport.Size = new System.Drawing.Size(141, 29);
             this.btnStoneReport.TabIndex = 9;
             this.btnStoneReport.Text = "Stone/Sequin Report";
             this.btnStoneReport.UseVisualStyleBackColor = true;
+            this.btnStoneReport.Click += new System.EventHandler(this.btnStoneReport_Click);
             // 
             // btnCsvAutomation
             // 

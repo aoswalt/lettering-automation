@@ -59,8 +59,20 @@ namespace Lettering {
                         (d.ditem NOT LIKE 'IDC%')";
                     break;
                 case ReportType.Sew:
+                    styleClause += @"
+                        ((d.ditem LIKE '%MN%') OR (d.ditem LIKE 'PF%') OR (d.dlrea LIKE 'ASW') OR (d.ditem LIKE 'PK%')) AND 
+                        ((d.ditem NOT LIKE '%CBSLIMN%') AND (d.ditem NOT LIKE '%SLIMN%')) AND 
+                        (d.dclas NOT IN ('010', '045', '04A', '04B', '04M', '04O', '065', '075', '083', '086', '087', '089', 
+                                         '0DB', '0P1', '0P2', '112', 'CS2', 'S01', 'S02', 'SSO', 'STL')) AND 
+                        ((TRIM(d.ditem) NOT LIKE 'MNB1') AND (TRIM(d.ditem) NOT LIKE 'MNB2') AND
+                         (d.ditem NOT LIKE 'MNBN%') AND (d.ditem NOT LIKE 'MNB2N%') AND 
+                         (d.ditem NOT LIKE 'MNBLN%') AND (d.ditem NOT LIKE 'MNBL2N%') AND 
+                         (d.ditem NOT LIKE 'MNSN%') AND (d.ditem NOT LIKE 'MNS2N%') AND (d.ditem NOT LIKE 'MNS3N%'))";
                     break;
                 case ReportType.Stone:
+                    styleClause += @"
+                        (d.dclas IN ('04U', '04V', '04W', 'L01', 'L03', 'L04', 'L09', 'F09', 'PS3', 'RSC', 'RSO', 'TSO')) AND 
+                        ((d.ditem LIKE 'RH%') OR (d.ditem LIKE 'TS%') OR (d.ditem LIKE 'RST%') OR (d.ditem Like 'RVOMMPT%'))";
                     break;
                 default:
                     ErrorHandler.HandleError(ErrorType.Critical, "Invalid report type in RunReport.");
