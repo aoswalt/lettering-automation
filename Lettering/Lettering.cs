@@ -144,7 +144,6 @@ namespace Lettering {
 
         //TODO(adam): progress bar?
         private static void CheckForDoneOrders(DataTable data, ReportType type) {
-            string errors = "";
             ConfigData config = configs[type];
 
             List<OrderData> ordersToLog = new List<OrderData>();
@@ -193,14 +192,10 @@ namespace Lettering {
             string reportFileName = $"{type.ToString()}Report-{DateTime.Now.ToString("yyyyMMdd_HHmm")}";
             CsvWriter.WriteReport(ordersToLog, reportFileName);
             Messenger.Show($"Report saved as {reportFileName}.csv");
-
-            //TODO(adam): proper errors display
-            if(errors.Length > 0) Messenger.Show(errors, "Error Log");
         }
 
         private static void ProcessOrders(DataTable data) {
             bool cancelBuilding = false;
-            string errors = "";
             ConfigData config = configs[ReportType.Cut];
 
             ActiveOrderWindow activeOrderWindow = new ActiveOrderWindow();
@@ -316,8 +311,6 @@ namespace Lettering {
             CsvWriter.WriteReport(ordersToLog, "LetteringLog-" + DateTime.Now.ToString("yyyyMMdd_HHmm"));
             
             Messenger.Show("Done!");
-            //TODO(adam): proper errors display
-            if(errors.Length > 0) Messenger.Show(errors, "Error Log");
             mainWindow.Show();
         }
 

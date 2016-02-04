@@ -14,6 +14,7 @@ namespace Lettering.Data {
         internal static readonly string networkFontsFolderPath = @"\\production\Lettering\Corel\WORK FOLDERS\VS Fonts\";
         internal static readonly string installedLibraryFilePath = @"C:\Program Files\Corel\CorelDRAW Graphics Suite X7\Draw\GMS\Automation.gms";
         internal static readonly string networkLibraryFilePath = networkAutomationFolderPath + "Automation.gms";
+        internal static readonly string errorLogFilePath = tempFolderPath + "errors.log";
 
         private string rootFolderPath;
         private string destFolderPath = FilePaths.desktopFolderPath + @"\1 CUT FILES\";

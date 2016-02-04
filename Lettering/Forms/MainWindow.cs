@@ -70,6 +70,10 @@ namespace Lettering {
             Lettering.CheckFonts();
         }
 
+        private void viewErrorLogToolStripMenuItem1_Click(object sender, EventArgs e) {
+            Messenger.ShowErrorLog();
+        }
+
         private void exitToolStripMenuItem_Click(object sender, EventArgs e) {
             this.Close();
         }

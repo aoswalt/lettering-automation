@@ -40,6 +40,8 @@
             this.btnCsvAutomation = new System.Windows.Forms.Button();
             this.btnCheckSetup = new System.Windows.Forms.Button();
             this.label2 = new System.Windows.Forms.Label();
+            this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
+            this.viewErrorLogToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -60,6 +62,8 @@
             this.loadAllConfigsToolStripMenuItem,
             this.editConfigsToolStripMenuItem,
             this.checkFontsToolStripMenuItem,
+            this.toolStripSeparator2,
+            this.viewErrorLogToolStripMenuItem1,
             this.toolStripSeparator1,
             this.exitToolStripMenuItem});
             this.fileToolStripMenuItem.Name = "fileToolStripMenuItem";
@@ -197,6 +201,18 @@
             this.label2.TabIndex = 13;
             this.label2.Text = "End Date:";
             // 
+            // toolStripSeparator2
+            // 
+            this.toolStripSeparator2.Name = "toolStripSeparator2";
+            this.toolStripSeparator2.Size = new System.Drawing.Size(158, 6);
+            // 
+            // viewErrorLogToolStripMenuItem1
+            // 
+            this.viewErrorLogToolStripMenuItem1.Name = "viewErrorLogToolStripMenuItem1";
+            this.viewErrorLogToolStripMenuItem1.Size = new System.Drawing.Size(161, 22);
+            this.viewErrorLogToolStripMenuItem1.Text = "&View Error Log";
+            this.viewErrorLogToolStripMenuItem1.Click += new System.EventHandler(this.viewErrorLogToolStripMenuItem1_Click);
+            // 
             // MainWindow
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -245,5 +261,7 @@
         private System.Windows.Forms.Button btnCheckSetup;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.ToolStripMenuItem checkFontsToolStripMenuItem;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
+        private System.Windows.Forms.ToolStripMenuItem viewErrorLogToolStripMenuItem1;
     }
 }

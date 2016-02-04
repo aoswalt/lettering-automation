@@ -79,6 +79,7 @@
     </Compile>
     <Compile Include="IO\CsvReader.cs" />
     <Compile Include="IO\SqlConnector.cs" />
+    <Compile Include="IO\TextWriter.cs" />
     <Compile Include="Setup\FontChecker.cs" />
     <Compile Include="Forms\ActiveOrderWindow.cs">
       <SubType>Form</SubType>
@@ -88,7 +89,7 @@
     </Compile>
     <Compile Include="IO\ConfigReader.cs" />
     <Compile Include="IO\ReportReader.cs" />
-    <Compile Include="IO\DataWriter.cs" />
+    <Compile Include="IO\CsvWriter.cs" />
     <Compile Include="Forms\MainWindow.cs">
       <SubType>Form</SubType>
     </Compile>
