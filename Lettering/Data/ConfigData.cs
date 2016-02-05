@@ -31,11 +31,10 @@ namespace Lettering.Data {
                 //NOTE(adam): example: "TTstyle" becomes "TT STYLES\TT style
                 foreach(string stylePrefix in stylePrefixes) {
                     OrderData tempOrder = order.Clone();
-                    if(tempOrder.itemCode.StartsWith(stylePrefix)) {
-                        //TODO(adam): should these be moved out of the if?
-                        if(pathTypes[paths[tempOrder.itemCode].type] == "mirror") tempOrder.itemCode = paths[tempOrder.itemCode].mirrorStyle;
-                        if(pathTypes[paths[tempOrder.itemCode].type] == "names") tempOrder.itemCode = paths[tempOrder.itemCode].mirrorStyle;
+                    if(pathTypes[paths[tempOrder.itemCode].type] == "mirror") tempOrder.itemCode = paths[tempOrder.itemCode].mirrorStyle;
+                    if(pathTypes[paths[tempOrder.itemCode].type] == "names") tempOrder.itemCode = paths[tempOrder.itemCode].mirrorStyle;
 
+                    if(tempOrder.itemCode.StartsWith(stylePrefix)) {
                         return stylePrefix + " STYLES\\" + stylePrefix + " " + Regex.Replace(tempOrder.itemCode, stylePrefix, "");
                     }
                 }

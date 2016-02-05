@@ -119,8 +119,7 @@ namespace Lettering {
 
             ProcessOrders(data);
         }
-
-        //TODO(adam): condense report exports
+        
         internal static void ExportReport(ReportType type, DateTime? startDate, DateTime? endDate) {
             if(configs.Values.Count == 0) {
                 LoadAllConfigs();
@@ -347,6 +346,18 @@ namespace Lettering {
             string orderWords = config.filePaths.ConstructFileName(order).Replace(".cdr", String.Empty);
             ExportType exportType = config.GetExportType(order.itemCode);
 
+            cdrFilter corelExport;
+            switch(exportType) {
+                case ExportType.Eps:
+                    corelExport = cdrFilter.cdrEPS;
+                    break;
+                case ExportType.Plt:
+                    corelExport = cdrFilter.cdrPLT;
+                    break;
+                default:
+                    ErrorHandler.HandleError(ErrorType.Alert, $"Invalid export type: {exportType}");
+                    return;
+            }
 
             corel.ActiveDocument.ClearSelection();
 
@@ -387,28 +398,14 @@ namespace Lettering {
                 corel.ActivePage.SelectableShapes.All().AddToSelection();
             }
 
-            //TODO(adam): condense section since overall format repeated
-            switch(exportType) {
-                case ExportType.Plt: {
-                    if(corel.ActiveSelection.Shapes.Count == 0) {
-                        Messenger.Show("Could no get shapes for exporting. Manual export required.");
-                    } else {
-                        Directory.CreateDirectory(config.filePaths.ConstructExportFolderPath(order, "PLT"));
-                        //NOTE(adam): options need to be specified within Corel previously
-                        corel.ActiveDocument.Export(config.filePaths.ConstructExportFilePath(order, "PLT"), cdrFilter.cdrPLT, cdrExportRange.cdrSelection);
-                    }
-                    } break;
-                case ExportType.Eps: {
-                    if(corel.ActiveSelection.Shapes.Count == 0) {
-                        Messenger.Show("Could no get shapes for exporting. Manual export required.");
-                    } else {
-                        Directory.CreateDirectory(config.filePaths.ConstructExportFolderPath(order, "EPS"));
-                        //NOTE(adam): options need to be specified within Corel previously
-                        corel.ActiveDocument.Export(config.filePaths.ConstructExportFilePath(order, "EPS"), cdrFilter.cdrEPS, cdrExportRange.cdrSelection);
-                    }
-                    } break;
-                default:
-                    break;
+
+            if(corel.ActiveSelection.Shapes.Count == 0) {
+                Messenger.Show("Could not get shapes for exporting. Manual export required.");
+            } else {
+                string exportUpper = exportType.ToString().ToUpper();
+                Directory.CreateDirectory(config.filePaths.ConstructExportFolderPath(order, exportUpper));
+                //NOTE(adam): options need to be specified within Corel previously
+                corel.ActiveDocument.Export(config.filePaths.ConstructExportFilePath(order, exportUpper), corelExport, cdrExportRange.cdrSelection);
             }
         }
     }
