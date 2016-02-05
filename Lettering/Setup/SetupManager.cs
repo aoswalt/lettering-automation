@@ -12,7 +12,7 @@ namespace Lettering {
         */
 
         //NOTE(adam): returns true if safe to continue
-        internal static bool CheckSetup(MainWindow mainWindow, bool hasRunBefore) {
+        internal static bool CheckMacroSetup(MainWindow mainWindow, bool hasRunBefore) {
             bool libraryInstalled = LibraryInstaller.InstallLibrary();
             string neededFonts = FontChecker.GetNeededFonts(mainWindow);
             bool needFontInstall = neededFonts.Length > 0;

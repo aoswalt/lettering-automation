@@ -77,9 +77,9 @@ namespace Lettering {
             }
         }
 
-        internal static bool CheckSetup() {
+        internal static bool CheckMacroSetup() {
             if(!isSetupOk) {
-                isSetupOk = SetupManager.CheckSetup(mainWindow, hasCheckedSetup);
+                isSetupOk = SetupManager.CheckMacroSetup(mainWindow, hasCheckedSetup);
                 hasCheckedSetup = true;
             }
 
@@ -91,7 +91,7 @@ namespace Lettering {
                 LoadAllConfigs();
             }
             
-            CheckSetup();
+            CheckMacroSetup();
             if(!isSetupOk) { return; }
 
             DataTable data = ReportReader.RunReport(startDate, endDate, ReportType.Cut);
@@ -108,7 +108,7 @@ namespace Lettering {
                 LoadAllConfigs();
             }
 
-            CheckSetup();
+            CheckMacroSetup();
             if(!isSetupOk) { return; }
 
             DataTable data = CsvReader.GetCsvData();

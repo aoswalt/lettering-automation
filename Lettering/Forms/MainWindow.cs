@@ -31,7 +31,7 @@ namespace Lettering {
         }
 
         private void btnCheckSetup_Click(object sender, EventArgs e) {
-            if(Lettering.CheckSetup()) {
+            if(Lettering.CheckMacroSetup()) {
                 Messenger.Show("Setup is Ok!");
             }
         }

@@ -28,6 +28,8 @@
             this.loadAllConfigsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.editConfigsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.checkFontsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
+            this.viewErrorLogToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.label1 = new System.Windows.Forms.Label();
@@ -38,10 +40,8 @@
             this.btnSewReport = new System.Windows.Forms.Button();
             this.btnStoneReport = new System.Windows.Forms.Button();
             this.btnCsvAutomation = new System.Windows.Forms.Button();
-            this.btnCheckSetup = new System.Windows.Forms.Button();
+            this.btnCheckMacroSetup = new System.Windows.Forms.Button();
             this.label2 = new System.Windows.Forms.Label();
-            this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
-            this.viewErrorLogToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -90,6 +90,18 @@
             this.checkFontsToolStripMenuItem.Size = new System.Drawing.Size(161, 22);
             this.checkFontsToolStripMenuItem.Text = "Check &Fonts";
             this.checkFontsToolStripMenuItem.Click += new System.EventHandler(this.checkFontsToolStripMenuItem_Click);
+            // 
+            // toolStripSeparator2
+            // 
+            this.toolStripSeparator2.Name = "toolStripSeparator2";
+            this.toolStripSeparator2.Size = new System.Drawing.Size(158, 6);
+            // 
+            // viewErrorLogToolStripMenuItem1
+            // 
+            this.viewErrorLogToolStripMenuItem1.Name = "viewErrorLogToolStripMenuItem1";
+            this.viewErrorLogToolStripMenuItem1.Size = new System.Drawing.Size(161, 22);
+            this.viewErrorLogToolStripMenuItem1.Text = "&View Error Log";
+            this.viewErrorLogToolStripMenuItem1.Click += new System.EventHandler(this.viewErrorLogToolStripMenuItem1_Click);
             // 
             // toolStripSeparator1
             // 
@@ -182,15 +194,15 @@
             this.btnCsvAutomation.UseVisualStyleBackColor = true;
             this.btnCsvAutomation.Click += new System.EventHandler(this.btnCsvAutomation_Click);
             // 
-            // btnCheckSetup
+            // btnCheckMacroSetup
             // 
-            this.btnCheckSetup.Location = new System.Drawing.Point(67, 133);
-            this.btnCheckSetup.Name = "btnCheckSetup";
-            this.btnCheckSetup.Size = new System.Drawing.Size(87, 23);
-            this.btnCheckSetup.TabIndex = 11;
-            this.btnCheckSetup.Text = "Check Setup";
-            this.btnCheckSetup.UseVisualStyleBackColor = true;
-            this.btnCheckSetup.Click += new System.EventHandler(this.btnCheckSetup_Click);
+            this.btnCheckMacroSetup.Location = new System.Drawing.Point(53, 133);
+            this.btnCheckMacroSetup.Name = "btnCheckMacroSetup";
+            this.btnCheckMacroSetup.Size = new System.Drawing.Size(115, 23);
+            this.btnCheckMacroSetup.TabIndex = 11;
+            this.btnCheckMacroSetup.Text = "Check Macro Setup";
+            this.btnCheckMacroSetup.UseVisualStyleBackColor = true;
+            this.btnCheckMacroSetup.Click += new System.EventHandler(this.btnCheckSetup_Click);
             // 
             // label2
             // 
@@ -201,18 +213,6 @@
             this.label2.TabIndex = 13;
             this.label2.Text = "End Date:";
             // 
-            // toolStripSeparator2
-            // 
-            this.toolStripSeparator2.Name = "toolStripSeparator2";
-            this.toolStripSeparator2.Size = new System.Drawing.Size(158, 6);
-            // 
-            // viewErrorLogToolStripMenuItem1
-            // 
-            this.viewErrorLogToolStripMenuItem1.Name = "viewErrorLogToolStripMenuItem1";
-            this.viewErrorLogToolStripMenuItem1.Size = new System.Drawing.Size(161, 22);
-            this.viewErrorLogToolStripMenuItem1.Text = "&View Error Log";
-            this.viewErrorLogToolStripMenuItem1.Click += new System.EventHandler(this.viewErrorLogToolStripMenuItem1_Click);
-            // 
             // MainWindow
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -220,7 +220,7 @@
             this.BackColor = System.Drawing.SystemColors.Control;
             this.ClientSize = new System.Drawing.Size(385, 171);
             this.Controls.Add(this.label2);
-            this.Controls.Add(this.btnCheckSetup);
+            this.Controls.Add(this.btnCheckMacroSetup);
             this.Controls.Add(this.btnCsvAutomation);
             this.Controls.Add(this.btnStoneReport);
             this.Controls.Add(this.btnSewReport);
@@ -258,7 +258,7 @@
         private System.Windows.Forms.Button btnSewReport;
         private System.Windows.Forms.Button btnStoneReport;
         private System.Windows.Forms.Button btnCsvAutomation;
-        private System.Windows.Forms.Button btnCheckSetup;
+        private System.Windows.Forms.Button btnCheckMacroSetup;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.ToolStripMenuItem checkFontsToolStripMenuItem;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
