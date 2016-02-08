@@ -8,6 +8,7 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "configs", "configs", "{C17E5C16-91DC-4BFC-A648-7D0FEC1E2308}"
 	ProjectSection(SolutionItems) = preProject
 		configs\cut.cfg = configs\cut.cfg
+		configs\global.cfg = configs\global.cfg
 		configs\holidays.txt = configs\holidays.txt
 		configs\sew.cfg = configs\sew.cfg
 		configs\stone.cfg = configs\stone.cfg

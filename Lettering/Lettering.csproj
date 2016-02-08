@@ -59,7 +59,8 @@
     <Reference Include="System.XML" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Data\ConfigData.cs" />
+    <Compile Include="Data\GlobalConfigData.cs" />
+    <Compile Include="Data\StyleConfigData.cs" />
     <Compile Include="Data\ExceptionData.cs" />
     <Compile Include="Data\ExportData.cs" />
     <Compile Include="Data\FilePaths.cs" />

@@ -19,11 +19,11 @@ namespace Lettering.Data {
         private string rootFolderPath;
         private string destFolderPath = FilePaths.desktopFolderPath + @"\1 CUT FILES\";
 
-        private readonly ConfigData config;
+        private readonly StyleConfigData config;
 
         //TODO(adam): simplify access to constructing file paths
         
-        internal FilePaths(ConfigData config) {
+        internal FilePaths(StyleConfigData config) {
             this.config = config;
         }
 

@@ -19,7 +19,8 @@ namespace Lettering {
         internal static CorelDRAW.Application corel = new CorelDRAW.Application();
 
         private static MainWindow mainWindow;
-        private static Dictionary<ReportType, ConfigData> configs = new Dictionary<ReportType, ConfigData>();
+        private static GlobalConfigData globalConfig = new GlobalConfigData();
+        private static Dictionary<ReportType, StyleConfigData> configs = new Dictionary<ReportType, StyleConfigData>();
         private static bool hasCheckedSetup = false;
         private static bool isSetupOk = false;
 
@@ -49,17 +50,22 @@ namespace Lettering {
             configLoadingWindow.Show();
             configLoadingWindow.Location = new System.Drawing.Point(mainWindow.Location.X + (mainWindow.Width - configLoadingWindow.Width) / 2,
                                                                     mainWindow.Location.Y + (mainWindow.Height - configLoadingWindow.Height) / 2);
+
             for(int i = 0; i != configFiles.Length; ++i) {
                 string fileName = Path.GetFileName(configFiles[i]);
-                ReportType type;
-                if(Enum.TryParse(fileName.Split('.')[0], true, out type)) {
-                    ConfigData config = new ConfigData();
-                    configLoadingWindow.SetFilesProgress(fileName, i + 1, configFiles.Length);
-                    ConfigReader.ReadFile(configFiles[i], config, configLoadingWindow);
-
-                    configs.Add(type, config);
+                if(fileName.Split('.')[0] == "global") {
+                    ConfigReader.ReadGlobalFile(configFiles[i], globalConfig, configLoadingWindow);
                 } else {
-                    ErrorHandler.HandleError(ErrorType.Alert, $"Could not find type for config file: {fileName}");
+                    ReportType type;
+                    if(Enum.TryParse(fileName.Split('.')[0], true, out type)) {
+                        StyleConfigData config = new StyleConfigData(globalConfig);
+                        configLoadingWindow.SetFilesProgress(fileName, i + 1, configFiles.Length);
+                        ConfigReader.ReadStyleFile(configFiles[i], config, configLoadingWindow);
+
+                        configs.Add(type, config);
+                    } else {
+                        ErrorHandler.HandleError(ErrorType.Alert, $"Could not find type for config file: {fileName}");
+                    }
                 }
             }
             configLoadingWindow.Hide();
@@ -143,7 +149,7 @@ namespace Lettering {
 
         //TODO(adam): progress bar?
         private static void CheckForDoneOrders(DataTable data, ReportType type) {
-            ConfigData config = configs[type];
+            StyleConfigData config = configs[type];
 
             List<OrderData> ordersToLog = new List<OrderData>();
 
@@ -195,7 +201,7 @@ namespace Lettering {
 
         private static void ProcessOrders(DataTable data) {
             bool cancelBuilding = false;
-            ConfigData config = configs[ReportType.Cut];
+            StyleConfigData config = configs[ReportType.Cut];
 
             ActiveOrderWindow activeOrderWindow = new ActiveOrderWindow();
             List<string> currentNames = new List<string>();
@@ -342,7 +348,7 @@ namespace Lettering {
             corel.ActivePage.CreateLayer("Automate");
         }
 
-        private static void ExportOrder(OrderData order, ConfigData config) {
+        private static void ExportOrder(OrderData order, StyleConfigData config) {
             string orderWords = config.filePaths.ConstructFileName(order).Replace(".cdr", String.Empty);
             ExportType exportType = config.GetExportType(order.itemCode);
 

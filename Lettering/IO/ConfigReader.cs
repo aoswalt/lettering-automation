@@ -44,7 +44,89 @@ namespace Lettering {
             return holidays;
         }
 
-        internal static ConfigData ReadFile(string configFilePath, ConfigData config, ConfigLoadingWindow configLoadingWindow) {
+        internal static GlobalConfigData ReadGlobalFile(string configFilePath, GlobalConfigData config, ConfigLoadingWindow configLoadingWindow) {
+            Sections curSection = Sections.Void;
+            int totalLines = File.ReadLines(configFilePath).Count();
+
+            using(StreamReader sr = new StreamReader(configFilePath)) {
+                int lineNumber = 0;
+                string line;
+                while(sr.Peek() > -1) {
+                    line = sr.ReadLine().Trim();
+                    ++lineNumber;
+
+                    configLoadingWindow.SetLinesProgress(lineNumber, totalLines);
+
+                    //NOTE(adam): if is blank line or comment, skip
+                    if(!(line.Length > 0 && line[0] != '#')) {
+                        continue;
+                    }
+
+                    //NOTE(adam): set section or parse line based on current section
+                    if(line[0] == '>') {
+                        if(line.Contains("ROOT")) {
+                            curSection = Sections.Root;
+                            ErrorHandler.HandleError(ErrorType.Log, $"config {lineNumber}: Should not have {curSection} in gloabl file.");
+                        } else if(line.Contains("EXTENSION")) {
+                            curSection = Sections.Extension;
+                            ErrorHandler.HandleError(ErrorType.Log, $"config {lineNumber}: Should not have {curSection} in gloabl file.");
+                        } else if(line.Contains("TYPES")) {
+                            curSection = Sections.Types;
+                            ErrorHandler.HandleError(ErrorType.Log, $"config {lineNumber}: Should not have {curSection} in gloabl file.");
+                        } else if(line.Contains("PREFIXES")) {
+                            curSection = Sections.Prefixes;
+                        } else if(line.Contains("PATHS")) {
+                            curSection = Sections.Paths;
+                            ErrorHandler.HandleError(ErrorType.Log, $"config {lineNumber}: Should not have {curSection} in gloabl file.");
+                        } else if(line.Contains("EXPORTS")) {
+                            curSection = Sections.Exports;
+                            ErrorHandler.HandleError(ErrorType.Log, $"config {lineNumber}: Should not have {curSection} in gloabl file.");
+                        } else if(line.Contains("EXCEPTIONS")) {
+                            curSection = Sections.Exceptions;
+                            ErrorHandler.HandleError(ErrorType.Log, $"config {lineNumber}: Should not have {curSection} in gloabl file.");
+                        } else if(line.Contains("TRIMS")) {
+                            curSection = Sections.Trims;
+                        } else {
+                            ErrorHandler.HandleError(ErrorType.Log, $"config {lineNumber}: Invalid section header.");
+                        }
+                    } else {
+                        switch(curSection) {
+                            case Sections.Root:
+                                //NOTE(adam): invalid section for global, logged when section set
+                                break;
+                            case Sections.Extension:
+                                //NOTE(adam): invalid section for global, logged when section set
+                                break;
+                            case Sections.Types:
+                                //NOTE(adam): invalid section for global, logged when section set
+                                break;
+                            case Sections.Prefixes:
+                                config.InsertStylePrefix(line);
+                                break;
+                            case Sections.Paths:
+                                //NOTE(adam): invalid section for global, logged when section set
+                                break;
+                            case Sections.Exports:
+                                //NOTE(adam): invalid section for global, logged when section set
+                                break;
+                            case Sections.Exceptions:
+                                //NOTE(adam): invalid section for global, logged when section set
+                                break;
+                            case Sections.Trims:
+                                config.InsertTrim(line);
+                                break;
+                            default:
+                                ErrorHandler.HandleError(ErrorType.Log, $"config {lineNumber}: Unspecified section.");
+                                break;
+                        }
+                    }
+                }
+            }
+
+            return config;
+        }
+
+        internal static StyleConfigData ReadStyleFile(string configFilePath, StyleConfigData config, ConfigLoadingWindow configLoadingWindow) {
             Sections curSection = Sections.Void;
             int totalLines = File.ReadLines(configFilePath).Count();
 
@@ -72,6 +154,7 @@ namespace Lettering {
                             curSection = Sections.Types;
                         } else if(line.Contains("PREFIXES")) {
                             curSection = Sections.Prefixes;
+                            ErrorHandler.HandleError(ErrorType.Log, $"config {lineNumber}: Should not have {curSection} in style file.");
                         } else if(line.Contains("PATHS")) {
                             curSection = Sections.Paths;
                         } else if(line.Contains("EXPORTS")) {
@@ -80,6 +163,7 @@ namespace Lettering {
                             curSection = Sections.Exceptions;
                         } else if(line.Contains("TRIMS")) {
                             curSection = Sections.Trims;
+                            ErrorHandler.HandleError(ErrorType.Log, $"config {lineNumber}: Should not have {curSection} in style file.");
                         } else {
                             ErrorHandler.HandleError(ErrorType.Log, $"config {lineNumber}: Invalid section header.");
                         }
@@ -103,7 +187,7 @@ namespace Lettering {
                                 }
                                 break;
                             case Sections.Prefixes:
-                                config.InsertStylePrefix(line);
+                                //NOTE(adam): invalid section for style, logged when section set
                                 break;
                             case Sections.Paths:
                                 {
@@ -136,7 +220,7 @@ namespace Lettering {
                                 }
                                 break;
                             case Sections.Trims:
-                                config.InsertTrim(line);
+                                //NOTE(adam): invalid section for style, logged when section set
                                 break;
                             default:
                                 ErrorHandler.HandleError(ErrorType.Log, $"config {lineNumber}: Unspecified section.");

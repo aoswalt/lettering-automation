@@ -4,23 +4,23 @@ using System.Text.RegularExpressions;
 using Lettering.Errors;
 
 namespace Lettering.Data {
-    internal class ConfigData {
+    internal class StyleConfigData {
         internal delegate string PathBuilderDelegate(OrderData order);
         internal delegate bool ExceptionCheckDelegate(OrderData order, ExceptionData exception);
 
         internal FilePaths filePaths;
+        internal GlobalConfigData globalConfig;
         internal string fileExtension;
         internal Dictionary<int, string> pathTypes = new Dictionary<int, string>();
-        internal List<string> stylePrefixes = new List<string>();
         internal Dictionary<string, StylePathData> paths = new Dictionary<string, StylePathData>();
         internal Dictionary<string, PathBuilderDelegate> pathBuilders = new Dictionary<string, PathBuilderDelegate>();
         internal Dictionary<string, ExportType> exports = new Dictionary<string, ExportType>();
         internal Dictionary<string, List<ExceptionData>> exceptions = new Dictionary<string, List<ExceptionData>>();
         internal Dictionary<string, ExceptionCheckDelegate> exceptionChecks = new Dictionary<string, ExceptionCheckDelegate>();
-        internal List<string> trims = new List<string>();
 
-        internal ConfigData() {
-            filePaths = new FilePaths(this);
+        internal StyleConfigData(GlobalConfigData globalConfig) {
+            this.filePaths = new FilePaths(this);
+            this.globalConfig = globalConfig;
 
             AddPathBuilders();
             AddExceptionChecks();
@@ -29,7 +29,7 @@ namespace Lettering.Data {
         internal void AddPathBuilders() {
             pathBuilders.Add("!style", (order) => {
                 //NOTE(adam): example: "TTstyle" becomes "TT STYLES\TT style
-                foreach(string stylePrefix in stylePrefixes) {
+                foreach(string stylePrefix in globalConfig.stylePrefixes) {
                     OrderData tempOrder = order.Clone();
                     if(pathTypes[paths[tempOrder.itemCode].type] == "mirror") tempOrder.itemCode = paths[tempOrder.itemCode].mirrorStyle;
                     if(pathTypes[paths[tempOrder.itemCode].type] == "names") tempOrder.itemCode = paths[tempOrder.itemCode].mirrorStyle;
@@ -83,15 +83,6 @@ namespace Lettering.Data {
             pathTypes.Add(id, desc);
         }
 
-        internal void InsertStylePrefix(string prefix) {
-            if(stylePrefixes.Contains(prefix)) {
-                ErrorHandler.HandleError(ErrorType.Log, $"Config already contains stylePrefix.  prefix: {prefix}");
-                return;
-            }
-
-            stylePrefixes.Add(prefix);
-        }
-
         internal void InsertPath(StylePathData path) {
             path.style = path.style.Replace(" ", String.Empty);
 
@@ -133,15 +124,6 @@ namespace Lettering.Data {
             }
         }
 
-        internal void InsertTrim(string trim) {
-            if(trims.Contains(trim)) {
-                ErrorHandler.HandleError(ErrorType.Log, $"Config already contains trim.  trim: {trim}");
-                return;
-            }
-
-            trims.Add(trim);
-        }
-
         internal string TryTrimStyleCode(string style) {
             style = style.Replace(" ", String.Empty);
             style = Regex.Replace(style, @"^CF", "TT");     //NOTE(adam): always treat CF as TT
@@ -149,7 +131,7 @@ namespace Lettering.Data {
             if(paths.ContainsKey(style)) return style;     //NOTE(adam): path data exists, no trimming needed
 
             //TODO(adam): change this to reuse trims with while & if ?
-            foreach(string pattern in trims) {
+            foreach(string pattern in globalConfig.trims) {
                 style = Regex.Replace(style, pattern, "");
                 if(paths.ContainsKey(style)) return style;     //NOTE(adam): path data found
             }
