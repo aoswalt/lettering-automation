@@ -155,6 +155,11 @@ namespace Lettering {
 
             Messenger.Show(data.Rows.Count + " total orders found");
 
+            ReportProgressWindow progressWindow = new ReportProgressWindow();
+            progressWindow.Show();
+            progressWindow.Location = new System.Drawing.Point(mainWindow.Location.X + (mainWindow.Width - progressWindow.Width) / 2,
+                                                               mainWindow.Location.Y + (mainWindow.Height - progressWindow.Height) / 2);
+
             //NOTE(adam): convert rows to data entries before loop to match processing
             List<OrderData> orders = new List<OrderData>();
             foreach(DataRow row in data.Rows) {
@@ -162,6 +167,8 @@ namespace Lettering {
             }
 
             for(int i = 0; i != orders.Count; ++i) {
+                progressWindow.SetReportProgress(type, i, orders.Count);
+
                 OrderData order = orders[i];
                 string trimmedCode = config.TryTrimStyleCode(order.itemCode);
 
@@ -193,6 +200,8 @@ namespace Lettering {
                     ordersToLog.Add(order);
                 }
             }
+
+            progressWindow.Close();
             
             string reportFileName = $"{type.ToString()}Report-{DateTime.Now.ToString("yyyyMMdd_HHmm")}";
             CsvWriter.WriteReport(ordersToLog, reportFileName);

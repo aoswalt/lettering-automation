@@ -11,6 +11,7 @@ namespace Lettering.Forms {
             this.labelFontNumber.Text = $"{fontNumber}/{totalFonts}";
             this.progressFonts.Maximum = totalFonts;
             this.progressFonts.Value = fontNumber;
+            this.Refresh();
         }
     }
 }

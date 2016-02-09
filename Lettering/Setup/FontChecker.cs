@@ -33,7 +33,6 @@ namespace Lettering {
 
                 if(fontCheckingWindow != null) {
                     fontCheckingWindow.SetFontsProgress(Path.GetFileName(networkFontFile), i + 1, networkFontFiles.Length);
-                    fontCheckingWindow.Refresh();
                 }
 
                 string networkFontName = GetFontNameFromFile(networkFontFile);
