@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using Lettering.Errors;
 
 namespace Lettering.Data {
     internal class FilePaths {
@@ -94,6 +95,21 @@ namespace Lettering.Data {
         private string ConstructStylePathPart(OrderData order) {
             //NOTE(adam): operating on copy to preserve original data
             OrderData tempOrder = order;
+
+            //TODO(adam): this feels really messy. can I access other configs in a better way?
+            if(config.GetStyleLookupType(tempOrder.itemCode) != config.styleType) {
+                if(config.pathTypes[config.paths[tempOrder.itemCode].type] == "cut-sew_files") {
+                    StyleConfigData cutConfig = Lettering.configs[ReportType.Cut];
+                    return cutConfig.pathBuilders["!style"](tempOrder) + @"\SEW FILES\";
+                }
+
+                if(config.pathTypes[config.paths[tempOrder.itemCode].type] == "cut-specific") {
+                    StyleConfigData cutConfig = Lettering.configs[ReportType.Cut];
+                    return cutConfig.filePaths.ConstructStylePathPart(tempOrder) + @"SEW FILES\";
+                }
+
+                ErrorHandler.HandleError(ErrorType.Alert, "Mismatched style and config with no match found.");
+            }
 
             //NOTE(adam): replace item code if mirror style
             if(config.pathTypes[config.paths[tempOrder.itemCode].type] == "mirror") tempOrder.itemCode = config.paths[tempOrder.itemCode].mirrorStyle;

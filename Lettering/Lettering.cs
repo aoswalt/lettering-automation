@@ -20,7 +20,7 @@ namespace Lettering {
 
         private static MainWindow mainWindow;
         private static GlobalConfigData globalConfig = new GlobalConfigData();
-        private static Dictionary<ReportType, StyleConfigData> configs = new Dictionary<ReportType, StyleConfigData>();
+        internal static Dictionary<ReportType, StyleConfigData> configs = new Dictionary<ReportType, StyleConfigData>();
         private static bool hasCheckedSetup = false;
         private static bool isSetupOk = false;
 
@@ -58,7 +58,7 @@ namespace Lettering {
                 } else {
                     ReportType type;
                     if(Enum.TryParse(fileName.Split('.')[0], true, out type)) {
-                        StyleConfigData config = new StyleConfigData(globalConfig);
+                        StyleConfigData config = new StyleConfigData(type, globalConfig);
                         configLoadingWindow.SetFilesProgress(fileName, i + 1, configFiles.Length);
                         ConfigReader.ReadStyleFile(configFiles[i], config, configLoadingWindow);
 
@@ -146,8 +146,7 @@ namespace Lettering {
         }
 
         //TODO(adam): combine repeating in CheckForDoneOrders and ProcssOrders
-
-        //TODO(adam): progress bar?
+        
         private static void CheckForDoneOrders(DataTable data, ReportType type) {
             StyleConfigData config = configs[type];
 
@@ -181,7 +180,6 @@ namespace Lettering {
                     order.itemCode = trimmedCode;
                 }
 
-                //NOTE(adam): if built, continue
                 string orderPath = config.filePaths.ConstructNetworkOrderFilePath(order);
                 string newMadePath = config.filePaths.ConstructSaveFilePath(order);
 
@@ -196,7 +194,7 @@ namespace Lettering {
                     ordersToLog.Add(order);
                     continue;
                 } else {
-                    order.comment += "Need to build";
+                    order.comment += "Need to build\t\t" + orderPath;
                     ordersToLog.Add(order);
                 }
             }
@@ -238,7 +236,6 @@ namespace Lettering {
                     order.itemCode = trimmedCode;
                 }
 
-                //NOTE(adam): if built, continue
                 string orderPath = config.filePaths.ConstructNetworkOrderFilePath(order);
                 string newMadePath = config.filePaths.ConstructSaveFilePath(order);
 
@@ -248,6 +245,7 @@ namespace Lettering {
                     continue;
                 }
 
+                //NOTE(adam): if built, continue
                 if(File.Exists(orderPath) || File.Exists(newMadePath)) {
                     order.comment += "Already made";
                     ordersToLog.Add(order);

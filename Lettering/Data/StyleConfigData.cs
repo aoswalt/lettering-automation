@@ -9,6 +9,7 @@ namespace Lettering.Data {
         internal delegate bool ExceptionCheckDelegate(OrderData order, ExceptionData exception);
 
         internal FilePaths filePaths;
+        internal ReportType styleType;
         internal GlobalConfigData globalConfig;
         internal string fileExtension;
         internal Dictionary<int, string> pathTypes = new Dictionary<int, string>();
@@ -18,8 +19,9 @@ namespace Lettering.Data {
         internal Dictionary<string, List<ExceptionData>> exceptions = new Dictionary<string, List<ExceptionData>>();
         internal Dictionary<string, ExceptionCheckDelegate> exceptionChecks = new Dictionary<string, ExceptionCheckDelegate>();
 
-        internal StyleConfigData(GlobalConfigData globalConfig) {
+        internal StyleConfigData(ReportType styleType, GlobalConfigData globalConfig) {
             this.filePaths = new FilePaths(this);
+            this.styleType = styleType;
             this.globalConfig = globalConfig;
 
             AddPathBuilders();
@@ -31,8 +33,9 @@ namespace Lettering.Data {
                 //NOTE(adam): example: "TTstyle" becomes "TT STYLES\TT style
                 foreach(string stylePrefix in globalConfig.stylePrefixes) {
                     OrderData tempOrder = order.Clone();
-                    if(pathTypes[paths[tempOrder.itemCode].type] == "mirror") tempOrder.itemCode = paths[tempOrder.itemCode].mirrorStyle;
-                    if(pathTypes[paths[tempOrder.itemCode].type] == "names") tempOrder.itemCode = paths[tempOrder.itemCode].mirrorStyle;
+                    //TODO(adam): remove these as they are unneeded?
+                    //if(pathTypes[paths[tempOrder.itemCode].type] == "mirror") tempOrder.itemCode = paths[tempOrder.itemCode].mirrorStyle;
+                    //if(pathTypes[paths[tempOrder.itemCode].type] == "names") tempOrder.itemCode = paths[tempOrder.itemCode].mirrorStyle;
 
                     if(tempOrder.itemCode.StartsWith(stylePrefix)) {
                         return stylePrefix + " STYLES\\" + stylePrefix + " " + Regex.Replace(tempOrder.itemCode, stylePrefix, "");
@@ -159,6 +162,14 @@ namespace Lettering.Data {
                 }
             }
             return ExportType.None;
+        }
+
+        internal ReportType GetStyleLookupType(string itemCode) {
+            //TODO(adam): change match to not be string
+            if(pathTypes[paths[TryTrimStyleCode(itemCode)].type] == "cut-sew_files") return ReportType.Cut;
+            if(pathTypes[paths[TryTrimStyleCode(itemCode)].type] == "cut-specific") return ReportType.Cut;
+
+            return this.styleType;
         }
 
         internal void SetRootPath(string rootPath) {
