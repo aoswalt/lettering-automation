@@ -33,9 +33,9 @@ namespace Lettering.Data {
                 //NOTE(adam): example: "TTstyle" becomes "TT STYLES\TT style
                 foreach(string stylePrefix in globalConfig.stylePrefixes) {
                     OrderData tempOrder = order.Clone();
-                    //TODO(adam): remove these as they are unneeded?
-                    //if(pathTypes[paths[tempOrder.itemCode].type] == "mirror") tempOrder.itemCode = paths[tempOrder.itemCode].mirrorStyle;
-                    //if(pathTypes[paths[tempOrder.itemCode].type] == "names") tempOrder.itemCode = paths[tempOrder.itemCode].mirrorStyle;
+                    //NOTE(adam): at least "names" is needed here, "mirror" may not be
+                    if(pathTypes[paths[tempOrder.itemCode].type] == "mirror") tempOrder.itemCode = paths[tempOrder.itemCode].mirrorStyle;
+                    if(pathTypes[paths[tempOrder.itemCode].type] == "names") tempOrder.itemCode = paths[tempOrder.itemCode].mirrorStyle;
 
                     if(tempOrder.itemCode.StartsWith(stylePrefix)) {
                         return stylePrefix + " STYLES\\" + stylePrefix + " " + Regex.Replace(tempOrder.itemCode, stylePrefix, "");
