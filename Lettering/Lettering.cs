@@ -194,7 +194,7 @@ namespace Lettering {
                     ordersToLog.Add(order);
                     continue;
                 } else {
-                    order.comment += "Need to build\t\t" + orderPath;
+                    order.comment += "Need to build";
                     ordersToLog.Add(order);
                 }
             }

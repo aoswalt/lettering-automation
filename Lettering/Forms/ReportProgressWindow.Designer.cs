@@ -76,7 +76,7 @@
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "ReportProgressWindow";
-            this.Text = "Checking Fonts";
+            this.Text = "Reporting";
             this.ResumeLayout(false);
             this.PerformLayout();
 
