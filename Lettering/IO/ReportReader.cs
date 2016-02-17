@@ -80,34 +80,8 @@ namespace Lettering {
             }
 
             DataTable reportTable = SqlConnector.RunQuery(dateClause, styleClause);
-            UnifyHeaders(reportTable);
 
             return reportTable;
-        }
-
-        //TODO(adam): move UnifyHeaders to a more general location
-        internal static void UnifyHeaders(DataTable table) {
-            if(table.Columns.Contains("HOUSE") && !table.Columns.Contains(DbHeaders.CUT_HOUSE)) table.Columns["HOUSE"].ColumnName = DbHeaders.CUT_HOUSE;
-            if(table.Columns.Contains("SCHEDULE_DATE_MMDDCCYY") && !table.Columns.Contains(DbHeaders.SCHEDULE_DATE)) table.Columns["SCHEDULE_DATE_MMDDCCYY"].ColumnName = DbHeaders.SCHEDULE_DATE;
-            if(!table.Columns.Contains(DbHeaders.ENTER_DATE)) table.Columns.Add(DbHeaders.ENTER_DATE);
-            if(table.Columns.Contains("ORDER_NO") && !table.Columns.Contains(DbHeaders.ORDER_NUMBER)) table.Columns["ORDER_NO"].ColumnName = DbHeaders.ORDER_NUMBER;
-            if(table.Columns.Contains("ORDER_VOUCH") && !table.Columns.Contains(DbHeaders.VOUCHER)) table.Columns["ORDER_VOUCH"].ColumnName = DbHeaders.VOUCHER;
-            if(table.Columns.Contains("ITEM_NO") && !table.Columns.Contains(DbHeaders.ITEM)) table.Columns["ITEM_NO"].ColumnName = DbHeaders.ITEM;
-            if(table.Columns.Contains("LETTER_SIZE") && !table.Columns.Contains(DbHeaders.SIZE)) table.Columns["LETTER_SIZE"].ColumnName = DbHeaders.SIZE;
-            if(table.Columns.Contains("LETTER_SPEC") && !table.Columns.Contains(DbHeaders.SPEC)) table.Columns["LETTER_SPEC"].ColumnName = DbHeaders.SPEC;
-            if(table.Columns.Contains("NAME") && !table.Columns.Contains(DbHeaders.NAME)) table.Columns["NAME"].ColumnName = DbHeaders.NAME;
-            if(table.Columns.Contains("DRAWING_LETTER_WORD1") && !table.Columns.Contains(DbHeaders.WORD1)) table.Columns["DRAWING_LETTER_WORD1"].ColumnName = DbHeaders.WORD1;
-            if(table.Columns.Contains("DRAWING_LETTER_WORD2") && !table.Columns.Contains(DbHeaders.WORD2)) table.Columns["DRAWING_LETTER_WORD2"].ColumnName = DbHeaders.WORD2;
-            if(table.Columns.Contains("DRAWING_LETTER_WORD3") && !table.Columns.Contains(DbHeaders.WORD3)) table.Columns["DRAWING_LETTER_WORD3"].ColumnName = DbHeaders.WORD3;
-            if(table.Columns.Contains("DRAWING_LETTER_WORD4") && !table.Columns.Contains(DbHeaders.WORD4)) table.Columns["DRAWING_LETTER_WORD4"].ColumnName = DbHeaders.WORD4;
-            if(!table.Columns.Contains(DbHeaders.COLOR1)) table.Columns.Add(DbHeaders.COLOR1);
-            if(!table.Columns.Contains(DbHeaders.COLOR2)) table.Columns.Add(DbHeaders.COLOR2);
-            if(!table.Columns.Contains(DbHeaders.COLOR3)) table.Columns.Add(DbHeaders.COLOR3);
-            if(!table.Columns.Contains(DbHeaders.COLOR4)) table.Columns.Add(DbHeaders.COLOR4);
-            if(!table.Columns.Contains(DbHeaders.RUSH_DATE)) table.Columns.Add(DbHeaders.RUSH_DATE);
-
-            //data.Columns["PARENT_VOUCH"].ColumnName = "";
-            //data.Columns["SCHEDULE_DATE_CCYYMMDD"].ColumnName = "";
         }
     }
 }

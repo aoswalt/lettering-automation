@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Data;
 using System.Diagnostics;
 using System.IO;
+using System.Windows.Forms;
 using Lettering.Data;
 using Lettering.Errors;
 using Lettering.Forms;
@@ -116,14 +117,22 @@ namespace Lettering {
 
             CheckMacroSetup();
             if(!isSetupOk) { return; }
+            
 
-            DataTable data = CsvReader.GetCsvData();
-            if(data == null) {
-                ErrorHandler.HandleError(ErrorType.Alert, "No data from csv.");
-                return;
+            OpenFileDialog openFileDialog = new OpenFileDialog();
+            openFileDialog.InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
+            openFileDialog.Filter = "csv file (*.csv)|*.csv|txt file (*.txt)|*.txt";
+            openFileDialog.RestoreDirectory = true;
+
+            if(openFileDialog.ShowDialog() == DialogResult.OK) {
+                DataTable data = CsvReader.Read(openFileDialog.FileName);
+                if(data == null) {
+                    ErrorHandler.HandleError(ErrorType.Alert, "No data from csv.");
+                    return;
+                }
+
+                ProcessOrders(data);
             }
-
-            ProcessOrders(data);
         }
         
         internal static void ExportReport(ReportType type, DateTime? startDate, DateTime? endDate) {
