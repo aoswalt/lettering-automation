@@ -29,25 +29,25 @@ namespace Lettering {
 
         private static string BuildHeaderString() {
             string ret = "";
-            ret += DbHeaders.CUT_HOUSE + ",";
-            ret += DbHeaders.SCHEDULE_DATE + ",";
-            ret += DbHeaders.ENTER_DATE + ",";
-            ret += DbHeaders.ORDER_NUMBER + ",";
-            ret += DbHeaders.VOUCHER + ",";
-            ret += DbHeaders.ITEM + ",";
-            ret += DbHeaders.SIZE + ",";
-            ret += DbHeaders.SPEC + ",";
-            ret += DbHeaders.NAME + ",";
-            ret += DbHeaders.WORD1 + ",";
-            ret += DbHeaders.WORD2 + ",";
-            ret += DbHeaders.WORD3 + ",";
-            ret += DbHeaders.WORD4 + ",";
-            ret += DbHeaders.COLOR1 + ",";
-            ret += DbHeaders.COLOR2 + ",";
-            ret += DbHeaders.COLOR3 + ",";
-            ret += DbHeaders.COLOR4 + ",";
-            ret += DbHeaders.RUSH_DATE + ",";
-            ret += DbHeaders.COMMENTS;
+            ret += FieldData.CUT_HOUSE.DisplayName + ",";
+            ret += FieldData.SCHEDULE_DATE.DisplayName + ",";
+            ret += FieldData.ENTER_DATE.DisplayName + ",";
+            ret += FieldData.ORDER_NUMBER.DisplayName + ",";
+            ret += FieldData.VOUCHER.DisplayName + ",";
+            ret += FieldData.ITEM.DisplayName + ",";
+            ret += FieldData.SIZE.DisplayName + ",";
+            ret += FieldData.SPEC.DisplayName + ",";
+            ret += FieldData.NAME.DisplayName + ",";
+            ret += FieldData.WORD1.DisplayName + ",";
+            ret += FieldData.WORD2.DisplayName + ",";
+            ret += FieldData.WORD3.DisplayName + ",";
+            ret += FieldData.WORD4.DisplayName + ",";
+            ret += FieldData.COLOR1.DisplayName + ",";
+            ret += FieldData.COLOR2.DisplayName + ",";
+            ret += FieldData.COLOR3.DisplayName + ",";
+            ret += FieldData.COLOR4.DisplayName + ",";
+            ret += FieldData.RUSH_DATE.DisplayName + ",";
+            ret += FieldData.COMMENTS.DisplayName;
 
             return ret;
         }

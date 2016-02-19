@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data;
+using Lettering.Data;
 
 namespace Lettering {
     internal class OrderData {
@@ -26,24 +27,24 @@ namespace Lettering {
         internal List<string> nameList;
 
         internal OrderData(DataRow row) {
-            this.cutHouse = (row[DbHeaders.CUT_HOUSE].ToString()).Trim();
-            this.scheduleDate = row[DbHeaders.SCHEDULE_DATE] != System.DBNull.Value ? ((System.DateTime)row[DbHeaders.SCHEDULE_DATE]).ToString("d") : "";
-            this.enterDate = row[DbHeaders.ENTER_DATE] != System.DBNull.Value ? ((System.DateTime)row[DbHeaders.ENTER_DATE]).ToString("d") : "";
-            this.orderNumber = row[DbHeaders.ORDER_NUMBER] != System.DBNull.Value ? Convert.ToInt32(row[DbHeaders.ORDER_NUMBER]) : 0;
-            this.voucherNumber = row[DbHeaders.VOUCHER] != System.DBNull.Value ? Convert.ToInt32(row[DbHeaders.VOUCHER]) : 0;
-            this.itemCode = (row[DbHeaders.ITEM].ToString()).Trim();
-            this.size = row[DbHeaders.SIZE] != System.DBNull.Value ? Convert.ToDouble(row[DbHeaders.SIZE]) : 0;
-            this.spec = row[DbHeaders.SPEC] != System.DBNull.Value ? Convert.ToDouble(row[DbHeaders.SPEC]) : 0;
-            this.name = (row[DbHeaders.NAME].ToString()).Trim();
-            this.word1 = (row[DbHeaders.WORD1].ToString()).Trim();
-            this.word2 = (row[DbHeaders.WORD2].ToString()).Trim();
-            this.word3 = (row[DbHeaders.WORD3].ToString()).Trim();
-            this.word4 = (row[DbHeaders.WORD4].ToString()).Trim();
-            this.color1 = (row[DbHeaders.COLOR1].ToString()).Trim();
-            this.color2 = (row[DbHeaders.COLOR2].ToString()).Trim();
-            this.color3 = (row[DbHeaders.COLOR3].ToString()).Trim();
-            this.color4 = (row[DbHeaders.COLOR4].ToString()).Trim();
-            this.rushDate = row[DbHeaders.RUSH_DATE] != System.DBNull.Value ? ((System.DateTime)row[DbHeaders.RUSH_DATE]).ToString("d") : "";
+            this.cutHouse = (row[FieldData.CUT_HOUSE.DbName].ToString()).Trim();
+            this.scheduleDate = row[FieldData.SCHEDULE_DATE.DbName] != System.DBNull.Value ? ((System.DateTime)row[FieldData.SCHEDULE_DATE.DbName]).ToString("d") : "";
+            this.enterDate = row[FieldData.ENTER_DATE.DbName] != System.DBNull.Value ? ((System.DateTime)row[FieldData.ENTER_DATE.DbName]).ToString("d") : "";
+            this.orderNumber = row[FieldData.ORDER_NUMBER.DbName] != System.DBNull.Value ? Convert.ToInt32(row[FieldData.ORDER_NUMBER.DbName]) : 0;
+            this.voucherNumber = row[FieldData.VOUCHER.DbName] != System.DBNull.Value ? Convert.ToInt32(row[FieldData.VOUCHER.DbName]) : 0;
+            this.itemCode = (row[FieldData.ITEM.DbName].ToString()).Trim();
+            this.size = row[FieldData.SIZE.DbName] != System.DBNull.Value ? Convert.ToDouble(row[FieldData.SIZE.DbName]) : 0;
+            this.spec = row[FieldData.SPEC.DbName] != System.DBNull.Value ? Convert.ToDouble(row[FieldData.SPEC.DbName]) : 0;
+            this.name = (row[FieldData.NAME.DbName].ToString()).Trim();
+            this.word1 = (row[FieldData.WORD1.DbName].ToString()).Trim();
+            this.word2 = (row[FieldData.WORD2.DbName].ToString()).Trim();
+            this.word3 = (row[FieldData.WORD3.DbName].ToString()).Trim();
+            this.word4 = (row[FieldData.WORD4.DbName].ToString()).Trim();
+            this.color1 = (row[FieldData.COLOR1.DbName].ToString()).Trim();
+            this.color2 = (row[FieldData.COLOR2.DbName].ToString()).Trim();
+            this.color3 = (row[FieldData.COLOR3.DbName].ToString()).Trim();
+            this.color4 = (row[FieldData.COLOR4.DbName].ToString()).Trim();
+            this.rushDate = row[FieldData.RUSH_DATE.DbName] != System.DBNull.Value ? ((System.DateTime)row[FieldData.RUSH_DATE.DbName]).ToString("d") : "";
             this.comment = "";
             this.nameList = new List<string>();
         }

@@ -88,7 +88,6 @@
     <Compile Include="IO\CsvReader.cs" />
     <Compile Include="IO\SqlConnector.cs" />
     <Compile Include="IO\TextWriter.cs" />
-    <Compile Include="Reference\DbHeaders.cs" />
     <Compile Include="Setup\FontChecker.cs" />
     <Compile Include="Forms\ActiveOrderWindow.cs">
       <SubType>Form</SubType>
