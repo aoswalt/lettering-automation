@@ -59,6 +59,7 @@
     <Reference Include="System.XML" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Data\FieldData.cs" />
     <Compile Include="Data\GlobalConfigData.cs" />
     <Compile Include="Data\StyleConfigData.cs" />
     <Compile Include="Data\ExceptionData.cs" />
@@ -87,6 +88,7 @@
     <Compile Include="IO\CsvReader.cs" />
     <Compile Include="IO\SqlConnector.cs" />
     <Compile Include="IO\TextWriter.cs" />
+    <Compile Include="Reference\DbHeaders.cs" />
     <Compile Include="Setup\FontChecker.cs" />
     <Compile Include="Forms\ActiveOrderWindow.cs">
       <SubType>Form</SubType>
@@ -108,7 +110,6 @@
     <Compile Include="Setup\LibraryInstaller.cs" />
     <Compile Include="Messaging\Messenger.cs" />
     <Compile Include="Program.cs" />
-    <Compile Include="Reference\DbHeaders.cs" />
     <Compile Include="Setup\SetupManager.cs" />
   </ItemGroup>
   <ItemGroup>
