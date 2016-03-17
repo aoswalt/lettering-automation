@@ -130,6 +130,7 @@ namespace Lettering.Data {
         internal string TryTrimStyleCode(string style) {
             style = style.Replace(" ", String.Empty);
             style = Regex.Replace(style, @"^CF", "TT");     //NOTE(adam): always treat CF as TT
+            style = Regex.Replace(style, @"^JVT", "TT");    //NOTE(adam): always treat JVT as TT
 
             if(paths.ContainsKey(style)) return style;     //NOTE(adam): path data exists, no trimming needed
 

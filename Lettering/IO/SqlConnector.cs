@@ -21,9 +21,9 @@ namespace Lettering.IO {
                               SELECT d.dhous,
                                      CASE WHEN d.dscmo = 0 THEN NULL ELSE DATE(d.dsccy||d.dscyr||'-'||RIGHT('00'||d.dscmo, 2)||'-'||RIGHT('00'||d.dscda, 2)) END AS scdat, 
                                      DATE(d.dorcy||d.doryr||'-'||RIGHT('00'||d.dormo, 2)||'-'||RIGHT('00'||d.dorda, 2)) AS endat, 
-                                     d.ordnr, d.orvch, d.dpvch, d.ditem, d.dlsiz, 
-                                     d.dlwr1, d.dlwr2, d.dlwr3, d.dlwr4, 
-                                     d.dclr1, d.dclr2, d.dclr3, d.dclr4, 
+                                     d.ordnr, d.orvch, d.dpvch, TRIM(d.ditem) AS ditem, d.dlsiz, 
+                                     TRIM(d.dlwr1) as dlwr1, TRIM(d.dlwr2) as dlwr2, TRIM(d.dlwr3) as dlwr3, TRIM(d.dlwr4) as dlwr4, 
+                                     TRIM(d.dclr1) AS dclr1, TRIM(d.dclr2) AS dclr2, TRIM(d.dclr3) AS dclr3, TRIM(d.dclr4) AS dclr4, 
                                      CASE d.drumo WHEN 0 THEN NULL ELSE DATE(d.drucy||d.druyr||'-'||RIGHT('00'||d.drumo, 2)||'-'||RIGHT('00'||d.druda, 2)) END AS rudat 
 
                               FROM VARSITYF.DETAIL AS d
