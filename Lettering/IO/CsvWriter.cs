@@ -59,7 +59,7 @@ namespace Lettering {
             ret += order.enterDate + ",";
             ret += order.orderNumber + ",";
             ret += order.voucherNumber + ",";
-            ret += order.itemCode + ",";
+            ret += order.originalItemCode + ",";
             ret += order.size + ",";
             ret += order.spec + ",";
             ret += order.name + ",";

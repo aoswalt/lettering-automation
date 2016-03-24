@@ -10,6 +10,7 @@ namespace Lettering {
         internal string enterDate;
         internal int orderNumber;
         internal int voucherNumber;
+        internal string originalItemCode;
         internal string itemCode;
         internal double size;
         internal double spec;
@@ -32,6 +33,7 @@ namespace Lettering {
             this.enterDate = row[FieldData.ENTER_DATE.DbName] != System.DBNull.Value ? ((System.DateTime)row[FieldData.ENTER_DATE.DbName]).ToString("d") : "";
             this.orderNumber = row[FieldData.ORDER_NUMBER.DbName] != System.DBNull.Value ? Convert.ToInt32(row[FieldData.ORDER_NUMBER.DbName]) : 0;
             this.voucherNumber = row[FieldData.VOUCHER.DbName] != System.DBNull.Value ? Convert.ToInt32(row[FieldData.VOUCHER.DbName]) : 0;
+            this.originalItemCode = (row[FieldData.ITEM.DbName].ToString()).Trim();
             this.itemCode = (row[FieldData.ITEM.DbName].ToString()).Trim();
             this.size = row[FieldData.SIZE.DbName] != System.DBNull.Value ? Convert.ToDouble(row[FieldData.SIZE.DbName]) : 0;
             this.spec = row[FieldData.SPEC.DbName] != System.DBNull.Value ? Convert.ToDouble(row[FieldData.SPEC.DbName]) : 0;
