@@ -45,7 +45,14 @@ namespace Lettering.Data {
                 ErrorHandler.HandleError(ErrorType.Log, "No style prefix found for !style path builder.");
                 return "";  //NOTE(adam): ensures failure if no match
             });
-            pathBuilders.Add("!size", (order) => { return (int)order.size + "INCH"; });
+            pathBuilders.Add("!size", (order) => {
+                //NOTE(adam): if int size, force as int; otherwise, allow decimal part
+                if(Math.Ceiling(order.size) == Math.Floor(order.size)) {
+                    return (int)order.size + "INCH";
+                } else {
+                    return order.size + "INCH";
+                }
+            });
             pathBuilders.Add("!spec", (order) => { return String.Format("{0:0.#}", order.spec); });
             pathBuilders.Add("!ya", (order) => { return order.spec < 10 ? "YOUTH" : "ADULT"; });
             pathBuilders.Add("!cd", (order) => {
