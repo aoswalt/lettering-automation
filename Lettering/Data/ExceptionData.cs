@@ -1,8 +1,8 @@
 ﻿namespace Lettering.Data {
-    internal class ExceptionData {
-        internal string style;
-        internal string path;
-        internal string tag;
-        internal double value;
+    public class ExceptionData {
+        public string style;
+        public string path;
+        public string tag;
+        public double value;
     }
 }

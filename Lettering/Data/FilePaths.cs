@@ -3,19 +3,19 @@ using System.Collections.Generic;
 using Lettering.Errors;
 
 namespace Lettering.Data {
-    internal class FilePaths {
+    public class FilePaths {
         private static readonly string networkAutomationFolderPath = @"\\production\Lettering\Corel\WORK FOLDERS\Automation\";
-        internal static readonly string adjacentConfigFolderPath = @".\configs\";
-        internal static readonly string networkConfigFolderPath = networkAutomationFolderPath + @"application\configs\";
-        internal static readonly string adjacentHolidaysFilePath = adjacentConfigFolderPath + "holidays.txt";
-        internal static readonly string networkHolidaysFilePath = networkConfigFolderPath + "holidays.txt";
-        internal static readonly string desktopFolderPath = Environment.GetFolderPath(Environment.SpecialFolder.Desktop) + '\\';
-        internal static readonly string tempFolderPath = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + @"\TemporaryAutomationFiles\";
-        internal static readonly string installedFontsFolderPath = Environment.GetFolderPath(Environment.SpecialFolder.Fonts) + '\\';
-        internal static readonly string networkFontsFolderPath = @"\\production\Lettering\Corel\WORK FOLDERS\VS Fonts\";
-        internal static readonly string installedLibraryFilePath = @"C:\Program Files\Corel\CorelDRAW Graphics Suite X7\Draw\GMS\Automation.gms";
-        internal static readonly string networkLibraryFilePath = networkAutomationFolderPath + "Automation.gms";
-        internal static readonly string errorLogFilePath = tempFolderPath + "errors.log";
+        public static readonly string adjacentConfigFolderPath = @".\configs\";
+        public static readonly string networkConfigFolderPath = networkAutomationFolderPath + @"application\configs\";
+        public static readonly string adjacentHolidaysFilePath = adjacentConfigFolderPath + "holidays.txt";
+        public static readonly string networkHolidaysFilePath = networkConfigFolderPath + "holidays.txt";
+        public static readonly string desktopFolderPath = Environment.GetFolderPath(Environment.SpecialFolder.Desktop) + '\\';
+        public static readonly string tempFolderPath = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + @"\TemporaryAutomationFiles\";
+        public static readonly string installedFontsFolderPath = Environment.GetFolderPath(Environment.SpecialFolder.Fonts) + '\\';
+        public static readonly string networkFontsFolderPath = @"\\production\Lettering\Corel\WORK FOLDERS\VS Fonts\";
+        public static readonly string installedLibraryFilePath = @"C:\Program Files\Corel\CorelDRAW Graphics Suite X7\Draw\GMS\Automation.gms";
+        public static readonly string networkLibraryFilePath = networkAutomationFolderPath + "Automation.gms";
+        public static readonly string errorLogFilePath = tempFolderPath + "errors.log";
 
         private string rootFolderPath;
         private string destFolderPath = FilePaths.desktopFolderPath + @"\1 CUT FILES\";
@@ -23,8 +23,8 @@ namespace Lettering.Data {
         private readonly StyleConfigData config;
 
         //TODO(adam): simplify access to constructing file paths
-        
-        internal FilePaths(StyleConfigData config) {
+
+        public FilePaths(StyleConfigData config) {
             this.config = config;
         }
 

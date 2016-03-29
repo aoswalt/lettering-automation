@@ -8,11 +8,12 @@ using Lettering.Data;
 using Lettering.Errors;
 using Lettering.Forms;
 using Lettering.IO;
+using Newtonsoft.Json;
 using VGCore;
 
 namespace Lettering {
-    internal enum ReportType { Cut, Sew, Stone };
-    internal enum ExportType { None, Plt, Eps };
+    public enum ReportType { Cut, Sew, Stone };
+    public enum ExportType { None, Plt, Eps };
 
     //TODO(adam): rethink all of the static usage
 
@@ -34,7 +35,25 @@ namespace Lettering {
         }
 
         internal static void LoadAllConfigs() {
-            //NOTE(adam): try multiple locations for config files
+
+            //JsonConfigData data = new JsonConfigData();
+            //data.Setup = new Data_Setup();
+            //data.Setup.FilePaths = new Data_FilePaths();
+            //data.Setup.FilePaths.NetworkFontsFolder = @"\\network\fonts\folder";
+            //data.Setup.FilePaths.LibraryInstalledFile = @"C:\corel\library";
+
+            //File.WriteAllText(FilePaths.desktopFolderPath + "jsonOutput.json", JsonConvert.SerializeObject(data, Formatting.Indented));
+            //Console.WriteLine(JsonConvert.SerializeObject(data, Formatting.Indented));
+            //return;
+
+
+            //string jsonString = File.ReadAllText(FilePaths.desktopFolderPath + "jsonOutput.json");
+            //JsonConfigData data = JsonConvert.DeserializeObject<JsonConfigData>(jsonString);
+            //Console.WriteLine(data.Setup.FilePaths.LibraryInstalledFile);
+            //return;
+
+
+            //NOTE(adam): trying multiple locations for config files
             string[] configFiles = null;
             if(Directory.Exists(FilePaths.adjacentConfigFolderPath)) {
                 configFiles = Directory.GetFiles(FilePaths.adjacentConfigFolderPath, "*.cfg");
@@ -71,6 +90,13 @@ namespace Lettering {
             }
             configLoadingWindow.Hide();
             //TODO(adam): investigate program freeze after reading config file
+
+
+            JsonSerializerSettings settings = new JsonSerializerSettings();
+            settings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore;
+            string serialized = JsonConvert.SerializeObject(configs, Formatting.Indented, settings);
+            File.WriteAllText(FilePaths.desktopFolderPath + "jsonOutput.json", serialized);
+            //Console.WriteLine(serialized);
         }
 
         internal static void CheckFonts() {

@@ -1,8 +1,8 @@
 ﻿namespace Lettering.Data {
-    internal class StylePathData {
-        internal string style;
-        internal int type;
-        internal int[] wordOrder = null;
-        internal string mirrorStyle = "";
+    public class StylePathData {
+        public string style;
+        public int type;
+        public int[] wordOrder = null;
+        public string mirrorStyle = "";
     }
 }

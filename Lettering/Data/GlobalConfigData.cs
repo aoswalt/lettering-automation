@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 using Lettering.Errors;
 
 namespace Lettering.Data {
-    internal class GlobalConfigData {
-        internal List<string> stylePrefixes = new List<string>();
-        internal List<string> trims = new List<string>();
+    public class GlobalConfigData {
+        public List<string> stylePrefixes = new List<string>();
+        public List<string> trims = new List<string>();
 
         internal void InsertStylePrefix(string prefix) {
             if(stylePrefixes.Contains(prefix)) {

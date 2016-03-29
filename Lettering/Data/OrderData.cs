@@ -4,30 +4,30 @@ using System.Data;
 using Lettering.Data;
 
 namespace Lettering {
-    internal class OrderData {
-        internal string cutHouse;
-        internal string scheduleDate;
-        internal string enterDate;
-        internal int orderNumber;
-        internal int voucherNumber;
-        internal string originalItemCode;
-        internal string itemCode;
-        internal double size;
-        internal double spec;
-        internal string name;
-        internal string word1;
-        internal string word2;
-        internal string word3;
-        internal string word4;
-        internal string color1;
-        internal string color2;
-        internal string color3;
-        internal string color4;
-        internal string rushDate;
-        internal string comment;
-        internal List<string> nameList;
+    public class OrderData {
+        public string cutHouse;
+        public string scheduleDate;
+        public string enterDate;
+        public int orderNumber;
+        public int voucherNumber;
+        public string originalItemCode;
+        public string itemCode;
+        public double size;
+        public double spec;
+        public string name;
+        public string word1;
+        public string word2;
+        public string word3;
+        public string word4;
+        public string color1;
+        public string color2;
+        public string color3;
+        public string color4;
+        public string rushDate;
+        public string comment;
+        public List<string> nameList;
 
-        internal OrderData(DataRow row) {
+        public OrderData(DataRow row) {
             this.cutHouse = (row[FieldData.CUT_HOUSE.DbName].ToString()).Trim();
             this.scheduleDate = row[FieldData.SCHEDULE_DATE.DbName] != System.DBNull.Value ? ((System.DateTime)row[FieldData.SCHEDULE_DATE.DbName]).ToString("d") : "";
             this.enterDate = row[FieldData.ENTER_DATE.DbName] != System.DBNull.Value ? ((System.DateTime)row[FieldData.ENTER_DATE.DbName]).ToString("d") : "";
@@ -51,7 +51,7 @@ namespace Lettering {
             this.nameList = new List<string>();
         }
 
-        internal OrderData Clone() {
+        public OrderData Clone() {
             return (OrderData)this.MemberwiseClone();
         }
     }

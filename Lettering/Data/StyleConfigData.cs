@@ -4,22 +4,22 @@ using System.Text.RegularExpressions;
 using Lettering.Errors;
 
 namespace Lettering.Data {
-    internal class StyleConfigData {
-        internal delegate string PathBuilderDelegate(OrderData order);
-        internal delegate bool ExceptionCheckDelegate(OrderData order, ExceptionData exception);
+    public class StyleConfigData {
+        public delegate string PathBuilderDelegate(OrderData order);
+        public delegate bool ExceptionCheckDelegate(OrderData order, ExceptionData exception);
 
-        internal FilePaths filePaths;
-        internal ReportType styleType;
-        internal GlobalConfigData globalConfig;
-        internal string fileExtension;
-        internal Dictionary<int, string> pathTypes = new Dictionary<int, string>();
-        internal Dictionary<string, StylePathData> paths = new Dictionary<string, StylePathData>();
-        internal Dictionary<string, PathBuilderDelegate> pathBuilders = new Dictionary<string, PathBuilderDelegate>();
-        internal Dictionary<string, ExportType> exports = new Dictionary<string, ExportType>();
-        internal Dictionary<string, List<ExceptionData>> exceptions = new Dictionary<string, List<ExceptionData>>();
-        internal Dictionary<string, ExceptionCheckDelegate> exceptionChecks = new Dictionary<string, ExceptionCheckDelegate>();
+        public FilePaths filePaths;
+        public ReportType styleType;
+        public GlobalConfigData globalConfig;
+        public string fileExtension;
+        public Dictionary<int, string> pathTypes = new Dictionary<int, string>();
+        public Dictionary<string, StylePathData> paths = new Dictionary<string, StylePathData>();
+        public Dictionary<string, PathBuilderDelegate> pathBuilders = new Dictionary<string, PathBuilderDelegate>();
+        public Dictionary<string, ExportType> exports = new Dictionary<string, ExportType>();
+        public Dictionary<string, List<ExceptionData>> exceptions = new Dictionary<string, List<ExceptionData>>();
+        public Dictionary<string, ExceptionCheckDelegate> exceptionChecks = new Dictionary<string, ExceptionCheckDelegate>();
 
-        internal StyleConfigData(ReportType styleType, GlobalConfigData globalConfig) {
+        public StyleConfigData(ReportType styleType, GlobalConfigData globalConfig) {
             this.filePaths = new FilePaths(this);
             this.styleType = styleType;
             this.globalConfig = globalConfig;

@@ -65,6 +65,7 @@
   <ItemGroup>
     <Compile Include="Data\FieldData.cs" />
     <Compile Include="Data\GlobalConfigData.cs" />
+    <Compile Include="Data\JsonConfigData.cs" />
     <Compile Include="Data\StyleConfigData.cs" />
     <Compile Include="Data\ExceptionData.cs" />
     <Compile Include="Data\ExportData.cs" />
