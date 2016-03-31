@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Data;
 using System.Diagnostics;
 using System.IO;
+using System.Linq;
 using System.Windows.Forms;
 using Lettering.Data;
 using Lettering.Errors;
@@ -47,7 +48,7 @@ namespace Lettering {
                 ErrorHandler.HandleError(ErrorType.Critical, "Could not find config files.");
                 return;
             }
-            
+
             ConfigLoadingWindow configLoadingWindow = new ConfigLoadingWindow();
             configLoadingWindow.Show();
             configLoadingWindow.Location = new System.Drawing.Point(mainWindow.Location.X + (mainWindow.Width - configLoadingWindow.Width) / 2,
@@ -109,9 +110,94 @@ namespace Lettering {
             stoneType.Root = @"\\varappmanu\Rhinestone\Rhinestone Orders\Sierra\Inline Styles";
             stoneType.Extension = "dsg";
             jdata.Setup.TypeData.Add(ReportType.Stone.ToString(), stoneType);
+            jdata.Setup.PathRules = new Dictionary<string, string>();
+            foreach(KeyValuePair<int, string> pairs in configs[ReportType.Cut].pathTypes) {
+                string id = pairs.Key.ToString("D2");
+                string path = pairs.Value;
+                jdata.Setup.PathRules.Add(id, path);
+            }
+            jdata.Styles = new Dictionary<string, Data_Style>();
+            foreach(KeyValuePair<ReportType, StyleConfigData> configDataPair in configs) {
+                ReportType type = configDataPair.Key;
+                StyleConfigData configData = configDataPair.Value;
+
+                foreach(KeyValuePair<string, StylePathData> pathPair in configData.paths) {
+                    string style = pathPair.Key;
+                    StylePathData stylePathData = pathPair.Value;
+                    Data_StyleData styleData = new Data_StyleData();
+
+                    styleData.Rule = stylePathData.type.ToString("D2");
+
+                    if(!stylePathData.wordOrder.SequenceEqual(new int[] { 1, 2, 3, 4 })) {
+                        styleData.CustomWordOrder = new List<int>();
+                        foreach(int w in stylePathData.wordOrder) {
+                            if(w != 0) {
+                                styleData.CustomWordOrder.Add(w);
+                            }
+                        }
+                    }
+
+                    if(stylePathData.mirrorStyle != "") {
+                        styleData.MirroredStyle = stylePathData.mirrorStyle;
+                    }
 
 
-            File.WriteAllText(FilePaths.desktopFolderPath + "jsonOutput.json", JsonConvert.SerializeObject(jdata, Formatting.Indented));
+
+                    if(!jdata.Styles.ContainsKey(style)) {
+                        jdata.Styles.Add(style, new Data_Style());
+                    }
+                    switch(type) {
+                        case ReportType.Cut:
+                            jdata.Styles[style].Cut = styleData;
+                            break;
+                        case ReportType.Sew:
+                            jdata.Styles[style].Sew = styleData;
+                            break;
+                        case ReportType.Stone:
+                            jdata.Styles[style].Stone = styleData;
+                            break;
+                    }
+                }
+
+                foreach(KeyValuePair<string, List<ExceptionData>> exceptionPair in configData.exceptions) {
+                    string style = exceptionPair.Key;
+                    List<ExceptionData> exceptionDataList = exceptionPair.Value;
+
+                    Data_StyleData styleData;
+                    switch(type) {
+                        case ReportType.Cut:
+                            styleData = jdata.Styles[style].Cut;
+                            break;
+                        case ReportType.Sew:
+                            styleData = jdata.Styles[style].Sew;
+                            break;
+                        case ReportType.Stone:
+                            styleData = jdata.Styles[style].Stone;
+                            break;
+                        default:
+                            styleData = null;
+                            break;
+                    }
+
+                    styleData.Exceptions = new List<Data_Exception>();
+                    for(int i = 0; i != exceptionDataList.Count; ++i) {
+                        ExceptionData exData = exceptionDataList[i];
+                        if(i > 0) {
+
+                        }
+
+                        Data_Exception exception = new Data_Exception();
+                        exception.Path = exData.path;
+                        exception.Conditions = new List<string> { exData.tag + "=" + exData.value };
+                        styleData.Exceptions.Add(exception);
+                    }
+                }
+            }
+
+
+            File.WriteAllText(FilePaths.desktopFolderPath + "jsonOutput.json", JsonConvert.SerializeObject(jdata,
+                Formatting.Indented,
+                new JsonSerializerSettings() { NullValueHandling = NullValueHandling.Ignore }));
 
 
             //JsonSerializerSettings settings = new JsonSerializerSettings();

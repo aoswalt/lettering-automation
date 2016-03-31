@@ -9,7 +9,7 @@ namespace Lettering.Data {
     //NOTE(adam): cannot be structs because need to allow editing
     public class JsonConfigData {
         public Data_Setup Setup;
-        public Dictionary<string, Data_Path> Paths;
+        public Dictionary<string, Data_Style> Styles;
     }
 
     public class Data_Setup {
@@ -18,7 +18,7 @@ namespace Lettering.Data {
         public List<Data_Trim> Trims;
         public List<Data_Export> Exports;       //TODO(adam): use dictionary instead?
         public Dictionary<string, Data_TypeData> TypeData;
-        public Dictionary<int, string> PathRules;
+        public Dictionary<string, string> PathRules;
     }
 
     public class Data_FilePaths {
@@ -43,19 +43,19 @@ namespace Lettering.Data {
     }
 
     //public class Data_PathRule {
-    //    public int Id;
+    //    public string Id;
     //    public string Rule;
     //}
 
-    public class Data_Path {
+    public class Data_Style {
         public Data_StyleData Cut;
         public Data_StyleData Sew;
         public Data_StyleData Stone;
     }
 
     public class Data_StyleData {
-        public int Rule;
-        public List<int> WordOrder;
+        public string Rule;
+        public List<int> CustomWordOrder;
         public string MirroredStyle;
         public List<Data_Exception> Exceptions;
     }
