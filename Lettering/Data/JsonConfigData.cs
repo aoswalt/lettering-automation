@@ -14,17 +14,17 @@ namespace Lettering.Data {
 
     public class Data_Setup {
         public Data_FilePaths FilePaths;
-        public List<string> Prefixes;
+        public List<string> StylePrefixes;
         public List<Data_Trim> Trims;
-        public List<Data_Export> Exports;
+        public List<Data_Export> Exports;       //TODO(adam): use dictionary instead?
         public Dictionary<string, Data_TypeData> TypeData;
         public Dictionary<int, string> PathRules;
     }
 
     public class Data_FilePaths {
-        public string NetworkFontsFolder;
-        public string LibraryNetworkFile;
-        public string LibraryInstalledFile;
+        public string NetworkFontsFolderPath;
+        public string NetworkLibraryFilePath;
+        public string InstalledLibraryFilePath;
     }
 
     public class Data_Trim {

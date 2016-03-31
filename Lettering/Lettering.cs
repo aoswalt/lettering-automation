@@ -35,24 +35,6 @@ namespace Lettering {
         }
 
         internal static void LoadAllConfigs() {
-
-            //JsonConfigData data = new JsonConfigData();
-            //data.Setup = new Data_Setup();
-            //data.Setup.FilePaths = new Data_FilePaths();
-            //data.Setup.FilePaths.NetworkFontsFolder = @"\\network\fonts\folder";
-            //data.Setup.FilePaths.LibraryInstalledFile = @"C:\corel\library";
-
-            //File.WriteAllText(FilePaths.desktopFolderPath + "jsonOutput.json", JsonConvert.SerializeObject(data, Formatting.Indented));
-            //Console.WriteLine(JsonConvert.SerializeObject(data, Formatting.Indented));
-            //return;
-
-
-            //string jsonString = File.ReadAllText(FilePaths.desktopFolderPath + "jsonOutput.json");
-            //JsonConfigData data = JsonConvert.DeserializeObject<JsonConfigData>(jsonString);
-            //Console.WriteLine(data.Setup.FilePaths.LibraryInstalledFile);
-            //return;
-
-
             //NOTE(adam): trying multiple locations for config files
             string[] configFiles = null;
             if(Directory.Exists(FilePaths.adjacentConfigFolderPath)) {
@@ -92,11 +74,53 @@ namespace Lettering {
             //TODO(adam): investigate program freeze after reading config file
 
 
-            JsonSerializerSettings settings = new JsonSerializerSettings();
-            settings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore;
-            string serialized = JsonConvert.SerializeObject(configs, Formatting.Indented, settings);
-            File.WriteAllText(FilePaths.desktopFolderPath + "jsonOutput.json", serialized);
+
+            JsonConfigData jdata = new JsonConfigData();
+            jdata.Setup = new Data_Setup();
+            jdata.Setup.FilePaths = new Data_FilePaths();
+            jdata.Setup.FilePaths.NetworkFontsFolderPath = FilePaths.networkFontsFolderPath;
+            jdata.Setup.FilePaths.NetworkLibraryFilePath = FilePaths.networkLibraryFilePath;
+            jdata.Setup.FilePaths.InstalledLibraryFilePath = FilePaths.installedLibraryFilePath;
+            jdata.Setup.StylePrefixes = globalConfig.stylePrefixes;
+            jdata.Setup.Trims = new List<Data_Trim>();
+            foreach(string t in globalConfig.trims) {
+                Data_Trim trim = new Data_Trim();
+                trim._Comment = "<none>";
+                trim.Pattern = t;
+                jdata.Setup.Trims.Add(trim);
+            }
+            jdata.Setup.Exports = new List<Data_Export>();
+            foreach(KeyValuePair<string, ExportType> pair in configs[ReportType.Cut].exports) {
+                Data_Export export = new Data_Export();
+                export.StyleRegex = pair.Key;
+                export.FileType = pair.Value.ToString().ToLower();
+                jdata.Setup.Exports.Add(export);
+            }
+            jdata.Setup.TypeData = new Dictionary<string, Data_TypeData>();
+            Data_TypeData cutType = new Data_TypeData();
+            cutType.Root = @"\\production\lettering\1 CUT FILES\";
+            cutType.Extension = "cdr";
+            jdata.Setup.TypeData.Add(ReportType.Cut.ToString(), cutType);
+            Data_TypeData sewType = new Data_TypeData();
+            sewType.Root = @"\\production\lettering\1 CUT FILES\";
+            sewType.Extension = "dst";
+            jdata.Setup.TypeData.Add(ReportType.Sew.ToString(), sewType);
+            Data_TypeData stoneType = new Data_TypeData();
+            stoneType.Root = @"\\varappmanu\Rhinestone\Rhinestone Orders\Sierra\Inline Styles";
+            stoneType.Extension = "dsg";
+            jdata.Setup.TypeData.Add(ReportType.Stone.ToString(), stoneType);
+
+
+            File.WriteAllText(FilePaths.desktopFolderPath + "jsonOutput.json", JsonConvert.SerializeObject(jdata, Formatting.Indented));
+
+
+            //JsonSerializerSettings settings = new JsonSerializerSettings();
+            //settings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore;
+            //string serialized = JsonConvert.SerializeObject(configs, Formatting.Indented, settings);
+            //File.WriteAllText(FilePaths.desktopFolderPath + "jsonOutput.json", serialized);
             //Console.WriteLine(serialized);
+
+
         }
 
         internal static void CheckFonts() {

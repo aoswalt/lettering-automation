@@ -17,10 +17,10 @@ namespace Lettering.Data {
         public static readonly FieldData SIZE =          new FieldData("DLSIZ",    "Size",          typeof(double),   new string[] { "size", "sze" });
         public static readonly FieldData SPEC =          new FieldData("LETWID",   "Spec",          typeof(double),   new string[] { "spec", "width" });
         public static readonly FieldData NAME =          new FieldData("LETNAME",  "Name",          typeof(string),   new string[] { "name" });
-        public static readonly FieldData WORD2 =         new FieldData("DLWR1",    "Word 1",        typeof(string),   new string[] { "word*1" });
-        public static readonly FieldData WORD3 =         new FieldData("DLWR2",    "Word 2",        typeof(string),   new string[] { "word*2" });
-        public static readonly FieldData WORD4 =         new FieldData("DLWR3",    "Word 3",        typeof(string),   new string[] { "word*3" });
-        public static readonly FieldData WORD1 =         new FieldData("DLWR4",    "Word 4",        typeof(string),   new string[] { "word*4" });
+        public static readonly FieldData WORD1 =         new FieldData("DLWR1",    "Word 1",        typeof(string),   new string[] { "word*1" });
+        public static readonly FieldData WORD2 =         new FieldData("DLWR2",    "Word 2",        typeof(string),   new string[] { "word*2" });
+        public static readonly FieldData WORD3 =         new FieldData("DLWR3",    "Word 3",        typeof(string),   new string[] { "word*3" });
+        public static readonly FieldData WORD4 =         new FieldData("DLWR4",    "Word 4",        typeof(string),   new string[] { "word*4" });
         public static readonly FieldData COLOR1 =        new FieldData("DCLR1",    "Color 1",       typeof(string),   new string[] { "color*1" });
         public static readonly FieldData COLOR2 =        new FieldData("DCLR2",    "Color 2",       typeof(string),   new string[] { "color*2" });
         public static readonly FieldData COLOR3 =        new FieldData("DCLR3",    "Color 3",       typeof(string),   new string[] { "color*3" });
