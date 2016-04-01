@@ -79,10 +79,10 @@
             // 
             // editConfigsToolStripMenuItem
             // 
-            this.editConfigsToolStripMenuItem.Enabled = false;
             this.editConfigsToolStripMenuItem.Name = "editConfigsToolStripMenuItem";
             this.editConfigsToolStripMenuItem.Size = new System.Drawing.Size(161, 22);
             this.editConfigsToolStripMenuItem.Text = "Edit &Configs";
+            this.editConfigsToolStripMenuItem.Click += new System.EventHandler(this.editConfigsToolStripMenuItem_Click);
             // 
             // checkFontsToolStripMenuItem
             // 

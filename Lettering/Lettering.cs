@@ -24,6 +24,7 @@ namespace Lettering {
         private static MainWindow mainWindow;
         private static GlobalConfigData globalConfig = new GlobalConfigData();
         internal static Dictionary<ReportType, StyleConfigData> configs = new Dictionary<ReportType, StyleConfigData>();
+        internal static JsonConfigData jsonConfig;
         private static bool hasCheckedSetup = false;
         private static bool isSetupOk = false;
 
@@ -73,15 +74,15 @@ namespace Lettering {
             }
             configLoadingWindow.Hide();
 
-            JsonConfigData jdata = ConvertConfigsToJson(globalConfig, configs);
+            jsonConfig = ConvertConfigsToJson(globalConfig, configs);
 
-            File.WriteAllText(FilePaths.desktopFolderPath + "jsonOutput.json", JsonConvert.SerializeObject(jdata,
+            File.WriteAllText(FilePaths.desktopFolderPath + "jsonOutput.json", JsonConvert.SerializeObject(jsonConfig,
                 new JsonSerializerSettings() {
                     Formatting = Formatting.Indented,
                     NullValueHandling = NullValueHandling.Ignore
                 }));
 
-            JsonConfigData readData = JsonConvert.DeserializeObject<JsonConfigData>(File.ReadAllText(FilePaths.desktopFolderPath + "jsonOutput.json"));
+            //JsonConfigData readData = JsonConvert.DeserializeObject<JsonConfigData>(File.ReadAllText(FilePaths.desktopFolderPath + "jsonOutput.json"));
         }
 
         private static JsonConfigData ConvertConfigsToJson(GlobalConfigData globalConfig, Dictionary<ReportType, StyleConfigData> configs) {
