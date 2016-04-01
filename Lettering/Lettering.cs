@@ -72,10 +72,19 @@ namespace Lettering {
                 }
             }
             configLoadingWindow.Hide();
-            //TODO(adam): investigate program freeze after reading config file
 
+            JsonConfigData jdata = ConvertConfigsToJson(globalConfig, configs);
 
+            File.WriteAllText(FilePaths.desktopFolderPath + "jsonOutput.json", JsonConvert.SerializeObject(jdata,
+                new JsonSerializerSettings() {
+                    Formatting = Formatting.Indented,
+                    NullValueHandling = NullValueHandling.Ignore
+                }));
 
+            JsonConfigData readData = JsonConvert.DeserializeObject<JsonConfigData>(File.ReadAllText(FilePaths.desktopFolderPath + "jsonOutput.json"));
+        }
+
+        private static JsonConfigData ConvertConfigsToJson(GlobalConfigData globalConfig, Dictionary<ReportType, StyleConfigData> configs) {
             JsonConfigData jdata = new JsonConfigData();
             jdata.Setup = new Data_Setup();
             jdata.Setup.FilePaths = new Data_FilePaths();
@@ -94,7 +103,7 @@ namespace Lettering {
             foreach(KeyValuePair<string, ExportType> pair in configs[ReportType.Cut].exports) {
                 Data_Export export = new Data_Export();
                 export.StyleRegex = pair.Key;
-                export.FileType = pair.Value.ToString().ToLower();
+                export.FileType = pair.Value;
                 jdata.Setup.Exports.Add(export);
             }
             jdata.Setup.TypeData = new Dictionary<string, Data_TypeData>();
@@ -194,19 +203,7 @@ namespace Lettering {
                 }
             }
 
-
-            File.WriteAllText(FilePaths.desktopFolderPath + "jsonOutput.json", JsonConvert.SerializeObject(jdata,
-                Formatting.Indented,
-                new JsonSerializerSettings() { NullValueHandling = NullValueHandling.Ignore }));
-
-
-            //JsonSerializerSettings settings = new JsonSerializerSettings();
-            //settings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore;
-            //string serialized = JsonConvert.SerializeObject(configs, Formatting.Indented, settings);
-            //File.WriteAllText(FilePaths.desktopFolderPath + "jsonOutput.json", serialized);
-            //Console.WriteLine(serialized);
-
-
+            return jdata;
         }
 
         internal static void CheckFonts() {

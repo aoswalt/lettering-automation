@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Converters;
 
 namespace Lettering.Data {
     //NOTE(adam): must be publics for JsonConvert
@@ -34,7 +36,8 @@ namespace Lettering.Data {
 
     public class Data_Export {
         public string StyleRegex;
-        public string FileType;     //TODO(adam): use enum? use cdr enum value?
+        [JsonConverter(typeof(StringEnumConverter))]
+        public ExportType FileType;     //TODO(adam): use enum? use cdr enum value?
     }
 
     public class Data_TypeData {
