@@ -23,253 +23,119 @@
         /// the contents of this method with the code editor.
         /// </summary>
         private void InitializeComponent() {
-            this.configTabControl = new System.Windows.Forms.TabControl();
-            this.setupTab = new System.Windows.Forms.TabPage();
-            this.setupTabControl = new System.Windows.Forms.TabControl();
-            this.filePathsTab = new System.Windows.Forms.TabPage();
-            this.prefixesTab = new System.Windows.Forms.TabPage();
-            this.trimsTab = new System.Windows.Forms.TabPage();
-            this.exportsTab = new System.Windows.Forms.TabPage();
-            this.styleTypesTab = new System.Windows.Forms.TabPage();
-            this.pathRulesTab = new System.Windows.Forms.TabPage();
-            this.stylesTab = new System.Windows.Forms.TabPage();
-            this.editorStatusStrip = new System.Windows.Forms.StatusStrip();
-            this.prefixesDataGrid = new System.Windows.Forms.DataGridView();
-            this.label1 = new System.Windows.Forms.Label();
-            this.textBox1 = new System.Windows.Forms.TextBox();
-            this.textBox2 = new System.Windows.Forms.TextBox();
-            this.label2 = new System.Windows.Forms.Label();
+            this.tabControlConfig = new System.Windows.Forms.TabControl();
+            this.tabSetup = new System.Windows.Forms.TabPage();
+            this.tabControlSetup = new System.Windows.Forms.TabControl();
+            this.tabFilePaths = new System.Windows.Forms.TabPage();
             this.textBox3 = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
-            this.trimsDataGrid = new System.Windows.Forms.DataGridView();
-            this.exportsDataGrid = new System.Windows.Forms.DataGridView();
-            this.textBox4 = new System.Windows.Forms.TextBox();
-            this.label4 = new System.Windows.Forms.Label();
-            this.textBox5 = new System.Windows.Forms.TextBox();
-            this.label5 = new System.Windows.Forms.Label();
-            this.textBox6 = new System.Windows.Forms.TextBox();
-            this.label6 = new System.Windows.Forms.Label();
-            this.textBox7 = new System.Windows.Forms.TextBox();
-            this.label7 = new System.Windows.Forms.Label();
-            this.textBox8 = new System.Windows.Forms.TextBox();
-            this.label8 = new System.Windows.Forms.Label();
-            this.textBox9 = new System.Windows.Forms.TextBox();
-            this.label9 = new System.Windows.Forms.Label();
+            this.textBox2 = new System.Windows.Forms.TextBox();
+            this.label2 = new System.Windows.Forms.Label();
+            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.label1 = new System.Windows.Forms.Label();
+            this.tabPrefixes = new System.Windows.Forms.TabPage();
+            this.dataGridPrefixes = new System.Windows.Forms.DataGridView();
+            this.tabTrims = new System.Windows.Forms.TabPage();
+            this.dataGridTrims = new System.Windows.Forms.DataGridView();
+            this.tabExports = new System.Windows.Forms.TabPage();
+            this.dataGridExports = new System.Windows.Forms.DataGridView();
+            this.tabStyleTypes = new System.Windows.Forms.TabPage();
             this.label10 = new System.Windows.Forms.Label();
             this.label11 = new System.Windows.Forms.Label();
             this.label12 = new System.Windows.Forms.Label();
-            this.pathRulesDataGrid = new System.Windows.Forms.DataGridView();
-            this.configTabControl.SuspendLayout();
-            this.setupTab.SuspendLayout();
-            this.setupTabControl.SuspendLayout();
-            this.filePathsTab.SuspendLayout();
-            this.prefixesTab.SuspendLayout();
-            this.trimsTab.SuspendLayout();
-            this.exportsTab.SuspendLayout();
-            this.styleTypesTab.SuspendLayout();
-            this.pathRulesTab.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.prefixesDataGrid)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.trimsDataGrid)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.exportsDataGrid)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pathRulesDataGrid)).BeginInit();
+            this.textCutExtension = new System.Windows.Forms.TextBox();
+            this.label5 = new System.Windows.Forms.Label();
+            this.textCutRoot = new System.Windows.Forms.TextBox();
+            this.label6 = new System.Windows.Forms.Label();
+            this.tabPathRules = new System.Windows.Forms.TabPage();
+            this.dataGridPathRules = new System.Windows.Forms.DataGridView();
+            this.tabStyles = new System.Windows.Forms.TabPage();
+            this.statusStripEditor = new System.Windows.Forms.StatusStrip();
+            this.textSewExtension = new System.Windows.Forms.TextBox();
+            this.label4 = new System.Windows.Forms.Label();
+            this.textSewRoot = new System.Windows.Forms.TextBox();
+            this.label7 = new System.Windows.Forms.Label();
+            this.textStoneExtension = new System.Windows.Forms.TextBox();
+            this.label8 = new System.Windows.Forms.Label();
+            this.textStoneRoot = new System.Windows.Forms.TextBox();
+            this.label9 = new System.Windows.Forms.Label();
+            this.tabControlConfig.SuspendLayout();
+            this.tabSetup.SuspendLayout();
+            this.tabControlSetup.SuspendLayout();
+            this.tabFilePaths.SuspendLayout();
+            this.tabPrefixes.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridPrefixes)).BeginInit();
+            this.tabTrims.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridTrims)).BeginInit();
+            this.tabExports.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridExports)).BeginInit();
+            this.tabStyleTypes.SuspendLayout();
+            this.tabPathRules.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridPathRules)).BeginInit();
             this.SuspendLayout();
             // 
-            // configTabControl
+            // tabControlConfig
             // 
-            this.configTabControl.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            this.tabControlConfig.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.configTabControl.Controls.Add(this.setupTab);
-            this.configTabControl.Controls.Add(this.stylesTab);
-            this.configTabControl.Location = new System.Drawing.Point(0, 0);
-            this.configTabControl.Multiline = true;
-            this.configTabControl.Name = "configTabControl";
-            this.configTabControl.SelectedIndex = 0;
-            this.configTabControl.Size = new System.Drawing.Size(717, 543);
-            this.configTabControl.TabIndex = 0;
+            this.tabControlConfig.Controls.Add(this.tabSetup);
+            this.tabControlConfig.Controls.Add(this.tabStyles);
+            this.tabControlConfig.Location = new System.Drawing.Point(0, 0);
+            this.tabControlConfig.Multiline = true;
+            this.tabControlConfig.Name = "tabControlConfig";
+            this.tabControlConfig.SelectedIndex = 0;
+            this.tabControlConfig.Size = new System.Drawing.Size(717, 543);
+            this.tabControlConfig.TabIndex = 0;
             // 
-            // setupTab
+            // tabSetup
             // 
-            this.setupTab.Controls.Add(this.setupTabControl);
-            this.setupTab.Location = new System.Drawing.Point(4, 22);
-            this.setupTab.Name = "setupTab";
-            this.setupTab.Padding = new System.Windows.Forms.Padding(3);
-            this.setupTab.Size = new System.Drawing.Size(709, 517);
-            this.setupTab.TabIndex = 0;
-            this.setupTab.Text = "Setup";
-            this.setupTab.UseVisualStyleBackColor = true;
+            this.tabSetup.Controls.Add(this.tabControlSetup);
+            this.tabSetup.Location = new System.Drawing.Point(4, 22);
+            this.tabSetup.Name = "tabSetup";
+            this.tabSetup.Padding = new System.Windows.Forms.Padding(3);
+            this.tabSetup.Size = new System.Drawing.Size(709, 517);
+            this.tabSetup.TabIndex = 0;
+            this.tabSetup.Text = "Setup";
+            this.tabSetup.UseVisualStyleBackColor = true;
             // 
-            // setupTabControl
+            // tabControlSetup
             // 
-            this.setupTabControl.Alignment = System.Windows.Forms.TabAlignment.Left;
-            this.setupTabControl.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.setupTabControl.Controls.Add(this.filePathsTab);
-            this.setupTabControl.Controls.Add(this.prefixesTab);
-            this.setupTabControl.Controls.Add(this.trimsTab);
-            this.setupTabControl.Controls.Add(this.exportsTab);
-            this.setupTabControl.Controls.Add(this.styleTypesTab);
-            this.setupTabControl.Controls.Add(this.pathRulesTab);
-            this.setupTabControl.DrawMode = System.Windows.Forms.TabDrawMode.OwnerDrawFixed;
-            this.setupTabControl.HotTrack = true;
-            this.setupTabControl.ItemSize = new System.Drawing.Size(25, 80);
-            this.setupTabControl.Location = new System.Drawing.Point(0, 0);
-            this.setupTabControl.Multiline = true;
-            this.setupTabControl.Name = "setupTabControl";
-            this.setupTabControl.SelectedIndex = 0;
-            this.setupTabControl.Size = new System.Drawing.Size(709, 517);
-            this.setupTabControl.SizeMode = System.Windows.Forms.TabSizeMode.Fixed;
-            this.setupTabControl.TabIndex = 0;
-            this.setupTabControl.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.setupTabControl_DrawItem);
+            this.tabControlSetup.Alignment = System.Windows.Forms.TabAlignment.Left;
+            this.tabControlSetup.Controls.Add(this.tabFilePaths);
+            this.tabControlSetup.Controls.Add(this.tabPrefixes);
+            this.tabControlSetup.Controls.Add(this.tabTrims);
+            this.tabControlSetup.Controls.Add(this.tabExports);
+            this.tabControlSetup.Controls.Add(this.tabStyleTypes);
+            this.tabControlSetup.Controls.Add(this.tabPathRules);
+            this.tabControlSetup.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tabControlSetup.DrawMode = System.Windows.Forms.TabDrawMode.OwnerDrawFixed;
+            this.tabControlSetup.HotTrack = true;
+            this.tabControlSetup.ItemSize = new System.Drawing.Size(25, 80);
+            this.tabControlSetup.Location = new System.Drawing.Point(3, 3);
+            this.tabControlSetup.Multiline = true;
+            this.tabControlSetup.Name = "tabControlSetup";
+            this.tabControlSetup.SelectedIndex = 0;
+            this.tabControlSetup.Size = new System.Drawing.Size(703, 511);
+            this.tabControlSetup.SizeMode = System.Windows.Forms.TabSizeMode.Fixed;
+            this.tabControlSetup.TabIndex = 0;
+            this.tabControlSetup.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.setupTabControl_DrawItem);
             // 
-            // filePathsTab
+            // tabFilePaths
             // 
-            this.filePathsTab.Controls.Add(this.textBox3);
-            this.filePathsTab.Controls.Add(this.label3);
-            this.filePathsTab.Controls.Add(this.textBox2);
-            this.filePathsTab.Controls.Add(this.label2);
-            this.filePathsTab.Controls.Add(this.textBox1);
-            this.filePathsTab.Controls.Add(this.label1);
-            this.filePathsTab.Location = new System.Drawing.Point(84, 4);
-            this.filePathsTab.Name = "filePathsTab";
-            this.filePathsTab.Padding = new System.Windows.Forms.Padding(3);
-            this.filePathsTab.Size = new System.Drawing.Size(621, 509);
-            this.filePathsTab.TabIndex = 0;
-            this.filePathsTab.Text = "File Paths";
-            this.filePathsTab.UseVisualStyleBackColor = true;
-            // 
-            // prefixesTab
-            // 
-            this.prefixesTab.Controls.Add(this.prefixesDataGrid);
-            this.prefixesTab.Location = new System.Drawing.Point(84, 4);
-            this.prefixesTab.Name = "prefixesTab";
-            this.prefixesTab.Padding = new System.Windows.Forms.Padding(3);
-            this.prefixesTab.Size = new System.Drawing.Size(621, 509);
-            this.prefixesTab.TabIndex = 1;
-            this.prefixesTab.Text = "Prefixes";
-            this.prefixesTab.UseVisualStyleBackColor = true;
-            // 
-            // trimsTab
-            // 
-            this.trimsTab.Controls.Add(this.trimsDataGrid);
-            this.trimsTab.Location = new System.Drawing.Point(84, 4);
-            this.trimsTab.Name = "trimsTab";
-            this.trimsTab.Padding = new System.Windows.Forms.Padding(3);
-            this.trimsTab.Size = new System.Drawing.Size(621, 509);
-            this.trimsTab.TabIndex = 2;
-            this.trimsTab.Text = "Trims";
-            this.trimsTab.UseVisualStyleBackColor = true;
-            // 
-            // exportsTab
-            // 
-            this.exportsTab.Controls.Add(this.exportsDataGrid);
-            this.exportsTab.Location = new System.Drawing.Point(84, 4);
-            this.exportsTab.Name = "exportsTab";
-            this.exportsTab.Padding = new System.Windows.Forms.Padding(3);
-            this.exportsTab.Size = new System.Drawing.Size(621, 509);
-            this.exportsTab.TabIndex = 3;
-            this.exportsTab.Text = "Exports";
-            this.exportsTab.UseVisualStyleBackColor = true;
-            // 
-            // styleTypesTab
-            // 
-            this.styleTypesTab.Controls.Add(this.label10);
-            this.styleTypesTab.Controls.Add(this.label11);
-            this.styleTypesTab.Controls.Add(this.label12);
-            this.styleTypesTab.Controls.Add(this.textBox7);
-            this.styleTypesTab.Controls.Add(this.label7);
-            this.styleTypesTab.Controls.Add(this.textBox8);
-            this.styleTypesTab.Controls.Add(this.label8);
-            this.styleTypesTab.Controls.Add(this.textBox9);
-            this.styleTypesTab.Controls.Add(this.label9);
-            this.styleTypesTab.Controls.Add(this.textBox4);
-            this.styleTypesTab.Controls.Add(this.label4);
-            this.styleTypesTab.Controls.Add(this.textBox5);
-            this.styleTypesTab.Controls.Add(this.label5);
-            this.styleTypesTab.Controls.Add(this.textBox6);
-            this.styleTypesTab.Controls.Add(this.label6);
-            this.styleTypesTab.Location = new System.Drawing.Point(84, 4);
-            this.styleTypesTab.Name = "styleTypesTab";
-            this.styleTypesTab.Padding = new System.Windows.Forms.Padding(3);
-            this.styleTypesTab.Size = new System.Drawing.Size(621, 509);
-            this.styleTypesTab.TabIndex = 4;
-            this.styleTypesTab.Text = "Style Types";
-            this.styleTypesTab.UseVisualStyleBackColor = true;
-            // 
-            // pathRulesTab
-            // 
-            this.pathRulesTab.Controls.Add(this.pathRulesDataGrid);
-            this.pathRulesTab.Location = new System.Drawing.Point(84, 4);
-            this.pathRulesTab.Name = "pathRulesTab";
-            this.pathRulesTab.Padding = new System.Windows.Forms.Padding(3);
-            this.pathRulesTab.Size = new System.Drawing.Size(621, 509);
-            this.pathRulesTab.TabIndex = 5;
-            this.pathRulesTab.Text = "Path Rules";
-            this.pathRulesTab.UseVisualStyleBackColor = true;
-            // 
-            // stylesTab
-            // 
-            this.stylesTab.Location = new System.Drawing.Point(4, 22);
-            this.stylesTab.Name = "stylesTab";
-            this.stylesTab.Padding = new System.Windows.Forms.Padding(3);
-            this.stylesTab.Size = new System.Drawing.Size(709, 517);
-            this.stylesTab.TabIndex = 1;
-            this.stylesTab.Text = "Styles";
-            this.stylesTab.UseVisualStyleBackColor = true;
-            // 
-            // editorStatusStrip
-            // 
-            this.editorStatusStrip.Location = new System.Drawing.Point(0, 546);
-            this.editorStatusStrip.Name = "editorStatusStrip";
-            this.editorStatusStrip.Size = new System.Drawing.Size(720, 22);
-            this.editorStatusStrip.TabIndex = 1;
-            this.editorStatusStrip.Text = "statusStrip1";
-            // 
-            // prefixesDataGrid
-            // 
-            this.prefixesDataGrid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.prefixesDataGrid.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.prefixesDataGrid.Location = new System.Drawing.Point(3, 3);
-            this.prefixesDataGrid.Name = "prefixesDataGrid";
-            this.prefixesDataGrid.Size = new System.Drawing.Size(615, 503);
-            this.prefixesDataGrid.TabIndex = 1;
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(6, 13);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(111, 13);
-            this.label1.TabIndex = 0;
-            this.label1.Text = "Network Fonts Folder:";
-            // 
-            // textBox1
-            // 
-            this.textBox1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.textBox1.Location = new System.Drawing.Point(123, 10);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(488, 20);
-            this.textBox1.TabIndex = 1;
-            // 
-            // textBox2
-            // 
-            this.textBox2.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.textBox2.Location = new System.Drawing.Point(123, 36);
-            this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(488, 20);
-            this.textBox2.TabIndex = 3;
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(14, 39);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(103, 13);
-            this.label2.TabIndex = 2;
-            this.label2.Text = "Network Library File:";
+            this.tabFilePaths.Controls.Add(this.textBox3);
+            this.tabFilePaths.Controls.Add(this.label3);
+            this.tabFilePaths.Controls.Add(this.textBox2);
+            this.tabFilePaths.Controls.Add(this.label2);
+            this.tabFilePaths.Controls.Add(this.textBox1);
+            this.tabFilePaths.Controls.Add(this.label1);
+            this.tabFilePaths.Location = new System.Drawing.Point(84, 4);
+            this.tabFilePaths.Name = "tabFilePaths";
+            this.tabFilePaths.Padding = new System.Windows.Forms.Padding(3);
+            this.tabFilePaths.Size = new System.Drawing.Size(615, 503);
+            this.tabFilePaths.TabIndex = 0;
+            this.tabFilePaths.Text = "File Paths";
+            this.tabFilePaths.UseVisualStyleBackColor = true;
             // 
             // textBox3
             // 
@@ -277,7 +143,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.textBox3.Location = new System.Drawing.Point(123, 62);
             this.textBox3.Name = "textBox3";
-            this.textBox3.Size = new System.Drawing.Size(488, 20);
+            this.textBox3.Size = new System.Drawing.Size(482, 20);
             this.textBox3.TabIndex = 5;
             // 
             // label3
@@ -289,180 +155,321 @@
             this.label3.TabIndex = 4;
             this.label3.Text = "Installed Library File:";
             // 
-            // trimsDataGrid
+            // textBox2
             // 
-            this.trimsDataGrid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.trimsDataGrid.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.trimsDataGrid.Location = new System.Drawing.Point(3, 3);
-            this.trimsDataGrid.Name = "trimsDataGrid";
-            this.trimsDataGrid.Size = new System.Drawing.Size(615, 503);
-            this.trimsDataGrid.TabIndex = 0;
+            this.textBox2.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.textBox2.Location = new System.Drawing.Point(123, 36);
+            this.textBox2.Name = "textBox2";
+            this.textBox2.Size = new System.Drawing.Size(482, 20);
+            this.textBox2.TabIndex = 3;
             // 
-            // exportsDataGrid
+            // label2
             // 
-            this.exportsDataGrid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.exportsDataGrid.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.exportsDataGrid.Location = new System.Drawing.Point(3, 3);
-            this.exportsDataGrid.Name = "exportsDataGrid";
-            this.exportsDataGrid.Size = new System.Drawing.Size(615, 503);
-            this.exportsDataGrid.TabIndex = 0;
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(14, 39);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(103, 13);
+            this.label2.TabIndex = 2;
+            this.label2.Text = "Network Library File:";
             // 
-            // textBox4
+            // textBox1
             // 
-            this.textBox4.Location = new System.Drawing.Point(151, 138);
-            this.textBox4.Name = "textBox4";
-            this.textBox4.Size = new System.Drawing.Size(100, 20);
-            this.textBox4.TabIndex = 11;
+            this.textBox1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.textBox1.Location = new System.Drawing.Point(123, 10);
+            this.textBox1.Name = "textBox1";
+            this.textBox1.Size = new System.Drawing.Size(482, 20);
+            this.textBox1.TabIndex = 1;
             // 
-            // label4
+            // label1
             // 
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(110, 141);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(35, 13);
-            this.label4.TabIndex = 10;
-            this.label4.Text = "label4";
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(6, 13);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(111, 13);
+            this.label1.TabIndex = 0;
+            this.label1.Text = "Network Fonts Folder:";
             // 
-            // textBox5
+            // tabPrefixes
             // 
-            this.textBox5.Location = new System.Drawing.Point(151, 100);
-            this.textBox5.Name = "textBox5";
-            this.textBox5.Size = new System.Drawing.Size(100, 20);
-            this.textBox5.TabIndex = 9;
+            this.tabPrefixes.Controls.Add(this.dataGridPrefixes);
+            this.tabPrefixes.Location = new System.Drawing.Point(84, 4);
+            this.tabPrefixes.Name = "tabPrefixes";
+            this.tabPrefixes.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPrefixes.Size = new System.Drawing.Size(615, 503);
+            this.tabPrefixes.TabIndex = 1;
+            this.tabPrefixes.Text = "Prefixes";
+            this.tabPrefixes.UseVisualStyleBackColor = true;
             // 
-            // label5
+            // dataGridPrefixes
             // 
-            this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(110, 103);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(35, 13);
-            this.label5.TabIndex = 8;
-            this.label5.Text = "label5";
+            this.dataGridPrefixes.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridPrefixes.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dataGridPrefixes.Location = new System.Drawing.Point(3, 3);
+            this.dataGridPrefixes.Name = "dataGridPrefixes";
+            this.dataGridPrefixes.Size = new System.Drawing.Size(609, 497);
+            this.dataGridPrefixes.TabIndex = 1;
             // 
-            // textBox6
+            // tabTrims
             // 
-            this.textBox6.Location = new System.Drawing.Point(151, 74);
-            this.textBox6.Name = "textBox6";
-            this.textBox6.Size = new System.Drawing.Size(100, 20);
-            this.textBox6.TabIndex = 7;
+            this.tabTrims.Controls.Add(this.dataGridTrims);
+            this.tabTrims.Location = new System.Drawing.Point(84, 4);
+            this.tabTrims.Name = "tabTrims";
+            this.tabTrims.Padding = new System.Windows.Forms.Padding(3);
+            this.tabTrims.Size = new System.Drawing.Size(615, 503);
+            this.tabTrims.TabIndex = 2;
+            this.tabTrims.Text = "Trims";
+            this.tabTrims.UseVisualStyleBackColor = true;
             // 
-            // label6
+            // dataGridTrims
             // 
-            this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(110, 77);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(35, 13);
-            this.label6.TabIndex = 6;
-            this.label6.Text = "label6";
+            this.dataGridTrims.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridTrims.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dataGridTrims.Location = new System.Drawing.Point(3, 3);
+            this.dataGridTrims.Name = "dataGridTrims";
+            this.dataGridTrims.Size = new System.Drawing.Size(609, 497);
+            this.dataGridTrims.TabIndex = 0;
             // 
-            // textBox7
+            // tabExports
             // 
-            this.textBox7.Location = new System.Drawing.Point(151, 230);
-            this.textBox7.Name = "textBox7";
-            this.textBox7.Size = new System.Drawing.Size(100, 20);
-            this.textBox7.TabIndex = 17;
+            this.tabExports.Controls.Add(this.dataGridExports);
+            this.tabExports.Location = new System.Drawing.Point(84, 4);
+            this.tabExports.Name = "tabExports";
+            this.tabExports.Padding = new System.Windows.Forms.Padding(3);
+            this.tabExports.Size = new System.Drawing.Size(615, 503);
+            this.tabExports.TabIndex = 3;
+            this.tabExports.Text = "Exports";
+            this.tabExports.UseVisualStyleBackColor = true;
             // 
-            // label7
+            // dataGridExports
             // 
-            this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(110, 233);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(35, 13);
-            this.label7.TabIndex = 16;
-            this.label7.Text = "label7";
+            this.dataGridExports.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridExports.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dataGridExports.Location = new System.Drawing.Point(3, 3);
+            this.dataGridExports.Name = "dataGridExports";
+            this.dataGridExports.Size = new System.Drawing.Size(609, 497);
+            this.dataGridExports.TabIndex = 0;
             // 
-            // textBox8
+            // tabStyleTypes
             // 
-            this.textBox8.Location = new System.Drawing.Point(151, 204);
-            this.textBox8.Name = "textBox8";
-            this.textBox8.Size = new System.Drawing.Size(100, 20);
-            this.textBox8.TabIndex = 15;
-            // 
-            // label8
-            // 
-            this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(110, 207);
-            this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(35, 13);
-            this.label8.TabIndex = 14;
-            this.label8.Text = "label8";
-            // 
-            // textBox9
-            // 
-            this.textBox9.Location = new System.Drawing.Point(151, 164);
-            this.textBox9.Name = "textBox9";
-            this.textBox9.Size = new System.Drawing.Size(100, 20);
-            this.textBox9.TabIndex = 13;
-            // 
-            // label9
-            // 
-            this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(110, 167);
-            this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(35, 13);
-            this.label9.TabIndex = 12;
-            this.label9.Text = "label9";
+            this.tabStyleTypes.Controls.Add(this.textStoneExtension);
+            this.tabStyleTypes.Controls.Add(this.label8);
+            this.tabStyleTypes.Controls.Add(this.textStoneRoot);
+            this.tabStyleTypes.Controls.Add(this.label9);
+            this.tabStyleTypes.Controls.Add(this.textSewExtension);
+            this.tabStyleTypes.Controls.Add(this.label4);
+            this.tabStyleTypes.Controls.Add(this.textSewRoot);
+            this.tabStyleTypes.Controls.Add(this.label7);
+            this.tabStyleTypes.Controls.Add(this.label10);
+            this.tabStyleTypes.Controls.Add(this.label11);
+            this.tabStyleTypes.Controls.Add(this.label12);
+            this.tabStyleTypes.Controls.Add(this.textCutExtension);
+            this.tabStyleTypes.Controls.Add(this.label5);
+            this.tabStyleTypes.Controls.Add(this.textCutRoot);
+            this.tabStyleTypes.Controls.Add(this.label6);
+            this.tabStyleTypes.Location = new System.Drawing.Point(84, 4);
+            this.tabStyleTypes.Name = "tabStyleTypes";
+            this.tabStyleTypes.Padding = new System.Windows.Forms.Padding(3);
+            this.tabStyleTypes.Size = new System.Drawing.Size(615, 503);
+            this.tabStyleTypes.TabIndex = 4;
+            this.tabStyleTypes.Text = "Style Types";
+            this.tabStyleTypes.UseVisualStyleBackColor = true;
             // 
             // label10
             // 
             this.label10.AutoSize = true;
-            this.label10.Location = new System.Drawing.Point(48, 204);
+            this.label10.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label10.Location = new System.Drawing.Point(11, 148);
             this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(41, 13);
+            this.label10.Size = new System.Drawing.Size(40, 13);
             this.label10.TabIndex = 20;
-            this.label10.Text = "label10";
+            this.label10.Text = "Stone";
             // 
             // label11
             // 
             this.label11.AutoSize = true;
-            this.label11.Location = new System.Drawing.Point(48, 138);
+            this.label11.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label11.Location = new System.Drawing.Point(18, 77);
             this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(41, 13);
+            this.label11.Size = new System.Drawing.Size(31, 13);
             this.label11.TabIndex = 19;
-            this.label11.Text = "label11";
+            this.label11.Text = "Sew";
             // 
             // label12
             // 
             this.label12.AutoSize = true;
-            this.label12.Location = new System.Drawing.Point(48, 74);
+            this.label12.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label12.Location = new System.Drawing.Point(23, 9);
             this.label12.Name = "label12";
-            this.label12.Size = new System.Drawing.Size(41, 13);
+            this.label12.Size = new System.Drawing.Size(26, 13);
             this.label12.TabIndex = 18;
-            this.label12.Text = "label12";
+            this.label12.Text = "Cut";
             // 
-            // pathRulesDataGrid
+            // textCutExtension
             // 
-            this.pathRulesDataGrid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.pathRulesDataGrid.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.pathRulesDataGrid.Location = new System.Drawing.Point(3, 3);
-            this.pathRulesDataGrid.Name = "pathRulesDataGrid";
-            this.pathRulesDataGrid.Size = new System.Drawing.Size(615, 503);
-            this.pathRulesDataGrid.TabIndex = 0;
+            this.textCutExtension.Location = new System.Drawing.Point(118, 32);
+            this.textCutExtension.Name = "textCutExtension";
+            this.textCutExtension.Size = new System.Drawing.Size(67, 20);
+            this.textCutExtension.TabIndex = 9;
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(56, 35);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(56, 13);
+            this.label5.TabIndex = 8;
+            this.label5.Text = "Extension:";
+            // 
+            // textCutRoot
+            // 
+            this.textCutRoot.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.textCutRoot.Location = new System.Drawing.Point(118, 6);
+            this.textCutRoot.Name = "textCutRoot";
+            this.textCutRoot.Size = new System.Drawing.Size(491, 20);
+            this.textCutRoot.TabIndex = 7;
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(79, 9);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(33, 13);
+            this.label6.TabIndex = 6;
+            this.label6.Text = "Root:";
+            // 
+            // tabPathRules
+            // 
+            this.tabPathRules.Controls.Add(this.dataGridPathRules);
+            this.tabPathRules.Location = new System.Drawing.Point(84, 4);
+            this.tabPathRules.Name = "tabPathRules";
+            this.tabPathRules.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPathRules.Size = new System.Drawing.Size(615, 503);
+            this.tabPathRules.TabIndex = 5;
+            this.tabPathRules.Text = "Path Rules";
+            this.tabPathRules.UseVisualStyleBackColor = true;
+            // 
+            // dataGridPathRules
+            // 
+            this.dataGridPathRules.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridPathRules.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dataGridPathRules.Location = new System.Drawing.Point(3, 3);
+            this.dataGridPathRules.Name = "dataGridPathRules";
+            this.dataGridPathRules.Size = new System.Drawing.Size(609, 497);
+            this.dataGridPathRules.TabIndex = 0;
+            // 
+            // tabStyles
+            // 
+            this.tabStyles.Location = new System.Drawing.Point(4, 22);
+            this.tabStyles.Name = "tabStyles";
+            this.tabStyles.Padding = new System.Windows.Forms.Padding(3);
+            this.tabStyles.Size = new System.Drawing.Size(709, 517);
+            this.tabStyles.TabIndex = 1;
+            this.tabStyles.Text = "Styles";
+            this.tabStyles.UseVisualStyleBackColor = true;
+            // 
+            // statusStripEditor
+            // 
+            this.statusStripEditor.Location = new System.Drawing.Point(0, 546);
+            this.statusStripEditor.Name = "statusStripEditor";
+            this.statusStripEditor.Size = new System.Drawing.Size(720, 22);
+            this.statusStripEditor.TabIndex = 1;
+            this.statusStripEditor.Text = "statusStrip1";
+            // 
+            // textSewExtension
+            // 
+            this.textSewExtension.Location = new System.Drawing.Point(118, 100);
+            this.textSewExtension.Name = "textSewExtension";
+            this.textSewExtension.Size = new System.Drawing.Size(67, 20);
+            this.textSewExtension.TabIndex = 24;
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(56, 103);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(56, 13);
+            this.label4.TabIndex = 23;
+            this.label4.Text = "Extension:";
+            // 
+            // textSewRoot
+            // 
+            this.textSewRoot.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.textSewRoot.Location = new System.Drawing.Point(118, 74);
+            this.textSewRoot.Name = "textSewRoot";
+            this.textSewRoot.Size = new System.Drawing.Size(491, 20);
+            this.textSewRoot.TabIndex = 22;
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Location = new System.Drawing.Point(79, 77);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(33, 13);
+            this.label7.TabIndex = 21;
+            this.label7.Text = "Root:";
+            // 
+            // textStoneExtension
+            // 
+            this.textStoneExtension.Location = new System.Drawing.Point(118, 171);
+            this.textStoneExtension.Name = "textStoneExtension";
+            this.textStoneExtension.Size = new System.Drawing.Size(67, 20);
+            this.textStoneExtension.TabIndex = 28;
+            // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Location = new System.Drawing.Point(56, 174);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(56, 13);
+            this.label8.TabIndex = 27;
+            this.label8.Text = "Extension:";
+            // 
+            // textStoneRoot
+            // 
+            this.textStoneRoot.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.textStoneRoot.Location = new System.Drawing.Point(118, 145);
+            this.textStoneRoot.Name = "textStoneRoot";
+            this.textStoneRoot.Size = new System.Drawing.Size(491, 20);
+            this.textStoneRoot.TabIndex = 26;
+            // 
+            // label9
+            // 
+            this.label9.AutoSize = true;
+            this.label9.Location = new System.Drawing.Point(79, 148);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(33, 13);
+            this.label9.TabIndex = 25;
+            this.label9.Text = "Root:";
             // 
             // EditorWindow
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(720, 568);
-            this.Controls.Add(this.editorStatusStrip);
-            this.Controls.Add(this.configTabControl);
+            this.Controls.Add(this.statusStripEditor);
+            this.Controls.Add(this.tabControlConfig);
             this.Name = "EditorWindow";
             this.Text = "Editor";
-            this.configTabControl.ResumeLayout(false);
-            this.setupTab.ResumeLayout(false);
-            this.setupTabControl.ResumeLayout(false);
-            this.filePathsTab.ResumeLayout(false);
-            this.filePathsTab.PerformLayout();
-            this.prefixesTab.ResumeLayout(false);
-            this.trimsTab.ResumeLayout(false);
-            this.exportsTab.ResumeLayout(false);
-            this.styleTypesTab.ResumeLayout(false);
-            this.styleTypesTab.PerformLayout();
-            this.pathRulesTab.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.prefixesDataGrid)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.trimsDataGrid)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.exportsDataGrid)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pathRulesDataGrid)).EndInit();
+            this.tabControlConfig.ResumeLayout(false);
+            this.tabSetup.ResumeLayout(false);
+            this.tabControlSetup.ResumeLayout(false);
+            this.tabFilePaths.ResumeLayout(false);
+            this.tabFilePaths.PerformLayout();
+            this.tabPrefixes.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridPrefixes)).EndInit();
+            this.tabTrims.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridTrims)).EndInit();
+            this.tabExports.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridExports)).EndInit();
+            this.tabStyleTypes.ResumeLayout(false);
+            this.tabStyleTypes.PerformLayout();
+            this.tabPathRules.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridPathRules)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -470,41 +477,41 @@
 
         #endregion
 
-        private System.Windows.Forms.TabControl configTabControl;
-        private System.Windows.Forms.TabPage setupTab;
-        private System.Windows.Forms.TabControl setupTabControl;
-        private System.Windows.Forms.TabPage filePathsTab;
-        private System.Windows.Forms.TabPage prefixesTab;
-        private System.Windows.Forms.TabPage trimsTab;
-        private System.Windows.Forms.TabPage exportsTab;
-        private System.Windows.Forms.TabPage styleTypesTab;
-        private System.Windows.Forms.TabPage pathRulesTab;
-        private System.Windows.Forms.TabPage stylesTab;
-        private System.Windows.Forms.StatusStrip editorStatusStrip;
-        private System.Windows.Forms.DataGridView prefixesDataGrid;
+        private System.Windows.Forms.TabControl tabControlConfig;
+        private System.Windows.Forms.TabPage tabSetup;
+        private System.Windows.Forms.TabControl tabControlSetup;
+        private System.Windows.Forms.TabPage tabFilePaths;
+        private System.Windows.Forms.TabPage tabPrefixes;
+        private System.Windows.Forms.TabPage tabTrims;
+        private System.Windows.Forms.TabPage tabExports;
+        private System.Windows.Forms.TabPage tabStyleTypes;
+        private System.Windows.Forms.TabPage tabPathRules;
+        private System.Windows.Forms.TabPage tabStyles;
+        private System.Windows.Forms.StatusStrip statusStripEditor;
+        private System.Windows.Forms.DataGridView dataGridPrefixes;
         private System.Windows.Forms.TextBox textBox3;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.TextBox textBox2;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.TextBox textBox1;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.DataGridView trimsDataGrid;
-        private System.Windows.Forms.DataGridView exportsDataGrid;
+        private System.Windows.Forms.DataGridView dataGridTrims;
+        private System.Windows.Forms.DataGridView dataGridExports;
         private System.Windows.Forms.Label label10;
         private System.Windows.Forms.Label label11;
         private System.Windows.Forms.Label label12;
-        private System.Windows.Forms.TextBox textBox7;
-        private System.Windows.Forms.Label label7;
-        private System.Windows.Forms.TextBox textBox8;
-        private System.Windows.Forms.Label label8;
-        private System.Windows.Forms.TextBox textBox9;
-        private System.Windows.Forms.Label label9;
-        private System.Windows.Forms.TextBox textBox4;
-        private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.TextBox textBox5;
+        private System.Windows.Forms.TextBox textCutExtension;
         private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.TextBox textBox6;
+        private System.Windows.Forms.TextBox textCutRoot;
         private System.Windows.Forms.Label label6;
-        private System.Windows.Forms.DataGridView pathRulesDataGrid;
+        private System.Windows.Forms.DataGridView dataGridPathRules;
+        private System.Windows.Forms.TextBox textStoneExtension;
+        private System.Windows.Forms.Label label8;
+        private System.Windows.Forms.TextBox textStoneRoot;
+        private System.Windows.Forms.Label label9;
+        private System.Windows.Forms.TextBox textSewExtension;
+        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.TextBox textSewRoot;
+        private System.Windows.Forms.Label label7;
     }
 }

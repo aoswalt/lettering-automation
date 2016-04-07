@@ -12,10 +12,10 @@ namespace Lettering.Forms {
             Graphics g = e.Graphics;
 
             // Get the item from the collection.
-            TabPage _tabPage = setupTabControl.TabPages[e.Index];
+            TabPage _tabPage = tabControlSetup.TabPages[e.Index];
 
             // Get the real bounds for the tab rectangle.
-            Rectangle _tabBounds = setupTabControl.GetTabRect(e.Index);
+            Rectangle _tabBounds = tabControlSetup.GetTabRect(e.Index);
             int offset = 8;
             _tabBounds.Width -= offset;
             _tabBounds.X += offset;
