@@ -27,11 +27,11 @@
             this.tabSetup = new System.Windows.Forms.TabPage();
             this.tabControlSetup = new System.Windows.Forms.TabControl();
             this.tabFilePaths = new System.Windows.Forms.TabPage();
-            this.textBox3 = new System.Windows.Forms.TextBox();
+            this.textBoxInstalledLibraryFile = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
-            this.textBox2 = new System.Windows.Forms.TextBox();
+            this.textBoxNetworkLibraryFile = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
-            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.textBoxNetworkFontsFolder = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.tabPrefixes = new System.Windows.Forms.TabPage();
             this.dataGridPrefixes = new System.Windows.Forms.DataGridView();
@@ -43,22 +43,25 @@
             this.label10 = new System.Windows.Forms.Label();
             this.label11 = new System.Windows.Forms.Label();
             this.label12 = new System.Windows.Forms.Label();
-            this.textCutExtension = new System.Windows.Forms.TextBox();
+            this.textBoxCutExtension = new System.Windows.Forms.TextBox();
             this.label5 = new System.Windows.Forms.Label();
-            this.textCutRoot = new System.Windows.Forms.TextBox();
+            this.textBoxCutRoot = new System.Windows.Forms.TextBox();
             this.label6 = new System.Windows.Forms.Label();
             this.tabPathRules = new System.Windows.Forms.TabPage();
             this.dataGridPathRules = new System.Windows.Forms.DataGridView();
             this.tabStyles = new System.Windows.Forms.TabPage();
             this.statusStripEditor = new System.Windows.Forms.StatusStrip();
-            this.textSewExtension = new System.Windows.Forms.TextBox();
+            this.textBoxSewExtension = new System.Windows.Forms.TextBox();
             this.label4 = new System.Windows.Forms.Label();
-            this.textSewRoot = new System.Windows.Forms.TextBox();
+            this.textBoxSewRoot = new System.Windows.Forms.TextBox();
             this.label7 = new System.Windows.Forms.Label();
-            this.textStoneExtension = new System.Windows.Forms.TextBox();
+            this.textBoxStoneExtension = new System.Windows.Forms.TextBox();
             this.label8 = new System.Windows.Forms.Label();
-            this.textStoneRoot = new System.Windows.Forms.TextBox();
+            this.textBoxStoneRoot = new System.Windows.Forms.TextBox();
             this.label9 = new System.Windows.Forms.Label();
+            this.label13 = new System.Windows.Forms.Label();
+            this.labelPathRulesInfo = new System.Windows.Forms.Label();
+            this.treeViewStyles = new System.Windows.Forms.TreeView();
             this.tabControlConfig.SuspendLayout();
             this.tabSetup.SuspendLayout();
             this.tabControlSetup.SuspendLayout();
@@ -72,6 +75,7 @@
             this.tabStyleTypes.SuspendLayout();
             this.tabPathRules.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridPathRules)).BeginInit();
+            this.tabStyles.SuspendLayout();
             this.SuspendLayout();
             // 
             // tabControlConfig
@@ -123,11 +127,11 @@
             // 
             // tabFilePaths
             // 
-            this.tabFilePaths.Controls.Add(this.textBox3);
+            this.tabFilePaths.Controls.Add(this.textBoxInstalledLibraryFile);
             this.tabFilePaths.Controls.Add(this.label3);
-            this.tabFilePaths.Controls.Add(this.textBox2);
+            this.tabFilePaths.Controls.Add(this.textBoxNetworkLibraryFile);
             this.tabFilePaths.Controls.Add(this.label2);
-            this.tabFilePaths.Controls.Add(this.textBox1);
+            this.tabFilePaths.Controls.Add(this.textBoxNetworkFontsFolder);
             this.tabFilePaths.Controls.Add(this.label1);
             this.tabFilePaths.Location = new System.Drawing.Point(84, 4);
             this.tabFilePaths.Name = "tabFilePaths";
@@ -137,14 +141,14 @@
             this.tabFilePaths.Text = "File Paths";
             this.tabFilePaths.UseVisualStyleBackColor = true;
             // 
-            // textBox3
+            // textBoxInstalledLibraryFile
             // 
-            this.textBox3.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            this.textBoxInstalledLibraryFile.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.textBox3.Location = new System.Drawing.Point(123, 62);
-            this.textBox3.Name = "textBox3";
-            this.textBox3.Size = new System.Drawing.Size(482, 20);
-            this.textBox3.TabIndex = 5;
+            this.textBoxInstalledLibraryFile.Location = new System.Drawing.Point(123, 62);
+            this.textBoxInstalledLibraryFile.Name = "textBoxInstalledLibraryFile";
+            this.textBoxInstalledLibraryFile.Size = new System.Drawing.Size(482, 20);
+            this.textBoxInstalledLibraryFile.TabIndex = 5;
             // 
             // label3
             // 
@@ -155,14 +159,14 @@
             this.label3.TabIndex = 4;
             this.label3.Text = "Installed Library File:";
             // 
-            // textBox2
+            // textBoxNetworkLibraryFile
             // 
-            this.textBox2.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            this.textBoxNetworkLibraryFile.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.textBox2.Location = new System.Drawing.Point(123, 36);
-            this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(482, 20);
-            this.textBox2.TabIndex = 3;
+            this.textBoxNetworkLibraryFile.Location = new System.Drawing.Point(123, 36);
+            this.textBoxNetworkLibraryFile.Name = "textBoxNetworkLibraryFile";
+            this.textBoxNetworkLibraryFile.Size = new System.Drawing.Size(482, 20);
+            this.textBoxNetworkLibraryFile.TabIndex = 3;
             // 
             // label2
             // 
@@ -173,14 +177,14 @@
             this.label2.TabIndex = 2;
             this.label2.Text = "Network Library File:";
             // 
-            // textBox1
+            // textBoxNetworkFontsFolder
             // 
-            this.textBox1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            this.textBoxNetworkFontsFolder.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.textBox1.Location = new System.Drawing.Point(123, 10);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(482, 20);
-            this.textBox1.TabIndex = 1;
+            this.textBoxNetworkFontsFolder.Location = new System.Drawing.Point(123, 10);
+            this.textBoxNetworkFontsFolder.Name = "textBoxNetworkFontsFolder";
+            this.textBoxNetworkFontsFolder.Size = new System.Drawing.Size(482, 20);
+            this.textBoxNetworkFontsFolder.TabIndex = 1;
             // 
             // label1
             // 
@@ -253,20 +257,20 @@
             // 
             // tabStyleTypes
             // 
-            this.tabStyleTypes.Controls.Add(this.textStoneExtension);
+            this.tabStyleTypes.Controls.Add(this.textBoxStoneExtension);
             this.tabStyleTypes.Controls.Add(this.label8);
-            this.tabStyleTypes.Controls.Add(this.textStoneRoot);
+            this.tabStyleTypes.Controls.Add(this.textBoxStoneRoot);
             this.tabStyleTypes.Controls.Add(this.label9);
-            this.tabStyleTypes.Controls.Add(this.textSewExtension);
+            this.tabStyleTypes.Controls.Add(this.textBoxSewExtension);
             this.tabStyleTypes.Controls.Add(this.label4);
-            this.tabStyleTypes.Controls.Add(this.textSewRoot);
+            this.tabStyleTypes.Controls.Add(this.textBoxSewRoot);
             this.tabStyleTypes.Controls.Add(this.label7);
             this.tabStyleTypes.Controls.Add(this.label10);
             this.tabStyleTypes.Controls.Add(this.label11);
             this.tabStyleTypes.Controls.Add(this.label12);
-            this.tabStyleTypes.Controls.Add(this.textCutExtension);
+            this.tabStyleTypes.Controls.Add(this.textBoxCutExtension);
             this.tabStyleTypes.Controls.Add(this.label5);
-            this.tabStyleTypes.Controls.Add(this.textCutRoot);
+            this.tabStyleTypes.Controls.Add(this.textBoxCutRoot);
             this.tabStyleTypes.Controls.Add(this.label6);
             this.tabStyleTypes.Location = new System.Drawing.Point(84, 4);
             this.tabStyleTypes.Name = "tabStyleTypes";
@@ -306,12 +310,12 @@
             this.label12.TabIndex = 18;
             this.label12.Text = "Cut";
             // 
-            // textCutExtension
+            // textBoxCutExtension
             // 
-            this.textCutExtension.Location = new System.Drawing.Point(118, 32);
-            this.textCutExtension.Name = "textCutExtension";
-            this.textCutExtension.Size = new System.Drawing.Size(67, 20);
-            this.textCutExtension.TabIndex = 9;
+            this.textBoxCutExtension.Location = new System.Drawing.Point(118, 32);
+            this.textBoxCutExtension.Name = "textBoxCutExtension";
+            this.textBoxCutExtension.Size = new System.Drawing.Size(67, 20);
+            this.textBoxCutExtension.TabIndex = 9;
             // 
             // label5
             // 
@@ -322,14 +326,14 @@
             this.label5.TabIndex = 8;
             this.label5.Text = "Extension:";
             // 
-            // textCutRoot
+            // textBoxCutRoot
             // 
-            this.textCutRoot.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            this.textBoxCutRoot.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.textCutRoot.Location = new System.Drawing.Point(118, 6);
-            this.textCutRoot.Name = "textCutRoot";
-            this.textCutRoot.Size = new System.Drawing.Size(491, 20);
-            this.textCutRoot.TabIndex = 7;
+            this.textBoxCutRoot.Location = new System.Drawing.Point(118, 6);
+            this.textBoxCutRoot.Name = "textBoxCutRoot";
+            this.textBoxCutRoot.Size = new System.Drawing.Size(491, 20);
+            this.textBoxCutRoot.TabIndex = 7;
             // 
             // label6
             // 
@@ -342,6 +346,8 @@
             // 
             // tabPathRules
             // 
+            this.tabPathRules.Controls.Add(this.labelPathRulesInfo);
+            this.tabPathRules.Controls.Add(this.label13);
             this.tabPathRules.Controls.Add(this.dataGridPathRules);
             this.tabPathRules.Location = new System.Drawing.Point(84, 4);
             this.tabPathRules.Name = "tabPathRules";
@@ -353,15 +359,18 @@
             // 
             // dataGridPathRules
             // 
+            this.dataGridPathRules.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.dataGridPathRules.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridPathRules.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dataGridPathRules.Location = new System.Drawing.Point(3, 3);
             this.dataGridPathRules.Name = "dataGridPathRules";
-            this.dataGridPathRules.Size = new System.Drawing.Size(609, 497);
+            this.dataGridPathRules.Size = new System.Drawing.Size(476, 503);
             this.dataGridPathRules.TabIndex = 0;
             // 
             // tabStyles
             // 
+            this.tabStyles.Controls.Add(this.treeViewStyles);
             this.tabStyles.Location = new System.Drawing.Point(4, 22);
             this.tabStyles.Name = "tabStyles";
             this.tabStyles.Padding = new System.Windows.Forms.Padding(3);
@@ -378,12 +387,12 @@
             this.statusStripEditor.TabIndex = 1;
             this.statusStripEditor.Text = "statusStrip1";
             // 
-            // textSewExtension
+            // textBoxSewExtension
             // 
-            this.textSewExtension.Location = new System.Drawing.Point(118, 100);
-            this.textSewExtension.Name = "textSewExtension";
-            this.textSewExtension.Size = new System.Drawing.Size(67, 20);
-            this.textSewExtension.TabIndex = 24;
+            this.textBoxSewExtension.Location = new System.Drawing.Point(118, 100);
+            this.textBoxSewExtension.Name = "textBoxSewExtension";
+            this.textBoxSewExtension.Size = new System.Drawing.Size(67, 20);
+            this.textBoxSewExtension.TabIndex = 24;
             // 
             // label4
             // 
@@ -394,14 +403,14 @@
             this.label4.TabIndex = 23;
             this.label4.Text = "Extension:";
             // 
-            // textSewRoot
+            // textBoxSewRoot
             // 
-            this.textSewRoot.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            this.textBoxSewRoot.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.textSewRoot.Location = new System.Drawing.Point(118, 74);
-            this.textSewRoot.Name = "textSewRoot";
-            this.textSewRoot.Size = new System.Drawing.Size(491, 20);
-            this.textSewRoot.TabIndex = 22;
+            this.textBoxSewRoot.Location = new System.Drawing.Point(118, 74);
+            this.textBoxSewRoot.Name = "textBoxSewRoot";
+            this.textBoxSewRoot.Size = new System.Drawing.Size(491, 20);
+            this.textBoxSewRoot.TabIndex = 22;
             // 
             // label7
             // 
@@ -412,12 +421,12 @@
             this.label7.TabIndex = 21;
             this.label7.Text = "Root:";
             // 
-            // textStoneExtension
+            // textBoxStoneExtension
             // 
-            this.textStoneExtension.Location = new System.Drawing.Point(118, 171);
-            this.textStoneExtension.Name = "textStoneExtension";
-            this.textStoneExtension.Size = new System.Drawing.Size(67, 20);
-            this.textStoneExtension.TabIndex = 28;
+            this.textBoxStoneExtension.Location = new System.Drawing.Point(118, 171);
+            this.textBoxStoneExtension.Name = "textBoxStoneExtension";
+            this.textBoxStoneExtension.Size = new System.Drawing.Size(67, 20);
+            this.textBoxStoneExtension.TabIndex = 28;
             // 
             // label8
             // 
@@ -428,14 +437,14 @@
             this.label8.TabIndex = 27;
             this.label8.Text = "Extension:";
             // 
-            // textStoneRoot
+            // textBoxStoneRoot
             // 
-            this.textStoneRoot.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            this.textBoxStoneRoot.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.textStoneRoot.Location = new System.Drawing.Point(118, 145);
-            this.textStoneRoot.Name = "textStoneRoot";
-            this.textStoneRoot.Size = new System.Drawing.Size(491, 20);
-            this.textStoneRoot.TabIndex = 26;
+            this.textBoxStoneRoot.Location = new System.Drawing.Point(118, 145);
+            this.textBoxStoneRoot.Name = "textBoxStoneRoot";
+            this.textBoxStoneRoot.Size = new System.Drawing.Size(491, 20);
+            this.textBoxStoneRoot.TabIndex = 26;
             // 
             // label9
             // 
@@ -445,6 +454,35 @@
             this.label9.Size = new System.Drawing.Size(33, 13);
             this.label9.TabIndex = 25;
             this.label9.Text = "Root:";
+            // 
+            // label13
+            // 
+            this.label13.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.label13.AutoSize = true;
+            this.label13.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label13.Location = new System.Drawing.Point(485, 3);
+            this.label13.Name = "label13";
+            this.label13.Size = new System.Drawing.Size(106, 13);
+            this.label13.TabIndex = 1;
+            this.label13.Text = "Available Options";
+            // 
+            // labelPathRulesInfo
+            // 
+            this.labelPathRulesInfo.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.labelPathRulesInfo.AutoSize = true;
+            this.labelPathRulesInfo.Location = new System.Drawing.Point(485, 16);
+            this.labelPathRulesInfo.Name = "labelPathRulesInfo";
+            this.labelPathRulesInfo.Size = new System.Drawing.Size(45, 13);
+            this.labelPathRulesInfo.TabIndex = 2;
+            this.labelPathRulesInfo.Text = "Info text";
+            // 
+            // treeViewStyles
+            // 
+            this.treeViewStyles.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.treeViewStyles.Location = new System.Drawing.Point(3, 3);
+            this.treeViewStyles.Name = "treeViewStyles";
+            this.treeViewStyles.Size = new System.Drawing.Size(703, 511);
+            this.treeViewStyles.TabIndex = 0;
             // 
             // EditorWindow
             // 
@@ -469,7 +507,9 @@
             this.tabStyleTypes.ResumeLayout(false);
             this.tabStyleTypes.PerformLayout();
             this.tabPathRules.ResumeLayout(false);
+            this.tabPathRules.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridPathRules)).EndInit();
+            this.tabStyles.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -489,29 +529,32 @@
         private System.Windows.Forms.TabPage tabStyles;
         private System.Windows.Forms.StatusStrip statusStripEditor;
         private System.Windows.Forms.DataGridView dataGridPrefixes;
-        private System.Windows.Forms.TextBox textBox3;
+        private System.Windows.Forms.TextBox textBoxInstalledLibraryFile;
         private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.TextBox textBox2;
+        private System.Windows.Forms.TextBox textBoxNetworkLibraryFile;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.TextBox textBoxNetworkFontsFolder;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.DataGridView dataGridTrims;
         private System.Windows.Forms.DataGridView dataGridExports;
         private System.Windows.Forms.Label label10;
         private System.Windows.Forms.Label label11;
         private System.Windows.Forms.Label label12;
-        private System.Windows.Forms.TextBox textCutExtension;
+        private System.Windows.Forms.TextBox textBoxCutExtension;
         private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.TextBox textCutRoot;
+        private System.Windows.Forms.TextBox textBoxCutRoot;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.DataGridView dataGridPathRules;
-        private System.Windows.Forms.TextBox textStoneExtension;
+        private System.Windows.Forms.TextBox textBoxStoneExtension;
         private System.Windows.Forms.Label label8;
-        private System.Windows.Forms.TextBox textStoneRoot;
+        private System.Windows.Forms.TextBox textBoxStoneRoot;
         private System.Windows.Forms.Label label9;
-        private System.Windows.Forms.TextBox textSewExtension;
+        private System.Windows.Forms.TextBox textBoxSewExtension;
         private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.TextBox textSewRoot;
+        private System.Windows.Forms.TextBox textBoxSewRoot;
         private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.Label labelPathRulesInfo;
+        private System.Windows.Forms.Label label13;
+        private System.Windows.Forms.TreeView treeViewStyles;
     }
 }

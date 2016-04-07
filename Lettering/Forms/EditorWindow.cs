@@ -7,7 +7,7 @@ namespace Lettering.Forms {
             InitializeComponent();
         }
 
-        //NOTE(adam): based on MSDN, draws text horizontal
+        //NOTE(adam): based on MSDN, draws tab text horizontal
         private void setupTabControl_DrawItem(object sender, DrawItemEventArgs e) {
             Graphics g = e.Graphics;
 
