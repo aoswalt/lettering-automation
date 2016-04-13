@@ -40,6 +40,14 @@
             this.tabExports = new System.Windows.Forms.TabPage();
             this.dataGridExports = new System.Windows.Forms.DataGridView();
             this.tabStyleTypes = new System.Windows.Forms.TabPage();
+            this.textBoxStoneExtension = new System.Windows.Forms.TextBox();
+            this.label8 = new System.Windows.Forms.Label();
+            this.textBoxStoneRoot = new System.Windows.Forms.TextBox();
+            this.label9 = new System.Windows.Forms.Label();
+            this.textBoxSewExtension = new System.Windows.Forms.TextBox();
+            this.label4 = new System.Windows.Forms.Label();
+            this.textBoxSewRoot = new System.Windows.Forms.TextBox();
+            this.label7 = new System.Windows.Forms.Label();
             this.label10 = new System.Windows.Forms.Label();
             this.label11 = new System.Windows.Forms.Label();
             this.label12 = new System.Windows.Forms.Label();
@@ -48,20 +56,13 @@
             this.textBoxCutRoot = new System.Windows.Forms.TextBox();
             this.label6 = new System.Windows.Forms.Label();
             this.tabPathRules = new System.Windows.Forms.TabPage();
+            this.labelPathRulesInfo = new System.Windows.Forms.Label();
+            this.label13 = new System.Windows.Forms.Label();
             this.dataGridPathRules = new System.Windows.Forms.DataGridView();
             this.tabStyles = new System.Windows.Forms.TabPage();
-            this.statusStripEditor = new System.Windows.Forms.StatusStrip();
-            this.textBoxSewExtension = new System.Windows.Forms.TextBox();
-            this.label4 = new System.Windows.Forms.Label();
-            this.textBoxSewRoot = new System.Windows.Forms.TextBox();
-            this.label7 = new System.Windows.Forms.Label();
-            this.textBoxStoneExtension = new System.Windows.Forms.TextBox();
-            this.label8 = new System.Windows.Forms.Label();
-            this.textBoxStoneRoot = new System.Windows.Forms.TextBox();
-            this.label9 = new System.Windows.Forms.Label();
-            this.label13 = new System.Windows.Forms.Label();
-            this.labelPathRulesInfo = new System.Windows.Forms.Label();
             this.treeViewStyles = new System.Windows.Forms.TreeView();
+            this.statusStripEditor = new System.Windows.Forms.StatusStrip();
+            this.buttonDone = new System.Windows.Forms.Button();
             this.tabControlConfig.SuspendLayout();
             this.tabSetup.SuspendLayout();
             this.tabControlSetup.SuspendLayout();
@@ -89,7 +90,7 @@
             this.tabControlConfig.Multiline = true;
             this.tabControlConfig.Name = "tabControlConfig";
             this.tabControlConfig.SelectedIndex = 0;
-            this.tabControlConfig.Size = new System.Drawing.Size(717, 543);
+            this.tabControlConfig.Size = new System.Drawing.Size(717, 510);
             this.tabControlConfig.TabIndex = 0;
             // 
             // tabSetup
@@ -98,7 +99,7 @@
             this.tabSetup.Location = new System.Drawing.Point(4, 22);
             this.tabSetup.Name = "tabSetup";
             this.tabSetup.Padding = new System.Windows.Forms.Padding(3);
-            this.tabSetup.Size = new System.Drawing.Size(709, 517);
+            this.tabSetup.Size = new System.Drawing.Size(709, 484);
             this.tabSetup.TabIndex = 0;
             this.tabSetup.Text = "Setup";
             this.tabSetup.UseVisualStyleBackColor = true;
@@ -120,7 +121,7 @@
             this.tabControlSetup.Multiline = true;
             this.tabControlSetup.Name = "tabControlSetup";
             this.tabControlSetup.SelectedIndex = 0;
-            this.tabControlSetup.Size = new System.Drawing.Size(703, 511);
+            this.tabControlSetup.Size = new System.Drawing.Size(703, 478);
             this.tabControlSetup.SizeMode = System.Windows.Forms.TabSizeMode.Fixed;
             this.tabControlSetup.TabIndex = 0;
             this.tabControlSetup.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.setupTabControl_DrawItem);
@@ -136,7 +137,7 @@
             this.tabFilePaths.Location = new System.Drawing.Point(84, 4);
             this.tabFilePaths.Name = "tabFilePaths";
             this.tabFilePaths.Padding = new System.Windows.Forms.Padding(3);
-            this.tabFilePaths.Size = new System.Drawing.Size(615, 503);
+            this.tabFilePaths.Size = new System.Drawing.Size(615, 470);
             this.tabFilePaths.TabIndex = 0;
             this.tabFilePaths.Text = "File Paths";
             this.tabFilePaths.UseVisualStyleBackColor = true;
@@ -201,7 +202,7 @@
             this.tabPrefixes.Location = new System.Drawing.Point(84, 4);
             this.tabPrefixes.Name = "tabPrefixes";
             this.tabPrefixes.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPrefixes.Size = new System.Drawing.Size(615, 503);
+            this.tabPrefixes.Size = new System.Drawing.Size(615, 470);
             this.tabPrefixes.TabIndex = 1;
             this.tabPrefixes.Text = "Prefixes";
             this.tabPrefixes.UseVisualStyleBackColor = true;
@@ -212,7 +213,7 @@
             this.dataGridPrefixes.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dataGridPrefixes.Location = new System.Drawing.Point(3, 3);
             this.dataGridPrefixes.Name = "dataGridPrefixes";
-            this.dataGridPrefixes.Size = new System.Drawing.Size(609, 497);
+            this.dataGridPrefixes.Size = new System.Drawing.Size(609, 464);
             this.dataGridPrefixes.TabIndex = 1;
             // 
             // tabTrims
@@ -221,7 +222,7 @@
             this.tabTrims.Location = new System.Drawing.Point(84, 4);
             this.tabTrims.Name = "tabTrims";
             this.tabTrims.Padding = new System.Windows.Forms.Padding(3);
-            this.tabTrims.Size = new System.Drawing.Size(615, 503);
+            this.tabTrims.Size = new System.Drawing.Size(615, 470);
             this.tabTrims.TabIndex = 2;
             this.tabTrims.Text = "Trims";
             this.tabTrims.UseVisualStyleBackColor = true;
@@ -232,7 +233,7 @@
             this.dataGridTrims.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dataGridTrims.Location = new System.Drawing.Point(3, 3);
             this.dataGridTrims.Name = "dataGridTrims";
-            this.dataGridTrims.Size = new System.Drawing.Size(609, 497);
+            this.dataGridTrims.Size = new System.Drawing.Size(609, 464);
             this.dataGridTrims.TabIndex = 0;
             // 
             // tabExports
@@ -279,6 +280,74 @@
             this.tabStyleTypes.TabIndex = 4;
             this.tabStyleTypes.Text = "Style Types";
             this.tabStyleTypes.UseVisualStyleBackColor = true;
+            // 
+            // textBoxStoneExtension
+            // 
+            this.textBoxStoneExtension.Location = new System.Drawing.Point(118, 171);
+            this.textBoxStoneExtension.Name = "textBoxStoneExtension";
+            this.textBoxStoneExtension.Size = new System.Drawing.Size(67, 20);
+            this.textBoxStoneExtension.TabIndex = 28;
+            // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Location = new System.Drawing.Point(56, 174);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(56, 13);
+            this.label8.TabIndex = 27;
+            this.label8.Text = "Extension:";
+            // 
+            // textBoxStoneRoot
+            // 
+            this.textBoxStoneRoot.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.textBoxStoneRoot.Location = new System.Drawing.Point(118, 145);
+            this.textBoxStoneRoot.Name = "textBoxStoneRoot";
+            this.textBoxStoneRoot.Size = new System.Drawing.Size(491, 20);
+            this.textBoxStoneRoot.TabIndex = 26;
+            // 
+            // label9
+            // 
+            this.label9.AutoSize = true;
+            this.label9.Location = new System.Drawing.Point(79, 148);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(33, 13);
+            this.label9.TabIndex = 25;
+            this.label9.Text = "Root:";
+            // 
+            // textBoxSewExtension
+            // 
+            this.textBoxSewExtension.Location = new System.Drawing.Point(118, 100);
+            this.textBoxSewExtension.Name = "textBoxSewExtension";
+            this.textBoxSewExtension.Size = new System.Drawing.Size(67, 20);
+            this.textBoxSewExtension.TabIndex = 24;
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(56, 103);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(56, 13);
+            this.label4.TabIndex = 23;
+            this.label4.Text = "Extension:";
+            // 
+            // textBoxSewRoot
+            // 
+            this.textBoxSewRoot.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.textBoxSewRoot.Location = new System.Drawing.Point(118, 74);
+            this.textBoxSewRoot.Name = "textBoxSewRoot";
+            this.textBoxSewRoot.Size = new System.Drawing.Size(491, 20);
+            this.textBoxSewRoot.TabIndex = 22;
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Location = new System.Drawing.Point(79, 77);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(33, 13);
+            this.label7.TabIndex = 21;
+            this.label7.Text = "Root:";
             // 
             // label10
             // 
@@ -357,6 +426,27 @@
             this.tabPathRules.Text = "Path Rules";
             this.tabPathRules.UseVisualStyleBackColor = true;
             // 
+            // labelPathRulesInfo
+            // 
+            this.labelPathRulesInfo.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.labelPathRulesInfo.AutoSize = true;
+            this.labelPathRulesInfo.Location = new System.Drawing.Point(485, 16);
+            this.labelPathRulesInfo.Name = "labelPathRulesInfo";
+            this.labelPathRulesInfo.Size = new System.Drawing.Size(45, 13);
+            this.labelPathRulesInfo.TabIndex = 2;
+            this.labelPathRulesInfo.Text = "Info text";
+            // 
+            // label13
+            // 
+            this.label13.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.label13.AutoSize = true;
+            this.label13.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label13.Location = new System.Drawing.Point(485, 3);
+            this.label13.Name = "label13";
+            this.label13.Size = new System.Drawing.Size(106, 13);
+            this.label13.TabIndex = 1;
+            this.label13.Text = "Available Options";
+            // 
             // dataGridPathRules
             // 
             this.dataGridPathRules.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
@@ -379,103 +469,6 @@
             this.tabStyles.Text = "Styles";
             this.tabStyles.UseVisualStyleBackColor = true;
             // 
-            // statusStripEditor
-            // 
-            this.statusStripEditor.Location = new System.Drawing.Point(0, 546);
-            this.statusStripEditor.Name = "statusStripEditor";
-            this.statusStripEditor.Size = new System.Drawing.Size(720, 22);
-            this.statusStripEditor.TabIndex = 1;
-            this.statusStripEditor.Text = "statusStrip1";
-            // 
-            // textBoxSewExtension
-            // 
-            this.textBoxSewExtension.Location = new System.Drawing.Point(118, 100);
-            this.textBoxSewExtension.Name = "textBoxSewExtension";
-            this.textBoxSewExtension.Size = new System.Drawing.Size(67, 20);
-            this.textBoxSewExtension.TabIndex = 24;
-            // 
-            // label4
-            // 
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(56, 103);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(56, 13);
-            this.label4.TabIndex = 23;
-            this.label4.Text = "Extension:";
-            // 
-            // textBoxSewRoot
-            // 
-            this.textBoxSewRoot.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.textBoxSewRoot.Location = new System.Drawing.Point(118, 74);
-            this.textBoxSewRoot.Name = "textBoxSewRoot";
-            this.textBoxSewRoot.Size = new System.Drawing.Size(491, 20);
-            this.textBoxSewRoot.TabIndex = 22;
-            // 
-            // label7
-            // 
-            this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(79, 77);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(33, 13);
-            this.label7.TabIndex = 21;
-            this.label7.Text = "Root:";
-            // 
-            // textBoxStoneExtension
-            // 
-            this.textBoxStoneExtension.Location = new System.Drawing.Point(118, 171);
-            this.textBoxStoneExtension.Name = "textBoxStoneExtension";
-            this.textBoxStoneExtension.Size = new System.Drawing.Size(67, 20);
-            this.textBoxStoneExtension.TabIndex = 28;
-            // 
-            // label8
-            // 
-            this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(56, 174);
-            this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(56, 13);
-            this.label8.TabIndex = 27;
-            this.label8.Text = "Extension:";
-            // 
-            // textBoxStoneRoot
-            // 
-            this.textBoxStoneRoot.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.textBoxStoneRoot.Location = new System.Drawing.Point(118, 145);
-            this.textBoxStoneRoot.Name = "textBoxStoneRoot";
-            this.textBoxStoneRoot.Size = new System.Drawing.Size(491, 20);
-            this.textBoxStoneRoot.TabIndex = 26;
-            // 
-            // label9
-            // 
-            this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(79, 148);
-            this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(33, 13);
-            this.label9.TabIndex = 25;
-            this.label9.Text = "Root:";
-            // 
-            // label13
-            // 
-            this.label13.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.label13.AutoSize = true;
-            this.label13.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label13.Location = new System.Drawing.Point(485, 3);
-            this.label13.Name = "label13";
-            this.label13.Size = new System.Drawing.Size(106, 13);
-            this.label13.TabIndex = 1;
-            this.label13.Text = "Available Options";
-            // 
-            // labelPathRulesInfo
-            // 
-            this.labelPathRulesInfo.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.labelPathRulesInfo.AutoSize = true;
-            this.labelPathRulesInfo.Location = new System.Drawing.Point(485, 16);
-            this.labelPathRulesInfo.Name = "labelPathRulesInfo";
-            this.labelPathRulesInfo.Size = new System.Drawing.Size(45, 13);
-            this.labelPathRulesInfo.TabIndex = 2;
-            this.labelPathRulesInfo.Text = "Info text";
-            // 
             // treeViewStyles
             // 
             this.treeViewStyles.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -484,11 +477,30 @@
             this.treeViewStyles.Size = new System.Drawing.Size(703, 511);
             this.treeViewStyles.TabIndex = 0;
             // 
+            // statusStripEditor
+            // 
+            this.statusStripEditor.Location = new System.Drawing.Point(0, 546);
+            this.statusStripEditor.Name = "statusStripEditor";
+            this.statusStripEditor.Size = new System.Drawing.Size(720, 22);
+            this.statusStripEditor.TabIndex = 1;
+            this.statusStripEditor.Text = "statusStrip1";
+            // 
+            // buttonDone
+            // 
+            this.buttonDone.Location = new System.Drawing.Point(12, 516);
+            this.buttonDone.Name = "buttonDone";
+            this.buttonDone.Size = new System.Drawing.Size(75, 23);
+            this.buttonDone.TabIndex = 2;
+            this.buttonDone.Text = "Done";
+            this.buttonDone.UseVisualStyleBackColor = true;
+            this.buttonDone.Click += new System.EventHandler(this.buttonDone_Click);
+            // 
             // EditorWindow
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(720, 568);
+            this.Controls.Add(this.buttonDone);
             this.Controls.Add(this.statusStripEditor);
             this.Controls.Add(this.tabControlConfig);
             this.Name = "EditorWindow";
@@ -556,5 +568,6 @@
         private System.Windows.Forms.Label labelPathRulesInfo;
         private System.Windows.Forms.Label label13;
         private System.Windows.Forms.TreeView treeViewStyles;
+        private System.Windows.Forms.Button buttonDone;
     }
 }

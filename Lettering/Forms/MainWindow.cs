@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Windows.Forms;
-using Lettering.Forms;
 
 namespace Lettering {
     internal partial class MainWindow : Form {
@@ -80,8 +79,7 @@ namespace Lettering {
         }
 
         private void editConfigsToolStripMenuItem_Click(object sender, EventArgs e) {
-            EditorWindow editor = new EditorWindow();
-            editor.Show();
+            Lettering.LaunchConfigEditor();
         }
     }
 }

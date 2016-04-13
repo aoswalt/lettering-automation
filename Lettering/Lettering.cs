@@ -92,7 +92,7 @@ namespace Lettering {
             jdata.Setup.FilePaths.NetworkFontsFolderPath = FilePaths.networkFontsFolderPath;
             jdata.Setup.FilePaths.NetworkLibraryFilePath = FilePaths.networkLibraryFilePath;
             jdata.Setup.FilePaths.InstalledLibraryFilePath = FilePaths.installedLibraryFilePath;
-            jdata.Setup.StylePrefixes = globalConfig.stylePrefixes;
+            jdata.Setup.StylePrefixes = globalConfig.stylePrefixes.ConvertAll<StringData>(x => new StringData(x));
             jdata.Setup.Trims = new List<Data_Trim>();
             foreach(string t in globalConfig.trims) {
                 Data_Trim trim = new Data_Trim();
@@ -120,11 +120,13 @@ namespace Lettering {
             stoneType.Root = @"\\varappmanu\Rhinestone\Rhinestone Orders\Sierra\Inline Styles";
             stoneType.Extension = "dsg";
             jdata.Setup.TypeData.Add(ReportType.Stone.ToString(), stoneType);
-            jdata.Setup.PathRules = new Dictionary<string, string>();
+            jdata.Setup.PathRules = new List<Data_PathRule>();
             foreach(KeyValuePair<int, string> pairs in configs[ReportType.Cut].pathTypes) {
-                string id = pairs.Key.ToString("D2");
-                string path = pairs.Value;
-                jdata.Setup.PathRules.Add(id, path);
+                Data_PathRule pathRule = new Data_PathRule() {
+                    Id = pairs.Key.ToString("D2"),
+                    Rule = pairs.Value
+                };
+                jdata.Setup.PathRules.Add(pathRule);
             }
             jdata.Styles = new Dictionary<string, Data_Style>();
             foreach(KeyValuePair<ReportType, StyleConfigData> configDataPair in configs) {
@@ -205,6 +207,12 @@ namespace Lettering {
             }
 
             return jdata;
+        }
+
+        internal static void LaunchConfigEditor() {
+            LoadAllConfigs();
+            EditorWindow editor = new EditorWindow(jsonConfig);
+            editor.ShowDialog(mainWindow);
         }
 
         internal static void CheckFonts() {

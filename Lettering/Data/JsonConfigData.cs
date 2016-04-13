@@ -16,28 +16,28 @@ namespace Lettering.Data {
 
     public class Data_Setup {
         public Data_FilePaths FilePaths;
-        public List<string> StylePrefixes;
+        public List<StringData> StylePrefixes;
         public List<Data_Trim> Trims;
-        public List<Data_Export> Exports;       //TODO(adam): use dictionary instead?
+        public List<Data_Export> Exports;
         public Dictionary<string, Data_TypeData> TypeData;
-        public Dictionary<string, string> PathRules;
+        public List<Data_PathRule> PathRules;
     }
 
     public class Data_FilePaths {
-        public string NetworkFontsFolderPath;
-        public string NetworkLibraryFilePath;
-        public string InstalledLibraryFilePath;
+        public string NetworkFontsFolderPath { get; set; }
+        public string NetworkLibraryFilePath { get; set; }
+        public string InstalledLibraryFilePath { get; set; }
     }
 
     public class Data_Trim {
-        public string _Comment;
-        public string Pattern;
+        public string Pattern { get; set; }
+        public string _Comment { get; set; }
     }
 
     public class Data_Export {
         public string StyleRegex;
         [JsonConverter(typeof(StringEnumConverter))]
-        public ExportType FileType;     //TODO(adam): use enum? use cdr enum value?
+        public ExportType FileType;     //TODO(adam): use cdr enum value?
     }
 
     public class Data_TypeData {
@@ -45,10 +45,10 @@ namespace Lettering.Data {
         public string Extension;
     }
 
-    //public class Data_PathRule {
-    //    public string Id;
-    //    public string Rule;
-    //}
+    public class Data_PathRule {
+        public string Id { get; set; }
+        public string Rule { get; set; }
+    }
 
     public class Data_Style {
         public Data_StyleData Cut;
@@ -67,6 +67,16 @@ namespace Lettering.Data {
         public string Path;
         public List<string> Conditions;
     }
+
+    public class StringData {
+        public string Value { get; set; }
+        public StringData() { }
+        public StringData(string s) { Value = s; }
+        public static implicit operator string(StringData s) { return s.Value; }
+        public static implicit operator StringData(string s) { return new StringData(s); }
+    }
+
+    //TODO(adam): cutom JsonSerializer class(es)?
 }
 
 
