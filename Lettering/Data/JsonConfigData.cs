@@ -19,7 +19,7 @@ namespace Lettering.Data {
         public List<StringData> StylePrefixes;
         public List<Data_Trim> Trims;
         public List<Data_Export> Exports;
-        public Dictionary<string, Data_TypeData> TypeData;
+        public Dictionary<string, Data_TypeData> TypeData;  //TODO(adam): change key to enum
         public List<Data_PathRule> PathRules;
     }
 
@@ -35,14 +35,14 @@ namespace Lettering.Data {
     }
 
     public class Data_Export {
-        public string StyleRegex;
+        public string StyleRegex { get; set; }
         [JsonConverter(typeof(StringEnumConverter))]
-        public ExportType FileType;     //TODO(adam): use cdr enum value?
+        public ExportType FileType { get; set; }    //TODO(adam): use cdr enum value?
     }
 
     public class Data_TypeData {
-        public string Root;
-        public string Extension;
+        public string Root { get; set; }
+        public string Extension { get; set; }
     }
 
     public class Data_PathRule {

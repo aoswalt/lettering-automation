@@ -22,11 +22,38 @@ namespace Lettering.Forms {
             textBoxNetworkFontsFolder.DataBindings.Add("Text", editedConfig.Setup.FilePaths, "NetworkFontsFolderPath", true, DataSourceUpdateMode.OnPropertyChanged);
             textBoxNetworkLibraryFile.DataBindings.Add("Text", editedConfig.Setup.FilePaths, "NetworkLibraryFilePath", true, DataSourceUpdateMode.OnPropertyChanged);
             textBoxInstalledLibraryFile.DataBindings.Add("Text", editedConfig.Setup.FilePaths, "InstalledLibraryFilePath", true, DataSourceUpdateMode.OnPropertyChanged);
-            
+
             dataGridPrefixes.DataSource = new BindingList<StringData>(editedConfig.Setup.StylePrefixes);
             dataGridPrefixes.Columns[0].HeaderText = "Prefix";
-            
+
             dataGridTrims.DataSource = new BindingList<Data_Trim>(editedConfig.Setup.Trims);
+
+            dataGridExports.DataSource = new BindingList<Data_Export>(editedConfig.Setup.Exports);
+            dataGridExports.Columns[0].HeaderText = "Style Regex";
+            dataGridExports.Columns[1].HeaderText = "File Type";
+
+            textBoxCutRoot.DataBindings.Add("Text", editedConfig.Setup.TypeData["Cut"], "Root");
+            textBoxCutExtension.DataBindings.Add("Text", editedConfig.Setup.TypeData["Cut"], "Extension");
+            textBoxSewRoot.DataBindings.Add("Text", editedConfig.Setup.TypeData["Sew"], "Root");
+            textBoxSewExtension.DataBindings.Add("Text", editedConfig.Setup.TypeData["Sew"], "Extension");
+            textBoxStoneRoot.DataBindings.Add("Text", editedConfig.Setup.TypeData["Stone"], "Root");
+            textBoxStoneExtension.DataBindings.Add("Text", editedConfig.Setup.TypeData["Stone"], "Extension");
+
+            dataGridPathRules.DataSource = new BindingList<Data_PathRule>(editedConfig.Setup.PathRules);
+            dataGridPathRules.Columns[1].Width *= 2;
+            labelPathRulesInfo.Text = "\n";
+            labelPathRulesInfo.Text += "!style\n    Style Folder/Style Code\n";
+            labelPathRulesInfo.Text += "!size\n    #INCH\n";
+            labelPathRulesInfo.Text += "!spec\n    #\n";
+            labelPathRulesInfo.Text += "!ya\n    Youth/Adult\n";
+            labelPathRulesInfo.Text += "!cd\n    Cheer/Dance\n";
+            labelPathRulesInfo.Text += "\n";
+            labelPathRulesInfo.Text += "ignore\n    Ignore Style\n";
+            labelPathRulesInfo.Text += "mirror\n    Same as Other Style\n";
+            labelPathRulesInfo.Text += "names\n    Names for Automation\n";
+            labelPathRulesInfo.Text += "\n";
+            labelPathRulesInfo.Text += "cut-sew_files\n    Sew Files in Cut Files\n";
+            labelPathRulesInfo.Text += "cut-specific\n    specific Sew Files\n";
         }
 
         //NOTE(adam): based on MSDN, draws tab text horizontal
