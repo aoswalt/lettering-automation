@@ -465,7 +465,7 @@
             this.tabStyles.Location = new System.Drawing.Point(4, 22);
             this.tabStyles.Name = "tabStyles";
             this.tabStyles.Padding = new System.Windows.Forms.Padding(3);
-            this.tabStyles.Size = new System.Drawing.Size(709, 517);
+            this.tabStyles.Size = new System.Drawing.Size(709, 484);
             this.tabStyles.TabIndex = 1;
             this.tabStyles.Text = "Styles";
             this.tabStyles.UseVisualStyleBackColor = true;
@@ -475,7 +475,7 @@
             this.treeViewStyles.Dock = System.Windows.Forms.DockStyle.Fill;
             this.treeViewStyles.Location = new System.Drawing.Point(3, 3);
             this.treeViewStyles.Name = "treeViewStyles";
-            this.treeViewStyles.Size = new System.Drawing.Size(703, 511);
+            this.treeViewStyles.Size = new System.Drawing.Size(703, 478);
             this.treeViewStyles.TabIndex = 0;
             // 
             // statusStripEditor

@@ -1,4 +1,5 @@
-﻿using System.ComponentModel;
+﻿using System.Collections.Generic;
+using System.ComponentModel;
 using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
@@ -15,10 +16,11 @@ namespace Lettering.Forms {
             //NOTE(adam): simple but probably inefficient deep copy of config
             editedConfig = JsonConvert.DeserializeObject<JsonConfigData>(JsonConvert.SerializeObject(config));
             InitializeComponent();
-            bindData();
+            BindSetupData();
+            BuildStylesTree();
         }
 
-        private void bindData() {
+        private void BindSetupData() {
             textBoxNetworkFontsFolder.DataBindings.Add("Text", editedConfig.Setup.FilePaths, "NetworkFontsFolderPath", true, DataSourceUpdateMode.OnPropertyChanged);
             textBoxNetworkLibraryFile.DataBindings.Add("Text", editedConfig.Setup.FilePaths, "NetworkLibraryFilePath", true, DataSourceUpdateMode.OnPropertyChanged);
             textBoxInstalledLibraryFile.DataBindings.Add("Text", editedConfig.Setup.FilePaths, "InstalledLibraryFilePath", true, DataSourceUpdateMode.OnPropertyChanged);
@@ -56,6 +58,60 @@ namespace Lettering.Forms {
             labelPathRulesInfo.Text += "cut-specific\n    specific Sew Files\n";
         }
 
+        private void BuildStylesTree() {
+            foreach(KeyValuePair<string, Data_Style> styleKV in editedConfig.Styles) {
+                StyleNode styleNode = new StyleNode(styleKV.Key, styleKV.Value);
+
+                if(styleKV.Value.Cut != null) {
+                    StyleDataNode cutNode = new StyleDataNode(ReportType.Cut, styleKV.Value.Cut);
+                    styleNode.Nodes.Add(cutNode);
+                }
+
+                if(styleKV.Value.Sew != null) {
+                    StyleDataNode sewNode = new StyleDataNode(ReportType.Sew, styleKV.Value.Sew);
+                    styleNode.Nodes.Add(sewNode);
+                }
+
+                if(styleKV.Value.Stone != null) {
+                    StyleDataNode stoneNode = new StyleDataNode(ReportType.Stone, styleKV.Value.Stone);
+                    styleNode.Nodes.Add(stoneNode);
+                }
+
+                foreach(TreeNode typeNode in styleNode.Nodes) {
+                    Data_StyleData styleData = (Data_StyleData)typeNode.Tag;
+                    
+                    if(styleData.Rule != null) {
+                        typeNode.Nodes.Add(new RuleNode(styleData.Rule));
+                    }
+
+                    if(styleData.CustomWordOrder != null) {
+                        typeNode.Nodes.Add(new WordOrderNode(styleData.CustomWordOrder));
+                    }
+
+                    if(styleData.MirroredStyle != null) {
+                        typeNode.Nodes.Add(new MirrorNode(styleData.MirroredStyle));
+                    }
+
+                    if(styleData.Exceptions != null) {
+                        ExceptionsNode exsNode = new ExceptionsNode();
+                        typeNode.Nodes.Add(exsNode);
+                        
+                        foreach(Data_Exception ex in styleData.Exceptions) {
+                            ExceptionNode exNode = new ExceptionNode(ex);
+
+                            foreach(string condition in ex.Conditions) {
+                                exNode.Nodes.Add(new ConditionNode(condition));
+                            }
+
+                            exsNode.Nodes.Add(exNode);
+                        }
+                    }
+                }
+
+                treeViewStyles.Nodes.Add(styleNode);
+            }
+        }
+
         //NOTE(adam): based on MSDN, draws tab text horizontal
         private void setupTabControl_DrawItem(object sender, DrawItemEventArgs e) {
             Graphics g = e.Graphics;
@@ -81,6 +137,61 @@ namespace Lettering.Forms {
 
         private void buttonDone_Click(object sender, System.EventArgs e) {
             MessageBox.Show(editedConfig.Setup.StylePrefixes[0]);
+        }
+    }
+
+    internal class StyleNode : TreeNode {
+        internal StyleNode(string styleString, Data_Style style) {
+            this.Text = styleString;
+            this.Tag = style;
+        }
+    }
+
+    internal class StyleDataNode : TreeNode {
+        internal StyleDataNode(ReportType type, Data_StyleData styleData) {
+            this.Text = type.ToString();
+            this.Tag = styleData;
+        }
+    }
+
+    internal class RuleNode : TreeNode {
+        internal RuleNode(string ruleId) {
+            this.Text = "Rule: " + ruleId;
+            this.Tag = ruleId;
+        }
+    }
+
+    internal class WordOrderNode : TreeNode {
+        internal WordOrderNode(List<int> words) {
+            this.Text = "Custom Word Order: " + string.Join(",", words);
+            this.Tag = words;
+        }
+    }
+
+    internal class MirrorNode : TreeNode {
+        internal MirrorNode(string style) {
+            this.Text = "Mirror: " + style;
+            this.Tag = style;
+        }
+    }
+
+    internal class ExceptionsNode : TreeNode {
+        internal ExceptionsNode() {
+            this.Text = "Exceptions";
+        }
+    }
+
+    internal class ExceptionNode : TreeNode {
+        internal ExceptionNode(Data_Exception ex) {
+            this.Text = ex.Path;
+            this.Tag = ex;
+        }
+    }
+
+    internal class ConditionNode : TreeNode {
+        internal ConditionNode(string condition) {
+            this.Text = "Condition: " + condition;
+            this.Tag = condition;
         }
     }
 }
