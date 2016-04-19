@@ -477,6 +477,7 @@
             this.treeViewStyles.Name = "treeViewStyles";
             this.treeViewStyles.Size = new System.Drawing.Size(703, 478);
             this.treeViewStyles.TabIndex = 0;
+            this.treeViewStyles.NodeMouseDoubleClick += new System.Windows.Forms.TreeNodeMouseClickEventHandler(this.treeViewStyles_NodeMouseDoubleClick);
             // 
             // statusStripEditor
             // 

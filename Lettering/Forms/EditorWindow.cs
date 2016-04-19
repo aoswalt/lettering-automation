@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel;
 using System.Drawing;
 using System.Linq;
@@ -41,6 +42,7 @@ namespace Lettering.Forms {
             textBoxStoneRoot.DataBindings.Add("Text", editedConfig.Setup.TypeData["Stone"], "Root");
             textBoxStoneExtension.DataBindings.Add("Text", editedConfig.Setup.TypeData["Stone"], "Extension");
 
+            //TODO(adam): define path rules info in better way
             dataGridPathRules.DataSource = new BindingList<Data_PathRule>(editedConfig.Setup.PathRules);
             dataGridPathRules.Columns[1].Width *= 2;
             labelPathRulesInfo.Text = "\n";
@@ -60,55 +62,55 @@ namespace Lettering.Forms {
 
         private void BuildStylesTree() {
             foreach(KeyValuePair<string, Data_Style> styleKV in editedConfig.Styles) {
-                StyleNode styleNode = new StyleNode(styleKV.Key, styleKV.Value);
+                TreeNode styleNode = new TreeNode(styleKV.Key) { Tag = styleKV.Value };
+                treeViewStyles.Nodes.Add(styleNode);
 
-                if(styleKV.Value.Cut != null) {
-                    StyleDataNode cutNode = new StyleDataNode(ReportType.Cut, styleKV.Value.Cut);
-                    styleNode.Nodes.Add(cutNode);
-                }
+                foreach(ReportType type in Enum.GetValues(typeof(ReportType))) {
+                    Data_StyleData styleData = null;
 
-                if(styleKV.Value.Sew != null) {
-                    StyleDataNode sewNode = new StyleDataNode(ReportType.Sew, styleKV.Value.Sew);
-                    styleNode.Nodes.Add(sewNode);
-                }
-
-                if(styleKV.Value.Stone != null) {
-                    StyleDataNode stoneNode = new StyleDataNode(ReportType.Stone, styleKV.Value.Stone);
-                    styleNode.Nodes.Add(stoneNode);
-                }
-
-                foreach(TreeNode typeNode in styleNode.Nodes) {
-                    Data_StyleData styleData = (Data_StyleData)typeNode.Tag;
-                    
-                    if(styleData.Rule != null) {
-                        typeNode.Nodes.Add(new RuleNode(styleData.Rule));
+                    switch(type) {
+                        case ReportType.Cut:
+                            styleData = styleKV.Value.Cut;
+                            break;
+                        case ReportType.Sew:
+                            styleData = styleKV.Value.Sew;
+                            break;
+                        case ReportType.Stone:
+                            styleData = styleKV.Value.Stone;
+                            break;
                     }
 
-                    if(styleData.CustomWordOrder != null) {
-                        typeNode.Nodes.Add(new WordOrderNode(styleData.CustomWordOrder));
-                    }
+                    if(styleData != null) {
+                        TreeNode typeNode = new TreeNode(type.ToString());
+                        styleNode.Nodes.Add(typeNode);
 
-                    if(styleData.MirroredStyle != null) {
-                        typeNode.Nodes.Add(new MirrorNode(styleData.MirroredStyle));
-                    }
+                        if(styleData.Rule != null) {
+                            typeNode.Nodes.Add(new TreeNode("Rule: " + styleData.Rule));
+                        }
 
-                    if(styleData.Exceptions != null) {
-                        ExceptionsNode exsNode = new ExceptionsNode();
-                        typeNode.Nodes.Add(exsNode);
-                        
-                        foreach(Data_Exception ex in styleData.Exceptions) {
-                            ExceptionNode exNode = new ExceptionNode(ex);
+                        if(styleData.CustomWordOrder != null) {
+                            typeNode.Nodes.Add(new TreeNode("Custom Word Order: " + string.Join(",", styleData.CustomWordOrder)));
+                        }
 
-                            foreach(string condition in ex.Conditions) {
-                                exNode.Nodes.Add(new ConditionNode(condition));
+                        if(styleData.MirroredStyle != null) {
+                            typeNode.Nodes.Add(new TreeNode("Mirror: " + styleData.MirroredStyle));
+                        }
+
+                        if(styleData.Exceptions != null) {
+                            TreeNode exsNode = new TreeNode("Exceptions");
+                            typeNode.Nodes.Add(exsNode);
+
+                            foreach(Data_Exception ex in styleData.Exceptions) {
+                                TreeNode exNode = new TreeNode(ex.Path);
+                                exsNode.Nodes.Add(exNode);
+
+                                foreach(string condition in ex.Conditions) {
+                                    exNode.Nodes.Add(new TreeNode("Condition: " + condition));
+                                }
                             }
-
-                            exsNode.Nodes.Add(exNode);
                         }
                     }
                 }
-
-                treeViewStyles.Nodes.Add(styleNode);
             }
         }
 
@@ -136,62 +138,16 @@ namespace Lettering.Forms {
         }
 
         private void buttonDone_Click(object sender, System.EventArgs e) {
-            MessageBox.Show(editedConfig.Setup.StylePrefixes[0]);
+            MessageBox.Show("TODO");
         }
-    }
 
-    internal class StyleNode : TreeNode {
-        internal StyleNode(string styleString, Data_Style style) {
-            this.Text = styleString;
-            this.Tag = style;
-        }
-    }
-
-    internal class StyleDataNode : TreeNode {
-        internal StyleDataNode(ReportType type, Data_StyleData styleData) {
-            this.Text = type.ToString();
-            this.Tag = styleData;
-        }
-    }
-
-    internal class RuleNode : TreeNode {
-        internal RuleNode(string ruleId) {
-            this.Text = "Rule: " + ruleId;
-            this.Tag = ruleId;
-        }
-    }
-
-    internal class WordOrderNode : TreeNode {
-        internal WordOrderNode(List<int> words) {
-            this.Text = "Custom Word Order: " + string.Join(",", words);
-            this.Tag = words;
-        }
-    }
-
-    internal class MirrorNode : TreeNode {
-        internal MirrorNode(string style) {
-            this.Text = "Mirror: " + style;
-            this.Tag = style;
-        }
-    }
-
-    internal class ExceptionsNode : TreeNode {
-        internal ExceptionsNode() {
-            this.Text = "Exceptions";
-        }
-    }
-
-    internal class ExceptionNode : TreeNode {
-        internal ExceptionNode(Data_Exception ex) {
-            this.Text = ex.Path;
-            this.Tag = ex;
-        }
-    }
-
-    internal class ConditionNode : TreeNode {
-        internal ConditionNode(string condition) {
-            this.Text = "Condition: " + condition;
-            this.Tag = condition;
+        private void treeViewStyles_NodeMouseDoubleClick(object sender, TreeNodeMouseClickEventArgs e) {
+            TreeNode root = e.Node;
+            while(root.Parent != null) {
+                root = root.Parent;
+            }
+            
+            MessageBox.Show(root.Text);
         }
     }
 }

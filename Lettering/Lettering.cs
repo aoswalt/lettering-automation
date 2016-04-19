@@ -36,7 +36,7 @@ namespace Lettering {
             mainWindow.MoveToTop();
         }
 
-        internal static void LoadAllConfigs() {
+        internal static void LoadAllConfigs() {/*
             //NOTE(adam): trying multiple locations for config files
             string[] configFiles = null;
             if(Directory.Exists(FilePaths.adjacentConfigFolderPath)) {
@@ -81,8 +81,8 @@ namespace Lettering {
                     Formatting = Formatting.Indented,
                     NullValueHandling = NullValueHandling.Ignore
                 }));
-
-            //JsonConfigData readData = JsonConvert.DeserializeObject<JsonConfigData>(File.ReadAllText(FilePaths.desktopFolderPath + "jsonOutput.json"));
+                */
+            jsonConfig = JsonConvert.DeserializeObject<JsonConfigData>(File.ReadAllText(FilePaths.desktopFolderPath + "jsonOutput.json"));
         }
 
         private static JsonConfigData ConvertConfigsToJson(GlobalConfigData globalConfig, Dictionary<ReportType, StyleConfigData> configs) {
