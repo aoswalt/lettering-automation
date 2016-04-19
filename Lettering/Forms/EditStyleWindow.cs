@@ -7,11 +7,15 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Lettering.Data;
 
 namespace Lettering.Forms {
     public partial class EditStyleWindow : Form {
-        public EditStyleWindow() {
+        public Data_StyleData EditedStyleData { get; set; }
+
+        public EditStyleWindow(Data_StyleData styleData) {
             InitializeComponent();
+            this.EditedStyleData = styleData;
         }
     }
 }
