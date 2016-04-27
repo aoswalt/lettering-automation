@@ -138,7 +138,6 @@ namespace Lettering.Forms {
         }
 
         private void buttonDone_Click(object sender, System.EventArgs e) {
-            MessageBox.Show("TODO");
         }
 
         private void treeViewStyles_NodeMouseDoubleClick(object sender, TreeNodeMouseClickEventArgs e) {
@@ -147,7 +146,10 @@ namespace Lettering.Forms {
                 root = root.Parent;
             }
             
-            MessageBox.Show(root.Text);
+            EditStyleWindow editStyleWindow = new EditStyleWindow(editedConfig, root.Text, (Data_Style)root.Tag);
+            if(editStyleWindow.ShowDialog(this) == DialogResult.OK) {
+                MessageBox.Show("OK");
+            }
         }
     }
 }

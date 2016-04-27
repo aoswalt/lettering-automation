@@ -64,7 +64,7 @@ namespace Lettering.Data {
     }
 
     public class Data_Exception {
-        public string Path;
+        public StringData Path { get; set; }
         public List<string> Conditions;
     }
 
@@ -74,6 +74,7 @@ namespace Lettering.Data {
         public StringData(string s) { Value = s; }
         public static implicit operator string(StringData s) { return s.Value; }
         public static implicit operator StringData(string s) { return new StringData(s); }
+        public override string ToString() { return Value; }
     }
 
     //TODO(adam): cutom JsonSerializer class(es)?
