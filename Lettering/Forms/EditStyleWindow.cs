@@ -232,35 +232,59 @@ namespace Lettering.Forms {
 
         private void listBoxCutExPaths_SelectedIndexChanged(object sender, EventArgs e) {
             Data_Exception ex = (Data_Exception)listBoxCutExPaths.SelectedItem;
-            if(ex != null) {
+            if(ex.Conditions != null) {
                 listBoxCutExConditions.DataSource = new BindingList<string>(ex.Conditions);
+            } else {
+                listBoxCutExConditions.DataSource = null;
             }
         }
 
         private void buttonCutExPathsAdd_Click(object sender, EventArgs e) {
-            //TODO(adam): need Messenger.Input
+            string input = Messenger.Prompt("Enter a new path", "Add Path");
+            if(input.Length > 0) {
+                if(listBoxCutExPaths.DataSource == null) {
+                    listBoxCutExPaths.DataSource = new BindingList<Data_Exception>(new List<Data_Exception>());
+                    listBoxCutExPaths.DisplayMember = "Path";
+                }
+
+                ((BindingList<Data_Exception>)listBoxCutExPaths.DataSource).Add(new Data_Exception() {
+                    Path = input
+                });
+            }
         }
 
         private void buttonCutExPathsDelete_Click(object sender, EventArgs e) {
             Data_Exception ex = (Data_Exception)listBoxCutExPaths.SelectedItem;
             if(ex != null) {
-                if(!Messenger.Show($"Are you sure you want to remove {ex.Path} and any conditions?", 
-                                   "Confirm Removal", 
+                if(!Messenger.Show($"Are you sure you want to remove {ex.Path} and any conditions?",
+                                   "Confirm Removal",
                                    MessageButtons.YesNo)) {
                     return;
                 }
 
                 ((BindingList<Data_Exception>)listBoxCutExPaths.DataSource).Remove(ex);
-                //NOTE(adam): next item is automatically selected
-                ex = (Data_Exception)listBoxCutExPaths.SelectedItem;
-                listBoxCutExConditions.DataSource = new BindingList<string>(ex.Conditions);
+                if(((BindingList<Data_Exception>)listBoxCutExPaths.DataSource).Count > 0) {
+                    //NOTE(adam): next item is automatically selected
+                    ex = (Data_Exception)listBoxCutExPaths.SelectedItem;
+                    listBoxCutExConditions.DataSource = new BindingList<string>(ex.Conditions);
+                } else {
+                    listBoxCutExPaths.DataSource = null;
+                }
             }
         }
 
         private void listBoxCutExConditions_SelectedIndexChanged(object sender, EventArgs e) {}
 
         private void buttonCutExConditionsAdd_Click(object sender, EventArgs e) {
-            //TODO(adam): need Messenger.Input
+            string input = Messenger.Prompt("Enter a new condition", "Add Condition");
+            if(input.Length > 0) {
+                if(listBoxCutExConditions.DataSource == null) {
+                    ((Data_Exception)listBoxCutExPaths.SelectedItem).Conditions = new List<string>();
+                    listBoxCutExConditions.DataSource = new BindingList<string>(((Data_Exception)listBoxCutExPaths.SelectedItem).Conditions);
+                }
+
+                ((BindingList<string>)listBoxCutExConditions.DataSource).Add(input);
+            }
         }
 
         private void buttonCutExConditionsDelete_Click(object sender, EventArgs e) {
@@ -272,6 +296,11 @@ namespace Lettering.Forms {
                     return;
                 }
                 ((BindingList<string>)listBoxCutExConditions.DataSource).Remove(cond);
+
+                if(((BindingList<string>)listBoxCutExConditions.DataSource).Count == 0) {
+                    ((Data_Exception)listBoxCutExPaths.SelectedItem).Conditions = null;
+                    listBoxCutExConditions.DataSource = null;
+                }
             }
         }
 
@@ -338,13 +367,25 @@ namespace Lettering.Forms {
 
         private void listBoxSewExPaths_SelectedIndexChanged(object sender, EventArgs e) {
             Data_Exception ex = (Data_Exception)listBoxSewExPaths.SelectedItem;
-            if(ex != null) {
+            if(ex.Conditions != null) {
                 listBoxSewExConditions.DataSource = new BindingList<string>(ex.Conditions);
+            } else {
+                listBoxSewExConditions.DataSource = null;
             }
         }
 
         private void buttonSewExPathsAdd_Click(object sender, EventArgs e) {
-            //TODO(adam): need Messenger.Input
+            string input = Messenger.Prompt("Enter a new path", "Add Path");
+            if(input.Length > 0) {
+                if(listBoxSewExPaths.DataSource == null) {
+                    listBoxSewExPaths.DataSource = new BindingList<Data_Exception>(new List<Data_Exception>());
+                    listBoxSewExPaths.DisplayMember = "Path";
+                }
+
+                ((BindingList<Data_Exception>)listBoxSewExPaths.DataSource).Add(new Data_Exception() {
+                    Path = input
+                });
+            }
         }
 
         private void buttonSewExPathsDelete_Click(object sender, EventArgs e) {
@@ -357,16 +398,28 @@ namespace Lettering.Forms {
                 }
 
                 ((BindingList<Data_Exception>)listBoxSewExPaths.DataSource).Remove(ex);
-                //NOTE(adam): next item is automatically selected
-                ex = (Data_Exception)listBoxSewExPaths.SelectedItem;
-                listBoxSewExConditions.DataSource = new BindingList<string>(ex.Conditions);
+                if(((BindingList<Data_Exception>)listBoxSewExPaths.DataSource).Count > 0) {
+                    //NOTE(adam): next item is automatically selected
+                    ex = (Data_Exception)listBoxSewExPaths.SelectedItem;
+                    listBoxSewExConditions.DataSource = new BindingList<string>(ex.Conditions);
+                } else {
+                    listBoxSewExPaths.DataSource = null;
+                }
             }
         }
 
         private void listBoxSewExConditions_SelectedIndexChanged(object sender, EventArgs e) { }
 
         private void buttonSewExConditionsAdd_Click(object sender, EventArgs e) {
-            //TODO(adam): need Messenger.Input
+            string input = Messenger.Prompt("Enter a new condition", "Add Condition");
+            if(input.Length > 0) {
+                if(listBoxSewExConditions.DataSource == null) {
+                    ((Data_Exception)listBoxSewExPaths.SelectedItem).Conditions = new List<string>();
+                    listBoxSewExConditions.DataSource = new BindingList<string>(((Data_Exception)listBoxSewExPaths.SelectedItem).Conditions);
+                }
+
+                ((BindingList<string>)listBoxSewExConditions.DataSource).Add(input);
+            }
         }
 
         private void buttonSewExConditionsDelete_Click(object sender, EventArgs e) {
@@ -378,6 +431,11 @@ namespace Lettering.Forms {
                     return;
                 }
                 ((BindingList<string>)listBoxSewExConditions.DataSource).Remove(cond);
+
+                if(((BindingList<string>)listBoxSewExConditions.DataSource).Count == 0) {
+                    ((Data_Exception)listBoxSewExPaths.SelectedItem).Conditions = null;
+                    listBoxSewExConditions.DataSource = null;
+                }
             }
         }
 
@@ -444,13 +502,25 @@ namespace Lettering.Forms {
 
         private void listBoxStoneExPaths_SelectedIndexChanged(object sender, EventArgs e) {
             Data_Exception ex = (Data_Exception)listBoxStoneExPaths.SelectedItem;
-            if(ex != null) {
+            if(ex.Conditions != null) {
                 listBoxStoneExConditions.DataSource = new BindingList<string>(ex.Conditions);
+            } else {
+                listBoxStoneExConditions.DataSource = null;
             }
         }
 
         private void buttonStoneExPathsAdd_Click(object sender, EventArgs e) {
-            //TODO(adam): need Messenger.Input
+            string input = Messenger.Prompt("Enter a new path", "Add Path");
+            if(input.Length > 0) {
+                if(listBoxStoneExPaths.DataSource == null) {
+                    listBoxStoneExPaths.DataSource = new BindingList<Data_Exception>(new List<Data_Exception>());
+                    listBoxStoneExPaths.DisplayMember = "Path";
+                }
+
+                ((BindingList<Data_Exception>)listBoxStoneExPaths.DataSource).Add(new Data_Exception() {
+                    Path = input
+                });
+            }
         }
 
         private void buttonStoneExPathsDelete_Click(object sender, EventArgs e) {
@@ -463,16 +533,28 @@ namespace Lettering.Forms {
                 }
 
                 ((BindingList<Data_Exception>)listBoxStoneExPaths.DataSource).Remove(ex);
-                //NOTE(adam): next item is automatically selected
-                ex = (Data_Exception)listBoxStoneExPaths.SelectedItem;
-                listBoxStoneExConditions.DataSource = new BindingList<string>(ex.Conditions);
+                if(((BindingList<Data_Exception>)listBoxStoneExPaths.DataSource).Count > 0) {
+                    //NOTE(adam): next item is automatically selected
+                    ex = (Data_Exception)listBoxStoneExPaths.SelectedItem;
+                    listBoxStoneExConditions.DataSource = new BindingList<string>(ex.Conditions);
+                } else {
+                    listBoxStoneExPaths.DataSource = null;
+                }
             }
         }
 
         private void listBoxStoneExConditions_SelectedIndexChanged(object sender, EventArgs e) { }
 
         private void buttonStoneExConditionsAdd_Click(object sender, EventArgs e) {
-            //TODO(adam): need Messenger.Input
+            string input = Messenger.Prompt("Enter a new condition", "Add Condition");
+            if(input.Length > 0) {
+                if(listBoxStoneExConditions.DataSource == null) {
+                    ((Data_Exception)listBoxStoneExPaths.SelectedItem).Conditions = new List<string>();
+                    listBoxStoneExConditions.DataSource = new BindingList<string>(((Data_Exception)listBoxStoneExPaths.SelectedItem).Conditions);
+                }
+
+                ((BindingList<string>)listBoxStoneExConditions.DataSource).Add(input);
+            }
         }
 
         private void buttonStoneExConditionsDelete_Click(object sender, EventArgs e) {
@@ -484,7 +566,20 @@ namespace Lettering.Forms {
                     return;
                 }
                 ((BindingList<string>)listBoxStoneExConditions.DataSource).Remove(cond);
+
+                if(((BindingList<string>)listBoxStoneExConditions.DataSource).Count == 0) {
+                    ((Data_Exception)listBoxStoneExPaths.SelectedItem).Conditions = null;
+                    listBoxStoneExConditions.DataSource = null;
+                }
             }
+        }
+
+        private void buttonAccept_Click(object sender, EventArgs e) {
+
+        }
+
+        private void buttonCancel_Click(object sender, EventArgs e) {
+
         }
     }
 }

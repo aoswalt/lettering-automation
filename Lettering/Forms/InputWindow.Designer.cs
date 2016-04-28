@@ -72,15 +72,18 @@
             // 
             // InputWindow
             // 
+            this.AcceptButton = this.buttonOk;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSize = true;
+            this.CancelButton = this.buttonCancel;
             this.ClientSize = new System.Drawing.Size(170, 81);
             this.ControlBox = false;
             this.Controls.Add(this.buttonCancel);
             this.Controls.Add(this.buttonOk);
             this.Controls.Add(this.textBoxInput);
             this.Controls.Add(this.labelText);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Name = "InputWindow";
             this.Text = "InputWindow";
             this.ResumeLayout(false);
