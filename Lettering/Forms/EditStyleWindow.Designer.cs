@@ -26,73 +26,73 @@
             this.label1 = new System.Windows.Forms.Label();
             this.textBoxStyle = new System.Windows.Forms.TextBox();
             this.groupBoxCut = new System.Windows.Forms.GroupBox();
-            this.label2 = new System.Windows.Forms.Label();
-            this.buttonCutResetWords = new System.Windows.Forms.Button();
-            this.label3 = new System.Windows.Forms.Label();
-            this.buttonCutResetMirror = new System.Windows.Forms.Button();
-            this.label4 = new System.Windows.Forms.Label();
-            this.cboxCutRule = new System.Windows.Forms.ComboBox();
-            this.cboxCutWordOrder1 = new System.Windows.Forms.ComboBox();
-            this.cboxCutWordOrder2 = new System.Windows.Forms.ComboBox();
-            this.cboxCutWordOrder3 = new System.Windows.Forms.ComboBox();
-            this.cboxCutWordOrder4 = new System.Windows.Forms.ComboBox();
-            this.label5 = new System.Windows.Forms.Label();
+            this.label18 = new System.Windows.Forms.Label();
+            this.label17 = new System.Windows.Forms.Label();
+            this.buttonCutExConditionsDelete = new System.Windows.Forms.Button();
+            this.buttonCutExConditionsAdd = new System.Windows.Forms.Button();
+            this.buttonCutExPathsDelete = new System.Windows.Forms.Button();
+            this.buttonCutExPathsAdd = new System.Windows.Forms.Button();
+            this.listBoxCutExConditions = new System.Windows.Forms.ListBox();
+            this.cboxCutMirror = new System.Windows.Forms.ComboBox();
+            this.listBoxCutExPaths = new System.Windows.Forms.ListBox();
             this.label6 = new System.Windows.Forms.Label();
+            this.label5 = new System.Windows.Forms.Label();
+            this.cboxCutWordOrder4 = new System.Windows.Forms.ComboBox();
+            this.cboxCutRule = new System.Windows.Forms.ComboBox();
+            this.cboxCutWordOrder3 = new System.Windows.Forms.ComboBox();
+            this.label4 = new System.Windows.Forms.Label();
+            this.buttonCutResetMirror = new System.Windows.Forms.Button();
+            this.cboxCutWordOrder2 = new System.Windows.Forms.ComboBox();
+            this.label3 = new System.Windows.Forms.Label();
+            this.buttonCutResetWords = new System.Windows.Forms.Button();
+            this.cboxCutWordOrder1 = new System.Windows.Forms.ComboBox();
+            this.label2 = new System.Windows.Forms.Label();
             this.groupBoxSew = new System.Windows.Forms.GroupBox();
+            this.label19 = new System.Windows.Forms.Label();
+            this.cboxSewWordOrder4 = new System.Windows.Forms.ComboBox();
+            this.label20 = new System.Windows.Forms.Label();
+            this.cboxSewMirror = new System.Windows.Forms.ComboBox();
+            this.buttonSewExConditionsDelete = new System.Windows.Forms.Button();
+            this.cboxSewWordOrder3 = new System.Windows.Forms.ComboBox();
+            this.buttonSewExConditionsAdd = new System.Windows.Forms.Button();
+            this.cboxSewWordOrder2 = new System.Windows.Forms.ComboBox();
+            this.buttonSewExPathsDelete = new System.Windows.Forms.Button();
+            this.buttonSewExPathsAdd = new System.Windows.Forms.Button();
+            this.cboxSewWordOrder1 = new System.Windows.Forms.ComboBox();
+            this.listBoxSewExConditions = new System.Windows.Forms.ListBox();
+            this.listBoxSewExPaths = new System.Windows.Forms.ListBox();
+            this.label21 = new System.Windows.Forms.Label();
             this.cboxSewRule = new System.Windows.Forms.ComboBox();
+            this.label22 = new System.Windows.Forms.Label();
             this.label9 = new System.Windows.Forms.Label();
             this.buttonSewResetMirror = new System.Windows.Forms.Button();
             this.label10 = new System.Windows.Forms.Label();
             this.buttonSewResetWords = new System.Windows.Forms.Button();
             this.label11 = new System.Windows.Forms.Label();
             this.groupBoxStone = new System.Windows.Forms.GroupBox();
+            this.label7 = new System.Windows.Forms.Label();
+            this.cboxStoneWordOrder4 = new System.Windows.Forms.ComboBox();
+            this.label8 = new System.Windows.Forms.Label();
+            this.cboxStoneMirror = new System.Windows.Forms.ComboBox();
+            this.buttonStoneExConditionsDelete = new System.Windows.Forms.Button();
+            this.cboxStoneWordOrder3 = new System.Windows.Forms.ComboBox();
+            this.buttonStoneExConditionsAdd = new System.Windows.Forms.Button();
+            this.cboxStoneWordOrder2 = new System.Windows.Forms.ComboBox();
+            this.buttonStoneExPathsDelete = new System.Windows.Forms.Button();
+            this.cboxStoneWordOrder1 = new System.Windows.Forms.ComboBox();
+            this.buttonStoneExPathsAdd = new System.Windows.Forms.Button();
+            this.listBoxStoneExConditions = new System.Windows.Forms.ListBox();
             this.cboxStoneRule = new System.Windows.Forms.ComboBox();
+            this.listBoxStoneExPaths = new System.Windows.Forms.ListBox();
             this.label14 = new System.Windows.Forms.Label();
+            this.label12 = new System.Windows.Forms.Label();
             this.buttonStoneResetMirror = new System.Windows.Forms.Button();
+            this.label23 = new System.Windows.Forms.Label();
             this.label15 = new System.Windows.Forms.Label();
             this.buttonStoneResetWords = new System.Windows.Forms.Button();
             this.label16 = new System.Windows.Forms.Label();
             this.buttonAccept = new System.Windows.Forms.Button();
             this.buttonCancel = new System.Windows.Forms.Button();
-            this.cboxCutMirror = new System.Windows.Forms.ComboBox();
-            this.cboxSewMirror = new System.Windows.Forms.ComboBox();
-            this.cboxStoneMirror = new System.Windows.Forms.ComboBox();
-            this.cboxSewWordOrder4 = new System.Windows.Forms.ComboBox();
-            this.cboxSewWordOrder3 = new System.Windows.Forms.ComboBox();
-            this.cboxSewWordOrder2 = new System.Windows.Forms.ComboBox();
-            this.cboxSewWordOrder1 = new System.Windows.Forms.ComboBox();
-            this.cboxStoneWordOrder4 = new System.Windows.Forms.ComboBox();
-            this.cboxStoneWordOrder3 = new System.Windows.Forms.ComboBox();
-            this.cboxStoneWordOrder2 = new System.Windows.Forms.ComboBox();
-            this.cboxStoneWordOrder1 = new System.Windows.Forms.ComboBox();
-            this.listBoxCutExPaths = new System.Windows.Forms.ListBox();
-            this.listBoxCutExConditions = new System.Windows.Forms.ListBox();
-            this.buttonCutExPathsAdd = new System.Windows.Forms.Button();
-            this.buttonCutExPathsDelete = new System.Windows.Forms.Button();
-            this.buttonCutExConditionsDelete = new System.Windows.Forms.Button();
-            this.buttonCutExConditionsAdd = new System.Windows.Forms.Button();
-            this.label17 = new System.Windows.Forms.Label();
-            this.label18 = new System.Windows.Forms.Label();
-            this.label19 = new System.Windows.Forms.Label();
-            this.label20 = new System.Windows.Forms.Label();
-            this.buttonSewExConditionsDelete = new System.Windows.Forms.Button();
-            this.buttonSewExConditionsAdd = new System.Windows.Forms.Button();
-            this.buttonSewExPathsDelete = new System.Windows.Forms.Button();
-            this.buttonSewExPathsAdd = new System.Windows.Forms.Button();
-            this.listBoxSewExConditions = new System.Windows.Forms.ListBox();
-            this.listBoxSewExPaths = new System.Windows.Forms.ListBox();
-            this.label21 = new System.Windows.Forms.Label();
-            this.label22 = new System.Windows.Forms.Label();
-            this.label7 = new System.Windows.Forms.Label();
-            this.label8 = new System.Windows.Forms.Label();
-            this.buttonStoneExConditionsDelete = new System.Windows.Forms.Button();
-            this.buttonStoneExConditionsAdd = new System.Windows.Forms.Button();
-            this.buttonStoneExPathsDelete = new System.Windows.Forms.Button();
-            this.buttonStoneExPathsAdd = new System.Windows.Forms.Button();
-            this.listBoxStoneExConditions = new System.Windows.Forms.ListBox();
-            this.listBoxStoneExPaths = new System.Windows.Forms.ListBox();
-            this.label12 = new System.Windows.Forms.Label();
-            this.label23 = new System.Windows.Forms.Label();
             this.groupBoxCut.SuspendLayout();
             this.groupBoxSew.SuspendLayout();
             this.groupBoxStone.SuspendLayout();
@@ -144,104 +144,95 @@
             this.groupBoxCut.TabStop = false;
             this.groupBoxCut.Text = "Cut";
             // 
-            // label2
+            // label18
             // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(31, 20);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(29, 13);
-            this.label2.TabIndex = 0;
-            this.label2.Text = "Rule";
+            this.label18.AutoSize = true;
+            this.label18.Location = new System.Drawing.Point(474, 17);
+            this.label18.Name = "label18";
+            this.label18.Size = new System.Drawing.Size(56, 13);
+            this.label18.TabIndex = 25;
+            this.label18.Text = "Conditions";
             // 
-            // buttonCutResetWords
+            // label17
             // 
-            this.buttonCutResetWords.Location = new System.Drawing.Point(6, 41);
-            this.buttonCutResetWords.Name = "buttonCutResetWords";
-            this.buttonCutResetWords.Size = new System.Drawing.Size(19, 23);
-            this.buttonCutResetWords.TabIndex = 1;
-            this.buttonCutResetWords.Text = "X";
-            this.buttonCutResetWords.UseVisualStyleBackColor = true;
+            this.label17.AutoSize = true;
+            this.label17.Location = new System.Drawing.Point(361, 17);
+            this.label17.Name = "label17";
+            this.label17.Size = new System.Drawing.Size(34, 13);
+            this.label17.TabIndex = 24;
+            this.label17.Text = "Paths";
             // 
-            // label3
+            // buttonCutExConditionsDelete
             // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(28, 46);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(62, 13);
-            this.label3.TabIndex = 3;
-            this.label3.Text = "Word Order";
+            this.buttonCutExConditionsDelete.Font = new System.Drawing.Font("Consolas", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.buttonCutExConditionsDelete.Location = new System.Drawing.Point(567, 94);
+            this.buttonCutExConditionsDelete.Name = "buttonCutExConditionsDelete";
+            this.buttonCutExConditionsDelete.Size = new System.Drawing.Size(19, 23);
+            this.buttonCutExConditionsDelete.TabIndex = 23;
+            this.buttonCutExConditionsDelete.Text = "-";
+            this.buttonCutExConditionsDelete.UseVisualStyleBackColor = true;
+            this.buttonCutExConditionsDelete.Click += new System.EventHandler(this.buttonCutExConditionsDelete_Click);
             // 
-            // buttonCutResetMirror
+            // buttonCutExConditionsAdd
             // 
-            this.buttonCutResetMirror.Location = new System.Drawing.Point(6, 70);
-            this.buttonCutResetMirror.Name = "buttonCutResetMirror";
-            this.buttonCutResetMirror.Size = new System.Drawing.Size(19, 23);
-            this.buttonCutResetMirror.TabIndex = 4;
-            this.buttonCutResetMirror.Text = "X";
-            this.buttonCutResetMirror.UseVisualStyleBackColor = true;
+            this.buttonCutExConditionsAdd.Font = new System.Drawing.Font("Consolas", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.buttonCutExConditionsAdd.Location = new System.Drawing.Point(567, 65);
+            this.buttonCutExConditionsAdd.Name = "buttonCutExConditionsAdd";
+            this.buttonCutExConditionsAdd.Size = new System.Drawing.Size(19, 23);
+            this.buttonCutExConditionsAdd.TabIndex = 22;
+            this.buttonCutExConditionsAdd.Text = "+";
+            this.buttonCutExConditionsAdd.UseVisualStyleBackColor = true;
+            this.buttonCutExConditionsAdd.Click += new System.EventHandler(this.buttonCutExConditionsAdd_Click);
             // 
-            // label4
+            // buttonCutExPathsDelete
             // 
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(31, 75);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(33, 13);
-            this.label4.TabIndex = 5;
-            this.label4.Text = "Mirror";
+            this.buttonCutExPathsDelete.Font = new System.Drawing.Font("Consolas", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.buttonCutExPathsDelete.Location = new System.Drawing.Point(302, 94);
+            this.buttonCutExPathsDelete.Name = "buttonCutExPathsDelete";
+            this.buttonCutExPathsDelete.Size = new System.Drawing.Size(19, 23);
+            this.buttonCutExPathsDelete.TabIndex = 21;
+            this.buttonCutExPathsDelete.Text = "-";
+            this.buttonCutExPathsDelete.UseVisualStyleBackColor = true;
+            this.buttonCutExPathsDelete.Click += new System.EventHandler(this.buttonCutExPathsDelete_Click);
             // 
-            // cboxCutRule
+            // buttonCutExPathsAdd
             // 
-            this.cboxCutRule.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cboxCutRule.FormattingEnabled = true;
-            this.cboxCutRule.Location = new System.Drawing.Point(66, 17);
-            this.cboxCutRule.Name = "cboxCutRule";
-            this.cboxCutRule.Size = new System.Drawing.Size(180, 21);
-            this.cboxCutRule.TabIndex = 7;
+            this.buttonCutExPathsAdd.Font = new System.Drawing.Font("Consolas", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.buttonCutExPathsAdd.Location = new System.Drawing.Point(302, 65);
+            this.buttonCutExPathsAdd.Name = "buttonCutExPathsAdd";
+            this.buttonCutExPathsAdd.Size = new System.Drawing.Size(19, 23);
+            this.buttonCutExPathsAdd.TabIndex = 20;
+            this.buttonCutExPathsAdd.Text = "+";
+            this.buttonCutExPathsAdd.UseVisualStyleBackColor = true;
+            this.buttonCutExPathsAdd.Click += new System.EventHandler(this.buttonCutExPathsAdd_Click);
             // 
-            // cboxCutWordOrder1
+            // listBoxCutExConditions
             // 
-            this.cboxCutWordOrder1.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cboxCutWordOrder1.FormattingEnabled = true;
-            this.cboxCutWordOrder1.Location = new System.Drawing.Point(96, 43);
-            this.cboxCutWordOrder1.Name = "cboxCutWordOrder1";
-            this.cboxCutWordOrder1.Size = new System.Drawing.Size(33, 21);
-            this.cboxCutWordOrder1.TabIndex = 8;
+            this.listBoxCutExConditions.FormattingEnabled = true;
+            this.listBoxCutExConditions.Location = new System.Drawing.Point(447, 36);
+            this.listBoxCutExConditions.Name = "listBoxCutExConditions";
+            this.listBoxCutExConditions.Size = new System.Drawing.Size(114, 95);
+            this.listBoxCutExConditions.TabIndex = 19;
+            this.listBoxCutExConditions.SelectedIndexChanged += new System.EventHandler(this.listBoxCutExConditions_SelectedIndexChanged);
             // 
-            // cboxCutWordOrder2
+            // cboxCutMirror
             // 
-            this.cboxCutWordOrder2.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cboxCutWordOrder2.FormattingEnabled = true;
-            this.cboxCutWordOrder2.Location = new System.Drawing.Point(135, 43);
-            this.cboxCutWordOrder2.Name = "cboxCutWordOrder2";
-            this.cboxCutWordOrder2.Size = new System.Drawing.Size(33, 21);
-            this.cboxCutWordOrder2.TabIndex = 9;
+            this.cboxCutMirror.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cboxCutMirror.FormattingEnabled = true;
+            this.cboxCutMirror.Location = new System.Drawing.Point(66, 72);
+            this.cboxCutMirror.Name = "cboxCutMirror";
+            this.cboxCutMirror.Size = new System.Drawing.Size(180, 21);
+            this.cboxCutMirror.TabIndex = 15;
+            this.cboxCutMirror.SelectedIndexChanged += new System.EventHandler(this.cboxCutMirror_SelectedIndexChanged);
             // 
-            // cboxCutWordOrder3
+            // listBoxCutExPaths
             // 
-            this.cboxCutWordOrder3.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cboxCutWordOrder3.FormattingEnabled = true;
-            this.cboxCutWordOrder3.Location = new System.Drawing.Point(174, 43);
-            this.cboxCutWordOrder3.Name = "cboxCutWordOrder3";
-            this.cboxCutWordOrder3.Size = new System.Drawing.Size(33, 21);
-            this.cboxCutWordOrder3.TabIndex = 10;
-            // 
-            // cboxCutWordOrder4
-            // 
-            this.cboxCutWordOrder4.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cboxCutWordOrder4.FormattingEnabled = true;
-            this.cboxCutWordOrder4.Location = new System.Drawing.Point(213, 43);
-            this.cboxCutWordOrder4.Name = "cboxCutWordOrder4";
-            this.cboxCutWordOrder4.Size = new System.Drawing.Size(33, 21);
-            this.cboxCutWordOrder4.TabIndex = 11;
-            // 
-            // label5
-            // 
-            this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(266, 17);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(59, 13);
-            this.label5.TabIndex = 12;
-            this.label5.Text = "Exceptions";
+            this.listBoxCutExPaths.FormattingEnabled = true;
+            this.listBoxCutExPaths.Location = new System.Drawing.Point(327, 36);
+            this.listBoxCutExPaths.Name = "listBoxCutExPaths";
+            this.listBoxCutExPaths.Size = new System.Drawing.Size(114, 95);
+            this.listBoxCutExPaths.TabIndex = 18;
+            this.listBoxCutExPaths.SelectedIndexChanged += new System.EventHandler(this.listBoxCutExPaths_SelectedIndexChanged);
             // 
             // label6
             // 
@@ -252,6 +243,112 @@
             this.label6.Size = new System.Drawing.Size(13, 13);
             this.label6.TabIndex = 13;
             this.label6.Text = "?";
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(266, 17);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(59, 13);
+            this.label5.TabIndex = 12;
+            this.label5.Text = "Exceptions";
+            // 
+            // cboxCutWordOrder4
+            // 
+            this.cboxCutWordOrder4.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cboxCutWordOrder4.FormattingEnabled = true;
+            this.cboxCutWordOrder4.Location = new System.Drawing.Point(213, 43);
+            this.cboxCutWordOrder4.Name = "cboxCutWordOrder4";
+            this.cboxCutWordOrder4.Size = new System.Drawing.Size(33, 21);
+            this.cboxCutWordOrder4.TabIndex = 11;
+            this.cboxCutWordOrder4.SelectedIndexChanged += new System.EventHandler(this.cboxCutWordOrder4_SelectedIndexChanged);
+            // 
+            // cboxCutRule
+            // 
+            this.cboxCutRule.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cboxCutRule.FormattingEnabled = true;
+            this.cboxCutRule.Location = new System.Drawing.Point(66, 17);
+            this.cboxCutRule.Name = "cboxCutRule";
+            this.cboxCutRule.Size = new System.Drawing.Size(180, 21);
+            this.cboxCutRule.TabIndex = 7;
+            this.cboxCutRule.SelectedIndexChanged += new System.EventHandler(this.cboxCutRule_SelectedIndexChanged);
+            // 
+            // cboxCutWordOrder3
+            // 
+            this.cboxCutWordOrder3.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cboxCutWordOrder3.FormattingEnabled = true;
+            this.cboxCutWordOrder3.Location = new System.Drawing.Point(174, 43);
+            this.cboxCutWordOrder3.Name = "cboxCutWordOrder3";
+            this.cboxCutWordOrder3.Size = new System.Drawing.Size(33, 21);
+            this.cboxCutWordOrder3.TabIndex = 10;
+            this.cboxCutWordOrder3.SelectedIndexChanged += new System.EventHandler(this.cboxCutWordOrder3_SelectedIndexChanged);
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(31, 75);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(33, 13);
+            this.label4.TabIndex = 5;
+            this.label4.Text = "Mirror";
+            // 
+            // buttonCutResetMirror
+            // 
+            this.buttonCutResetMirror.Location = new System.Drawing.Point(6, 70);
+            this.buttonCutResetMirror.Name = "buttonCutResetMirror";
+            this.buttonCutResetMirror.Size = new System.Drawing.Size(19, 23);
+            this.buttonCutResetMirror.TabIndex = 4;
+            this.buttonCutResetMirror.Text = "X";
+            this.buttonCutResetMirror.UseVisualStyleBackColor = true;
+            this.buttonCutResetMirror.Click += new System.EventHandler(this.buttonCutResetMirror_Click);
+            // 
+            // cboxCutWordOrder2
+            // 
+            this.cboxCutWordOrder2.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cboxCutWordOrder2.FormattingEnabled = true;
+            this.cboxCutWordOrder2.Location = new System.Drawing.Point(135, 43);
+            this.cboxCutWordOrder2.Name = "cboxCutWordOrder2";
+            this.cboxCutWordOrder2.Size = new System.Drawing.Size(33, 21);
+            this.cboxCutWordOrder2.TabIndex = 9;
+            this.cboxCutWordOrder2.SelectedIndexChanged += new System.EventHandler(this.cboxCutWordOrder2_SelectedIndexChanged);
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(28, 46);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(62, 13);
+            this.label3.TabIndex = 3;
+            this.label3.Text = "Word Order";
+            // 
+            // buttonCutResetWords
+            // 
+            this.buttonCutResetWords.Location = new System.Drawing.Point(6, 41);
+            this.buttonCutResetWords.Name = "buttonCutResetWords";
+            this.buttonCutResetWords.Size = new System.Drawing.Size(19, 23);
+            this.buttonCutResetWords.TabIndex = 1;
+            this.buttonCutResetWords.Text = "X";
+            this.buttonCutResetWords.UseVisualStyleBackColor = true;
+            this.buttonCutResetWords.Click += new System.EventHandler(this.buttonCutResetWords_Click);
+            // 
+            // cboxCutWordOrder1
+            // 
+            this.cboxCutWordOrder1.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cboxCutWordOrder1.FormattingEnabled = true;
+            this.cboxCutWordOrder1.Location = new System.Drawing.Point(96, 43);
+            this.cboxCutWordOrder1.Name = "cboxCutWordOrder1";
+            this.cboxCutWordOrder1.Size = new System.Drawing.Size(33, 21);
+            this.cboxCutWordOrder1.TabIndex = 8;
+            this.cboxCutWordOrder1.SelectedIndexChanged += new System.EventHandler(this.cboxCutWordOrder1_SelectedIndexChanged);
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(31, 20);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(29, 13);
+            this.label2.TabIndex = 0;
+            this.label2.Text = "Rule";
             // 
             // groupBoxSew
             // 
@@ -283,6 +380,146 @@
             this.groupBoxSew.TabStop = false;
             this.groupBoxSew.Text = "Sew";
             // 
+            // label19
+            // 
+            this.label19.AutoSize = true;
+            this.label19.Location = new System.Drawing.Point(474, 20);
+            this.label19.Name = "label19";
+            this.label19.Size = new System.Drawing.Size(56, 13);
+            this.label19.TabIndex = 35;
+            this.label19.Text = "Conditions";
+            // 
+            // cboxSewWordOrder4
+            // 
+            this.cboxSewWordOrder4.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cboxSewWordOrder4.FormattingEnabled = true;
+            this.cboxSewWordOrder4.Location = new System.Drawing.Point(213, 43);
+            this.cboxSewWordOrder4.Name = "cboxSewWordOrder4";
+            this.cboxSewWordOrder4.Size = new System.Drawing.Size(33, 21);
+            this.cboxSewWordOrder4.TabIndex = 19;
+            this.cboxSewWordOrder4.SelectedIndexChanged += new System.EventHandler(this.cboxSewWordOrder4_SelectedIndexChanged);
+            // 
+            // label20
+            // 
+            this.label20.AutoSize = true;
+            this.label20.Location = new System.Drawing.Point(361, 20);
+            this.label20.Name = "label20";
+            this.label20.Size = new System.Drawing.Size(34, 13);
+            this.label20.TabIndex = 34;
+            this.label20.Text = "Paths";
+            // 
+            // cboxSewMirror
+            // 
+            this.cboxSewMirror.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cboxSewMirror.FormattingEnabled = true;
+            this.cboxSewMirror.Location = new System.Drawing.Point(66, 72);
+            this.cboxSewMirror.Name = "cboxSewMirror";
+            this.cboxSewMirror.Size = new System.Drawing.Size(180, 21);
+            this.cboxSewMirror.TabIndex = 16;
+            this.cboxSewMirror.SelectedIndexChanged += new System.EventHandler(this.cboxSewMirror_SelectedIndexChanged);
+            // 
+            // buttonSewExConditionsDelete
+            // 
+            this.buttonSewExConditionsDelete.Font = new System.Drawing.Font("Consolas", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.buttonSewExConditionsDelete.Location = new System.Drawing.Point(567, 97);
+            this.buttonSewExConditionsDelete.Name = "buttonSewExConditionsDelete";
+            this.buttonSewExConditionsDelete.Size = new System.Drawing.Size(19, 23);
+            this.buttonSewExConditionsDelete.TabIndex = 33;
+            this.buttonSewExConditionsDelete.Text = "-";
+            this.buttonSewExConditionsDelete.UseVisualStyleBackColor = true;
+            this.buttonSewExConditionsDelete.Click += new System.EventHandler(this.buttonSewExConditionsDelete_Click);
+            // 
+            // cboxSewWordOrder3
+            // 
+            this.cboxSewWordOrder3.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cboxSewWordOrder3.FormattingEnabled = true;
+            this.cboxSewWordOrder3.Location = new System.Drawing.Point(174, 43);
+            this.cboxSewWordOrder3.Name = "cboxSewWordOrder3";
+            this.cboxSewWordOrder3.Size = new System.Drawing.Size(33, 21);
+            this.cboxSewWordOrder3.TabIndex = 18;
+            this.cboxSewWordOrder3.SelectedIndexChanged += new System.EventHandler(this.cboxSewWordOrder3_SelectedIndexChanged);
+            // 
+            // buttonSewExConditionsAdd
+            // 
+            this.buttonSewExConditionsAdd.Font = new System.Drawing.Font("Consolas", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.buttonSewExConditionsAdd.Location = new System.Drawing.Point(567, 68);
+            this.buttonSewExConditionsAdd.Name = "buttonSewExConditionsAdd";
+            this.buttonSewExConditionsAdd.Size = new System.Drawing.Size(19, 23);
+            this.buttonSewExConditionsAdd.TabIndex = 32;
+            this.buttonSewExConditionsAdd.Text = "+";
+            this.buttonSewExConditionsAdd.UseVisualStyleBackColor = true;
+            this.buttonSewExConditionsAdd.Click += new System.EventHandler(this.buttonSewExConditionsAdd_Click);
+            // 
+            // cboxSewWordOrder2
+            // 
+            this.cboxSewWordOrder2.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cboxSewWordOrder2.FormattingEnabled = true;
+            this.cboxSewWordOrder2.Location = new System.Drawing.Point(135, 43);
+            this.cboxSewWordOrder2.Name = "cboxSewWordOrder2";
+            this.cboxSewWordOrder2.Size = new System.Drawing.Size(33, 21);
+            this.cboxSewWordOrder2.TabIndex = 17;
+            this.cboxSewWordOrder2.SelectedIndexChanged += new System.EventHandler(this.cboxSewWordOrder2_SelectedIndexChanged);
+            // 
+            // buttonSewExPathsDelete
+            // 
+            this.buttonSewExPathsDelete.Font = new System.Drawing.Font("Consolas", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.buttonSewExPathsDelete.Location = new System.Drawing.Point(302, 97);
+            this.buttonSewExPathsDelete.Name = "buttonSewExPathsDelete";
+            this.buttonSewExPathsDelete.Size = new System.Drawing.Size(19, 23);
+            this.buttonSewExPathsDelete.TabIndex = 31;
+            this.buttonSewExPathsDelete.Text = "-";
+            this.buttonSewExPathsDelete.UseVisualStyleBackColor = true;
+            this.buttonSewExPathsDelete.Click += new System.EventHandler(this.buttonSewExPathsDelete_Click);
+            // 
+            // buttonSewExPathsAdd
+            // 
+            this.buttonSewExPathsAdd.Font = new System.Drawing.Font("Consolas", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.buttonSewExPathsAdd.Location = new System.Drawing.Point(302, 68);
+            this.buttonSewExPathsAdd.Name = "buttonSewExPathsAdd";
+            this.buttonSewExPathsAdd.Size = new System.Drawing.Size(19, 23);
+            this.buttonSewExPathsAdd.TabIndex = 30;
+            this.buttonSewExPathsAdd.Text = "+";
+            this.buttonSewExPathsAdd.UseVisualStyleBackColor = true;
+            this.buttonSewExPathsAdd.Click += new System.EventHandler(this.buttonSewExPathsAdd_Click);
+            // 
+            // cboxSewWordOrder1
+            // 
+            this.cboxSewWordOrder1.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cboxSewWordOrder1.FormattingEnabled = true;
+            this.cboxSewWordOrder1.Location = new System.Drawing.Point(96, 43);
+            this.cboxSewWordOrder1.Name = "cboxSewWordOrder1";
+            this.cboxSewWordOrder1.Size = new System.Drawing.Size(33, 21);
+            this.cboxSewWordOrder1.TabIndex = 16;
+            this.cboxSewWordOrder1.SelectedIndexChanged += new System.EventHandler(this.cboxSewWordOrder1_SelectedIndexChanged);
+            // 
+            // listBoxSewExConditions
+            // 
+            this.listBoxSewExConditions.FormattingEnabled = true;
+            this.listBoxSewExConditions.Location = new System.Drawing.Point(447, 39);
+            this.listBoxSewExConditions.Name = "listBoxSewExConditions";
+            this.listBoxSewExConditions.Size = new System.Drawing.Size(114, 95);
+            this.listBoxSewExConditions.TabIndex = 29;
+            this.listBoxSewExConditions.SelectedIndexChanged += new System.EventHandler(this.listBoxSewExConditions_SelectedIndexChanged);
+            // 
+            // listBoxSewExPaths
+            // 
+            this.listBoxSewExPaths.FormattingEnabled = true;
+            this.listBoxSewExPaths.Location = new System.Drawing.Point(327, 39);
+            this.listBoxSewExPaths.Name = "listBoxSewExPaths";
+            this.listBoxSewExPaths.Size = new System.Drawing.Size(114, 95);
+            this.listBoxSewExPaths.TabIndex = 28;
+            this.listBoxSewExPaths.SelectedIndexChanged += new System.EventHandler(this.listBoxSewExPaths_SelectedIndexChanged);
+            // 
+            // label21
+            // 
+            this.label21.AutoSize = true;
+            this.label21.Location = new System.Drawing.Point(266, 33);
+            this.label21.Name = "label21";
+            this.label21.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.label21.Size = new System.Drawing.Size(13, 13);
+            this.label21.TabIndex = 27;
+            this.label21.Text = "?";
+            // 
             // cboxSewRule
             // 
             this.cboxSewRule.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
@@ -291,6 +528,16 @@
             this.cboxSewRule.Name = "cboxSewRule";
             this.cboxSewRule.Size = new System.Drawing.Size(180, 21);
             this.cboxSewRule.TabIndex = 7;
+            this.cboxSewRule.SelectedIndexChanged += new System.EventHandler(this.cboxSewRule_SelectedIndexChanged);
+            // 
+            // label22
+            // 
+            this.label22.AutoSize = true;
+            this.label22.Location = new System.Drawing.Point(266, 20);
+            this.label22.Name = "label22";
+            this.label22.Size = new System.Drawing.Size(59, 13);
+            this.label22.TabIndex = 26;
+            this.label22.Text = "Exceptions";
             // 
             // label9
             // 
@@ -309,6 +556,7 @@
             this.buttonSewResetMirror.TabIndex = 4;
             this.buttonSewResetMirror.Text = "X";
             this.buttonSewResetMirror.UseVisualStyleBackColor = true;
+            this.buttonSewResetMirror.Click += new System.EventHandler(this.buttonSewResetMirror_Click);
             // 
             // label10
             // 
@@ -327,6 +575,7 @@
             this.buttonSewResetWords.TabIndex = 1;
             this.buttonSewResetWords.Text = "X";
             this.buttonSewResetWords.UseVisualStyleBackColor = true;
+            this.buttonSewResetWords.Click += new System.EventHandler(this.buttonSewResetWords_Click);
             // 
             // label11
             // 
@@ -367,6 +616,127 @@
             this.groupBoxStone.TabStop = false;
             this.groupBoxStone.Text = "Stone";
             // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Location = new System.Drawing.Point(474, 20);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(56, 13);
+            this.label7.TabIndex = 45;
+            this.label7.Text = "Conditions";
+            // 
+            // cboxStoneWordOrder4
+            // 
+            this.cboxStoneWordOrder4.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cboxStoneWordOrder4.FormattingEnabled = true;
+            this.cboxStoneWordOrder4.Location = new System.Drawing.Point(213, 43);
+            this.cboxStoneWordOrder4.Name = "cboxStoneWordOrder4";
+            this.cboxStoneWordOrder4.Size = new System.Drawing.Size(33, 21);
+            this.cboxStoneWordOrder4.TabIndex = 23;
+            this.cboxStoneWordOrder4.SelectedIndexChanged += new System.EventHandler(this.cboxStoneWordOrder4_SelectedIndexChanged);
+            // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Location = new System.Drawing.Point(361, 20);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(34, 13);
+            this.label8.TabIndex = 44;
+            this.label8.Text = "Paths";
+            // 
+            // cboxStoneMirror
+            // 
+            this.cboxStoneMirror.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cboxStoneMirror.FormattingEnabled = true;
+            this.cboxStoneMirror.Location = new System.Drawing.Point(66, 72);
+            this.cboxStoneMirror.Name = "cboxStoneMirror";
+            this.cboxStoneMirror.Size = new System.Drawing.Size(180, 21);
+            this.cboxStoneMirror.TabIndex = 17;
+            this.cboxStoneMirror.SelectedIndexChanged += new System.EventHandler(this.cboxStoneMirror_SelectedIndexChanged);
+            // 
+            // buttonStoneExConditionsDelete
+            // 
+            this.buttonStoneExConditionsDelete.Font = new System.Drawing.Font("Consolas", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.buttonStoneExConditionsDelete.Location = new System.Drawing.Point(567, 97);
+            this.buttonStoneExConditionsDelete.Name = "buttonStoneExConditionsDelete";
+            this.buttonStoneExConditionsDelete.Size = new System.Drawing.Size(19, 23);
+            this.buttonStoneExConditionsDelete.TabIndex = 43;
+            this.buttonStoneExConditionsDelete.Text = "-";
+            this.buttonStoneExConditionsDelete.UseVisualStyleBackColor = true;
+            this.buttonStoneExConditionsDelete.Click += new System.EventHandler(this.buttonStoneExConditionsDelete_Click);
+            // 
+            // cboxStoneWordOrder3
+            // 
+            this.cboxStoneWordOrder3.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cboxStoneWordOrder3.FormattingEnabled = true;
+            this.cboxStoneWordOrder3.Location = new System.Drawing.Point(174, 43);
+            this.cboxStoneWordOrder3.Name = "cboxStoneWordOrder3";
+            this.cboxStoneWordOrder3.Size = new System.Drawing.Size(33, 21);
+            this.cboxStoneWordOrder3.TabIndex = 22;
+            this.cboxStoneWordOrder3.SelectedIndexChanged += new System.EventHandler(this.cboxStoneWordOrder3_SelectedIndexChanged);
+            // 
+            // buttonStoneExConditionsAdd
+            // 
+            this.buttonStoneExConditionsAdd.Font = new System.Drawing.Font("Consolas", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.buttonStoneExConditionsAdd.Location = new System.Drawing.Point(567, 68);
+            this.buttonStoneExConditionsAdd.Name = "buttonStoneExConditionsAdd";
+            this.buttonStoneExConditionsAdd.Size = new System.Drawing.Size(19, 23);
+            this.buttonStoneExConditionsAdd.TabIndex = 42;
+            this.buttonStoneExConditionsAdd.Text = "+";
+            this.buttonStoneExConditionsAdd.UseVisualStyleBackColor = true;
+            this.buttonStoneExConditionsAdd.Click += new System.EventHandler(this.buttonStoneExConditionsAdd_Click);
+            // 
+            // cboxStoneWordOrder2
+            // 
+            this.cboxStoneWordOrder2.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cboxStoneWordOrder2.FormattingEnabled = true;
+            this.cboxStoneWordOrder2.Location = new System.Drawing.Point(135, 43);
+            this.cboxStoneWordOrder2.Name = "cboxStoneWordOrder2";
+            this.cboxStoneWordOrder2.Size = new System.Drawing.Size(33, 21);
+            this.cboxStoneWordOrder2.TabIndex = 21;
+            this.cboxStoneWordOrder2.SelectedIndexChanged += new System.EventHandler(this.cboxStoneWordOrder2_SelectedIndexChanged);
+            // 
+            // buttonStoneExPathsDelete
+            // 
+            this.buttonStoneExPathsDelete.Font = new System.Drawing.Font("Consolas", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.buttonStoneExPathsDelete.Location = new System.Drawing.Point(302, 97);
+            this.buttonStoneExPathsDelete.Name = "buttonStoneExPathsDelete";
+            this.buttonStoneExPathsDelete.Size = new System.Drawing.Size(19, 23);
+            this.buttonStoneExPathsDelete.TabIndex = 41;
+            this.buttonStoneExPathsDelete.Text = "-";
+            this.buttonStoneExPathsDelete.UseVisualStyleBackColor = true;
+            this.buttonStoneExPathsDelete.Click += new System.EventHandler(this.buttonStoneExPathsDelete_Click);
+            // 
+            // cboxStoneWordOrder1
+            // 
+            this.cboxStoneWordOrder1.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cboxStoneWordOrder1.FormattingEnabled = true;
+            this.cboxStoneWordOrder1.Location = new System.Drawing.Point(96, 43);
+            this.cboxStoneWordOrder1.Name = "cboxStoneWordOrder1";
+            this.cboxStoneWordOrder1.Size = new System.Drawing.Size(33, 21);
+            this.cboxStoneWordOrder1.TabIndex = 20;
+            this.cboxStoneWordOrder1.SelectedIndexChanged += new System.EventHandler(this.cboxStoneWordOrder1_SelectedIndexChanged);
+            // 
+            // buttonStoneExPathsAdd
+            // 
+            this.buttonStoneExPathsAdd.Font = new System.Drawing.Font("Consolas", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.buttonStoneExPathsAdd.Location = new System.Drawing.Point(302, 68);
+            this.buttonStoneExPathsAdd.Name = "buttonStoneExPathsAdd";
+            this.buttonStoneExPathsAdd.Size = new System.Drawing.Size(19, 23);
+            this.buttonStoneExPathsAdd.TabIndex = 40;
+            this.buttonStoneExPathsAdd.Text = "+";
+            this.buttonStoneExPathsAdd.UseVisualStyleBackColor = true;
+            this.buttonStoneExPathsAdd.Click += new System.EventHandler(this.buttonStoneExPathsAdd_Click);
+            // 
+            // listBoxStoneExConditions
+            // 
+            this.listBoxStoneExConditions.FormattingEnabled = true;
+            this.listBoxStoneExConditions.Location = new System.Drawing.Point(447, 39);
+            this.listBoxStoneExConditions.Name = "listBoxStoneExConditions";
+            this.listBoxStoneExConditions.Size = new System.Drawing.Size(114, 95);
+            this.listBoxStoneExConditions.TabIndex = 39;
+            this.listBoxStoneExConditions.SelectedIndexChanged += new System.EventHandler(this.listBoxStoneExConditions_SelectedIndexChanged);
+            // 
             // cboxStoneRule
             // 
             this.cboxStoneRule.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
@@ -375,6 +745,16 @@
             this.cboxStoneRule.Name = "cboxStoneRule";
             this.cboxStoneRule.Size = new System.Drawing.Size(180, 21);
             this.cboxStoneRule.TabIndex = 7;
+            this.cboxStoneRule.SelectedIndexChanged += new System.EventHandler(this.cboxStoneRule_SelectedIndexChanged);
+            // 
+            // listBoxStoneExPaths
+            // 
+            this.listBoxStoneExPaths.FormattingEnabled = true;
+            this.listBoxStoneExPaths.Location = new System.Drawing.Point(327, 39);
+            this.listBoxStoneExPaths.Name = "listBoxStoneExPaths";
+            this.listBoxStoneExPaths.Size = new System.Drawing.Size(114, 95);
+            this.listBoxStoneExPaths.TabIndex = 38;
+            this.listBoxStoneExPaths.SelectedIndexChanged += new System.EventHandler(this.listBoxStoneExPaths_SelectedIndexChanged);
             // 
             // label14
             // 
@@ -385,6 +765,16 @@
             this.label14.TabIndex = 5;
             this.label14.Text = "Mirror";
             // 
+            // label12
+            // 
+            this.label12.AutoSize = true;
+            this.label12.Location = new System.Drawing.Point(266, 33);
+            this.label12.Name = "label12";
+            this.label12.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.label12.Size = new System.Drawing.Size(13, 13);
+            this.label12.TabIndex = 37;
+            this.label12.Text = "?";
+            // 
             // buttonStoneResetMirror
             // 
             this.buttonStoneResetMirror.Location = new System.Drawing.Point(6, 70);
@@ -393,6 +783,16 @@
             this.buttonStoneResetMirror.TabIndex = 4;
             this.buttonStoneResetMirror.Text = "X";
             this.buttonStoneResetMirror.UseVisualStyleBackColor = true;
+            this.buttonStoneResetMirror.Click += new System.EventHandler(this.buttonStoneResetMirror_Click);
+            // 
+            // label23
+            // 
+            this.label23.AutoSize = true;
+            this.label23.Location = new System.Drawing.Point(266, 20);
+            this.label23.Name = "label23";
+            this.label23.Size = new System.Drawing.Size(59, 13);
+            this.label23.TabIndex = 36;
+            this.label23.Text = "Exceptions";
             // 
             // label15
             // 
@@ -411,6 +811,7 @@
             this.buttonStoneResetWords.TabIndex = 1;
             this.buttonStoneResetWords.Text = "X";
             this.buttonStoneResetWords.UseVisualStyleBackColor = true;
+            this.buttonStoneResetWords.Click += new System.EventHandler(this.buttonStoneResetWords_Click);
             // 
             // label16
             // 
@@ -438,365 +839,6 @@
             this.buttonCancel.TabIndex = 17;
             this.buttonCancel.Text = "Cancel";
             this.buttonCancel.UseVisualStyleBackColor = true;
-            // 
-            // cboxCutMirror
-            // 
-            this.cboxCutMirror.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cboxCutMirror.FormattingEnabled = true;
-            this.cboxCutMirror.Location = new System.Drawing.Point(66, 72);
-            this.cboxCutMirror.Name = "cboxCutMirror";
-            this.cboxCutMirror.Size = new System.Drawing.Size(180, 21);
-            this.cboxCutMirror.TabIndex = 15;
-            // 
-            // cboxSewMirror
-            // 
-            this.cboxSewMirror.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cboxSewMirror.FormattingEnabled = true;
-            this.cboxSewMirror.Location = new System.Drawing.Point(66, 72);
-            this.cboxSewMirror.Name = "cboxSewMirror";
-            this.cboxSewMirror.Size = new System.Drawing.Size(180, 21);
-            this.cboxSewMirror.TabIndex = 16;
-            // 
-            // cboxStoneMirror
-            // 
-            this.cboxStoneMirror.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cboxStoneMirror.FormattingEnabled = true;
-            this.cboxStoneMirror.Location = new System.Drawing.Point(66, 72);
-            this.cboxStoneMirror.Name = "cboxStoneMirror";
-            this.cboxStoneMirror.Size = new System.Drawing.Size(180, 21);
-            this.cboxStoneMirror.TabIndex = 17;
-            // 
-            // cboxSewWordOrder4
-            // 
-            this.cboxSewWordOrder4.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cboxSewWordOrder4.FormattingEnabled = true;
-            this.cboxSewWordOrder4.Location = new System.Drawing.Point(213, 43);
-            this.cboxSewWordOrder4.Name = "cboxSewWordOrder4";
-            this.cboxSewWordOrder4.Size = new System.Drawing.Size(33, 21);
-            this.cboxSewWordOrder4.TabIndex = 19;
-            // 
-            // cboxSewWordOrder3
-            // 
-            this.cboxSewWordOrder3.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cboxSewWordOrder3.FormattingEnabled = true;
-            this.cboxSewWordOrder3.Location = new System.Drawing.Point(174, 43);
-            this.cboxSewWordOrder3.Name = "cboxSewWordOrder3";
-            this.cboxSewWordOrder3.Size = new System.Drawing.Size(33, 21);
-            this.cboxSewWordOrder3.TabIndex = 18;
-            // 
-            // cboxSewWordOrder2
-            // 
-            this.cboxSewWordOrder2.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cboxSewWordOrder2.FormattingEnabled = true;
-            this.cboxSewWordOrder2.Location = new System.Drawing.Point(135, 43);
-            this.cboxSewWordOrder2.Name = "cboxSewWordOrder2";
-            this.cboxSewWordOrder2.Size = new System.Drawing.Size(33, 21);
-            this.cboxSewWordOrder2.TabIndex = 17;
-            // 
-            // cboxSewWordOrder1
-            // 
-            this.cboxSewWordOrder1.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cboxSewWordOrder1.FormattingEnabled = true;
-            this.cboxSewWordOrder1.Location = new System.Drawing.Point(96, 43);
-            this.cboxSewWordOrder1.Name = "cboxSewWordOrder1";
-            this.cboxSewWordOrder1.Size = new System.Drawing.Size(33, 21);
-            this.cboxSewWordOrder1.TabIndex = 16;
-            // 
-            // cboxStoneWordOrder4
-            // 
-            this.cboxStoneWordOrder4.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cboxStoneWordOrder4.FormattingEnabled = true;
-            this.cboxStoneWordOrder4.Location = new System.Drawing.Point(213, 43);
-            this.cboxStoneWordOrder4.Name = "cboxStoneWordOrder4";
-            this.cboxStoneWordOrder4.Size = new System.Drawing.Size(33, 21);
-            this.cboxStoneWordOrder4.TabIndex = 23;
-            // 
-            // cboxStoneWordOrder3
-            // 
-            this.cboxStoneWordOrder3.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cboxStoneWordOrder3.FormattingEnabled = true;
-            this.cboxStoneWordOrder3.Location = new System.Drawing.Point(174, 43);
-            this.cboxStoneWordOrder3.Name = "cboxStoneWordOrder3";
-            this.cboxStoneWordOrder3.Size = new System.Drawing.Size(33, 21);
-            this.cboxStoneWordOrder3.TabIndex = 22;
-            // 
-            // cboxStoneWordOrder2
-            // 
-            this.cboxStoneWordOrder2.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cboxStoneWordOrder2.FormattingEnabled = true;
-            this.cboxStoneWordOrder2.Location = new System.Drawing.Point(135, 43);
-            this.cboxStoneWordOrder2.Name = "cboxStoneWordOrder2";
-            this.cboxStoneWordOrder2.Size = new System.Drawing.Size(33, 21);
-            this.cboxStoneWordOrder2.TabIndex = 21;
-            // 
-            // cboxStoneWordOrder1
-            // 
-            this.cboxStoneWordOrder1.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cboxStoneWordOrder1.FormattingEnabled = true;
-            this.cboxStoneWordOrder1.Location = new System.Drawing.Point(96, 43);
-            this.cboxStoneWordOrder1.Name = "cboxStoneWordOrder1";
-            this.cboxStoneWordOrder1.Size = new System.Drawing.Size(33, 21);
-            this.cboxStoneWordOrder1.TabIndex = 20;
-            // 
-            // listBoxCutExPaths
-            // 
-            this.listBoxCutExPaths.FormattingEnabled = true;
-            this.listBoxCutExPaths.Location = new System.Drawing.Point(327, 36);
-            this.listBoxCutExPaths.Name = "listBoxCutExPaths";
-            this.listBoxCutExPaths.Size = new System.Drawing.Size(114, 95);
-            this.listBoxCutExPaths.TabIndex = 18;
-            // 
-            // listBoxCutExConditions
-            // 
-            this.listBoxCutExConditions.FormattingEnabled = true;
-            this.listBoxCutExConditions.Location = new System.Drawing.Point(447, 36);
-            this.listBoxCutExConditions.Name = "listBoxCutExConditions";
-            this.listBoxCutExConditions.Size = new System.Drawing.Size(114, 95);
-            this.listBoxCutExConditions.TabIndex = 19;
-            // 
-            // buttonCutExPathsAdd
-            // 
-            this.buttonCutExPathsAdd.Font = new System.Drawing.Font("Consolas", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.buttonCutExPathsAdd.Location = new System.Drawing.Point(302, 65);
-            this.buttonCutExPathsAdd.Name = "buttonCutExPathsAdd";
-            this.buttonCutExPathsAdd.Size = new System.Drawing.Size(19, 23);
-            this.buttonCutExPathsAdd.TabIndex = 20;
-            this.buttonCutExPathsAdd.Text = "+";
-            this.buttonCutExPathsAdd.UseVisualStyleBackColor = true;
-            // 
-            // buttonCutExPathsDelete
-            // 
-            this.buttonCutExPathsDelete.Font = new System.Drawing.Font("Consolas", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.buttonCutExPathsDelete.Location = new System.Drawing.Point(302, 94);
-            this.buttonCutExPathsDelete.Name = "buttonCutExPathsDelete";
-            this.buttonCutExPathsDelete.Size = new System.Drawing.Size(19, 23);
-            this.buttonCutExPathsDelete.TabIndex = 21;
-            this.buttonCutExPathsDelete.Text = "-";
-            this.buttonCutExPathsDelete.UseVisualStyleBackColor = true;
-            // 
-            // buttonCutExConditionsDelete
-            // 
-            this.buttonCutExConditionsDelete.Font = new System.Drawing.Font("Consolas", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.buttonCutExConditionsDelete.Location = new System.Drawing.Point(567, 94);
-            this.buttonCutExConditionsDelete.Name = "buttonCutExConditionsDelete";
-            this.buttonCutExConditionsDelete.Size = new System.Drawing.Size(19, 23);
-            this.buttonCutExConditionsDelete.TabIndex = 23;
-            this.buttonCutExConditionsDelete.Text = "-";
-            this.buttonCutExConditionsDelete.UseVisualStyleBackColor = true;
-            // 
-            // buttonCutExConditionsAdd
-            // 
-            this.buttonCutExConditionsAdd.Font = new System.Drawing.Font("Consolas", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.buttonCutExConditionsAdd.Location = new System.Drawing.Point(567, 65);
-            this.buttonCutExConditionsAdd.Name = "buttonCutExConditionsAdd";
-            this.buttonCutExConditionsAdd.Size = new System.Drawing.Size(19, 23);
-            this.buttonCutExConditionsAdd.TabIndex = 22;
-            this.buttonCutExConditionsAdd.Text = "+";
-            this.buttonCutExConditionsAdd.UseVisualStyleBackColor = true;
-            // 
-            // label17
-            // 
-            this.label17.AutoSize = true;
-            this.label17.Location = new System.Drawing.Point(361, 17);
-            this.label17.Name = "label17";
-            this.label17.Size = new System.Drawing.Size(34, 13);
-            this.label17.TabIndex = 24;
-            this.label17.Text = "Paths";
-            // 
-            // label18
-            // 
-            this.label18.AutoSize = true;
-            this.label18.Location = new System.Drawing.Point(474, 17);
-            this.label18.Name = "label18";
-            this.label18.Size = new System.Drawing.Size(56, 13);
-            this.label18.TabIndex = 25;
-            this.label18.Text = "Conditions";
-            // 
-            // label19
-            // 
-            this.label19.AutoSize = true;
-            this.label19.Location = new System.Drawing.Point(474, 20);
-            this.label19.Name = "label19";
-            this.label19.Size = new System.Drawing.Size(56, 13);
-            this.label19.TabIndex = 35;
-            this.label19.Text = "Conditions";
-            // 
-            // label20
-            // 
-            this.label20.AutoSize = true;
-            this.label20.Location = new System.Drawing.Point(361, 20);
-            this.label20.Name = "label20";
-            this.label20.Size = new System.Drawing.Size(34, 13);
-            this.label20.TabIndex = 34;
-            this.label20.Text = "Paths";
-            // 
-            // buttonSewExConditionsDelete
-            // 
-            this.buttonSewExConditionsDelete.Font = new System.Drawing.Font("Consolas", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.buttonSewExConditionsDelete.Location = new System.Drawing.Point(567, 97);
-            this.buttonSewExConditionsDelete.Name = "buttonSewExConditionsDelete";
-            this.buttonSewExConditionsDelete.Size = new System.Drawing.Size(19, 23);
-            this.buttonSewExConditionsDelete.TabIndex = 33;
-            this.buttonSewExConditionsDelete.Text = "-";
-            this.buttonSewExConditionsDelete.UseVisualStyleBackColor = true;
-            // 
-            // buttonSewExConditionsAdd
-            // 
-            this.buttonSewExConditionsAdd.Font = new System.Drawing.Font("Consolas", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.buttonSewExConditionsAdd.Location = new System.Drawing.Point(567, 68);
-            this.buttonSewExConditionsAdd.Name = "buttonSewExConditionsAdd";
-            this.buttonSewExConditionsAdd.Size = new System.Drawing.Size(19, 23);
-            this.buttonSewExConditionsAdd.TabIndex = 32;
-            this.buttonSewExConditionsAdd.Text = "+";
-            this.buttonSewExConditionsAdd.UseVisualStyleBackColor = true;
-            // 
-            // buttonSewExPathsDelete
-            // 
-            this.buttonSewExPathsDelete.Font = new System.Drawing.Font("Consolas", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.buttonSewExPathsDelete.Location = new System.Drawing.Point(302, 97);
-            this.buttonSewExPathsDelete.Name = "buttonSewExPathsDelete";
-            this.buttonSewExPathsDelete.Size = new System.Drawing.Size(19, 23);
-            this.buttonSewExPathsDelete.TabIndex = 31;
-            this.buttonSewExPathsDelete.Text = "-";
-            this.buttonSewExPathsDelete.UseVisualStyleBackColor = true;
-            // 
-            // buttonSewExPathsAdd
-            // 
-            this.buttonSewExPathsAdd.Font = new System.Drawing.Font("Consolas", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.buttonSewExPathsAdd.Location = new System.Drawing.Point(302, 68);
-            this.buttonSewExPathsAdd.Name = "buttonSewExPathsAdd";
-            this.buttonSewExPathsAdd.Size = new System.Drawing.Size(19, 23);
-            this.buttonSewExPathsAdd.TabIndex = 30;
-            this.buttonSewExPathsAdd.Text = "+";
-            this.buttonSewExPathsAdd.UseVisualStyleBackColor = true;
-            // 
-            // listBoxSewExConditions
-            // 
-            this.listBoxSewExConditions.FormattingEnabled = true;
-            this.listBoxSewExConditions.Location = new System.Drawing.Point(447, 39);
-            this.listBoxSewExConditions.Name = "listBoxSewExConditions";
-            this.listBoxSewExConditions.Size = new System.Drawing.Size(114, 95);
-            this.listBoxSewExConditions.TabIndex = 29;
-            // 
-            // listBoxSewExPaths
-            // 
-            this.listBoxSewExPaths.FormattingEnabled = true;
-            this.listBoxSewExPaths.Location = new System.Drawing.Point(327, 39);
-            this.listBoxSewExPaths.Name = "listBoxSewExPaths";
-            this.listBoxSewExPaths.Size = new System.Drawing.Size(114, 95);
-            this.listBoxSewExPaths.TabIndex = 28;
-            // 
-            // label21
-            // 
-            this.label21.AutoSize = true;
-            this.label21.Location = new System.Drawing.Point(266, 33);
-            this.label21.Name = "label21";
-            this.label21.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.label21.Size = new System.Drawing.Size(13, 13);
-            this.label21.TabIndex = 27;
-            this.label21.Text = "?";
-            // 
-            // label22
-            // 
-            this.label22.AutoSize = true;
-            this.label22.Location = new System.Drawing.Point(266, 20);
-            this.label22.Name = "label22";
-            this.label22.Size = new System.Drawing.Size(59, 13);
-            this.label22.TabIndex = 26;
-            this.label22.Text = "Exceptions";
-            // 
-            // label7
-            // 
-            this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(474, 20);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(56, 13);
-            this.label7.TabIndex = 45;
-            this.label7.Text = "Conditions";
-            // 
-            // label8
-            // 
-            this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(361, 20);
-            this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(34, 13);
-            this.label8.TabIndex = 44;
-            this.label8.Text = "Paths";
-            // 
-            // buttonStoneExConditionsDelete
-            // 
-            this.buttonStoneExConditionsDelete.Font = new System.Drawing.Font("Consolas", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.buttonStoneExConditionsDelete.Location = new System.Drawing.Point(567, 97);
-            this.buttonStoneExConditionsDelete.Name = "buttonStoneExConditionsDelete";
-            this.buttonStoneExConditionsDelete.Size = new System.Drawing.Size(19, 23);
-            this.buttonStoneExConditionsDelete.TabIndex = 43;
-            this.buttonStoneExConditionsDelete.Text = "-";
-            this.buttonStoneExConditionsDelete.UseVisualStyleBackColor = true;
-            // 
-            // buttonStoneExConditionsAdd
-            // 
-            this.buttonStoneExConditionsAdd.Font = new System.Drawing.Font("Consolas", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.buttonStoneExConditionsAdd.Location = new System.Drawing.Point(567, 68);
-            this.buttonStoneExConditionsAdd.Name = "buttonStoneExConditionsAdd";
-            this.buttonStoneExConditionsAdd.Size = new System.Drawing.Size(19, 23);
-            this.buttonStoneExConditionsAdd.TabIndex = 42;
-            this.buttonStoneExConditionsAdd.Text = "+";
-            this.buttonStoneExConditionsAdd.UseVisualStyleBackColor = true;
-            // 
-            // buttonStoneExPathsDelete
-            // 
-            this.buttonStoneExPathsDelete.Font = new System.Drawing.Font("Consolas", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.buttonStoneExPathsDelete.Location = new System.Drawing.Point(302, 97);
-            this.buttonStoneExPathsDelete.Name = "buttonStoneExPathsDelete";
-            this.buttonStoneExPathsDelete.Size = new System.Drawing.Size(19, 23);
-            this.buttonStoneExPathsDelete.TabIndex = 41;
-            this.buttonStoneExPathsDelete.Text = "-";
-            this.buttonStoneExPathsDelete.UseVisualStyleBackColor = true;
-            // 
-            // buttonStoneExPathsAdd
-            // 
-            this.buttonStoneExPathsAdd.Font = new System.Drawing.Font("Consolas", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.buttonStoneExPathsAdd.Location = new System.Drawing.Point(302, 68);
-            this.buttonStoneExPathsAdd.Name = "buttonStoneExPathsAdd";
-            this.buttonStoneExPathsAdd.Size = new System.Drawing.Size(19, 23);
-            this.buttonStoneExPathsAdd.TabIndex = 40;
-            this.buttonStoneExPathsAdd.Text = "+";
-            this.buttonStoneExPathsAdd.UseVisualStyleBackColor = true;
-            // 
-            // listBoxStoneExConditions
-            // 
-            this.listBoxStoneExConditions.FormattingEnabled = true;
-            this.listBoxStoneExConditions.Location = new System.Drawing.Point(447, 39);
-            this.listBoxStoneExConditions.Name = "listBoxStoneExConditions";
-            this.listBoxStoneExConditions.Size = new System.Drawing.Size(114, 95);
-            this.listBoxStoneExConditions.TabIndex = 39;
-            // 
-            // listBoxStoneExPaths
-            // 
-            this.listBoxStoneExPaths.FormattingEnabled = true;
-            this.listBoxStoneExPaths.Location = new System.Drawing.Point(327, 39);
-            this.listBoxStoneExPaths.Name = "listBoxStoneExPaths";
-            this.listBoxStoneExPaths.Size = new System.Drawing.Size(114, 95);
-            this.listBoxStoneExPaths.TabIndex = 38;
-            // 
-            // label12
-            // 
-            this.label12.AutoSize = true;
-            this.label12.Location = new System.Drawing.Point(266, 33);
-            this.label12.Name = "label12";
-            this.label12.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.label12.Size = new System.Drawing.Size(13, 13);
-            this.label12.TabIndex = 37;
-            this.label12.Text = "?";
-            // 
-            // label23
-            // 
-            this.label23.AutoSize = true;
-            this.label23.Location = new System.Drawing.Point(266, 20);
-            this.label23.Name = "label23";
-            this.label23.Size = new System.Drawing.Size(59, 13);
-            this.label23.TabIndex = 36;
-            this.label23.Text = "Exceptions";
             // 
             // EditStyleWindow
             // 

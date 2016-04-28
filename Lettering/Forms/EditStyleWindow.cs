@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Diagnostics;
 using System.Linq;
 using System.Windows.Forms;
 using Lettering.Data;
@@ -166,6 +167,323 @@ namespace Lettering.Forms {
                         listBoxStoneExConditions.DataSource = new BindingList<string>(((Data_Exception)listBoxStoneExPaths.SelectedItem).Conditions);
                     }
                 }
+            }
+        }
+
+        //CUT SECTION
+        private void cboxCutRule_SelectedIndexChanged(object sender, EventArgs e) {}
+
+        private void buttonCutResetWords_Click(object sender, EventArgs e) {
+            cboxCutWordOrder1.SelectedIndex = -1;
+            cboxCutWordOrder2.SelectedIndex = -1;
+            cboxCutWordOrder2.Enabled = false;
+            cboxCutWordOrder3.SelectedIndex = -1;
+            cboxCutWordOrder3.Enabled = false;
+            cboxCutWordOrder4.SelectedIndex = -1;
+            cboxCutWordOrder4.Enabled = false;
+        }
+
+        private void cboxCutWordOrder1_SelectedIndexChanged(object sender, EventArgs e) {
+            cboxCutWordOrder2.Items.Clear();
+            cboxCutWordOrder2.Items.AddRange(wordNums);
+            if(cboxCutWordOrder1.SelectedIndex > 0) {
+                cboxCutWordOrder2.Items.Remove(cboxCutWordOrder1.SelectedItem);
+            }
+            cboxCutWordOrder2.SelectedIndex = -1;
+            cboxCutWordOrder3.SelectedIndex = -1;
+            cboxCutWordOrder4.SelectedIndex = -1;
+            cboxCutWordOrder2.Enabled = (cboxCutWordOrder1.SelectedIndex > 0);
+            cboxCutWordOrder3.Enabled = (cboxCutWordOrder2.SelectedIndex > 0);
+            cboxCutWordOrder4.Enabled = (cboxCutWordOrder3.SelectedIndex > 0);
+        }
+
+        private void cboxCutWordOrder2_SelectedIndexChanged(object sender, EventArgs e) {
+            cboxCutWordOrder3.Items.Clear();
+            cboxCutWordOrder3.Items.AddRange(wordNums);
+            if(cboxCutWordOrder2.SelectedIndex > 0) {
+                cboxCutWordOrder3.Items.Remove(cboxCutWordOrder1.SelectedItem);
+                cboxCutWordOrder3.Items.Remove(cboxCutWordOrder2.SelectedItem);
+            }
+            cboxCutWordOrder3.SelectedIndex = -1;
+            cboxCutWordOrder4.SelectedIndex = -1;
+            cboxCutWordOrder3.Enabled = (cboxCutWordOrder2.SelectedIndex > 0);
+            cboxCutWordOrder4.Enabled = (cboxCutWordOrder3.SelectedIndex > 0);
+        }
+
+        private void cboxCutWordOrder3_SelectedIndexChanged(object sender, EventArgs e) {
+            cboxCutWordOrder4.Items.Clear();
+            cboxCutWordOrder4.Items.AddRange(wordNums);
+            if(cboxCutWordOrder3.SelectedIndex > 0) {
+                cboxCutWordOrder4.Items.Remove(cboxCutWordOrder1.SelectedItem);
+                cboxCutWordOrder4.Items.Remove(cboxCutWordOrder2.SelectedItem);
+                cboxCutWordOrder4.Items.Remove(cboxCutWordOrder3.SelectedItem);
+            }
+            cboxCutWordOrder4.SelectedIndex = -1;
+            cboxCutWordOrder4.Enabled = (cboxCutWordOrder3.SelectedIndex > 0);
+        }
+
+        private void cboxCutWordOrder4_SelectedIndexChanged(object sender, EventArgs e) {}
+
+        private void buttonCutResetMirror_Click(object sender, EventArgs e) {
+            cboxCutMirror.SelectedIndex = -1;
+        }
+
+        private void cboxCutMirror_SelectedIndexChanged(object sender, EventArgs e) {}
+
+        private void listBoxCutExPaths_SelectedIndexChanged(object sender, EventArgs e) {
+            Data_Exception ex = (Data_Exception)listBoxCutExPaths.SelectedItem;
+            if(ex != null) {
+                listBoxCutExConditions.DataSource = new BindingList<string>(ex.Conditions);
+            }
+        }
+
+        private void buttonCutExPathsAdd_Click(object sender, EventArgs e) {
+            //TODO(adam): need Messenger.Input
+        }
+
+        private void buttonCutExPathsDelete_Click(object sender, EventArgs e) {
+            Data_Exception ex = (Data_Exception)listBoxCutExPaths.SelectedItem;
+            if(ex != null) {
+                if(!Messenger.Show($"Are you sure you want to remove {ex.Path} and any conditions?", 
+                                   "Confirm Removal", 
+                                   MessageButtons.YesNo)) {
+                    return;
+                }
+
+                ((BindingList<Data_Exception>)listBoxCutExPaths.DataSource).Remove(ex);
+                //NOTE(adam): next item is automatically selected
+                ex = (Data_Exception)listBoxCutExPaths.SelectedItem;
+                listBoxCutExConditions.DataSource = new BindingList<string>(ex.Conditions);
+            }
+        }
+
+        private void listBoxCutExConditions_SelectedIndexChanged(object sender, EventArgs e) {}
+
+        private void buttonCutExConditionsAdd_Click(object sender, EventArgs e) {
+            //TODO(adam): need Messenger.Input
+        }
+
+        private void buttonCutExConditionsDelete_Click(object sender, EventArgs e) {
+            string cond = (string)listBoxCutExConditions.SelectedItem;
+            if(cond != null) {
+                if(!Messenger.Show($"Are you sure you want to remove the {cond} conditions?",
+                                   "Confirm Removal",
+                                   MessageButtons.YesNo)) {
+                    return;
+                }
+                ((BindingList<string>)listBoxCutExConditions.DataSource).Remove(cond);
+            }
+        }
+
+
+        //SEW SECTION
+        private void cboxSewRule_SelectedIndexChanged(object sender, EventArgs e) { }
+
+        private void buttonSewResetWords_Click(object sender, EventArgs e) {
+            cboxSewWordOrder1.SelectedIndex = -1;
+            cboxSewWordOrder2.SelectedIndex = -1;
+            cboxSewWordOrder2.Enabled = false;
+            cboxSewWordOrder3.SelectedIndex = -1;
+            cboxSewWordOrder3.Enabled = false;
+            cboxSewWordOrder4.SelectedIndex = -1;
+            cboxSewWordOrder4.Enabled = false;
+        }
+
+        private void cboxSewWordOrder1_SelectedIndexChanged(object sender, EventArgs e) {
+            cboxSewWordOrder2.Items.Clear();
+            cboxSewWordOrder2.Items.AddRange(wordNums);
+            if(cboxSewWordOrder1.SelectedIndex > 0) {
+                cboxSewWordOrder2.Items.Remove(cboxSewWordOrder1.SelectedItem);
+            }
+            cboxSewWordOrder2.SelectedIndex = -1;
+            cboxSewWordOrder3.SelectedIndex = -1;
+            cboxSewWordOrder4.SelectedIndex = -1;
+            cboxSewWordOrder2.Enabled = (cboxSewWordOrder1.SelectedIndex > 0);
+            cboxSewWordOrder3.Enabled = (cboxSewWordOrder2.SelectedIndex > 0);
+            cboxSewWordOrder4.Enabled = (cboxSewWordOrder3.SelectedIndex > 0);
+        }
+
+        private void cboxSewWordOrder2_SelectedIndexChanged(object sender, EventArgs e) {
+            cboxSewWordOrder3.Items.Clear();
+            cboxSewWordOrder3.Items.AddRange(wordNums);
+            if(cboxSewWordOrder2.SelectedIndex > 0) {
+                cboxSewWordOrder3.Items.Remove(cboxSewWordOrder1.SelectedItem);
+                cboxSewWordOrder3.Items.Remove(cboxSewWordOrder2.SelectedItem);
+            }
+            cboxSewWordOrder3.SelectedIndex = -1;
+            cboxSewWordOrder4.SelectedIndex = -1;
+            cboxSewWordOrder3.Enabled = (cboxSewWordOrder2.SelectedIndex > 0);
+            cboxSewWordOrder4.Enabled = (cboxSewWordOrder3.SelectedIndex > 0);
+        }
+
+        private void cboxSewWordOrder3_SelectedIndexChanged(object sender, EventArgs e) {
+            cboxSewWordOrder4.Items.Clear();
+            cboxSewWordOrder4.Items.AddRange(wordNums);
+            if(cboxSewWordOrder3.SelectedIndex > 0) {
+                cboxSewWordOrder4.Items.Remove(cboxSewWordOrder1.SelectedItem);
+                cboxSewWordOrder4.Items.Remove(cboxSewWordOrder2.SelectedItem);
+                cboxSewWordOrder4.Items.Remove(cboxSewWordOrder3.SelectedItem);
+            }
+            cboxSewWordOrder4.SelectedIndex = -1;
+            cboxSewWordOrder4.Enabled = (cboxSewWordOrder3.SelectedIndex > 0);
+        }
+
+        private void cboxSewWordOrder4_SelectedIndexChanged(object sender, EventArgs e) { }
+
+        private void buttonSewResetMirror_Click(object sender, EventArgs e) {
+            cboxSewMirror.SelectedIndex = -1;
+        }
+
+        private void cboxSewMirror_SelectedIndexChanged(object sender, EventArgs e) { }
+
+        private void listBoxSewExPaths_SelectedIndexChanged(object sender, EventArgs e) {
+            Data_Exception ex = (Data_Exception)listBoxSewExPaths.SelectedItem;
+            if(ex != null) {
+                listBoxSewExConditions.DataSource = new BindingList<string>(ex.Conditions);
+            }
+        }
+
+        private void buttonSewExPathsAdd_Click(object sender, EventArgs e) {
+            //TODO(adam): need Messenger.Input
+        }
+
+        private void buttonSewExPathsDelete_Click(object sender, EventArgs e) {
+            Data_Exception ex = (Data_Exception)listBoxSewExPaths.SelectedItem;
+            if(ex != null) {
+                if(!Messenger.Show($"Are you sure you want to remove {ex.Path} and any conditions?",
+                                   "Confirm Removal",
+                                   MessageButtons.YesNo)) {
+                    return;
+                }
+
+                ((BindingList<Data_Exception>)listBoxSewExPaths.DataSource).Remove(ex);
+                //NOTE(adam): next item is automatically selected
+                ex = (Data_Exception)listBoxSewExPaths.SelectedItem;
+                listBoxSewExConditions.DataSource = new BindingList<string>(ex.Conditions);
+            }
+        }
+
+        private void listBoxSewExConditions_SelectedIndexChanged(object sender, EventArgs e) { }
+
+        private void buttonSewExConditionsAdd_Click(object sender, EventArgs e) {
+            //TODO(adam): need Messenger.Input
+        }
+
+        private void buttonSewExConditionsDelete_Click(object sender, EventArgs e) {
+            string cond = (string)listBoxSewExConditions.SelectedItem;
+            if(cond != null) {
+                if(!Messenger.Show($"Are you sure you want to remove the {cond} conditions?",
+                                   "Confirm Removal",
+                                   MessageButtons.YesNo)) {
+                    return;
+                }
+                ((BindingList<string>)listBoxSewExConditions.DataSource).Remove(cond);
+            }
+        }
+
+
+        //STONE SECTION
+        private void cboxStoneRule_SelectedIndexChanged(object sender, EventArgs e) { }
+
+        private void buttonStoneResetWords_Click(object sender, EventArgs e) {
+            cboxStoneWordOrder1.SelectedIndex = -1;
+            cboxStoneWordOrder2.SelectedIndex = -1;
+            cboxStoneWordOrder2.Enabled = false;
+            cboxStoneWordOrder3.SelectedIndex = -1;
+            cboxStoneWordOrder3.Enabled = false;
+            cboxStoneWordOrder4.SelectedIndex = -1;
+            cboxStoneWordOrder4.Enabled = false;
+        }
+
+        private void cboxStoneWordOrder1_SelectedIndexChanged(object sender, EventArgs e) {
+            cboxStoneWordOrder2.Items.Clear();
+            cboxStoneWordOrder2.Items.AddRange(wordNums);
+            if(cboxStoneWordOrder1.SelectedIndex > 0) {
+                cboxStoneWordOrder2.Items.Remove(cboxStoneWordOrder1.SelectedItem);
+            }
+            cboxStoneWordOrder2.SelectedIndex = -1;
+            cboxStoneWordOrder3.SelectedIndex = -1;
+            cboxStoneWordOrder4.SelectedIndex = -1;
+            cboxStoneWordOrder2.Enabled = (cboxStoneWordOrder1.SelectedIndex > 0);
+            cboxStoneWordOrder3.Enabled = (cboxStoneWordOrder2.SelectedIndex > 0);
+            cboxStoneWordOrder4.Enabled = (cboxStoneWordOrder3.SelectedIndex > 0);
+        }
+
+        private void cboxStoneWordOrder2_SelectedIndexChanged(object sender, EventArgs e) {
+            cboxStoneWordOrder3.Items.Clear();
+            cboxStoneWordOrder3.Items.AddRange(wordNums);
+            if(cboxStoneWordOrder2.SelectedIndex > 0) {
+                cboxStoneWordOrder3.Items.Remove(cboxStoneWordOrder1.SelectedItem);
+                cboxStoneWordOrder3.Items.Remove(cboxStoneWordOrder2.SelectedItem);
+            }
+            cboxStoneWordOrder3.SelectedIndex = -1;
+            cboxStoneWordOrder4.SelectedIndex = -1;
+            cboxStoneWordOrder3.Enabled = (cboxStoneWordOrder2.SelectedIndex > 0);
+            cboxStoneWordOrder4.Enabled = (cboxStoneWordOrder3.SelectedIndex > 0);
+        }
+
+        private void cboxStoneWordOrder3_SelectedIndexChanged(object sender, EventArgs e) {
+            cboxStoneWordOrder4.Items.Clear();
+            cboxStoneWordOrder4.Items.AddRange(wordNums);
+            if(cboxStoneWordOrder3.SelectedIndex > 0) {
+                cboxStoneWordOrder4.Items.Remove(cboxStoneWordOrder1.SelectedItem);
+                cboxStoneWordOrder4.Items.Remove(cboxStoneWordOrder2.SelectedItem);
+                cboxStoneWordOrder4.Items.Remove(cboxStoneWordOrder3.SelectedItem);
+            }
+            cboxStoneWordOrder4.SelectedIndex = -1;
+            cboxStoneWordOrder4.Enabled = (cboxStoneWordOrder3.SelectedIndex > 0);
+        }
+
+        private void cboxStoneWordOrder4_SelectedIndexChanged(object sender, EventArgs e) { }
+
+        private void buttonStoneResetMirror_Click(object sender, EventArgs e) {
+            cboxStoneMirror.SelectedIndex = -1;
+        }
+
+        private void cboxStoneMirror_SelectedIndexChanged(object sender, EventArgs e) { }
+
+        private void listBoxStoneExPaths_SelectedIndexChanged(object sender, EventArgs e) {
+            Data_Exception ex = (Data_Exception)listBoxStoneExPaths.SelectedItem;
+            if(ex != null) {
+                listBoxStoneExConditions.DataSource = new BindingList<string>(ex.Conditions);
+            }
+        }
+
+        private void buttonStoneExPathsAdd_Click(object sender, EventArgs e) {
+            //TODO(adam): need Messenger.Input
+        }
+
+        private void buttonStoneExPathsDelete_Click(object sender, EventArgs e) {
+            Data_Exception ex = (Data_Exception)listBoxStoneExPaths.SelectedItem;
+            if(ex != null) {
+                if(!Messenger.Show($"Are you sure you want to remove {ex.Path} and any conditions?",
+                                   "Confirm Removal",
+                                   MessageButtons.YesNo)) {
+                    return;
+                }
+
+                ((BindingList<Data_Exception>)listBoxStoneExPaths.DataSource).Remove(ex);
+                //NOTE(adam): next item is automatically selected
+                ex = (Data_Exception)listBoxStoneExPaths.SelectedItem;
+                listBoxStoneExConditions.DataSource = new BindingList<string>(ex.Conditions);
+            }
+        }
+
+        private void listBoxStoneExConditions_SelectedIndexChanged(object sender, EventArgs e) { }
+
+        private void buttonStoneExConditionsAdd_Click(object sender, EventArgs e) {
+            //TODO(adam): need Messenger.Input
+        }
+
+        private void buttonStoneExConditionsDelete_Click(object sender, EventArgs e) {
+            string cond = (string)listBoxStoneExConditions.SelectedItem;
+            if(cond != null) {
+                if(!Messenger.Show($"Are you sure you want to remove the {cond} conditions?",
+                                   "Confirm Removal",
+                                   MessageButtons.YesNo)) {
+                    return;
+                }
+                ((BindingList<string>)listBoxStoneExConditions.DataSource).Remove(cond);
             }
         }
     }
