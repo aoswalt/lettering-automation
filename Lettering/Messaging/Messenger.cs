@@ -1,5 +1,6 @@
 ﻿using System.Windows.Forms;
 using Lettering.Errors;
+using Lettering.Forms;
 
 namespace Lettering {
     internal enum MessageButtons { Ok, OkCancel, YesNo }
@@ -39,6 +40,12 @@ namespace Lettering {
             Lettering.MoveWindowToTop();
             DialogResult result = MessageBox.Show(message, title, messsageBoxButtons);
             return result == DialogResult.OK || result == DialogResult.Yes;
+        }
+
+        internal static string Prompt(string message, string title) {
+            InputWindow inputWindow = new InputWindow(message, title);
+            inputWindow.ShowDialog();
+            return inputWindow.Input;
         }
 
         internal static void ShowErrorLog() {

@@ -90,6 +90,12 @@
     <Compile Include="Forms\EditStyleWindow.Designer.cs">
       <DependentUpon>EditStyleWindow.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\InputWindow.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\InputWindow.Designer.cs">
+      <DependentUpon>InputWindow.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\ReportProgressWindow.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -160,6 +166,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\EditStyleWindow.resx">
       <DependentUpon>EditStyleWindow.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\InputWindow.resx">
+      <DependentUpon>InputWindow.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\ReportProgressWindow.resx">
       <DependentUpon>ReportProgressWindow.cs</DependentUpon>
