@@ -138,9 +138,12 @@ namespace Lettering.Forms {
         }
 
         private void buttonDone_Click(object sender, System.EventArgs e) {
+            this.Close();
         }
 
         private void treeViewStyles_NodeMouseDoubleClick(object sender, TreeNodeMouseClickEventArgs e) {
+            e.Node.Toggle();    //TODO(adam): find better method of preventing expand/collapse
+
             TreeNode root = e.Node;
             while(root.Parent != null) {
                 root = root.Parent;

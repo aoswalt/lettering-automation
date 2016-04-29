@@ -575,11 +575,13 @@ namespace Lettering.Forms {
         }
 
         private void buttonAccept_Click(object sender, EventArgs e) {
-
+            //TODO(adam): copy temporary style object to referenced one
+            this.Close();
         }
 
         private void buttonCancel_Click(object sender, EventArgs e) {
-
+            //TODO(adam): discard temporary style object
+            this.Close();
         }
     }
 }
