@@ -64,10 +64,11 @@ namespace Lettering.Forms {
             foreach(KeyValuePair<string, Data_Style> styleKV in editedConfig.Styles) {
                 treeViewStyles.Nodes.Add(CreateTreeNode(styleKV.Key, styleKV.Value));
             }
+            treeViewStyles.Sort();
         }
 
         private TreeNode CreateTreeNode(string style, Data_Style data) {
-            TreeNode styleNode = new TreeNode(style) { Tag = data };
+            TreeNode styleNode = new TreeNode(style) { Name = style, Tag = data };
 
             foreach(ReportType type in Enum.GetValues(typeof(ReportType))) {
                 Data_StyleData styleData = null;
@@ -149,8 +150,6 @@ namespace Lettering.Forms {
         }
 
         private void treeViewStyles_NodeMouseDoubleClick(object sender, TreeNodeMouseClickEventArgs e) {
-            e.Node.Toggle();    //TODO(adam): find better method of preventing expand/collapse
-
             TreeNode root = e.Node;
             while(root.Parent != null) {
                 root = root.Parent;
@@ -160,8 +159,11 @@ namespace Lettering.Forms {
             if(editStyleWindow.ShowDialog(this) == DialogResult.OK) {
                 treeViewStyles.Nodes.RemoveByKey(root.Text);
                 treeViewStyles.Nodes.RemoveByKey(editStyleWindow.StyleCode);
-                treeViewStyles.Nodes.Add(CreateTreeNode(editStyleWindow.StyleCode, editStyleWindow.EditedStyle));
-                //treeViewStyles.Sort();
+
+                TreeNode newNode = CreateTreeNode(editStyleWindow.StyleCode, editStyleWindow.EditedStyle);
+                treeViewStyles.Nodes.Add(newNode);
+                treeViewStyles.Sort();
+                treeViewStyles.SelectedNode = newNode;
             }
         }
     }
