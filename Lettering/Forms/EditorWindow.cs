@@ -62,48 +62,53 @@ namespace Lettering.Forms {
 
         private void BuildStylesTree() {
             foreach(KeyValuePair<string, Data_Style> styleKV in editedConfig.Styles) {
-                TreeNode styleNode = new TreeNode(styleKV.Key) { Tag = styleKV.Value };
-                treeViewStyles.Nodes.Add(styleNode);
+                treeViewStyles.Nodes.Add(CreateTreeNode(styleKV.Key, styleKV.Value));
+            }
+        }
 
-                foreach(ReportType type in Enum.GetValues(typeof(ReportType))) {
-                    Data_StyleData styleData = null;
+        private TreeNode CreateTreeNode(string style, Data_Style data) {
+            TreeNode styleNode = new TreeNode(style) { Tag = data };
 
-                    switch(type) {
-                        case ReportType.Cut:
-                            styleData = styleKV.Value.Cut;
-                            break;
-                        case ReportType.Sew:
-                            styleData = styleKV.Value.Sew;
-                            break;
-                        case ReportType.Stone:
-                            styleData = styleKV.Value.Stone;
-                            break;
+            foreach(ReportType type in Enum.GetValues(typeof(ReportType))) {
+                Data_StyleData styleData = null;
+
+                switch(type) {
+                    case ReportType.Cut:
+                        styleData = data.Cut;
+                        break;
+                    case ReportType.Sew:
+                        styleData = data.Sew;
+                        break;
+                    case ReportType.Stone:
+                        styleData = data.Stone;
+                        break;
+                }
+
+                if(styleData != null) {
+                    TreeNode typeNode = new TreeNode(type.ToString());
+                    styleNode.Nodes.Add(typeNode);
+
+                    if(styleData.Rule != null) {
+                        typeNode.Nodes.Add(new TreeNode("Rule: " + styleData.Rule));
                     }
 
-                    if(styleData != null) {
-                        TreeNode typeNode = new TreeNode(type.ToString());
-                        styleNode.Nodes.Add(typeNode);
+                    if(styleData.CustomWordOrder != null) {
+                        typeNode.Nodes.Add(new TreeNode("Custom Word Order: " + string.Join(",", styleData.CustomWordOrder)));
+                    }
 
-                        if(styleData.Rule != null) {
-                            typeNode.Nodes.Add(new TreeNode("Rule: " + styleData.Rule));
-                        }
+                    if(styleData.MirroredStyle != null) {
+                        typeNode.Nodes.Add(new TreeNode("Mirror: " + styleData.MirroredStyle));
+                    }
 
-                        if(styleData.CustomWordOrder != null) {
-                            typeNode.Nodes.Add(new TreeNode("Custom Word Order: " + string.Join(",", styleData.CustomWordOrder)));
-                        }
+                    if(styleData.Exceptions != null) {
+                        TreeNode exsNode = new TreeNode("Exceptions");
+                        typeNode.Nodes.Add(exsNode);
 
-                        if(styleData.MirroredStyle != null) {
-                            typeNode.Nodes.Add(new TreeNode("Mirror: " + styleData.MirroredStyle));
-                        }
+                        foreach(Data_Exception ex in styleData.Exceptions) {
+                            TreeNode exNode = new TreeNode(ex.Path);
+                            exsNode.Nodes.Add(exNode);
 
-                        if(styleData.Exceptions != null) {
-                            TreeNode exsNode = new TreeNode("Exceptions");
-                            typeNode.Nodes.Add(exsNode);
-
-                            foreach(Data_Exception ex in styleData.Exceptions) {
-                                TreeNode exNode = new TreeNode(ex.Path);
-                                exsNode.Nodes.Add(exNode);
-
+                            if(ex.Conditions != null) {
                                 foreach(string condition in ex.Conditions) {
                                     exNode.Nodes.Add(new TreeNode("Condition: " + condition));
                                 }
@@ -112,6 +117,8 @@ namespace Lettering.Forms {
                     }
                 }
             }
+
+            return styleNode;
         }
 
         //NOTE(adam): based on MSDN, draws tab text horizontal
@@ -151,7 +158,10 @@ namespace Lettering.Forms {
             
             EditStyleWindow editStyleWindow = new EditStyleWindow(editedConfig, root.Text, (Data_Style)root.Tag);
             if(editStyleWindow.ShowDialog(this) == DialogResult.OK) {
-                MessageBox.Show("OK");
+                treeViewStyles.Nodes.RemoveByKey(root.Text);
+                treeViewStyles.Nodes.RemoveByKey(editStyleWindow.StyleCode);
+                treeViewStyles.Nodes.Add(CreateTreeNode(editStyleWindow.StyleCode, editStyleWindow.EditedStyle));
+                //treeViewStyles.Sort();
             }
         }
     }

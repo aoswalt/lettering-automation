@@ -1,10 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.Diagnostics;
 using System.Linq;
 using System.Windows.Forms;
 using Lettering.Data;
+using Newtonsoft.Json;
 
 namespace Lettering.Forms {
     public partial class EditStyleWindow : Form {
@@ -12,16 +12,24 @@ namespace Lettering.Forms {
         public Data_Style EditedStyle { get; set; }
 
         private JsonConfigData configData;
+        private Data_Style workingStyle;
         private object[] wordNums = new object[] { "", 1, 2, 3, 4 };
 
-        public EditStyleWindow(JsonConfigData configData, string styleCode, Data_Style editedStyle) {
+        public EditStyleWindow(JsonConfigData configData, string styleCode, Data_Style style) {
             this.configData = configData;
             InitializeComponent();
             FillLists();
 
-            if(styleCode != null && editedStyle != null) {
+            if(styleCode != null && style != null) {
                 this.StyleCode = styleCode;
-                this.EditedStyle = editedStyle;
+                //NOTE(adam): simple but probably inefficient deep copy of config
+                this.workingStyle = JsonConvert.DeserializeObject<Data_Style>(JsonConvert.SerializeObject(style));
+
+                //NOTE(adam): potentially temporary StyleData for ability to add properties through controls
+                if(workingStyle.Cut == null) workingStyle.Cut = new Data_StyleData();
+                if(workingStyle.Sew == null) workingStyle.Sew = new Data_StyleData();
+                if(workingStyle.Stone == null) workingStyle.Stone = new Data_StyleData();
+
                 PopulateControls();
             }
         }
@@ -73,30 +81,30 @@ namespace Lettering.Forms {
         private void PopulateControls() {
             textBoxStyle.Text = StyleCode;
 
-            if(EditedStyle.Cut != null) {
-                cboxCutRule.SelectedIndex = cboxCutRule.FindStringExact(EditedStyle.Cut.Rule);
+            if(workingStyle.Cut != null) {
+                cboxCutRule.SelectedIndex = cboxCutRule.FindStringExact(workingStyle.Cut.Rule);
 
-                if(EditedStyle.Cut.CustomWordOrder != null) {
-                    if(EditedStyle.Cut.CustomWordOrder.Count >= 1) {
-                        cboxCutWordOrder1.SelectedIndex = cboxCutWordOrder1.FindString(EditedStyle.Cut.CustomWordOrder[0].ToString());
+                if(workingStyle.Cut.CustomWordOrder != null) {
+                    if(workingStyle.Cut.CustomWordOrder.Count >= 1) {
+                        cboxCutWordOrder1.SelectedIndex = cboxCutWordOrder1.FindString(workingStyle.Cut.CustomWordOrder[0].ToString());
                     }
-                    if(EditedStyle.Cut.CustomWordOrder.Count >= 2) {
-                        cboxCutWordOrder2.SelectedIndex = cboxCutWordOrder2.FindString(EditedStyle.Cut.CustomWordOrder[1].ToString());
+                    if(workingStyle.Cut.CustomWordOrder.Count >= 2) {
+                        cboxCutWordOrder2.SelectedIndex = cboxCutWordOrder2.FindString(workingStyle.Cut.CustomWordOrder[1].ToString());
                     }
-                    if(EditedStyle.Cut.CustomWordOrder.Count >= 3) {
-                        cboxCutWordOrder3.SelectedIndex = cboxCutWordOrder3.FindString(EditedStyle.Cut.CustomWordOrder[2].ToString());
+                    if(workingStyle.Cut.CustomWordOrder.Count >= 3) {
+                        cboxCutWordOrder3.SelectedIndex = cboxCutWordOrder3.FindString(workingStyle.Cut.CustomWordOrder[2].ToString());
                     }
-                    if(EditedStyle.Cut.CustomWordOrder.Count >= 4) {
-                        cboxCutWordOrder4.SelectedIndex = cboxCutWordOrder4.FindString(EditedStyle.Cut.CustomWordOrder[3].ToString());
+                    if(workingStyle.Cut.CustomWordOrder.Count >= 4) {
+                        cboxCutWordOrder4.SelectedIndex = cboxCutWordOrder4.FindString(workingStyle.Cut.CustomWordOrder[3].ToString());
                     }
                 }
 
-                if(EditedStyle.Cut.MirroredStyle != null) {
-                    cboxCutMirror.Text = EditedStyle.Cut.MirroredStyle;
+                if(workingStyle.Cut.MirroredStyle != null) {
+                    cboxCutMirror.Text = workingStyle.Cut.MirroredStyle;
                 }
 
-                if(EditedStyle.Cut.Exceptions != null) {
-                    listBoxCutExPaths.DataSource = new BindingList<Data_Exception>(EditedStyle.Cut.Exceptions);
+                if(workingStyle.Cut.Exceptions != null) {
+                    listBoxCutExPaths.DataSource = new BindingList<Data_Exception>(workingStyle.Cut.Exceptions);
                     listBoxCutExPaths.DisplayMember = "Path";
 
                     if((Data_Exception)listBoxCutExPaths.SelectedItem != null) {
@@ -105,30 +113,30 @@ namespace Lettering.Forms {
                 }
             }
 
-            if(EditedStyle.Sew != null) {
-                cboxSewRule.SelectedIndex = cboxSewRule.FindStringExact(EditedStyle.Sew.Rule);
+            if(workingStyle.Sew != null) {
+                cboxSewRule.SelectedIndex = cboxSewRule.FindStringExact(workingStyle.Sew.Rule);
 
-                if(EditedStyle.Sew.CustomWordOrder != null) {
-                    if(EditedStyle.Sew.CustomWordOrder.Count >= 1) {
-                        cboxSewWordOrder1.SelectedIndex = cboxSewWordOrder1.FindString(EditedStyle.Sew.CustomWordOrder[0].ToString());
+                if(workingStyle.Sew.CustomWordOrder != null) {
+                    if(workingStyle.Sew.CustomWordOrder.Count >= 1) {
+                        cboxSewWordOrder1.SelectedIndex = cboxSewWordOrder1.FindString(workingStyle.Sew.CustomWordOrder[0].ToString());
                     }
-                    if(EditedStyle.Sew.CustomWordOrder.Count >= 2) {
-                        cboxSewWordOrder2.SelectedIndex = cboxSewWordOrder2.FindString(EditedStyle.Sew.CustomWordOrder[1].ToString());
+                    if(workingStyle.Sew.CustomWordOrder.Count >= 2) {
+                        cboxSewWordOrder2.SelectedIndex = cboxSewWordOrder2.FindString(workingStyle.Sew.CustomWordOrder[1].ToString());
                     }
-                    if(EditedStyle.Sew.CustomWordOrder.Count >= 3) {
-                        cboxSewWordOrder3.SelectedIndex = cboxSewWordOrder3.FindString(EditedStyle.Sew.CustomWordOrder[2].ToString());
+                    if(workingStyle.Sew.CustomWordOrder.Count >= 3) {
+                        cboxSewWordOrder3.SelectedIndex = cboxSewWordOrder3.FindString(workingStyle.Sew.CustomWordOrder[2].ToString());
                     }
-                    if(EditedStyle.Sew.CustomWordOrder.Count >= 4) {
-                        cboxSewWordOrder4.SelectedIndex = cboxSewWordOrder4.FindString(EditedStyle.Sew.CustomWordOrder[3].ToString());
+                    if(workingStyle.Sew.CustomWordOrder.Count >= 4) {
+                        cboxSewWordOrder4.SelectedIndex = cboxSewWordOrder4.FindString(workingStyle.Sew.CustomWordOrder[3].ToString());
                     }
                 }
 
-                if(EditedStyle.Sew.MirroredStyle != null) {
-                    cboxSewMirror.Text = EditedStyle.Sew.MirroredStyle;
+                if(workingStyle.Sew.MirroredStyle != null) {
+                    cboxSewMirror.Text = workingStyle.Sew.MirroredStyle;
                 }
 
-                if(EditedStyle.Sew.Exceptions != null) {
-                    listBoxSewExPaths.DataSource = new BindingList<Data_Exception>(EditedStyle.Sew.Exceptions);
+                if(workingStyle.Sew.Exceptions != null) {
+                    listBoxSewExPaths.DataSource = new BindingList<Data_Exception>(workingStyle.Sew.Exceptions);
                     listBoxSewExPaths.DisplayMember = "Path";
 
                     if((Data_Exception)listBoxSewExPaths.SelectedItem != null) {
@@ -137,30 +145,30 @@ namespace Lettering.Forms {
                 }
             }
 
-            if(EditedStyle.Stone != null) {
-                cboxStoneRule.SelectedIndex = cboxStoneRule.FindStringExact(EditedStyle.Stone.Rule);
+            if(workingStyle.Stone != null) {
+                cboxStoneRule.SelectedIndex = cboxStoneRule.FindStringExact(workingStyle.Stone.Rule);
 
-                if(EditedStyle.Stone.CustomWordOrder != null) {
-                    if(EditedStyle.Stone.CustomWordOrder.Count >= 1) {
-                        cboxStoneWordOrder1.SelectedIndex = cboxStoneWordOrder1.FindString(EditedStyle.Stone.CustomWordOrder[0].ToString());
+                if(workingStyle.Stone.CustomWordOrder != null) {
+                    if(workingStyle.Stone.CustomWordOrder.Count >= 1) {
+                        cboxStoneWordOrder1.SelectedIndex = cboxStoneWordOrder1.FindString(workingStyle.Stone.CustomWordOrder[0].ToString());
                     }
-                    if(EditedStyle.Stone.CustomWordOrder.Count >= 2) {
-                        cboxStoneWordOrder2.SelectedIndex = cboxStoneWordOrder2.FindString(EditedStyle.Stone.CustomWordOrder[1].ToString());
+                    if(workingStyle.Stone.CustomWordOrder.Count >= 2) {
+                        cboxStoneWordOrder2.SelectedIndex = cboxStoneWordOrder2.FindString(workingStyle.Stone.CustomWordOrder[1].ToString());
                     }
-                    if(EditedStyle.Stone.CustomWordOrder.Count >= 3) {
-                        cboxStoneWordOrder3.SelectedIndex = cboxStoneWordOrder3.FindString(EditedStyle.Stone.CustomWordOrder[2].ToString());
+                    if(workingStyle.Stone.CustomWordOrder.Count >= 3) {
+                        cboxStoneWordOrder3.SelectedIndex = cboxStoneWordOrder3.FindString(workingStyle.Stone.CustomWordOrder[2].ToString());
                     }
-                    if(EditedStyle.Stone.CustomWordOrder.Count >= 4) {
-                        cboxStoneWordOrder4.SelectedIndex = cboxStoneWordOrder4.FindString(EditedStyle.Stone.CustomWordOrder[3].ToString());
+                    if(workingStyle.Stone.CustomWordOrder.Count >= 4) {
+                        cboxStoneWordOrder4.SelectedIndex = cboxStoneWordOrder4.FindString(workingStyle.Stone.CustomWordOrder[3].ToString());
                     }
                 }
 
-                if(EditedStyle.Stone.MirroredStyle != null) {
-                    cboxStoneMirror.Text = EditedStyle.Stone.MirroredStyle;
+                if(workingStyle.Stone.MirroredStyle != null) {
+                    cboxStoneMirror.Text = workingStyle.Stone.MirroredStyle;
                 }
 
-                if(EditedStyle.Stone.Exceptions != null) {
-                    listBoxStoneExPaths.DataSource = new BindingList<Data_Exception>(EditedStyle.Stone.Exceptions);
+                if(workingStyle.Stone.Exceptions != null) {
+                    listBoxStoneExPaths.DataSource = new BindingList<Data_Exception>(workingStyle.Stone.Exceptions);
                     listBoxStoneExPaths.DisplayMember = "Path";
 
                     if((Data_Exception)listBoxStoneExPaths.SelectedItem != null) {
@@ -170,7 +178,21 @@ namespace Lettering.Forms {
             }
         }
 
+        private List<int> BuildWordOrder(ComboBox w1, ComboBox w2, ComboBox w3, ComboBox w4) {
+            List<int> words = new List<int>();
+            if(w1.SelectedIndex > 0) words.Add((int)w1.SelectedItem);
+            if(w2.SelectedIndex > 0) words.Add((int)w2.SelectedItem);
+            if(w3.SelectedIndex > 0) words.Add((int)w3.SelectedItem);
+            if(w4.SelectedIndex > 0) words.Add((int)w4.SelectedItem);
+            return words;
+        }
+
         //CUT SECTION
+        private void buttonCutClearRule_Click(object sender, EventArgs e) {
+            cboxCutRule.SelectedIndex = -1;
+            workingStyle.Cut.Rule = null;
+        }
+
         private void cboxCutRule_SelectedIndexChanged(object sender, EventArgs e) {}
 
         private void buttonCutResetWords_Click(object sender, EventArgs e) {
@@ -243,7 +265,8 @@ namespace Lettering.Forms {
             string input = Messenger.Prompt("Enter a new path", "Add Path");
             if(input.Length > 0) {
                 if(listBoxCutExPaths.DataSource == null) {
-                    listBoxCutExPaths.DataSource = new BindingList<Data_Exception>(new List<Data_Exception>());
+                    workingStyle.Cut.Exceptions = new List<Data_Exception>();
+                    listBoxCutExPaths.DataSource = new BindingList<Data_Exception>(workingStyle.Cut.Exceptions);
                     listBoxCutExPaths.DisplayMember = "Path";
                 }
 
@@ -306,6 +329,11 @@ namespace Lettering.Forms {
 
 
         //SEW SECTION
+        private void buttonSewClearRule_Click(object sender, EventArgs e) {
+            cboxSewRule.SelectedIndex = -1;
+            workingStyle.Sew.Rule = null;
+        }
+
         private void cboxSewRule_SelectedIndexChanged(object sender, EventArgs e) { }
 
         private void buttonSewResetWords_Click(object sender, EventArgs e) {
@@ -378,7 +406,8 @@ namespace Lettering.Forms {
             string input = Messenger.Prompt("Enter a new path", "Add Path");
             if(input.Length > 0) {
                 if(listBoxSewExPaths.DataSource == null) {
-                    listBoxSewExPaths.DataSource = new BindingList<Data_Exception>(new List<Data_Exception>());
+                    workingStyle.Sew.Exceptions = new List<Data_Exception>();
+                    listBoxSewExPaths.DataSource = new BindingList<Data_Exception>(workingStyle.Sew.Exceptions);
                     listBoxSewExPaths.DisplayMember = "Path";
                 }
 
@@ -441,6 +470,11 @@ namespace Lettering.Forms {
 
 
         //STONE SECTION
+        private void buttonStoneClearRule_Click(object sender, EventArgs e) {
+            cboxStoneRule.SelectedIndex = -1;
+            workingStyle.Stone.Rule = null;
+        }
+
         private void cboxStoneRule_SelectedIndexChanged(object sender, EventArgs e) { }
 
         private void buttonStoneResetWords_Click(object sender, EventArgs e) {
@@ -513,7 +547,8 @@ namespace Lettering.Forms {
             string input = Messenger.Prompt("Enter a new path", "Add Path");
             if(input.Length > 0) {
                 if(listBoxStoneExPaths.DataSource == null) {
-                    listBoxStoneExPaths.DataSource = new BindingList<Data_Exception>(new List<Data_Exception>());
+                    workingStyle.Stone.Exceptions = new List<Data_Exception>();
+                    listBoxStoneExPaths.DataSource = new BindingList<Data_Exception>(workingStyle.Stone.Exceptions);
                     listBoxStoneExPaths.DisplayMember = "Path";
                 }
 
@@ -575,12 +610,69 @@ namespace Lettering.Forms {
         }
 
         private void buttonAccept_Click(object sender, EventArgs e) {
-            //TODO(adam): copy temporary style object to referenced one
+            //NOTE(adam): copying non-binding elements to working style object
+            //CUT
+            workingStyle.Cut.Rule = (cboxCutRule.SelectedIndex > -1) ? ((Data_PathRule)cboxCutRule.SelectedItem).Id : null;
+
+            List<int> cutWords = BuildWordOrder(cboxCutWordOrder1, cboxCutWordOrder2, cboxCutWordOrder3, cboxCutWordOrder4);
+            workingStyle.Cut.CustomWordOrder = (cutWords.Count > 0) ? cutWords : null;
+            
+            workingStyle.Cut.MirroredStyle = (cboxCutMirror.SelectedIndex > -1) ? (string)cboxCutMirror.SelectedItem : null;
+
+
+            //SEW
+            workingStyle.Sew.Rule = (cboxSewRule.SelectedIndex > -1) ? ((Data_PathRule)cboxSewRule.SelectedItem).Id : null;
+
+            List<int> sewWords = BuildWordOrder(cboxCutWordOrder1, cboxCutWordOrder2, cboxCutWordOrder3, cboxCutWordOrder4);
+            workingStyle.Sew.CustomWordOrder = (sewWords.Count > 0) ? sewWords : null;
+
+            workingStyle.Sew.MirroredStyle = (cboxSewMirror.SelectedIndex > -1) ? (string)cboxSewMirror.SelectedItem : null;
+
+
+            //STONE
+            workingStyle.Stone.Rule = (cboxStoneRule.SelectedIndex > -1) ? ((Data_PathRule)cboxStoneRule.SelectedItem).Id : null;
+
+            List<int> stoneWords = BuildWordOrder(cboxStoneWordOrder1, cboxStoneWordOrder2, cboxStoneWordOrder3, cboxStoneWordOrder4);
+            workingStyle.Stone.CustomWordOrder = (stoneWords.Count > 0) ? stoneWords : null;
+
+            workingStyle.Stone.MirroredStyle = (cboxStoneMirror.SelectedIndex > -1) ? (string)cboxStoneMirror.SelectedItem : null;
+
+
+            //NOTE(adam): removing unused temporary StyleData
+            if(workingStyle.Cut.Rule == null &&
+               (workingStyle.Cut.CustomWordOrder == null || workingStyle.Cut.CustomWordOrder.Count == 0) &&
+               workingStyle.Cut.MirroredStyle == null && 
+               workingStyle.Cut.Exceptions == null) workingStyle.Cut = null;
+            if(workingStyle.Sew.Rule == null &&
+               (workingStyle.Sew.CustomWordOrder == null || workingStyle.Sew.CustomWordOrder.Count == 0) &&
+               workingStyle.Sew.MirroredStyle == null &&
+               workingStyle.Sew.Exceptions == null) workingStyle.Sew = null;
+            if(workingStyle.Stone.Rule == null &&
+               (workingStyle.Stone.CustomWordOrder == null || workingStyle.Stone.CustomWordOrder.Count == 0) &&
+               workingStyle.Stone.MirroredStyle == null &&
+               workingStyle.Stone.Exceptions == null) workingStyle.Stone = null;
+
+            if(workingStyle.Cut == null && workingStyle.Sew == null && workingStyle.Stone == null) {
+                Messenger.Show("Nothing to save.", "No Data");
+
+                //NOTE(adam): reinitialize StyleData from being removed
+                if(workingStyle.Cut == null) workingStyle.Cut = new Data_StyleData();
+                if(workingStyle.Sew == null) workingStyle.Sew = new Data_StyleData();
+                if(workingStyle.Stone == null) workingStyle.Stone = new Data_StyleData();
+
+                this.DialogResult = DialogResult.None;
+
+                return;
+            }
+
+            this.EditedStyle = this.workingStyle;
+            this.DialogResult = DialogResult.OK;
             this.Close();
         }
 
         private void buttonCancel_Click(object sender, EventArgs e) {
-            //TODO(adam): discard temporary style object
+            workingStyle = null;
+            this.DialogResult = DialogResult.Cancel;
             this.Close();
         }
     }
