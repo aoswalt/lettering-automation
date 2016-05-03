@@ -213,6 +213,13 @@ namespace Lettering {
             LoadAllConfigs();
             EditorWindow editor = new EditorWindow(jsonConfig);
             editor.ShowDialog(mainWindow);
+            jsonConfig = editor.Config;
+
+            File.WriteAllText(FilePaths.desktopFolderPath + "jsonOutput_result.json", JsonConvert.SerializeObject(jsonConfig,
+                new JsonSerializerSettings() {
+                    Formatting = Formatting.Indented,
+                    NullValueHandling = NullValueHandling.Ignore
+                }));
         }
 
         internal static void CheckFonts() {

@@ -9,11 +9,10 @@ using Newtonsoft.Json;
 
 namespace Lettering.Forms {
     public partial class EditorWindow : Form {
-        private JsonConfigData config;
+        public JsonConfigData Config;
         private JsonConfigData editedConfig;
 
         public EditorWindow(JsonConfigData config) {
-            this.config = config;
             //NOTE(adam): simple but probably inefficient deep copy of config
             editedConfig = JsonConvert.DeserializeObject<JsonConfigData>(JsonConvert.SerializeObject(config));
             InitializeComponent();
@@ -145,7 +144,8 @@ namespace Lettering.Forms {
             g.DrawString(_tabPage.Text, e.Font, _textBrush, _tabBounds, new StringFormat(_stringFlags));
         }
 
-        private void buttonDone_Click(object sender, System.EventArgs e) {
+        private void buttonDone_Click(object sender, EventArgs e) {
+            Config = editedConfig;
             this.Close();
         }
 
@@ -164,6 +164,16 @@ namespace Lettering.Forms {
                 treeViewStyles.Nodes.Add(newNode);
                 treeViewStyles.Sort();
                 treeViewStyles.SelectedNode = newNode;
+
+                if(root.Text != editStyleWindow.StyleCode) {
+                    editedConfig.Styles.Remove(root.Text);
+                }
+
+                if(editedConfig.Styles.ContainsKey(editStyleWindow.StyleCode)) {
+                    editedConfig.Styles[editStyleWindow.StyleCode] = editStyleWindow.EditedStyle;
+                } else {
+                    editedConfig.Styles.Add(editStyleWindow.StyleCode, editStyleWindow.EditedStyle);
+                }
             }
         }
     }
