@@ -6,7 +6,7 @@ namespace Lettering.Forms {
             InitializeComponent();
         }
 
-        internal void SetReportProgress(ReportType type, int recordNumber, int totalRecords) {
+        internal void SetReportProgress(LetteringType type, int recordNumber, int totalRecords) {
             this.labelReportType.Text = type.ToString();
             this.labelRecordNumber.Text = $"{recordNumber}/{totalRecords}";
             this.progressFonts.Maximum = totalRecords;

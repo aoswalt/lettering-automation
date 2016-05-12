@@ -1,8 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
 
@@ -68,6 +65,7 @@ namespace Lettering.Data {
         public List<string> Conditions;
     }
 
+    //NOTE(adam): string wrapper class for public accessors & mutators
     public class StringData {
         public string Value { get; set; }
         public StringData() { }
@@ -79,35 +77,3 @@ namespace Lettering.Data {
 
     //TODO(adam): cutom JsonSerializer class(es)?
 }
-
-
-/*
-setup
-    file_paths
-        network_fonts_folder
-        library_network_file
-        library_installed_file
-    prefixes []
-    trims []
-        _comment
-        regex pattern
-    exports []
-        style
-        type
-    type_data []
-        type
-        root
-        extension
-    path_rules []
-        id
-        rule
-paths []
-    style
-    cut/sew/stone
-        rule
-        word_order []
-        mirrored_style
-        exceptions []
-            path
-            conditions []
-*/

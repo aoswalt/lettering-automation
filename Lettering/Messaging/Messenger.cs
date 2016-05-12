@@ -4,8 +4,7 @@ using Lettering.Forms;
 
 namespace Lettering {
     internal enum MessageButtons { Ok, OkCancel, YesNo }
-
-    //TODO(adam): expand Messenger class with more functionality
+    
     internal class Messenger {
         private static MainWindow parentWindow;
 
@@ -34,9 +33,7 @@ namespace Lettering {
                     messsageBoxButtons = MessageBoxButtons.OK;
                     break;
             }
-
-
-            //TODO(adam): add displaying to custom form for auto-sizing, etc
+            
             Lettering.MoveWindowToTop();
             DialogResult result = MessageBox.Show(message, title, messsageBoxButtons);
             return result == DialogResult.OK || result == DialogResult.Yes;

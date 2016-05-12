@@ -20,7 +20,7 @@ namespace Lettering {
                 installedFontNames.Add(fontFamily.ToString().Split('#')[fontFamily.ToString().Split('#').Count() - 1]);
             }
 
-            string[] networkFontFiles = Directory.GetFiles(FilePaths.networkFontsFolderPath, "*.otf");
+            string[] networkFontFiles = Directory.GetFiles(Lettering.Config.Setup.FilePaths.NetworkFontsFolderPath, "*.otf");
 
             FontCheckingWindow fontCheckingWindow = new FontCheckingWindow();
             fontCheckingWindow.Show();

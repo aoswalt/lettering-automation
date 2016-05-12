@@ -69,17 +69,17 @@ namespace Lettering.Forms {
         private TreeNode CreateTreeNode(string style, Data_Style data) {
             TreeNode styleNode = new TreeNode(style) { Name = style, Tag = data };
 
-            foreach(ReportType type in Enum.GetValues(typeof(ReportType))) {
+            foreach(LetteringType type in Enum.GetValues(typeof(LetteringType))) {
                 Data_StyleData styleData = null;
 
                 switch(type) {
-                    case ReportType.Cut:
+                    case LetteringType.Cut:
                         styleData = data.Cut;
                         break;
-                    case ReportType.Sew:
+                    case LetteringType.Sew:
                         styleData = data.Sew;
                         break;
-                    case ReportType.Stone:
+                    case LetteringType.Stone:
                         styleData = data.Stone;
                         break;
                 }
