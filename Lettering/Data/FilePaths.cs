@@ -52,6 +52,11 @@ namespace Lettering.Data {
                         }
                     }
                 }
+            } else {
+                if(order.word1 != null && order.word1.Length > 0) { fileName += order.word1 + '-'; }
+                if(order.word2 != null && order.word2.Length > 0) { fileName += order.word2 + '-'; }
+                if(order.word3 != null && order.word3.Length > 0) { fileName += order.word3 + '-'; }
+                if(order.word4 != null && order.word4.Length > 0) { fileName += order.word4 + '-'; }
             }
 
             fileName = fileName.TrimEnd('-');
@@ -59,7 +64,7 @@ namespace Lettering.Data {
         }
 
         internal static string ConstructNetworkOrderFilePath(OrderData order, LetteringType type) {
-            return Lettering.Config.Setup.TypeData[type.ToString()].Root + ConstructStylePathPart(order, type) + ConstructFileName(order, type) + Lettering.Config.Setup.TypeData[type.ToString()].Extension;
+            return Lettering.Config.Setup.TypeData[type.ToString()].Root + ConstructStylePathPart(order, type) + ConstructFileName(order, type) + '.' + Lettering.Config.Setup.TypeData[type.ToString()].Extension;
         }
 
         internal static string ConstructSaveFolderPath(OrderData order, LetteringType type) {
@@ -71,7 +76,7 @@ namespace Lettering.Data {
         }
 
         internal static string ConstructSaveFilePath(OrderData order, LetteringType type) {
-            return ConstructSaveFolderPath(order, type) + ConstructFileName(order, type) + Lettering.Config.Setup.TypeData[type.ToString()].Extension;
+            return ConstructSaveFolderPath(order, type) + ConstructFileName(order, type) + '.' + Lettering.Config.Setup.TypeData[type.ToString()].Extension;
         }
 
         internal static string ConstructExportFolderPath(OrderData order, LetteringType type, string extension) {

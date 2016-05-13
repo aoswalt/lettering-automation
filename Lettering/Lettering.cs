@@ -80,10 +80,10 @@ namespace Lettering {
         private static void AddConditionCheckers() {
             conditionCheckers.Add("=", (object a, object b) => { return a.Equals(b); });
             conditionCheckers.Add("!=", (object a, object b) => { return !a.Equals(b); });
-            conditionCheckers.Add(">", (object a, object b) => { return (float)a > (float)b; });
-            conditionCheckers.Add("<", (object a, object b) => { return (float)a < (float)b; });
-            conditionCheckers.Add(">=", (object a, object b) => { return (float)a >= (float)b; });
-            conditionCheckers.Add("<=", (object a, object b) => { return (float)a <= (float)b; });
+            conditionCheckers.Add(">", (object a, object b) => { return (double)a > (double)b; });
+            conditionCheckers.Add("<", (object a, object b) => { return (double)a < (double)b; });
+            conditionCheckers.Add(">=", (object a, object b) => { return (double)a >= (double)b; });
+            conditionCheckers.Add("<=", (object a, object b) => { return (double)a <= (double)b; });
         }
 
         internal static void SetMainWindow(MainWindow mainWindow) {
@@ -220,17 +220,17 @@ namespace Lettering {
                     order.itemCode = trimmedCode;
                 }
 
-                string orderPath = "";
-                string newMadePath = "";
-                try {
-                    orderPath = FilePaths.ConstructNetworkOrderFilePath(order, type);
-                    newMadePath = FilePaths.ConstructSaveFilePath(order, type);
-                    order.path = orderPath;
-                } catch(Exception ex) {
-                    order.comment += "Error: " + ex.Message;
+                //TODO(adam): prevent having to error check
+                if(GetStyleData(trimmedCode, type) == null) {
+                    ErrorHandler.HandleError(ErrorType.Log, $"No data for {trimmedCode} at Type: {type}");
+                    order.comment += "Error: No data for type";
                     ordersToLog.Add(order);
                     continue;
                 }
+
+                string orderPath = FilePaths.ConstructNetworkOrderFilePath(order, type);
+                string newMadePath = FilePaths.ConstructSaveFilePath(order, type);
+                order.path = orderPath;
 
                 if(IsIgnoredStyle(order.itemCode, type)) {
                     order.comment += "Ignored style";
@@ -256,6 +256,8 @@ namespace Lettering {
         }
 
         private static void ProcessOrders(DataTable data) {
+            LetteringType type = LetteringType.Cut;
+
             bool cancelBuilding = false;
 
             ActiveOrderWindow activeOrderWindow = new ActiveOrderWindow();
@@ -284,11 +286,11 @@ namespace Lettering {
                     order.itemCode = trimmedCode;
                 }
 
-                string orderPath = FilePaths.ConstructNetworkOrderFilePath(order, LetteringType.Cut);
-                string newMadePath = FilePaths.ConstructSaveFilePath(order, LetteringType.Cut);
+                string orderPath = FilePaths.ConstructNetworkOrderFilePath(order, type);
+                string newMadePath = FilePaths.ConstructSaveFilePath(order, type);
                 order.path = orderPath;
 
-                if(IsIgnoredStyle(order.itemCode, LetteringType.Cut)) {
+                if(IsIgnoredStyle(order.itemCode, type)) {
                     order.comment += "Ignored style";
                     ordersToLog.Add(order);
                     continue;
@@ -308,7 +310,7 @@ namespace Lettering {
                 }
 
                 //NOTE(adam): build point
-                string templatePath = FilePaths.ConstructTemplateFilePath(order, LetteringType.Cut);
+                string templatePath = FilePaths.ConstructTemplateFilePath(order, type);
                 if(!File.Exists(templatePath)) {
                     ErrorHandler.HandleError(ErrorType.Alert, "Template not found:\n" + templatePath);
                     order.comment += "Template not found";
@@ -316,11 +318,11 @@ namespace Lettering {
                 } else {
                     currentNames.Add(order.name);
 
-                    if(IsNameStyle(order.itemCode, LetteringType.Cut)) {
+                    if(IsNameStyle(order.itemCode, type)) {
                         //NOTE(adam): if following is name style and same order/voucher, skip processing current list
                         if((i + 1 != orders.Count) && 
                            (TryTrimStyleCode(orders[i + 1].itemCode).Length > 0) && 
-                           (IsNameStyle(orders[i + 1].itemCode, LetteringType.Cut)) &&
+                           (IsNameStyle(orders[i + 1].itemCode, type)) &&
                            (order.orderNumber == orders[i + 1].orderNumber) &&
                            (order.voucherNumber == orders[i + 1].voucherNumber)) {
                             order.comment += "Name style";
@@ -340,14 +342,14 @@ namespace Lettering {
                             ShapeRange shapes = corel.ActiveDocument.ActivePage.FindShapes(null, cdrShapeType.cdrTextShape);
                             shapes.ConvertToCurves();
 
-                            if(IsNameStyle(order.itemCode, LetteringType.Cut)) {
+                            if(IsNameStyle(order.itemCode, type)) {
                                 string namesDir = Environment.GetFolderPath(Environment.SpecialFolder.Desktop) + @"\Name Styles\" + order.cutHouse + "\\";
                                 Directory.CreateDirectory(namesDir);
                                 corel.ActiveDocument.SaveAs(namesDir + order.orderNumber + order.voucherNumber.ToString("D3") + ".cdr");
                             } else {
-                                Directory.CreateDirectory(FilePaths.ConstructSaveFolderPath(order, LetteringType.Cut));
+                                Directory.CreateDirectory(FilePaths.ConstructSaveFolderPath(order, type));
                                 corel.ActiveDocument.SaveAs(newMadePath);
-                                if(GetExportType(order.itemCode, LetteringType.Cut) != ExportType.None) ExportOrder(order);
+                                if(GetExportType(order.itemCode, type) != ExportType.None) ExportOrder(order);
                             }
                         }
 
