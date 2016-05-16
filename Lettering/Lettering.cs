@@ -219,11 +219,10 @@ namespace Lettering {
                 } else {
                     order.itemCode = trimmedCode;
                 }
-
-                //TODO(adam): prevent having to error check
+                
                 if(GetStyleData(trimmedCode, type) == null) {
                     ErrorHandler.HandleError(ErrorType.Log, $"No data for {trimmedCode} at Type: {type}");
-                    order.comment += "Error: No data for type";
+                    order.comment += "Wrong lettering type";
                     ordersToLog.Add(order);
                     continue;
                 }

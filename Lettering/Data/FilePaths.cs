@@ -1,7 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text.RegularExpressions;
-using Lettering.Errors;
 
 namespace Lettering.Data {
     public class FilePaths {
