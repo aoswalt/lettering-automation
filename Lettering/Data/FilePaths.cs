@@ -62,7 +62,10 @@ namespace Lettering.Data {
         }
 
         internal static string ConstructNetworkOrderFilePath(OrderData order, LetteringType type) {
-            return Lettering.Config.Setup.TypeData[type.ToString()].Root + ConstructStylePathPart(order, type) + ConstructFileName(order, type) + '.' + Lettering.Config.Setup.TypeData[type.ToString()].Extension;
+            return Lettering.Config.Setup.TypeData[type.ToString()].Root + 
+                   ConstructStylePathPart(order, type) + 
+                   ConstructFileName(order, type) + '.' + 
+                   Lettering.Config.Setup.TypeData[type.ToString()].Extension;
         }
 
         internal static string ConstructSaveFolderPath(OrderData order, LetteringType type) {
@@ -74,7 +77,9 @@ namespace Lettering.Data {
         }
 
         internal static string ConstructSaveFilePath(OrderData order, LetteringType type) {
-            return ConstructSaveFolderPath(order, type) + ConstructFileName(order, type) + '.' + Lettering.Config.Setup.TypeData[type.ToString()].Extension;
+            return ConstructSaveFolderPath(order, type) + 
+                   ConstructFileName(order, type) + '.' + 
+                   Lettering.Config.Setup.TypeData[type.ToString()].Extension;
         }
 
         internal static string ConstructExportFolderPath(OrderData order, LetteringType type, string extension) {

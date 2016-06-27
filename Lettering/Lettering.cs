@@ -22,20 +22,8 @@ namespace Lettering {
 
         internal static CorelDRAW.Application corel = new CorelDRAW.Application();
         
-        private static Dictionary<string, Func<OrderData, LetteringType, string>> pathBuilders = new Dictionary<string, Func<OrderData, LetteringType, string>>();
-        private static Dictionary<string, Func<object, object, bool>> conditionCheckers = new Dictionary<string, Func<object, object, bool>>();
-
-        private static MainWindow mainWindow;
-        private static bool hasCheckedSetup = false;
-        private static bool isSetupOk = false;
-
-        static Lettering() {
-            AddPathBuilders();
-            AddConditionCheckers();
-        }
-        
-        private static void AddPathBuilders() {
-            pathBuilders.Add("!style", (order, type) => {
+        private static Dictionary<string, Func<OrderData, LetteringType, string>> pathBuilders = new Dictionary<string, Func<OrderData, LetteringType, string>>() {
+            {"!style", (order, type) => {
                 //NOTE(adam): example: "TTstyle" becomes "TT STYLES\TT style
                 foreach(string stylePrefix in Config.Setup.StylePrefixes) {
                     OrderData tempOrder = order.Clone();
@@ -49,18 +37,18 @@ namespace Lettering {
                 }
                 ErrorHandler.HandleError(ErrorType.Log, "No style prefix found for !style path builder.");
                 return "";
-            });
-            pathBuilders.Add("!size", (order, type) => {
-                //NOTE(adam): if int size, force as int; otherwise, allow decimal part
-                if(Math.Ceiling(order.size) == Math.Floor(order.size)) {
-                    return (int)order.size + "INCH";
-                } else {
-                    return order.size + "INCH";
-                }
-            });
-            pathBuilders.Add("!spec", (order, type) => { return String.Format("{0:0.#}", order.spec); });
-            pathBuilders.Add("!ya", (order, type) => { return order.spec < 10 ? "YOUTH" : "ADULT"; });
-            pathBuilders.Add("!cd", (order, type) => {
+            } },
+            {"!size", (order, type) => {
+                    //NOTE(adam): if int size, force as int; otherwise, allow decimal part
+                    if(Math.Ceiling(order.size) == Math.Floor(order.size)) {
+                        return (int)order.size + "INCH";
+                    } else {
+                        return order.size + "INCH";
+                    }
+                } },
+            {"!spec", (order, type) => { return String.Format("{0:0.#}", order.spec); } },
+            {"!ya", (order, type) => { return order.spec< 10 ? "YOUTH" : "ADULT"; } },
+            {"!cd", (order, type) => {
                 //NOTE(adam): using last entered word as cheer/dance
                 if(order.word4 != "") {
                     return order.word4.ToUpper();
@@ -74,17 +62,29 @@ namespace Lettering {
                     ErrorHandler.HandleError(ErrorType.Log, "No words for !cd path builder.");
                     return "";
                 }
-            });
-        }
+            } },
+            {"!word1", (order, type) => { return order.word1.ToUpper(); } },
+            {"!word2", (order, type) => { return order.word2.ToUpper(); } },
+            {"!word3", (order, type) => { return order.word3.ToUpper(); } },
+            {"!word4", (order, type) => { return order.word4.ToUpper(); } },
+            {"!ecm1", (order, type) => { return $"ECM{ToEcm(order.word1)}"; } },
+            {"!ecm2", (order, type) => { return $"ECM{ToEcm(order.word2)}"; } },
+            {"!ecm3", (order, type) => { return $"ECM{ToEcm(order.word3)}"; } },
+            {"!ecm4", (order, type) => { return $"ECM{ToEcm(order.word4)}"; } }
+        };
 
-        private static void AddConditionCheckers() {
-            conditionCheckers.Add("=", (object a, object b) => { return a.Equals(b); });
-            conditionCheckers.Add("!=", (object a, object b) => { return !a.Equals(b); });
-            conditionCheckers.Add(">", (object a, object b) => { return (double)a > (double)b; });
-            conditionCheckers.Add("<", (object a, object b) => { return (double)a < (double)b; });
-            conditionCheckers.Add(">=", (object a, object b) => { return (double)a >= (double)b; });
-            conditionCheckers.Add("<=", (object a, object b) => { return (double)a <= (double)b; });
-        }
+        private static Dictionary<string, Func<object, object, bool>> conditionCheckers = new Dictionary<string, Func<object, object, bool>>() {
+            { "=", (object a, object b) => { return a.Equals(b); } },
+            { "!=", (object a, object b) => { return !a.Equals(b); } },
+            { ">", (object a, object b) => { return (double)a > (double)b; } },
+            { "<", (object a, object b) => { return (double)a < (double)b; } },
+            { ">=", (object a, object b) => { return (double)a >= (double)b; } },
+            { "<=", (object a, object b) => { return (double)a <= (double)b; } }
+        };
+
+        private static MainWindow mainWindow;
+        private static bool hasCheckedSetup = false;
+        private static bool isSetupOk = false;
 
         internal static void SetMainWindow(MainWindow mainWindow) {
             Lettering.mainWindow = mainWindow;
@@ -167,7 +167,7 @@ namespace Lettering {
                 if(data == null) {
                     ErrorHandler.HandleError(ErrorType.Alert, "No data from csv.");
                     return;
-                }
+                } 
 
                 ProcessOrders(data);
             }
@@ -547,6 +547,10 @@ namespace Lettering {
                 }
             }
             return "";
+        }
+
+        private static string ToEcm(string word) {
+            return $"ECM{Regex.Replace(word, "\\d+", "$1")}";
         }
 
         private static bool MatchesCondition(OrderData order, string condition) {
