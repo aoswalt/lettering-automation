@@ -16,8 +16,8 @@ namespace Lettering.Data {
         public static readonly string errorLogFilePath = tempFolderPath + "errors.log";
 
         private static Dictionary<string, Func<OrderData, LetteringType, string>> pathBuilders = new Dictionary<string, Func<OrderData, LetteringType, string>>() {
-            {"!style", (order, type) => {
-                //NOTE(adam): example: "TTstyle" becomes "TT STYLES\TT style
+            {"!type", (order, type) => {
+                //NOTE(adam): example: "TTstyle" becomes "TT STYLES"
                 foreach(string stylePrefix in Lettering.Config.Setup.StylePrefixes) {
                     OrderData tempOrder = order.Clone();
                     //NOTE(adam): at least "names" is needed here, "mirror" may not be
@@ -25,7 +25,22 @@ namespace Lettering.Data {
                     if(Lettering.IsNameStyle(tempOrder.itemCode, type)) tempOrder.itemCode = Lettering.GetStyleData(tempOrder.itemCode, type).MirroredStyle;
 
                     if(tempOrder.itemCode.StartsWith(stylePrefix)) {
-                        return stylePrefix + " STYLES\\" + stylePrefix + " " + Regex.Replace(tempOrder.itemCode, stylePrefix, "");
+                        return stylePrefix + " STYLES";
+                    }
+                }
+                ErrorHandler.HandleError(ErrorType.Log, "No style prefix found for !style path builder.");
+                return "";
+            } },
+            {"!style", (order, type) => {
+                //NOTE(adam): example: "TTstyle" becomes "TT style"
+                foreach(string stylePrefix in Lettering.Config.Setup.StylePrefixes) {
+                    OrderData tempOrder = order.Clone();
+                    //NOTE(adam): at least "names" is needed here, "mirror" may not be
+                    if(Lettering.IsMirroredStyle(tempOrder.itemCode, type)) tempOrder.itemCode = Lettering.GetStyleData(tempOrder.itemCode, type).MirroredStyle;
+                    if(Lettering.IsNameStyle(tempOrder.itemCode, type)) tempOrder.itemCode = Lettering.GetStyleData(tempOrder.itemCode, type).MirroredStyle;
+
+                    if(tempOrder.itemCode.StartsWith(stylePrefix)) {
+                        return stylePrefix + " " + Regex.Replace(tempOrder.itemCode, stylePrefix, "");
                     }
                 }
                 ErrorHandler.HandleError(ErrorType.Log, "No style prefix found for !style path builder.");
@@ -56,22 +71,35 @@ namespace Lettering.Data {
                     return "";
                 }
             } },
-            {"!word1", (order, type) => { return order.word1.ToUpper(); } },
+            {"!word1", (order, type) => {
+                if(order.word1 != "") {
+                    return order.word1.ToUpper();
+                } else if(order.name != "") {
+                    return order.name.ToUpper();
+                } else {
+                    return "";
+                }
+            } },
             {"!word2", (order, type) => { return order.word2.ToUpper(); } },
             {"!word3", (order, type) => { return order.word3.ToUpper(); } },
             {"!word4", (order, type) => { return order.word4.ToUpper(); } },
-            {"!ecm1", (order, type) => { return Lettering.ToEcm(order.word1); } },
-            {"!ecm2", (order, type) => { return Lettering.ToEcm(order.word2); } },
-            {"!ecm3", (order, type) => { return Lettering.ToEcm(order.word3); } },
-            {"!ecm4", (order, type) => { return Lettering.ToEcm(order.word4); } }
+            {"!ecm1", (order, type) => { return ToEcm(order.word1); } },
+            {"!ecm2", (order, type) => { return ToEcm(order.word2); } },
+            {"!ecm3", (order, type) => { return ToEcm(order.word3); } },
+            {"!ecm4", (order, type) => { return ToEcm(order.word4); } }
+        };
+
+        private static Dictionary<string, Func<object, object, bool>> conditionCheckers = new Dictionary<string, Func<object, object, bool>>() {
+            { "=", (object a, object b) => { return a.Equals(b); } },
+            { "!=", (object a, object b) => { return !a.Equals(b); } },
+            { ">", (object a, object b) => { return (double)a > (double)b; } },
+            { "<", (object a, object b) => { return (double)a < (double)b; } },
+            { ">=", (object a, object b) => { return (double)a >= (double)b; } },
+            { "<=", (object a, object b) => { return (double)a <= (double)b; } }
         };
 
         internal static string ConstructTemplateFilePath(OrderData order, LetteringType type) {
-            string dir = Lettering.Config.Setup.TypeData[type.ToString()].Root + DoPathBuilder(order, type, "!style");
-            string[] pathTokens = dir.Split('\\');
-            string file = pathTokens[pathTokens.Length - 1] + " TEMPLATE.cdr";
-
-            return dir + '\\' + file;
+            return Lettering.Config.Setup.TypeData[type.ToString()].Root + @"!type\!style\!style TEMPLATE.cdr";
         }
 
         internal static string ConstructFileName(OrderData order, LetteringType type) {
@@ -83,74 +111,65 @@ namespace Lettering.Data {
             }
 
             string fileName = "";
-
             if(styleData.CustomWordOrder != null) {
                 for(int i = 0; i != styleData.CustomWordOrder.Count; ++i) {
                     if(styleData.CustomWordOrder[i] > 0) {
-                        switch(styleData.CustomWordOrder[i]) {
-                            case 1:
-                                fileName += order.word1 + '-';
-                                break;
-                            case 2:
-                                fileName += order.word2 + '-';
-                                break;
-                            case 3:
-                                fileName += order.word3 + '-';
-                                break;
-                            case 4:
-                                fileName += order.word4 + '-';
-                                break;
-                        }
+                        //NOTE(adam): "!word1-" etc
+                        fileName += $"!word{styleData.CustomWordOrder[i]}-";
                     }
                 }
             } else {
-                if(order.word1 != null && order.word1.Length > 0) { fileName += order.word1 + '-'; }
-                if(order.word2 != null && order.word2.Length > 0) { fileName += order.word2 + '-'; }
-                if(order.word3 != null && order.word3.Length > 0) { fileName += order.word3 + '-'; }
-                if(order.word4 != null && order.word4.Length > 0) { fileName += order.word4 + '-'; }
+                fileName += "!word1-!word2-!word3-!word4";
             }
+            return BuildPath(order, type, fileName);
+        }
 
-            fileName = fileName.TrimEnd('-');
-            return (fileName != "" ? fileName.ToUpper() : order.name.ToUpper());
+        private static string ToEcm(string word) {
+            return $"ECM{Regex.Replace(word, "\\d+", "$1")}";
+        }
+
+        private static string GetRootLast(OrderData order, LetteringType type) {
+            string typeRootPath = Lettering.Config.Setup.TypeData[type.ToString()].Root;
+            string[] folders = typeRootPath.Split('\\');
+            return folders[folders.Length - 1] + '\\';
         }
 
         internal static string ConstructNetworkOrderFilePath(OrderData order, LetteringType type) {
-            return Lettering.Config.Setup.TypeData[type.ToString()].Root + 
-                   ConstructStylePathPart(order, type) + 
-                   ConstructFileName(order, type) + '.' + 
-                   Lettering.Config.Setup.TypeData[type.ToString()].Extension;
+            string path = Lettering.Config.Setup.TypeData[type.ToString()].Root + 
+                          ConstructStylePathPart(order, type) + 
+                          '\\' + ConstructFileName(order, type) + '.' + 
+                          Lettering.Config.Setup.TypeData[type.ToString()].Extension;
+            return BuildPath(order, type, path);
         }
 
         internal static string ConstructSaveFolderPath(OrderData order, LetteringType type) {
-            string typeRootPath = Lettering.Config.Setup.TypeData[type.ToString()].Root;
-            string[] folders = typeRootPath.Split('\\');
-            string lastFolder = folders[folders.Length - 1] + '\\';
-
-            return desktopFolderPath + lastFolder + ConstructStylePathPart(order, type);
+            string lastFolder = GetRootLast(order, type);
+            string path = desktopFolderPath + lastFolder + ConstructStylePathPart(order, type);
+            return BuildPath(order, type, path);
         }
 
         internal static string ConstructSaveFilePath(OrderData order, LetteringType type) {
-            return ConstructSaveFolderPath(order, type) + 
-                   ConstructFileName(order, type) + '.' + 
-                   Lettering.Config.Setup.TypeData[type.ToString()].Extension;
+            string path = ConstructSaveFolderPath(order, type) +
+                          '\\' + ConstructFileName(order, type) + '.' + 
+                          Lettering.Config.Setup.TypeData[type.ToString()].Extension;
+            return BuildPath(order, type, path);
         }
 
         internal static string ConstructExportFolderPath(OrderData order, LetteringType type, string extension) {
-            string typeRootPath = Lettering.Config.Setup.TypeData[type.ToString()].Root;
-            string[] folders = typeRootPath.Split('\\');
-            string lastFolder = folders[folders.Length - 1] + '\\';
-
-            return desktopFolderPath + lastFolder + ConstructStylePathPart(order, type) + extension.ToUpper() + '\\';
+            string lastFolder = GetRootLast(order, type);
+            string path = desktopFolderPath + lastFolder + ConstructStylePathPart(order, type) + extension.ToUpper() + '\\';
+            return BuildPath(order, type, path);
         }
 
         internal static string ConstructExportFilePath(OrderData order, LetteringType type, string extension) {
-            return ConstructExportFolderPath(order, type, extension) + ConstructFileName(order, type) + '.' + extension;
+            string path = ConstructExportFolderPath(order, type, extension) + '\\' + ConstructFileName(order, type) + '.' + extension;
+            return BuildPath(order, type, path);
         }
 
         private static string ConstructStylePathPart(OrderData order, LetteringType type) {
             //NOTE(adam): special path handling
             if(Lettering.GetStylePath(order.itemCode, type) == "cut-sew_files") {
-                return DoPathBuilder(order, type, "!style") + @"\SEW FILES\";
+                return  @"!type\\!style\SEW FILES\";
             }
 
             if(Lettering.GetStylePath(order.itemCode, type) == "cut-specific") {
@@ -161,36 +180,86 @@ namespace Lettering.Data {
             if(Lettering.IsMirroredStyle(order.itemCode, type)) order.itemCode = Lettering.GetStyleData(order.itemCode, type).MirroredStyle;
 
 
-            string startPath = "";
+            string path = "";
             List<Data_Exception> possibleExceptions = Lettering.GetStyleData(order.itemCode, type).Exceptions;
             if(possibleExceptions != null) {
-                startPath = Lettering.GetExceptionPath(order, possibleExceptions);
+                path = GetExceptionPath(order, possibleExceptions);
             }
             
-            if(startPath == "") {
-                startPath = Lettering.GetStylePath(order.itemCode, type);
+            if(path == "") {
+                path = Lettering.GetStylePath(order.itemCode, type);
             }
 
-            return BuildPath(order, type, startPath);
+            return path;
         }
 
-        public static string BuildPath(OrderData order, LetteringType type, string startPath) {
-            string[] tokens = startPath.Split('\\');
-            string finalPath = "";
-
-            foreach(string token in tokens) {
-                if(token.StartsWith("!") && pathBuilders.ContainsKey(token)) {
-                    finalPath += DoPathBuilder(order, type, token) + '\\';
-                } else {
-                    finalPath += token + '\\';
+        private static string BuildPath(OrderData order, LetteringType type, string path) {
+            foreach(string key in pathBuilders.Keys) {
+                if(path.Contains(key)) {
+                    path = path.Replace(key, pathBuilders[key](order, type));
                 }
             }
-
-            return finalPath;
+            path = Regex.Replace(path, @"-+\B", "");
+            return path;
         }
 
-        public static string DoPathBuilder(OrderData order, LetteringType type, string token) {
-            return pathBuilders[token](order, type);
+        private static string GetExceptionPath(OrderData order, List<Data_Exception> possibleExceptions) {
+            if(possibleExceptions != null) {
+                foreach(Data_Exception ex in possibleExceptions) {
+                    if(ex.Conditions == null) {
+                        return ex.Path;
+                    }
+
+                    foreach(string condition in ex.Conditions) {
+                        if(MatchesCondition(order, condition)) {
+                            return ex.Path;
+                        }
+                    }
+                }
+            }
+            return "";
+        }
+
+        private static bool MatchesCondition(OrderData order, string condition) {
+            string[] tokens = Regex.Split(condition, @"([^\w\d\.]+)");
+            if(tokens.Length != 3) {
+                ErrorHandler.HandleError(ErrorType.Alert, "Invalid condition: " + condition);
+                return false;
+            }
+
+            //TODO(adam): change to use path builders
+            object prop = null;
+            switch(tokens[0].ToLower()) {
+                case "size":
+                    prop = order.size;
+                    break;
+                case "spec":
+                    prop = order.spec;
+                    break;
+                case "word1":
+                    prop = order.word1;
+                    break;
+                case "word2":
+                    prop = order.word2;
+                    break;
+                case "word3":
+                    prop = order.word3;
+                    break;
+                case "word4":
+                    prop = order.word4;
+                    break;
+                default:
+                    ErrorHandler.HandleError(ErrorType.Alert, "No matching condition property.");
+                    break;
+            }
+
+            //TODO(adam): get property for condition key
+            double val;
+            if(double.TryParse(tokens[2], out val)) {
+                return conditionCheckers[tokens[1]]((double)prop, val);
+            } else {
+                return conditionCheckers[tokens[1]](prop, tokens[2]);
+            }
         }
     }
 }

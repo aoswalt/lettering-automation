@@ -22,15 +22,6 @@ namespace Lettering {
 
         internal static CorelDRAW.Application corel = new CorelDRAW.Application();
 
-        private static Dictionary<string, Func<object, object, bool>> conditionCheckers = new Dictionary<string, Func<object, object, bool>>() {
-            { "=", (object a, object b) => { return a.Equals(b); } },
-            { "!=", (object a, object b) => { return !a.Equals(b); } },
-            { ">", (object a, object b) => { return (double)a > (double)b; } },
-            { "<", (object a, object b) => { return (double)a < (double)b; } },
-            { ">=", (object a, object b) => { return (double)a >= (double)b; } },
-            { "<=", (object a, object b) => { return (double)a <= (double)b; } }
-        };
-
         private static MainWindow mainWindow;
         private static bool hasCheckedSetup = false;
         private static bool isSetupOk = false;
@@ -479,68 +470,6 @@ namespace Lettering {
 
             ErrorHandler.HandleError(ErrorType.Log, $"No style found in TryTrimStyleCode for final style code {styleCode}");
             return "";
-        }
-
-        public static string GetExceptionPath(OrderData order, List<Data_Exception> possibleExceptions) {
-            if(possibleExceptions != null) {
-                foreach(Data_Exception ex in possibleExceptions) {
-                    if(ex.Conditions == null) {
-                        return ex.Path;
-                    }
-
-                    foreach(string condition in ex.Conditions) {
-                        if(MatchesCondition(order, condition)) {
-                            return ex.Path;
-                        }
-                    }
-                }
-            }
-            return "";
-        }
-
-        public static string ToEcm(string word) {
-            return $"ECM{Regex.Replace(word, "\\d+", "$1")}";
-        }
-
-        private static bool MatchesCondition(OrderData order, string condition) {
-            string[] tokens = Regex.Split(condition, @"([^\w\d\.]+)");
-            if(tokens.Length != 3) {
-                ErrorHandler.HandleError(ErrorType.Alert, "Invalid condition: " + condition);
-                return false;
-            }
-
-            object prop = null;
-            switch(tokens[0].ToLower()) {
-                case "size":
-                    prop = order.size;
-                    break;
-                case "spec":
-                    prop = order.spec;
-                    break;
-                case "word1":
-                    prop = order.word1;
-                    break;
-                case "word2":
-                    prop = order.word2;
-                    break;
-                case "word3":
-                    prop = order.word3;
-                    break;
-                case "word4":
-                    prop = order.word4;
-                    break;
-                default:
-                    ErrorHandler.HandleError(ErrorType.Alert, "No matching condition property.");
-                    break;
-            }
-
-            //TODO(adam): get property for condition key
-            double val;
-            if(double.TryParse(tokens[2], out val)) {
-                return conditionCheckers[tokens[1]]((double)prop, val);
-            } else {
-                return conditionCheckers[tokens[1]](prop, tokens[2]);
-            }
         }
     }
 }
