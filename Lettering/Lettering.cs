@@ -21,57 +21,6 @@ namespace Lettering {
         public static JsonConfigData Config;
 
         internal static CorelDRAW.Application corel = new CorelDRAW.Application();
-        
-        private static Dictionary<string, Func<OrderData, LetteringType, string>> pathBuilders = new Dictionary<string, Func<OrderData, LetteringType, string>>() {
-            {"!style", (order, type) => {
-                //NOTE(adam): example: "TTstyle" becomes "TT STYLES\TT style
-                foreach(string stylePrefix in Config.Setup.StylePrefixes) {
-                    OrderData tempOrder = order.Clone();
-                    //NOTE(adam): at least "names" is needed here, "mirror" may not be
-                    if(IsMirroredStyle(tempOrder.itemCode, type)) tempOrder.itemCode = GetStyleData(tempOrder.itemCode, type).MirroredStyle;
-                    if(IsNameStyle(tempOrder.itemCode, type)) tempOrder.itemCode = GetStyleData(tempOrder.itemCode, type).MirroredStyle;
-
-                    if(tempOrder.itemCode.StartsWith(stylePrefix)) {
-                        return stylePrefix + " STYLES\\" + stylePrefix + " " + Regex.Replace(tempOrder.itemCode, stylePrefix, "");
-                    }
-                }
-                ErrorHandler.HandleError(ErrorType.Log, "No style prefix found for !style path builder.");
-                return "";
-            } },
-            {"!size", (order, type) => {
-                    //NOTE(adam): if int size, force as int; otherwise, allow decimal part
-                    if(Math.Ceiling(order.size) == Math.Floor(order.size)) {
-                        return (int)order.size + "INCH";
-                    } else {
-                        return order.size + "INCH";
-                    }
-                } },
-            {"!spec", (order, type) => { return String.Format("{0:0.#}", order.spec); } },
-            {"!ya", (order, type) => { return order.spec< 10 ? "YOUTH" : "ADULT"; } },
-            {"!cd", (order, type) => {
-                //NOTE(adam): using last entered word as cheer/dance
-                if(order.word4 != "") {
-                    return order.word4.ToUpper();
-                } else if(order.word3 != "") {
-                    return order.word3.ToUpper();
-                } else if(order.word2 != "") {
-                    return order.word2.ToUpper();
-                } else if(order.word1 != "") {
-                    return order.word1.ToUpper();
-                } else {
-                    ErrorHandler.HandleError(ErrorType.Log, "No words for !cd path builder.");
-                    return "";
-                }
-            } },
-            {"!word1", (order, type) => { return order.word1.ToUpper(); } },
-            {"!word2", (order, type) => { return order.word2.ToUpper(); } },
-            {"!word3", (order, type) => { return order.word3.ToUpper(); } },
-            {"!word4", (order, type) => { return order.word4.ToUpper(); } },
-            {"!ecm1", (order, type) => { return $"ECM{ToEcm(order.word1)}"; } },
-            {"!ecm2", (order, type) => { return $"ECM{ToEcm(order.word2)}"; } },
-            {"!ecm3", (order, type) => { return $"ECM{ToEcm(order.word3)}"; } },
-            {"!ecm4", (order, type) => { return $"ECM{ToEcm(order.word4)}"; } }
-        };
 
         private static Dictionary<string, Func<object, object, bool>> conditionCheckers = new Dictionary<string, Func<object, object, bool>>() {
             { "=", (object a, object b) => { return a.Equals(b); } },
@@ -549,7 +498,7 @@ namespace Lettering {
             return "";
         }
 
-        private static string ToEcm(string word) {
+        public static string ToEcm(string word) {
             return $"ECM{Regex.Replace(word, "\\d+", "$1")}";
         }
 
@@ -592,25 +541,6 @@ namespace Lettering {
             } else {
                 return conditionCheckers[tokens[1]](prop, tokens[2]);
             }
-        }
-
-        public static string BuildPath(OrderData order, LetteringType type, string startPath) {
-            string[] tokens = startPath.Split('\\');
-            string finalPath = "";
-
-            foreach(string token in tokens) {
-                if(token.StartsWith("!") && pathBuilders.ContainsKey(token)) {
-                    finalPath += DoPathBuilder(order, type, token) + '\\';
-                } else {
-                    finalPath += token + '\\';
-                }
-            }
-
-            return finalPath;
-        }
-
-        public static string DoPathBuilder(OrderData order, LetteringType type, string token) {
-            return pathBuilders[token](order, type);
         }
     }
 }
