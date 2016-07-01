@@ -86,7 +86,8 @@ namespace Lettering.Data {
             {"!ecm1", (order, type) => { return ToEcm(order.word1); } },
             {"!ecm2", (order, type) => { return ToEcm(order.word2); } },
             {"!ecm3", (order, type) => { return ToEcm(order.word3); } },
-            {"!ecm4", (order, type) => { return ToEcm(order.word4); } }
+            {"!ecm4", (order, type) => { return ToEcm(order.word4); } },
+            {"!name", (order, type) => { return order.name.ToUpper(); } }
         };
 
         private static Dictionary<string, Func<object, object, bool>> conditionCheckers = new Dictionary<string, Func<object, object, bool>>() {
