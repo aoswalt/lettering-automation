@@ -184,7 +184,7 @@ namespace Lettering.Data {
             string path = "";
             List<Data_Exception> possibleExceptions = Lettering.GetStyleData(order.itemCode, type).Exceptions;
             if(possibleExceptions != null) {
-                path = GetExceptionPath(order, possibleExceptions);
+                path = GetExceptionPath(order, type, possibleExceptions);
             }
             
             if(path == "") {
@@ -204,7 +204,7 @@ namespace Lettering.Data {
             return path;
         }
 
-        private static string GetExceptionPath(OrderData order, List<Data_Exception> possibleExceptions) {
+        private static string GetExceptionPath(OrderData order, LetteringType type, List<Data_Exception> possibleExceptions) {
             if(possibleExceptions != null) {
                 foreach(Data_Exception ex in possibleExceptions) {
                     if(ex.Conditions == null) {
@@ -212,7 +212,7 @@ namespace Lettering.Data {
                     }
 
                     foreach(string condition in ex.Conditions) {
-                        if(MatchesCondition(order, condition)) {
+                        if(MatchesCondition(order, type, condition)) {
                             return ex.Path;
                         }
                     }
@@ -221,43 +221,18 @@ namespace Lettering.Data {
             return "";
         }
 
-        private static bool MatchesCondition(OrderData order, string condition) {
+        private static bool MatchesCondition(OrderData order, LetteringType type, string condition) {
             string[] tokens = Regex.Split(condition, @"([^\w\d\.]+)");
             if(tokens.Length != 3) {
                 ErrorHandler.HandleError(ErrorType.Alert, "Invalid condition: " + condition);
                 return false;
             }
-
-            //TODO(adam): change to use path builders
-            object prop = null;
-            switch(tokens[0].ToLower()) {
-                case "size":
-                    prop = order.size;
-                    break;
-                case "spec":
-                    prop = order.spec;
-                    break;
-                case "word1":
-                    prop = order.word1;
-                    break;
-                case "word2":
-                    prop = order.word2;
-                    break;
-                case "word3":
-                    prop = order.word3;
-                    break;
-                case "word4":
-                    prop = order.word4;
-                    break;
-                default:
-                    ErrorHandler.HandleError(ErrorType.Alert, "No matching condition property.");
-                    break;
-            }
-
-            //TODO(adam): get property for condition key
+            
+            string prop = pathBuilders["!" + tokens[0].ToLower()](order, type);
+            
             double val;
             if(double.TryParse(tokens[2], out val)) {
-                return conditionCheckers[tokens[1]]((double)prop, val);
+                return conditionCheckers[tokens[1]](double.Parse(prop), val);
             } else {
                 return conditionCheckers[tokens[1]](prop, tokens[2]);
             }
