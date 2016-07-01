@@ -90,7 +90,7 @@ namespace Lettering.Data {
             {"!name", (order, type) => { return order.name.ToUpper(); } }
         };
 
-        private static Dictionary<string, Func<object, object, bool>> conditionCheckers = new Dictionary<string, Func<object, object, bool>>() {
+        private static Dictionary<string, Func<object, object, bool>> comparisons = new Dictionary<string, Func<object, object, bool>>() {
             { "=", (object a, object b) => { return a.Equals(b); } },
             { "!=", (object a, object b) => { return !a.Equals(b); } },
             { ">", (object a, object b) => { return (double)a > (double)b; } },
@@ -232,9 +232,9 @@ namespace Lettering.Data {
             
             double val;
             if(double.TryParse(tokens[2], out val)) {
-                return conditionCheckers[tokens[1]](double.Parse(prop), val);
+                return comparisons[tokens[1]](double.Parse(prop), val);
             } else {
-                return conditionCheckers[tokens[1]](prop, tokens[2]);
+                return comparisons[tokens[1]](prop, tokens[2]);
             }
         }
     }
