@@ -126,7 +126,7 @@ namespace Lettering.Data {
         }
 
         private static string ToEcm(string word) {
-            return $"ECM{Regex.Replace(word, "\\d+", "$1")}";
+            return $"ECM{Regex.Replace(word, "[^\\d]+(\\d+)", "$1")}";
         }
 
         private static string GetRootLast(OrderData order, LetteringType type) {
@@ -136,10 +136,11 @@ namespace Lettering.Data {
         }
 
         internal static string ConstructNetworkOrderFilePath(OrderData order, LetteringType type) {
-            string path = Lettering.Config.Setup.TypeData[type.ToString()].Root + 
-                          ConstructStylePathPart(order, type) + 
-                          '\\' + ConstructFileName(order, type) + '.' + 
-                          Lettering.Config.Setup.TypeData[type.ToString()].Extension;
+            string path = Lettering.Config.Setup.TypeData[type.ToString()].Root +
+                          ConstructStylePathPart(order, type);
+            string filename = '\\' + ConstructFileName(order, type) + '.' + 
+                              Lettering.Config.Setup.TypeData[type.ToString()].Extension;
+            if(!path.Contains(".")) { path += filename; }
             return BuildPath(order, type, path);
         }
 
@@ -150,20 +151,23 @@ namespace Lettering.Data {
         }
 
         internal static string ConstructSaveFilePath(OrderData order, LetteringType type) {
-            string path = ConstructSaveFolderPath(order, type) +
-                          '\\' + ConstructFileName(order, type) + '.' + 
-                          Lettering.Config.Setup.TypeData[type.ToString()].Extension;
+            string path = ConstructSaveFolderPath(order, type);
+            string filename = '\\' + ConstructFileName(order, type) + '.' + 
+                              Lettering.Config.Setup.TypeData[type.ToString()].Extension;
+            if(!path.Contains(".")) { path += filename; }
             return BuildPath(order, type, path);
         }
 
         internal static string ConstructExportFolderPath(OrderData order, LetteringType type, string extension) {
             string lastFolder = GetRootLast(order, type);
-            string path = desktopFolderPath + lastFolder + ConstructStylePathPart(order, type) + extension.ToUpper() + '\\';
+            string path = desktopFolderPath + lastFolder + ConstructStylePathPart(order, type) + extension.ToUpper();
             return BuildPath(order, type, path);
         }
 
         internal static string ConstructExportFilePath(OrderData order, LetteringType type, string extension) {
-            string path = ConstructExportFolderPath(order, type, extension) + '\\' + ConstructFileName(order, type) + '.' + extension;
+            string path = ConstructExportFolderPath(order, type, extension);
+            string filename = '\\' + ConstructFileName(order, type) + '.' + extension;
+            if(!path.Contains(".")) { path += filename; }
             return BuildPath(order, type, path);
         }
 
