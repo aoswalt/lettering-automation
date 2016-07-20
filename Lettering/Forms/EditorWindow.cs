@@ -44,19 +44,6 @@ namespace Lettering.Forms {
             //TODO(adam): define path rules info in better way
             dataGridPathRules.DataSource = new BindingList<Data_PathRule>(editedConfig.Setup.PathRules);
             dataGridPathRules.Columns[1].Width *= 2;
-            labelPathRulesInfo.Text = "\n";
-            labelPathRulesInfo.Text += "!style\n    Style Folder/Style Code\n";
-            labelPathRulesInfo.Text += "!size\n    #INCH\n";
-            labelPathRulesInfo.Text += "!spec\n    #\n";
-            labelPathRulesInfo.Text += "!ya\n    Youth/Adult\n";
-            labelPathRulesInfo.Text += "!cd\n    Cheer/Dance\n";
-            labelPathRulesInfo.Text += "\n";
-            labelPathRulesInfo.Text += "ignore\n    Ignore Style\n";
-            labelPathRulesInfo.Text += "mirror\n    Same as Other Style\n";
-            labelPathRulesInfo.Text += "names\n    Names for Automation\n";
-            labelPathRulesInfo.Text += "\n";
-            labelPathRulesInfo.Text += "cut-sew_files\n    Sew Files in Cut Files\n";
-            labelPathRulesInfo.Text += "cut-specific\n    specific Sew Files\n";
         }
 
         private void BuildStylesTree() {
@@ -175,6 +162,41 @@ namespace Lettering.Forms {
                     editedConfig.Styles.Add(editStyleWindow.StyleCode, editStyleWindow.EditedStyle);
                 }
             }
+        }
+
+        private void buttonInfo_Click(object sender, EventArgs e) {
+            string infoText = "Special options available to use in paths\n\n";
+            infoText += "!type\t";
+            infoText += "type of lettering \t ex: TT Styles\n";
+            infoText += "!style\t";
+            infoText += "style code \t ex: TT FBL\n";
+            infoText += "!size\t";
+            infoText += "lettering size \t ex: 3INCH\n";
+            infoText += "!spec\t";
+            infoText += "spec width \t ex: 10.5\n";
+            infoText += "!ya\t";
+            infoText += "Youth/Adult\n";
+            infoText += "!cd\t";
+            infoText += "Cheer/Dance\n";
+            infoText += "!word1\t";
+            infoText += "1st word (or name)\n";
+            infoText += "!word2\t";
+            infoText += "2nd word\n";
+            infoText += "!word3\t";
+            infoText += "3rd word\n";
+            infoText += "!word4\t";
+            infoText += "4th word\n";
+            infoText += "!ecm1\t";
+            infoText += "1st word as ECM\n";
+            infoText += "!ecm2\t";
+            infoText += "2nd word as ECM\n";
+            infoText += "!ecm3\t";
+            infoText += "3rd word as ECM\n";
+            infoText += "!ecm4\t";
+            infoText += "4th word as ECM\n";
+            infoText += "!name\t";
+            infoText += "name\n";
+            Messenger.Show(infoText, "Info");
         }
     }
 }
