@@ -449,6 +449,7 @@ namespace Lettering {
         }
         
         public static ExportType GetExportType(string styleCode, LetteringType type) {
+            //FIXME: null error
             return Config.Setup.Exports.Find(x => Regex.Match(styleCode, x.StyleRegex).Success).FileType;
         }
 

@@ -62,6 +62,22 @@
             this.statusStripEditor = new System.Windows.Forms.StatusStrip();
             this.buttonDone = new System.Windows.Forms.Button();
             this.buttonInfo = new System.Windows.Forms.Button();
+            this.buttonPrefixAdd = new System.Windows.Forms.Button();
+            this.buttonPrefixRemove = new System.Windows.Forms.Button();
+            this.buttonPrefixUp = new System.Windows.Forms.Button();
+            this.buttonPrefixDown = new System.Windows.Forms.Button();
+            this.buttonTrimsRemove = new System.Windows.Forms.Button();
+            this.buttonTrimsAdd = new System.Windows.Forms.Button();
+            this.button1 = new System.Windows.Forms.Button();
+            this.button2 = new System.Windows.Forms.Button();
+            this.buttonPathRulesRemove = new System.Windows.Forms.Button();
+            this.buttonPathRulesAdd = new System.Windows.Forms.Button();
+            this.buttonPathRulesHelp = new System.Windows.Forms.Button();
+            this.buttonSetupHelp = new System.Windows.Forms.Button();
+            this.buttonExportsHelp = new System.Windows.Forms.Button();
+            this.buttonTrimsHelp = new System.Windows.Forms.Button();
+            this.buttonPrefixesHelp = new System.Windows.Forms.Button();
+            this.buttonFilePathsHelp = new System.Windows.Forms.Button();
             this.tabControlConfig.SuspendLayout();
             this.tabSetup.SuspendLayout();
             this.tabControlSetup.SuspendLayout();
@@ -127,6 +143,7 @@
             // 
             // tabFilePaths
             // 
+            this.tabFilePaths.Controls.Add(this.buttonFilePathsHelp);
             this.tabFilePaths.Controls.Add(this.textBoxInstalledLibraryFile);
             this.tabFilePaths.Controls.Add(this.label3);
             this.tabFilePaths.Controls.Add(this.textBoxNetworkLibraryFile);
@@ -197,6 +214,11 @@
             // 
             // tabPrefixes
             // 
+            this.tabPrefixes.Controls.Add(this.buttonPrefixesHelp);
+            this.tabPrefixes.Controls.Add(this.buttonPrefixDown);
+            this.tabPrefixes.Controls.Add(this.buttonPrefixUp);
+            this.tabPrefixes.Controls.Add(this.buttonPrefixRemove);
+            this.tabPrefixes.Controls.Add(this.buttonPrefixAdd);
             this.tabPrefixes.Controls.Add(this.dataGridPrefixes);
             this.tabPrefixes.Location = new System.Drawing.Point(84, 4);
             this.tabPrefixes.Name = "tabPrefixes";
@@ -208,15 +230,20 @@
             // 
             // dataGridPrefixes
             // 
+            this.dataGridPrefixes.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.dataGridPrefixes.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridPrefixes.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dataGridPrefixes.Location = new System.Drawing.Point(3, 3);
+            this.dataGridPrefixes.Location = new System.Drawing.Point(40, 3);
             this.dataGridPrefixes.Name = "dataGridPrefixes";
-            this.dataGridPrefixes.Size = new System.Drawing.Size(609, 464);
+            this.dataGridPrefixes.Size = new System.Drawing.Size(572, 464);
             this.dataGridPrefixes.TabIndex = 1;
             // 
             // tabTrims
             // 
+            this.tabTrims.Controls.Add(this.buttonTrimsHelp);
+            this.tabTrims.Controls.Add(this.buttonTrimsRemove);
+            this.tabTrims.Controls.Add(this.buttonTrimsAdd);
             this.tabTrims.Controls.Add(this.dataGridTrims);
             this.tabTrims.Location = new System.Drawing.Point(84, 4);
             this.tabTrims.Name = "tabTrims";
@@ -228,15 +255,20 @@
             // 
             // dataGridTrims
             // 
+            this.dataGridTrims.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.dataGridTrims.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridTrims.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dataGridTrims.Location = new System.Drawing.Point(3, 3);
+            this.dataGridTrims.Location = new System.Drawing.Point(40, 3);
             this.dataGridTrims.Name = "dataGridTrims";
-            this.dataGridTrims.Size = new System.Drawing.Size(609, 464);
+            this.dataGridTrims.Size = new System.Drawing.Size(572, 464);
             this.dataGridTrims.TabIndex = 0;
             // 
             // tabExports
             // 
+            this.tabExports.Controls.Add(this.buttonExportsHelp);
+            this.tabExports.Controls.Add(this.button1);
+            this.tabExports.Controls.Add(this.button2);
             this.tabExports.Controls.Add(this.dataGridExports);
             this.tabExports.Location = new System.Drawing.Point(84, 4);
             this.tabExports.Name = "tabExports";
@@ -248,15 +280,18 @@
             // 
             // dataGridExports
             // 
+            this.dataGridExports.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.dataGridExports.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridExports.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dataGridExports.Location = new System.Drawing.Point(3, 3);
+            this.dataGridExports.Location = new System.Drawing.Point(40, 3);
             this.dataGridExports.Name = "dataGridExports";
-            this.dataGridExports.Size = new System.Drawing.Size(609, 464);
+            this.dataGridExports.Size = new System.Drawing.Size(572, 464);
             this.dataGridExports.TabIndex = 0;
             // 
             // tabStyleTypes
             // 
+            this.tabStyleTypes.Controls.Add(this.buttonSetupHelp);
             this.tabStyleTypes.Controls.Add(this.textBoxStoneExtension);
             this.tabStyleTypes.Controls.Add(this.label8);
             this.tabStyleTypes.Controls.Add(this.textBoxStoneRoot);
@@ -414,6 +449,9 @@
             // 
             // tabPathRules
             // 
+            this.tabPathRules.Controls.Add(this.buttonPathRulesHelp);
+            this.tabPathRules.Controls.Add(this.buttonPathRulesRemove);
+            this.tabPathRules.Controls.Add(this.buttonPathRulesAdd);
             this.tabPathRules.Controls.Add(this.dataGridPathRules);
             this.tabPathRules.Location = new System.Drawing.Point(84, 4);
             this.tabPathRules.Name = "tabPathRules";
@@ -425,11 +463,13 @@
             // 
             // dataGridPathRules
             // 
+            this.dataGridPathRules.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.dataGridPathRules.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridPathRules.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dataGridPathRules.Location = new System.Drawing.Point(3, 3);
+            this.dataGridPathRules.Location = new System.Drawing.Point(40, 3);
             this.dataGridPathRules.Name = "dataGridPathRules";
-            this.dataGridPathRules.Size = new System.Drawing.Size(609, 464);
+            this.dataGridPathRules.Size = new System.Drawing.Size(572, 464);
             this.dataGridPathRules.TabIndex = 0;
             // 
             // tabStyles
@@ -481,6 +521,170 @@
             this.buttonInfo.Text = "Info";
             this.buttonInfo.UseVisualStyleBackColor = true;
             this.buttonInfo.Click += new System.EventHandler(this.buttonInfo_Click);
+            // 
+            // buttonPrefixAdd
+            // 
+            this.buttonPrefixAdd.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.buttonPrefixAdd.Location = new System.Drawing.Point(6, 6);
+            this.buttonPrefixAdd.Name = "buttonPrefixAdd";
+            this.buttonPrefixAdd.Size = new System.Drawing.Size(28, 23);
+            this.buttonPrefixAdd.TabIndex = 4;
+            this.buttonPrefixAdd.Text = "+";
+            this.buttonPrefixAdd.UseVisualStyleBackColor = true;
+            // 
+            // buttonPrefixRemove
+            // 
+            this.buttonPrefixRemove.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.buttonPrefixRemove.Location = new System.Drawing.Point(6, 35);
+            this.buttonPrefixRemove.Name = "buttonPrefixRemove";
+            this.buttonPrefixRemove.Size = new System.Drawing.Size(28, 23);
+            this.buttonPrefixRemove.TabIndex = 5;
+            this.buttonPrefixRemove.Text = "-";
+            this.buttonPrefixRemove.UseVisualStyleBackColor = true;
+            // 
+            // buttonPrefixUp
+            // 
+            this.buttonPrefixUp.Location = new System.Drawing.Point(6, 64);
+            this.buttonPrefixUp.Name = "buttonPrefixUp";
+            this.buttonPrefixUp.Size = new System.Drawing.Size(28, 23);
+            this.buttonPrefixUp.TabIndex = 6;
+            this.buttonPrefixUp.Text = "▲";
+            this.buttonPrefixUp.UseVisualStyleBackColor = true;
+            // 
+            // buttonPrefixDown
+            // 
+            this.buttonPrefixDown.Location = new System.Drawing.Point(6, 93);
+            this.buttonPrefixDown.Name = "buttonPrefixDown";
+            this.buttonPrefixDown.Size = new System.Drawing.Size(28, 23);
+            this.buttonPrefixDown.TabIndex = 7;
+            this.buttonPrefixDown.Text = "▼";
+            this.buttonPrefixDown.UseVisualStyleBackColor = true;
+            // 
+            // buttonTrimsRemove
+            // 
+            this.buttonTrimsRemove.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.buttonTrimsRemove.Location = new System.Drawing.Point(6, 35);
+            this.buttonTrimsRemove.Name = "buttonTrimsRemove";
+            this.buttonTrimsRemove.Size = new System.Drawing.Size(28, 23);
+            this.buttonTrimsRemove.TabIndex = 7;
+            this.buttonTrimsRemove.Text = "-";
+            this.buttonTrimsRemove.UseVisualStyleBackColor = true;
+            // 
+            // buttonTrimsAdd
+            // 
+            this.buttonTrimsAdd.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.buttonTrimsAdd.Location = new System.Drawing.Point(6, 6);
+            this.buttonTrimsAdd.Name = "buttonTrimsAdd";
+            this.buttonTrimsAdd.Size = new System.Drawing.Size(28, 23);
+            this.buttonTrimsAdd.TabIndex = 6;
+            this.buttonTrimsAdd.Text = "+";
+            this.buttonTrimsAdd.UseVisualStyleBackColor = true;
+            // 
+            // button1
+            // 
+            this.button1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.button1.Location = new System.Drawing.Point(6, 35);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(28, 23);
+            this.button1.TabIndex = 9;
+            this.button1.Text = "-";
+            this.button1.UseVisualStyleBackColor = true;
+            // 
+            // button2
+            // 
+            this.button2.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.button2.Location = new System.Drawing.Point(6, 6);
+            this.button2.Name = "button2";
+            this.button2.Size = new System.Drawing.Size(28, 23);
+            this.button2.TabIndex = 8;
+            this.button2.Text = "+";
+            this.button2.UseVisualStyleBackColor = true;
+            // 
+            // buttonPathRulesRemove
+            // 
+            this.buttonPathRulesRemove.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.buttonPathRulesRemove.Location = new System.Drawing.Point(6, 35);
+            this.buttonPathRulesRemove.Name = "buttonPathRulesRemove";
+            this.buttonPathRulesRemove.Size = new System.Drawing.Size(28, 23);
+            this.buttonPathRulesRemove.TabIndex = 11;
+            this.buttonPathRulesRemove.Text = "-";
+            this.buttonPathRulesRemove.UseVisualStyleBackColor = true;
+            // 
+            // buttonPathRulesAdd
+            // 
+            this.buttonPathRulesAdd.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.buttonPathRulesAdd.Location = new System.Drawing.Point(6, 6);
+            this.buttonPathRulesAdd.Name = "buttonPathRulesAdd";
+            this.buttonPathRulesAdd.Size = new System.Drawing.Size(28, 23);
+            this.buttonPathRulesAdd.TabIndex = 10;
+            this.buttonPathRulesAdd.Text = "+";
+            this.buttonPathRulesAdd.UseVisualStyleBackColor = true;
+            // 
+            // buttonPathRulesHelp
+            // 
+            this.buttonPathRulesHelp.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.buttonPathRulesHelp.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.buttonPathRulesHelp.Location = new System.Drawing.Point(6, 441);
+            this.buttonPathRulesHelp.Name = "buttonPathRulesHelp";
+            this.buttonPathRulesHelp.Size = new System.Drawing.Size(28, 23);
+            this.buttonPathRulesHelp.TabIndex = 12;
+            this.buttonPathRulesHelp.Text = "?";
+            this.buttonPathRulesHelp.UseVisualStyleBackColor = true;
+            // 
+            // buttonSetupHelp
+            // 
+            this.buttonSetupHelp.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.buttonSetupHelp.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.buttonSetupHelp.Location = new System.Drawing.Point(6, 441);
+            this.buttonSetupHelp.Name = "buttonSetupHelp";
+            this.buttonSetupHelp.Size = new System.Drawing.Size(28, 23);
+            this.buttonSetupHelp.TabIndex = 29;
+            this.buttonSetupHelp.Text = "?";
+            this.buttonSetupHelp.UseVisualStyleBackColor = true;
+            // 
+            // buttonExportsHelp
+            // 
+            this.buttonExportsHelp.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.buttonExportsHelp.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.buttonExportsHelp.Location = new System.Drawing.Point(6, 441);
+            this.buttonExportsHelp.Name = "buttonExportsHelp";
+            this.buttonExportsHelp.Size = new System.Drawing.Size(28, 23);
+            this.buttonExportsHelp.TabIndex = 13;
+            this.buttonExportsHelp.Text = "?";
+            this.buttonExportsHelp.UseVisualStyleBackColor = true;
+            // 
+            // buttonTrimsHelp
+            // 
+            this.buttonTrimsHelp.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.buttonTrimsHelp.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.buttonTrimsHelp.Location = new System.Drawing.Point(6, 441);
+            this.buttonTrimsHelp.Name = "buttonTrimsHelp";
+            this.buttonTrimsHelp.Size = new System.Drawing.Size(28, 23);
+            this.buttonTrimsHelp.TabIndex = 13;
+            this.buttonTrimsHelp.Text = "?";
+            this.buttonTrimsHelp.UseVisualStyleBackColor = true;
+            // 
+            // buttonPrefixesHelp
+            // 
+            this.buttonPrefixesHelp.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.buttonPrefixesHelp.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.buttonPrefixesHelp.Location = new System.Drawing.Point(6, 441);
+            this.buttonPrefixesHelp.Name = "buttonPrefixesHelp";
+            this.buttonPrefixesHelp.Size = new System.Drawing.Size(28, 23);
+            this.buttonPrefixesHelp.TabIndex = 13;
+            this.buttonPrefixesHelp.Text = "?";
+            this.buttonPrefixesHelp.UseVisualStyleBackColor = true;
+            // 
+            // buttonFilePathsHelp
+            // 
+            this.buttonFilePathsHelp.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.buttonFilePathsHelp.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.buttonFilePathsHelp.Location = new System.Drawing.Point(6, 441);
+            this.buttonFilePathsHelp.Name = "buttonFilePathsHelp";
+            this.buttonFilePathsHelp.Size = new System.Drawing.Size(28, 23);
+            this.buttonFilePathsHelp.TabIndex = 13;
+            this.buttonFilePathsHelp.Text = "?";
+            this.buttonFilePathsHelp.UseVisualStyleBackColor = true;
             // 
             // EditorWindow
             // 
@@ -556,5 +760,21 @@
         private System.Windows.Forms.TreeView treeViewStyles;
         private System.Windows.Forms.Button buttonDone;
         private System.Windows.Forms.Button buttonInfo;
+        private System.Windows.Forms.Button buttonPrefixDown;
+        private System.Windows.Forms.Button buttonPrefixUp;
+        private System.Windows.Forms.Button buttonPrefixRemove;
+        private System.Windows.Forms.Button buttonPrefixAdd;
+        private System.Windows.Forms.Button buttonTrimsRemove;
+        private System.Windows.Forms.Button buttonTrimsAdd;
+        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.Button buttonPathRulesRemove;
+        private System.Windows.Forms.Button buttonPathRulesAdd;
+        private System.Windows.Forms.Button buttonFilePathsHelp;
+        private System.Windows.Forms.Button buttonPrefixesHelp;
+        private System.Windows.Forms.Button buttonTrimsHelp;
+        private System.Windows.Forms.Button buttonExportsHelp;
+        private System.Windows.Forms.Button buttonSetupHelp;
+        private System.Windows.Forms.Button buttonPathRulesHelp;
     }
 }

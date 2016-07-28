@@ -100,7 +100,7 @@ namespace Lettering.Data {
         };
 
         internal static string ConstructTemplateFilePath(OrderData order, LetteringType type) {
-            return Lettering.Config.Setup.TypeData[type.ToString()].Root + @"!type\!style\!style TEMPLATE.cdr";
+            return BuildPath(order, type, Lettering.Config.Setup.TypeData[type.ToString()].Root + @"!type\!style\!style TEMPLATE.cdr");
         }
 
         internal static string ConstructFileName(OrderData order, LetteringType type) {
