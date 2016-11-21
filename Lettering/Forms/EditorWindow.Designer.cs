@@ -548,7 +548,7 @@
             this.buttonPrefixUp.Name = "buttonPrefixUp";
             this.buttonPrefixUp.Size = new System.Drawing.Size(28, 23);
             this.buttonPrefixUp.TabIndex = 6;
-            this.buttonPrefixUp.Text = "▲";
+            this.buttonPrefixUp.Text = "▲";
             this.buttonPrefixUp.UseVisualStyleBackColor = true;
             // 
             // buttonPrefixDown
