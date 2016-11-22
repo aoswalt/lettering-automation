@@ -131,11 +131,6 @@ namespace Lettering.Forms {
             g.DrawString(_tabPage.Text, e.Font, _textBrush, _tabBounds, new StringFormat(_stringFlags));
         }
 
-        private void buttonDone_Click(object sender, EventArgs e) {
-            Config = editedConfig;
-            this.Close();
-        }
-
         private void treeViewStyles_NodeMouseDoubleClick(object sender, TreeNodeMouseClickEventArgs e) {
             TreeNode root = e.Node;
             while(root.Parent != null) {
@@ -162,6 +157,11 @@ namespace Lettering.Forms {
                     editedConfig.Styles.Add(editStyleWindow.StyleCode, editStyleWindow.EditedStyle);
                 }
             }
+        }
+
+        private void buttonDone_Click(object sender, EventArgs e) {
+            Config = editedConfig;
+            this.Close();
         }
 
         private void buttonInfo_Click(object sender, EventArgs e) {
@@ -197,6 +197,78 @@ namespace Lettering.Forms {
             infoText += "!name\t";
             infoText += "name\n";
             Messenger.Show(infoText, "Info");
+        }
+
+        private void buttonFilePathsHelp_Click(object sender, EventArgs e) {
+            Messenger.Show("FilePathsHelp");
+        }
+
+        private void buttonPrefixesHelp_Click(object sender, EventArgs e) {
+            Messenger.Show("PrefixesHelp");
+        }
+
+        private void buttonPrefixesAdd_Click(object sender, EventArgs e) {
+            Messenger.Show("PrefixesAdd");
+        }
+
+        private void buttonPrefixesRemove_Click(object sender, EventArgs e) {
+            Messenger.Show("PrefixesRemove");
+        }
+
+        private void buttonPrefixesUp_Click(object sender, EventArgs e) {
+            Messenger.Show("PrefixesUp");
+        }
+
+        private void buttonPrefixesDown_Click(object sender, EventArgs e) {
+            Messenger.Show("PrefixesDown");
+        }
+
+        private void buttonTrimsHelp_Click(object sender, EventArgs e) {
+            Messenger.Show("TrimsHelp");
+        }
+
+        private void buttonTrimsAdd_Click(object sender, EventArgs e) {
+            Messenger.Show("TrimsAdd");
+        }
+
+        private void buttonTrimsRemove_Click(object sender, EventArgs e) {
+            Messenger.Show("TrimsRemove");
+        }
+
+        private void buttonTrimsUp_Click(object sender, EventArgs e) {
+            Messenger.Show("TrimsUp");
+        }
+
+        private void buttonTrimsDown_Click(object sender, EventArgs e) {
+            Messenger.Show("TrimsDown");
+        }
+
+        private void buttonExportsHelp_Click(object sender, EventArgs e) {
+            Messenger.Show("ExportsHelp");
+        }
+
+        private void buttonExportsAdd_Click(object sender, EventArgs e) {
+            Messenger.Show("ExportsAdd");
+        }
+
+        private void buttonExportsRemove_Click(object sender, EventArgs e) {
+            Messenger.Show("ExportsRemove");
+        }
+
+        private void buttonSetupHelp_Click(object sender, EventArgs e) {
+            Messenger.Show("SetupHelp");
+        }
+
+        private void buttonPathRulesHelp_Click(object sender, EventArgs e) {
+            Messenger.Show("PathRulesHelp");
+        }
+
+        private void buttonPathRulesAdd_Click(object sender, EventArgs e) {
+            Messenger.Show("PathRulesAdd");
+        }
+
+        private void buttonPathRulesRemove_Click(object sender, EventArgs e) {
+            Messenger.Show("PathRulesRemove");
         }
     }
 }
