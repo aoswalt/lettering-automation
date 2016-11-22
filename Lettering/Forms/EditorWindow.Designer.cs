@@ -292,6 +292,8 @@
             // 
             // dataGridPrefixes
             // 
+            this.dataGridPrefixes.AllowUserToAddRows = false;
+            this.dataGridPrefixes.AllowUserToDeleteRows = false;
             this.dataGridPrefixes.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
@@ -350,6 +352,8 @@
             // 
             // dataGridTrims
             // 
+            this.dataGridTrims.AllowUserToAddRows = false;
+            this.dataGridTrims.AllowUserToDeleteRows = false;
             this.dataGridTrims.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
@@ -406,6 +410,8 @@
             // 
             // dataGridExports
             // 
+            this.dataGridExports.AllowUserToAddRows = false;
+            this.dataGridExports.AllowUserToDeleteRows = false;
             this.dataGridExports.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
@@ -631,6 +637,8 @@
             // 
             // dataGridPathRules
             // 
+            this.dataGridPathRules.AllowUserToAddRows = false;
+            this.dataGridPathRules.AllowUserToDeleteRows = false;
             this.dataGridPathRules.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
