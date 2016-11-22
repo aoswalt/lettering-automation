@@ -200,11 +200,11 @@ namespace Lettering.Forms {
         }
 
         private void buttonFilePathsHelp_Click(object sender, EventArgs e) {
-            Messenger.Show("FilePathsHelp");
+            Messenger.Show("Global paths used across the program.", "File Paths Help");
         }
 
         private void buttonPrefixesHelp_Click(object sender, EventArgs e) {
-            Messenger.Show("PrefixesHelp");
+            Messenger.Show("Prefixes used for parsing styles.\n\nProcessed in order!", "Prefixes Help");
         }
 
         private void buttonPrefixesAdd_Click(object sender, EventArgs e) {
@@ -224,7 +224,7 @@ namespace Lettering.Forms {
         }
 
         private void buttonTrimsHelp_Click(object sender, EventArgs e) {
-            Messenger.Show("TrimsHelp");
+            Messenger.Show("Regular expressions to try to remove extraneous information from style codes.\n\nProcessed in order!", "Trims Help");
         }
 
         private void buttonTrimsAdd_Click(object sender, EventArgs e) {
@@ -244,7 +244,7 @@ namespace Lettering.Forms {
         }
 
         private void buttonExportsHelp_Click(object sender, EventArgs e) {
-            Messenger.Show("ExportsHelp");
+            Messenger.Show("Regular expressions for which styles to export with the file type to export.", "Exports Help");
         }
 
         private void buttonExportsAdd_Click(object sender, EventArgs e) {
@@ -256,11 +256,11 @@ namespace Lettering.Forms {
         }
 
         private void buttonSetupHelp_Click(object sender, EventArgs e) {
-            Messenger.Show("SetupHelp");
+            Messenger.Show("Per-type root path and file extension.", "Setup Help");
         }
 
         private void buttonPathRulesHelp_Click(object sender, EventArgs e) {
-            Messenger.Show("PathRulesHelp");
+            Messenger.Show("The path rules for styles to follow.", "Path Rules Help");
         }
 
         private void buttonPathRulesAdd_Click(object sender, EventArgs e) {
