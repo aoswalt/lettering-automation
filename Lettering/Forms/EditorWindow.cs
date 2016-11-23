@@ -208,11 +208,28 @@ namespace Lettering.Forms {
         }
 
         private void buttonPrefixesAdd_Click(object sender, EventArgs e) {
-            Messenger.Show("PrefixesAdd");
+            string prefix = Messenger.Prompt("Enter new prefix:", "Add Prefix").ToUpper();
+            if(prefix.Length > 0) {
+                //NOTE(adam): convert to string list for check because contains not working for StringData
+                if(!editedConfig.Setup.StylePrefixes.ConvertAll(x => x.Value).Contains(prefix)) {
+                    editedConfig.Setup.StylePrefixes.Add(prefix);
+                    //TODO(adam): look into better method of updaing data
+                    dataGridPrefixes.DataSource = new BindingList<StringData>(editedConfig.Setup.StylePrefixes);
+                } else {
+                    Messenger.Show("Prefix already exists.", "Add Prefix Error");
+                }
+            }
         }
 
         private void buttonPrefixesRemove_Click(object sender, EventArgs e) {
-            Messenger.Show("PrefixesRemove");
+            DataGridViewCell selected = dataGridPrefixes.SelectedCells[0];
+            bool confirm = Messenger.Show($"Remove '{selected.Value}'?", "Confirm Remove", MessageButtons.YesNo);
+            if(confirm) {
+                int selectedIndex = selected.RowIndex;
+                editedConfig.Setup.StylePrefixes.RemoveAt(selectedIndex);
+                //TODO(adam): look into better method of updaing data
+                dataGridPrefixes.DataSource = new BindingList<StringData>(editedConfig.Setup.StylePrefixes);
+            }
         }
 
         private void buttonPrefixesUp_Click(object sender, EventArgs e) {
