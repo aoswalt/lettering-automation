@@ -233,11 +233,29 @@ namespace Lettering.Forms {
         }
 
         private void buttonPrefixesUp_Click(object sender, EventArgs e) {
-            Messenger.Show("PrefixesUp");
+            int selectedIndex = dataGridPrefixes.SelectedCells[0].RowIndex;
+            if(selectedIndex != 0) {
+                StringData prefix = editedConfig.Setup.StylePrefixes[selectedIndex];
+                editedConfig.Setup.StylePrefixes.RemoveAt(selectedIndex);
+                editedConfig.Setup.StylePrefixes.Insert(selectedIndex - 1, prefix);
+                //TODO(adam): look into better method of updaing data
+                dataGridPrefixes.DataSource = new BindingList<StringData>(editedConfig.Setup.StylePrefixes);
+                dataGridPrefixes.ClearSelection();
+                dataGridPrefixes.Rows[selectedIndex - 1].Selected = true;
+            }
         }
 
         private void buttonPrefixesDown_Click(object sender, EventArgs e) {
-            Messenger.Show("PrefixesDown");
+            int selectedIndex = dataGridPrefixes.SelectedCells[0].RowIndex;
+            if(selectedIndex != dataGridPrefixes.RowCount - 1) {
+                StringData prefix = editedConfig.Setup.StylePrefixes[selectedIndex];
+                editedConfig.Setup.StylePrefixes.RemoveAt(selectedIndex);
+                editedConfig.Setup.StylePrefixes.Insert(selectedIndex + 1, prefix);
+                //TODO(adam): look into better method of updaing data
+                dataGridPrefixes.DataSource = new BindingList<StringData>(editedConfig.Setup.StylePrefixes);
+                dataGridPrefixes.ClearSelection();
+                dataGridPrefixes.Rows[selectedIndex + 1].Selected = true;
+            }
         }
 
         private void buttonTrimsHelp_Click(object sender, EventArgs e) {
