@@ -222,10 +222,10 @@ namespace Lettering.Forms {
         }
 
         private void buttonPrefixesRemove_Click(object sender, EventArgs e) {
-            DataGridViewCell selected = dataGridPrefixes.SelectedCells[0];
-            bool confirm = Messenger.Show($"Remove '{selected.Value}'?", "Confirm Remove", MessageButtons.YesNo);
+            int selectedIndex = dataGridPrefixes.SelectedCells[0].RowIndex;
+            string prefix = editedConfig.Setup.StylePrefixes[selectedIndex];
+            bool confirm = Messenger.Show($"Remove '{prefix}'?", "Confirm Remove", MessageButtons.YesNo);
             if(confirm) {
-                int selectedIndex = selected.RowIndex;
                 editedConfig.Setup.StylePrefixes.RemoveAt(selectedIndex);
                 //TODO(adam): look into better method of updaing data
                 dataGridPrefixes.DataSource = new BindingList<StringData>(editedConfig.Setup.StylePrefixes);
@@ -267,15 +267,40 @@ namespace Lettering.Forms {
         }
 
         private void buttonTrimsRemove_Click(object sender, EventArgs e) {
-            Messenger.Show("TrimsRemove");
+            int selectedIndex = dataGridTrims.SelectedCells[0].RowIndex;
+            Data_Trim trim = editedConfig.Setup.Trims[selectedIndex];
+            bool confirm = Messenger.Show($"Remove '{trim.Pattern}' - {trim._Comment}?", "Confirm Remove", MessageButtons.YesNo);
+            if(confirm) {
+                editedConfig.Setup.Trims.RemoveAt(selectedIndex);
+                //TODO(adam): look into better method of updaing data
+                dataGridTrims.DataSource = new BindingList<Data_Trim>(editedConfig.Setup.Trims);
+            }
         }
 
         private void buttonTrimsUp_Click(object sender, EventArgs e) {
-            Messenger.Show("TrimsUp");
+            int selectedIndex = dataGridTrims.SelectedCells[0].RowIndex;
+            if(selectedIndex != 0) {
+                Data_Trim trim = editedConfig.Setup.Trims[selectedIndex];
+                editedConfig.Setup.Trims.RemoveAt(selectedIndex);
+                editedConfig.Setup.Trims.Insert(selectedIndex - 1, trim);
+                //TODO(adam): look into better method of updaing data
+                dataGridTrims.DataSource = new BindingList<Data_Trim>(editedConfig.Setup.Trims);
+                dataGridTrims.ClearSelection();
+                dataGridTrims.Rows[selectedIndex - 1].Selected = true;
+            }
         }
 
         private void buttonTrimsDown_Click(object sender, EventArgs e) {
-            Messenger.Show("TrimsDown");
+            int selectedIndex = dataGridTrims.SelectedCells[0].RowIndex;
+            if(selectedIndex != dataGridTrims.RowCount - 1) {
+                Data_Trim trim = editedConfig.Setup.Trims[selectedIndex];
+                editedConfig.Setup.Trims.RemoveAt(selectedIndex);
+                editedConfig.Setup.Trims.Insert(selectedIndex + 1, trim);
+                //TODO(adam): look into better method of updaing data
+                dataGridTrims.DataSource = new BindingList<Data_Trim>(editedConfig.Setup.Trims);
+                dataGridTrims.ClearSelection();
+                dataGridTrims.Rows[selectedIndex + 1].Selected = true;
+            }
         }
 
         private void buttonExportsHelp_Click(object sender, EventArgs e) {
