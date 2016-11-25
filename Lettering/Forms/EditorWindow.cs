@@ -263,7 +263,20 @@ namespace Lettering.Forms {
         }
 
         private void buttonTrimsAdd_Click(object sender, EventArgs e) {
-            Messenger.Show("TrimsAdd");
+            AddTrimWindow addTrimWindow = new AddTrimWindow();
+            if(addTrimWindow.ShowDialog(this) == DialogResult.OK) {
+                Data_Trim newTrim = new Data_Trim() {
+                    Pattern = addTrimWindow.Pattern,
+                    _Comment = addTrimWindow.Comment != "" ? addTrimWindow.Comment : "<none>"
+                };
+                if(!editedConfig.Setup.Trims.ConvertAll(x => x.Pattern).Contains(newTrim.Pattern)) {
+                    editedConfig.Setup.Trims.Add(newTrim);
+                    //TODO(adam): look into better method of updaing data
+                    dataGridTrims.DataSource = new BindingList<Data_Trim>(editedConfig.Setup.Trims);
+                } else {
+                    Messenger.Show("Trim already exists.", "Add Trim Error");
+                }
+            }
         }
 
         private void buttonTrimsRemove_Click(object sender, EventArgs e) {
