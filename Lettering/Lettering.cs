@@ -35,16 +35,34 @@ namespace Lettering {
         }
 
         internal static void LoadAllConfigs() {
-            Config = JsonConvert.DeserializeObject<JsonConfigData>(File.ReadAllText(FilePaths.desktopFolderPath + "jsonOutput.json"));
+            string path = "";
+            if(Directory.Exists(FilePaths.adjacentConfigFolderPath)
+                && File.Exists(FilePaths.adjacentConfigFolderPath + FilePaths.configFileName)) {
+                    path = FilePaths.adjacentConfigFolderPath + FilePaths.configFileName;
+            } else if(Directory.Exists(FilePaths.networkConfigFolderPath)
+                && File.Exists(FilePaths.networkConfigFolderPath + FilePaths.configFileName)) {
+                path = FilePaths.networkConfigFolderPath + FilePaths.configFileName;
+            } else {
+                ErrorHandler.HandleError(ErrorType.Critical, "Could not find config files.");
+                return;
+            }
+
+            Config = JsonConvert.DeserializeObject<JsonConfigData>(File.ReadAllText(path));
         }
         
         internal static void LaunchConfigEditor() {
             LoadAllConfigs();
+
+            if(Config == null) {
+                ErrorHandler.HandleError(ErrorType.Log, "No config data when trying to Launch editor.");
+                return;
+            }
+
             EditorWindow editor = new EditorWindow(Config);
             editor.ShowDialog(mainWindow);
             Config = editor.Config;
 
-            File.WriteAllText(FilePaths.desktopFolderPath + "jsonOutput_result.json", JsonConvert.SerializeObject(Config,
+            File.WriteAllText(FilePaths.desktopFolderPath + "lettering.json", JsonConvert.SerializeObject(Config,
                 new JsonSerializerSettings() {
                     Formatting = Formatting.Indented,
                     NullValueHandling = NullValueHandling.Ignore

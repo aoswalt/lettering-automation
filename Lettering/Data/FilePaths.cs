@@ -6,6 +6,7 @@ using Lettering.Errors;
 namespace Lettering.Data {
     public class FilePaths {
         private static readonly string networkAutomationFolderPath = @"\\production\Lettering\Corel\WORK FOLDERS\Automation\";
+        public static readonly string configFileName = "lettering.json";
         public static readonly string adjacentConfigFolderPath = @".\configs\";
         public static readonly string networkConfigFolderPath = networkAutomationFolderPath + @"application\configs\";
         public static readonly string adjacentHolidaysFilePath = adjacentConfigFolderPath + "holidays.txt";
