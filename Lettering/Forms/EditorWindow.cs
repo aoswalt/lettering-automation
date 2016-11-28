@@ -338,7 +338,14 @@ namespace Lettering.Forms {
         }
 
         private void buttonExportsRemove_Click(object sender, EventArgs e) {
-            Messenger.Show("ExportsRemove");
+            int selectedIndex = dataGridExports.SelectedCells[0].RowIndex;
+            Data_Export export = editedConfig.Setup.Exports[selectedIndex];
+            bool confirm = Messenger.Show($"Remove '{export.StyleRegex}' - {export.FileType}?", "Confirm Remove", MessageButtons.YesNo);
+            if(confirm) {
+                editedConfig.Setup.Exports.RemoveAt(selectedIndex);
+                //TODO(adam): look into better method of updaing data
+                dataGridExports.DataSource = new BindingList<Data_Export>(editedConfig.Setup.Exports);
+            }
         }
 
         private void buttonSetupHelp_Click(object sender, EventArgs e) {
@@ -367,7 +374,14 @@ namespace Lettering.Forms {
         }
 
         private void buttonPathRulesRemove_Click(object sender, EventArgs e) {
-            Messenger.Show("PathRulesRemove");
+            int selectedIndex = dataGridPathRules.SelectedCells[0].RowIndex;
+            Data_PathRule pathRule = editedConfig.Setup.PathRules[selectedIndex];
+            bool confirm = Messenger.Show($"Remove '{pathRule.Id}' - {pathRule.Rule}?", "Confirm Remove", MessageButtons.YesNo);
+            if(confirm) {
+                editedConfig.Setup.PathRules.RemoveAt(selectedIndex);
+                //TODO(adam): look into better method of updaing data
+                dataGridPathRules.DataSource = new BindingList<Data_PathRule>(editedConfig.Setup.PathRules);
+            }
         }
     }
 }
