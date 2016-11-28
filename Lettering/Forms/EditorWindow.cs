@@ -403,7 +403,12 @@ namespace Lettering.Forms {
         }
 
         private void buttonStylesRemove_Click(object sender, EventArgs e) {
-
+            TreeNode selectedStyleNode = treeViewStyles.SelectedNode;
+            bool confirm = Messenger.Show($"Completely remove style {selectedStyleNode.Text}?", "Confirm Remove", MessageButtons.YesNo);
+            if(confirm) {
+                editedConfig.Styles.Remove(selectedStyleNode.Text);
+                treeViewStyles.Nodes.Remove(selectedStyleNode);
+            }
         }
     }
 }
