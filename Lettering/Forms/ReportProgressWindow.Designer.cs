@@ -76,6 +76,7 @@
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "ReportProgressWindow";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Reporting";
             this.ResumeLayout(false);
             this.PerformLayout();

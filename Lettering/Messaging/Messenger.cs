@@ -41,7 +41,7 @@ namespace Lettering {
 
         internal static string Prompt(string message, string title) {
             InputWindow inputWindow = new InputWindow(message, title);
-            inputWindow.ShowDialog();
+            inputWindow.ShowDialog(parentWindow);
             return inputWindow.Input;
         }
 

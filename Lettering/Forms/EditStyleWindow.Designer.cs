@@ -26,6 +26,7 @@
             this.label1 = new System.Windows.Forms.Label();
             this.textBoxStyle = new System.Windows.Forms.TextBox();
             this.groupBoxCut = new System.Windows.Forms.GroupBox();
+            this.buttonCutClearRule = new System.Windows.Forms.Button();
             this.label18 = new System.Windows.Forms.Label();
             this.label17 = new System.Windows.Forms.Label();
             this.buttonCutExConditionsDelete = new System.Windows.Forms.Button();
@@ -48,6 +49,7 @@
             this.cboxCutWordOrder1 = new System.Windows.Forms.ComboBox();
             this.label2 = new System.Windows.Forms.Label();
             this.groupBoxSew = new System.Windows.Forms.GroupBox();
+            this.buttonSewClearRule = new System.Windows.Forms.Button();
             this.label19 = new System.Windows.Forms.Label();
             this.cboxSewWordOrder4 = new System.Windows.Forms.ComboBox();
             this.label20 = new System.Windows.Forms.Label();
@@ -70,6 +72,7 @@
             this.buttonSewResetWords = new System.Windows.Forms.Button();
             this.label11 = new System.Windows.Forms.Label();
             this.groupBoxStone = new System.Windows.Forms.GroupBox();
+            this.buttonStoneClearRule = new System.Windows.Forms.Button();
             this.label7 = new System.Windows.Forms.Label();
             this.cboxStoneWordOrder4 = new System.Windows.Forms.ComboBox();
             this.label8 = new System.Windows.Forms.Label();
@@ -93,9 +96,6 @@
             this.label16 = new System.Windows.Forms.Label();
             this.buttonAccept = new System.Windows.Forms.Button();
             this.buttonCancel = new System.Windows.Forms.Button();
-            this.buttonCutClearRule = new System.Windows.Forms.Button();
-            this.buttonSewClearRule = new System.Windows.Forms.Button();
-            this.buttonStoneClearRule = new System.Windows.Forms.Button();
             this.groupBoxCut.SuspendLayout();
             this.groupBoxSew.SuspendLayout();
             this.groupBoxStone.SuspendLayout();
@@ -147,6 +147,16 @@
             this.groupBoxCut.TabIndex = 2;
             this.groupBoxCut.TabStop = false;
             this.groupBoxCut.Text = "Cut";
+            // 
+            // buttonCutClearRule
+            // 
+            this.buttonCutClearRule.Location = new System.Drawing.Point(6, 15);
+            this.buttonCutClearRule.Name = "buttonCutClearRule";
+            this.buttonCutClearRule.Size = new System.Drawing.Size(19, 23);
+            this.buttonCutClearRule.TabIndex = 26;
+            this.buttonCutClearRule.Text = "X";
+            this.buttonCutClearRule.UseVisualStyleBackColor = true;
+            this.buttonCutClearRule.Click += new System.EventHandler(this.buttonCutClearRule_Click);
             // 
             // label18
             // 
@@ -385,6 +395,16 @@
             this.groupBoxSew.TabStop = false;
             this.groupBoxSew.Text = "Sew";
             // 
+            // buttonSewClearRule
+            // 
+            this.buttonSewClearRule.Location = new System.Drawing.Point(6, 15);
+            this.buttonSewClearRule.Name = "buttonSewClearRule";
+            this.buttonSewClearRule.Size = new System.Drawing.Size(19, 23);
+            this.buttonSewClearRule.TabIndex = 27;
+            this.buttonSewClearRule.Text = "X";
+            this.buttonSewClearRule.UseVisualStyleBackColor = true;
+            this.buttonSewClearRule.Click += new System.EventHandler(this.buttonSewClearRule_Click);
+            // 
             // label19
             // 
             this.label19.AutoSize = true;
@@ -622,6 +642,16 @@
             this.groupBoxStone.TabStop = false;
             this.groupBoxStone.Text = "Stone";
             // 
+            // buttonStoneClearRule
+            // 
+            this.buttonStoneClearRule.Location = new System.Drawing.Point(6, 15);
+            this.buttonStoneClearRule.Name = "buttonStoneClearRule";
+            this.buttonStoneClearRule.Size = new System.Drawing.Size(19, 23);
+            this.buttonStoneClearRule.TabIndex = 36;
+            this.buttonStoneClearRule.Text = "X";
+            this.buttonStoneClearRule.UseVisualStyleBackColor = true;
+            this.buttonStoneClearRule.Click += new System.EventHandler(this.buttonStoneClearRule_Click);
+            // 
             // label7
             // 
             this.label7.AutoSize = true;
@@ -850,36 +880,6 @@
             this.buttonCancel.UseVisualStyleBackColor = true;
             this.buttonCancel.Click += new System.EventHandler(this.buttonCancel_Click);
             // 
-            // buttonCutClearRule
-            // 
-            this.buttonCutClearRule.Location = new System.Drawing.Point(6, 15);
-            this.buttonCutClearRule.Name = "buttonCutClearRule";
-            this.buttonCutClearRule.Size = new System.Drawing.Size(19, 23);
-            this.buttonCutClearRule.TabIndex = 26;
-            this.buttonCutClearRule.Text = "X";
-            this.buttonCutClearRule.UseVisualStyleBackColor = true;
-            this.buttonCutClearRule.Click += new System.EventHandler(this.buttonCutClearRule_Click);
-            // 
-            // buttonSewClearRule
-            // 
-            this.buttonSewClearRule.Location = new System.Drawing.Point(6, 15);
-            this.buttonSewClearRule.Name = "buttonSewClearRule";
-            this.buttonSewClearRule.Size = new System.Drawing.Size(19, 23);
-            this.buttonSewClearRule.TabIndex = 27;
-            this.buttonSewClearRule.Text = "X";
-            this.buttonSewClearRule.UseVisualStyleBackColor = true;
-            this.buttonSewClearRule.Click += new System.EventHandler(this.buttonSewClearRule_Click);
-            // 
-            // buttonStoneClearRule
-            // 
-            this.buttonStoneClearRule.Location = new System.Drawing.Point(6, 15);
-            this.buttonStoneClearRule.Name = "buttonStoneClearRule";
-            this.buttonStoneClearRule.Size = new System.Drawing.Size(19, 23);
-            this.buttonStoneClearRule.TabIndex = 36;
-            this.buttonStoneClearRule.Text = "X";
-            this.buttonStoneClearRule.UseVisualStyleBackColor = true;
-            this.buttonStoneClearRule.Click += new System.EventHandler(this.buttonStoneClearRule_Click);
-            // 
             // EditStyleWindow
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -895,6 +895,7 @@
             this.Controls.Add(this.label1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Name = "EditStyleWindow";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Edit Style";
             this.groupBoxCut.ResumeLayout(false);
             this.groupBoxCut.PerformLayout();

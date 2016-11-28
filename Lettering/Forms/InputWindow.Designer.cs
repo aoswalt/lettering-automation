@@ -62,6 +62,7 @@
             // buttonCancel
             // 
             this.buttonCancel.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
+            this.buttonCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
             this.buttonCancel.Location = new System.Drawing.Point(87, 51);
             this.buttonCancel.Name = "buttonCancel";
             this.buttonCancel.Size = new System.Drawing.Size(75, 23);
@@ -85,6 +86,7 @@
             this.Controls.Add(this.labelText);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Name = "InputWindow";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "InputWindow";
             this.ResumeLayout(false);
             this.PerformLayout();

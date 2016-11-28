@@ -102,7 +102,7 @@ namespace Lettering {
             openFileDialog.Filter = "csv file (*.csv)|*.csv|txt file (*.txt)|*.txt";
             openFileDialog.RestoreDirectory = true;
 
-            if(openFileDialog.ShowDialog() == DialogResult.OK) {
+            if(openFileDialog.ShowDialog(mainWindow) == DialogResult.OK) {
                 DataTable data = CsvReader.Read(openFileDialog.FileName);
                 if(data == null) {
                     ErrorHandler.HandleError(ErrorType.Alert, "No data from csv.");

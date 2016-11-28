@@ -786,6 +786,7 @@
             this.Controls.Add(this.statusStripEditor);
             this.Controls.Add(this.tabControlConfig);
             this.Name = "EditorWindow";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Editor";
             this.tabControlConfig.ResumeLayout(false);
             this.tabSetup.ResumeLayout(false);
