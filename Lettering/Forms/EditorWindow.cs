@@ -350,7 +350,20 @@ namespace Lettering.Forms {
         }
 
         private void buttonPathRulesAdd_Click(object sender, EventArgs e) {
-            Messenger.Show("PathRulesAdd");
+            AddPathRuleWindow addPathRuleWindow = new AddPathRuleWindow();
+            if(addPathRuleWindow.ShowDialog(this) == DialogResult.OK) {
+                Data_PathRule newPathRule = new Data_PathRule() {
+                    Id = addPathRuleWindow.Id,
+                    Rule = addPathRuleWindow.Rule
+                };
+                if(!editedConfig.Setup.PathRules.ConvertAll(x => x.Id).Contains(newPathRule.Id)) {
+                    editedConfig.Setup.PathRules.Add(newPathRule);
+                    //TODO(adam): look into better method of updaing data
+                    dataGridPathRules.DataSource = new BindingList<Data_PathRule>(editedConfig.Setup.PathRules);
+                } else {
+                    Messenger.Show("Path Rule already exists.", "Add Path Rule Error");
+                }
+            }
         }
 
         private void buttonPathRulesRemove_Click(object sender, EventArgs e) {

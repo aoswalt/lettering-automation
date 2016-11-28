@@ -73,6 +73,12 @@
     <Compile Include="Forms\AddExportWindow.Designer.cs">
       <DependentUpon>AddExportWindow.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\AddPathRuleWindow.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\AddPathRuleWindow.Designer.cs">
+      <DependentUpon>AddPathRuleWindow.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\ConfigLoadingWindow.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -167,6 +173,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\AddExportWindow.resx">
       <DependentUpon>AddExportWindow.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\AddPathRuleWindow.resx">
+      <DependentUpon>AddPathRuleWindow.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\ConfigLoadingWindow.resx">
       <DependentUpon>ConfigLoadingWindow.cs</DependentUpon>
