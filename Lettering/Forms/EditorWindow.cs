@@ -56,6 +56,11 @@ namespace Lettering.Forms {
         private TreeNode CreateTreeNode(string style, Data_Style data) {
             TreeNode styleNode = new TreeNode(style) { Name = style, Tag = data };
 
+            if(data == null) {
+                Errors.ErrorHandler.HandleError(Errors.ErrorType.Log, $"Adding empty style for {style}.");
+                return styleNode;
+            }
+
             foreach(LetteringType type in Enum.GetValues(typeof(LetteringType))) {
                 Data_StyleData styleData = null;
 
@@ -136,20 +141,25 @@ namespace Lettering.Forms {
             while(root.Parent != null) {
                 root = root.Parent;
             }
-            
-            EditStyleWindow editStyleWindow = new EditStyleWindow(editedConfig, root.Text, (Data_Style)root.Tag);
+            EditStyle(root.Text, (Data_Style)root.Tag);
+        }
+
+        private void EditStyle(string styleCode, Data_Style data) {
+            EditStyleWindow editStyleWindow = new EditStyleWindow(editedConfig, styleCode, data);
             if(editStyleWindow.ShowDialog(this) == DialogResult.OK) {
-                treeViewStyles.Nodes.RemoveByKey(root.Text);
-                treeViewStyles.Nodes.RemoveByKey(editStyleWindow.StyleCode);
+                if(styleCode != "" && styleCode != editStyleWindow.StyleCode) {
+                    treeViewStyles.Nodes.RemoveByKey(styleCode);
+                    editedConfig.Styles.Remove(styleCode);
+                }
+
+                if(treeViewStyles.Nodes.ContainsKey(editStyleWindow.StyleCode)) {
+                    treeViewStyles.Nodes.RemoveByKey(editStyleWindow.StyleCode);
+                }
 
                 TreeNode newNode = CreateTreeNode(editStyleWindow.StyleCode, editStyleWindow.EditedStyle);
                 treeViewStyles.Nodes.Add(newNode);
                 treeViewStyles.Sort();
                 treeViewStyles.SelectedNode = newNode;
-
-                if(root.Text != editStyleWindow.StyleCode) {
-                    editedConfig.Styles.Remove(root.Text);
-                }
 
                 if(editedConfig.Styles.ContainsKey(editStyleWindow.StyleCode)) {
                     editedConfig.Styles[editStyleWindow.StyleCode] = editStyleWindow.EditedStyle;
@@ -382,6 +392,18 @@ namespace Lettering.Forms {
                 //TODO(adam): look into better method of updaing data
                 dataGridPathRules.DataSource = new BindingList<Data_PathRule>(editedConfig.Setup.PathRules);
             }
+        }
+
+        private void buttonStylesHelp_Click(object sender, EventArgs e) {
+            Messenger.Show("Double-click to edit an individual style.", "Styles Help");
+        }
+
+        private void buttonStylesAdd_Click(object sender, EventArgs e) {
+            EditStyle("", new Data_Style());
+        }
+
+        private void buttonStylesRemove_Click(object sender, EventArgs e) {
+
         }
     }
 }

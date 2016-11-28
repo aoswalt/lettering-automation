@@ -80,6 +80,9 @@
             this.statusStripEditor = new System.Windows.Forms.StatusStrip();
             this.buttonDone = new System.Windows.Forms.Button();
             this.buttonInfo = new System.Windows.Forms.Button();
+            this.buttonStylesRemove = new System.Windows.Forms.Button();
+            this.buttonStylesAdd = new System.Windows.Forms.Button();
+            this.buttonStylesHelp = new System.Windows.Forms.Button();
             this.tabControlConfig.SuspendLayout();
             this.tabSetup.SuspendLayout();
             this.tabControlSetup.SuspendLayout();
@@ -686,6 +689,9 @@
             // 
             // tabStyles
             // 
+            this.tabStyles.Controls.Add(this.buttonStylesHelp);
+            this.tabStyles.Controls.Add(this.buttonStylesRemove);
+            this.tabStyles.Controls.Add(this.buttonStylesAdd);
             this.tabStyles.Controls.Add(this.treeViewStyles);
             this.tabStyles.Location = new System.Drawing.Point(4, 22);
             this.tabStyles.Name = "tabStyles";
@@ -697,10 +703,11 @@
             // 
             // treeViewStyles
             // 
-            this.treeViewStyles.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.treeViewStyles.Location = new System.Drawing.Point(3, 3);
+            this.treeViewStyles.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.treeViewStyles.Location = new System.Drawing.Point(42, 3);
             this.treeViewStyles.Name = "treeViewStyles";
-            this.treeViewStyles.Size = new System.Drawing.Size(703, 478);
+            this.treeViewStyles.Size = new System.Drawing.Size(664, 478);
             this.treeViewStyles.TabIndex = 0;
             this.treeViewStyles.NodeMouseDoubleClick += new System.Windows.Forms.TreeNodeMouseClickEventHandler(this.treeViewStyles_NodeMouseDoubleClick);
             // 
@@ -733,6 +740,40 @@
             this.buttonInfo.Text = "Info";
             this.buttonInfo.UseVisualStyleBackColor = true;
             this.buttonInfo.Click += new System.EventHandler(this.buttonInfo_Click);
+            // 
+            // buttonStylesRemove
+            // 
+            this.buttonStylesRemove.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.buttonStylesRemove.Location = new System.Drawing.Point(8, 35);
+            this.buttonStylesRemove.Name = "buttonStylesRemove";
+            this.buttonStylesRemove.Size = new System.Drawing.Size(28, 23);
+            this.buttonStylesRemove.TabIndex = 7;
+            this.buttonStylesRemove.Text = "-";
+            this.buttonStylesRemove.UseVisualStyleBackColor = true;
+            this.buttonStylesRemove.Click += new System.EventHandler(this.buttonStylesRemove_Click);
+            // 
+            // buttonStylesAdd
+            // 
+            this.buttonStylesAdd.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.buttonStylesAdd.Location = new System.Drawing.Point(8, 6);
+            this.buttonStylesAdd.Name = "buttonStylesAdd";
+            this.buttonStylesAdd.Size = new System.Drawing.Size(28, 23);
+            this.buttonStylesAdd.TabIndex = 6;
+            this.buttonStylesAdd.Text = "+";
+            this.buttonStylesAdd.UseVisualStyleBackColor = true;
+            this.buttonStylesAdd.Click += new System.EventHandler(this.buttonStylesAdd_Click);
+            // 
+            // buttonStylesHelp
+            // 
+            this.buttonStylesHelp.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.buttonStylesHelp.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.buttonStylesHelp.Location = new System.Drawing.Point(8, 455);
+            this.buttonStylesHelp.Name = "buttonStylesHelp";
+            this.buttonStylesHelp.Size = new System.Drawing.Size(28, 23);
+            this.buttonStylesHelp.TabIndex = 14;
+            this.buttonStylesHelp.Text = "?";
+            this.buttonStylesHelp.UseVisualStyleBackColor = true;
+            this.buttonStylesHelp.Click += new System.EventHandler(this.buttonStylesHelp_Click);
             // 
             // EditorWindow
             // 
@@ -826,5 +867,8 @@
         private System.Windows.Forms.Button buttonPathRulesHelp;
         private System.Windows.Forms.Button buttonTrimsDown;
         private System.Windows.Forms.Button buttonTrimsUp;
+        private System.Windows.Forms.Button buttonStylesHelp;
+        private System.Windows.Forms.Button buttonStylesRemove;
+        private System.Windows.Forms.Button buttonStylesAdd;
     }
 }

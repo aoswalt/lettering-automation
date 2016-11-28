@@ -610,6 +610,12 @@ namespace Lettering.Forms {
         }
 
         private void buttonAccept_Click(object sender, EventArgs e) {
+            if(textBoxStyle.Text.Length == 0) {
+                Messenger.Show("Cannot save without style code.", "No Style Code");
+                this.DialogResult = DialogResult.None;
+                return;
+            }
+
             //NOTE(adam): copying non-binding elements to working style object
             //CUT
             workingStyle.Cut.Rule = (cboxCutRule.SelectedIndex > -1) ? ((Data_PathRule)cboxCutRule.SelectedItem).Id : null;
@@ -665,6 +671,7 @@ namespace Lettering.Forms {
                 return;
             }
 
+            this.StyleCode = textBoxStyle.Text.ToUpper();
             this.EditedStyle = this.workingStyle;
             this.DialogResult = DialogResult.OK;
             this.Close();
