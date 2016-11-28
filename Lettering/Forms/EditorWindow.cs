@@ -321,7 +321,20 @@ namespace Lettering.Forms {
         }
 
         private void buttonExportsAdd_Click(object sender, EventArgs e) {
-            Messenger.Show("ExportsAdd");
+            AddExportWindow addExportWindow = new AddExportWindow();
+            if(addExportWindow.ShowDialog(this) == DialogResult.OK) {
+                Data_Export newExport = new Data_Export() {
+                    StyleRegex = addExportWindow.Pattern,
+                    FileType = addExportWindow.Type
+                };
+                if(!editedConfig.Setup.Exports.ConvertAll(x => x.StyleRegex).Contains(newExport.StyleRegex)) {
+                    editedConfig.Setup.Exports.Add(newExport);
+                    //TODO(adam): look into better method of updaing data
+                    dataGridExports.DataSource = new BindingList<Data_Export>(editedConfig.Setup.Exports);
+                } else {
+                    Messenger.Show("Export already exists.", "Add Export Error");
+                }
+            }
         }
 
         private void buttonExportsRemove_Click(object sender, EventArgs e) {
