@@ -35,7 +35,8 @@ namespace Lettering {
             }
             
             Lettering.MoveWindowToTop();
-            DialogResult result = MessageBox.Show(message, title, messsageBoxButtons);
+            //TODO(adam): add custom message window too allow centering on parent
+            DialogResult result = MessageBox.Show(parentWindow, message, title, messsageBoxButtons);
             return result == DialogResult.OK || result == DialogResult.Yes;
         }
 
@@ -51,7 +52,7 @@ namespace Lettering {
                 log += $"{line}\n";
             }
 
-            MessageBox.Show(log);
+            MessageBox.Show(parentWindow, log);
         }
     }
 }
