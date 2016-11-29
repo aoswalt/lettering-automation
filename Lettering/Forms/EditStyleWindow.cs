@@ -629,7 +629,7 @@ namespace Lettering.Forms {
             //SEW
             workingStyle.Sew.Rule = (cboxSewRule.SelectedIndex > -1) ? ((Data_PathRule)cboxSewRule.SelectedItem).Id : null;
 
-            List<int> sewWords = BuildWordOrder(cboxCutWordOrder1, cboxCutWordOrder2, cboxCutWordOrder3, cboxCutWordOrder4);
+            List<int> sewWords = BuildWordOrder(cboxSewWordOrder1, cboxSewWordOrder2, cboxSewWordOrder3, cboxSewWordOrder4);
             workingStyle.Sew.CustomWordOrder = (sewWords.Count > 0) ? sewWords : null;
 
             workingStyle.Sew.MirroredStyle = (cboxSewMirror.SelectedIndex > -1) ? (string)cboxSewMirror.SelectedItem : null;
