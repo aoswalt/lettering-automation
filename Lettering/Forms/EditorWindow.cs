@@ -339,6 +339,7 @@ namespace Lettering.Forms {
                 };
                 if(!editedConfig.Setup.Exports.ConvertAll(x => x.StyleRegex).Contains(newExport.StyleRegex)) {
                     editedConfig.Setup.Exports.Add(newExport);
+                    editedConfig.Setup.Exports.Sort((x, y) => String.Compare(x.StyleRegex, y.StyleRegex));
                     //TODO(adam): look into better method of updaing data
                     dataGridExports.DataSource = new BindingList<Data_Export>(editedConfig.Setup.Exports);
                 } else {
@@ -375,6 +376,7 @@ namespace Lettering.Forms {
                 };
                 if(!editedConfig.Setup.PathRules.ConvertAll(x => x.Id).Contains(newPathRule.Id)) {
                     editedConfig.Setup.PathRules.Add(newPathRule);
+                    editedConfig.Setup.PathRules.Sort((x, y) => String.Compare(x.Id, y.Id));
                     //TODO(adam): look into better method of updaing data
                     dataGridPathRules.DataSource = new BindingList<Data_PathRule>(editedConfig.Setup.PathRules);
                 } else {
