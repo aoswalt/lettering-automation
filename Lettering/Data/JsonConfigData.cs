@@ -8,7 +8,7 @@ namespace Lettering.Data {
     //NOTE(adam): cannot be structs because need to allow editing
     public class JsonConfigData {
         public Data_Setup Setup;
-        public Dictionary<string, Data_Style> Styles;
+        public SortedDictionary<string, Data_Style> Styles;
     }
 
     public class Data_Setup {
@@ -16,7 +16,7 @@ namespace Lettering.Data {
         public List<StringData> StylePrefixes;
         public List<Data_Trim> Trims;
         public List<Data_Export> Exports;
-        public Dictionary<string, Data_TypeData> TypeData;  //TODO(adam): change key to enum
+        public SortedDictionary<string, Data_TypeData> TypeData;  //TODO(adam): change key to enum
         public List<Data_PathRule> PathRules;
     }
 
