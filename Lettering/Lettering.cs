@@ -101,6 +101,12 @@ namespace Lettering {
                 LoadAllConfigs();
             }
 
+            //NOTE(adam): if still no config data, abort
+            if(Config == null) {
+                ErrorHandler.HandleError(ErrorType.Log, "Attempt to automate with no config data.");
+                return;
+            }
+
             CheckMacroSetup();
             if(!isSetupOk) { return; }
 
@@ -116,6 +122,12 @@ namespace Lettering {
         internal static void AutomateCsv() {
             if(Config == null) {
                 LoadAllConfigs();
+            }
+
+            //NOTE(adam): if still no config data, abort
+            if(Config == null) {
+                ErrorHandler.HandleError(ErrorType.Log, "Attempt to automate with no config data.");
+                return;
             }
 
             CheckMacroSetup();
@@ -141,6 +153,12 @@ namespace Lettering {
         internal static void ExportReport(LetteringType type, DateTime? startDate, DateTime? endDate) {
             if(Config == null) {
                 LoadAllConfigs();
+            }
+
+            //NOTE(adam): if still no config data, abort
+            if(Config == null) {
+                ErrorHandler.HandleError(ErrorType.Log, "Attempt to automate with no config data.");
+                return;
             }
 
             DataTable data = ReportReader.RunReport(startDate, endDate, type);
