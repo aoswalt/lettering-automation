@@ -171,6 +171,12 @@ namespace Lettering.Forms {
 
         private void buttonDone_Click(object sender, EventArgs e) {
             Config = editedConfig;
+            this.DialogResult = DialogResult.OK;
+            this.Close();
+        }
+
+        private void buttonCancel_Click(object sender, EventArgs e) {
+            this.DialogResult = DialogResult.Cancel;
             this.Close();
         }
 

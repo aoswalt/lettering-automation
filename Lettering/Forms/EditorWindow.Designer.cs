@@ -76,13 +76,14 @@
             this.buttonPathRulesAdd = new System.Windows.Forms.Button();
             this.dataGridPathRules = new System.Windows.Forms.DataGridView();
             this.tabStyles = new System.Windows.Forms.TabPage();
+            this.buttonStylesHelp = new System.Windows.Forms.Button();
+            this.buttonStylesRemove = new System.Windows.Forms.Button();
+            this.buttonStylesAdd = new System.Windows.Forms.Button();
             this.treeViewStyles = new System.Windows.Forms.TreeView();
             this.statusStripEditor = new System.Windows.Forms.StatusStrip();
             this.buttonDone = new System.Windows.Forms.Button();
             this.buttonInfo = new System.Windows.Forms.Button();
-            this.buttonStylesRemove = new System.Windows.Forms.Button();
-            this.buttonStylesAdd = new System.Windows.Forms.Button();
-            this.buttonStylesHelp = new System.Windows.Forms.Button();
+            this.buttonCancel = new System.Windows.Forms.Button();
             this.tabControlConfig.SuspendLayout();
             this.tabSetup.SuspendLayout();
             this.tabControlSetup.SuspendLayout();
@@ -701,6 +702,40 @@
             this.tabStyles.Text = "Styles";
             this.tabStyles.UseVisualStyleBackColor = true;
             // 
+            // buttonStylesHelp
+            // 
+            this.buttonStylesHelp.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.buttonStylesHelp.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.buttonStylesHelp.Location = new System.Drawing.Point(8, 455);
+            this.buttonStylesHelp.Name = "buttonStylesHelp";
+            this.buttonStylesHelp.Size = new System.Drawing.Size(28, 23);
+            this.buttonStylesHelp.TabIndex = 14;
+            this.buttonStylesHelp.Text = "?";
+            this.buttonStylesHelp.UseVisualStyleBackColor = true;
+            this.buttonStylesHelp.Click += new System.EventHandler(this.buttonStylesHelp_Click);
+            // 
+            // buttonStylesRemove
+            // 
+            this.buttonStylesRemove.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.buttonStylesRemove.Location = new System.Drawing.Point(8, 35);
+            this.buttonStylesRemove.Name = "buttonStylesRemove";
+            this.buttonStylesRemove.Size = new System.Drawing.Size(28, 23);
+            this.buttonStylesRemove.TabIndex = 7;
+            this.buttonStylesRemove.Text = "-";
+            this.buttonStylesRemove.UseVisualStyleBackColor = true;
+            this.buttonStylesRemove.Click += new System.EventHandler(this.buttonStylesRemove_Click);
+            // 
+            // buttonStylesAdd
+            // 
+            this.buttonStylesAdd.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.buttonStylesAdd.Location = new System.Drawing.Point(8, 6);
+            this.buttonStylesAdd.Name = "buttonStylesAdd";
+            this.buttonStylesAdd.Size = new System.Drawing.Size(28, 23);
+            this.buttonStylesAdd.TabIndex = 6;
+            this.buttonStylesAdd.Text = "+";
+            this.buttonStylesAdd.UseVisualStyleBackColor = true;
+            this.buttonStylesAdd.Click += new System.EventHandler(this.buttonStylesAdd_Click);
+            // 
             // treeViewStyles
             // 
             this.treeViewStyles.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
@@ -741,39 +776,16 @@
             this.buttonInfo.UseVisualStyleBackColor = true;
             this.buttonInfo.Click += new System.EventHandler(this.buttonInfo_Click);
             // 
-            // buttonStylesRemove
+            // buttonCancel
             // 
-            this.buttonStylesRemove.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.buttonStylesRemove.Location = new System.Drawing.Point(8, 35);
-            this.buttonStylesRemove.Name = "buttonStylesRemove";
-            this.buttonStylesRemove.Size = new System.Drawing.Size(28, 23);
-            this.buttonStylesRemove.TabIndex = 7;
-            this.buttonStylesRemove.Text = "-";
-            this.buttonStylesRemove.UseVisualStyleBackColor = true;
-            this.buttonStylesRemove.Click += new System.EventHandler(this.buttonStylesRemove_Click);
-            // 
-            // buttonStylesAdd
-            // 
-            this.buttonStylesAdd.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.buttonStylesAdd.Location = new System.Drawing.Point(8, 6);
-            this.buttonStylesAdd.Name = "buttonStylesAdd";
-            this.buttonStylesAdd.Size = new System.Drawing.Size(28, 23);
-            this.buttonStylesAdd.TabIndex = 6;
-            this.buttonStylesAdd.Text = "+";
-            this.buttonStylesAdd.UseVisualStyleBackColor = true;
-            this.buttonStylesAdd.Click += new System.EventHandler(this.buttonStylesAdd_Click);
-            // 
-            // buttonStylesHelp
-            // 
-            this.buttonStylesHelp.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.buttonStylesHelp.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.buttonStylesHelp.Location = new System.Drawing.Point(8, 455);
-            this.buttonStylesHelp.Name = "buttonStylesHelp";
-            this.buttonStylesHelp.Size = new System.Drawing.Size(28, 23);
-            this.buttonStylesHelp.TabIndex = 14;
-            this.buttonStylesHelp.Text = "?";
-            this.buttonStylesHelp.UseVisualStyleBackColor = true;
-            this.buttonStylesHelp.Click += new System.EventHandler(this.buttonStylesHelp_Click);
+            this.buttonCancel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.buttonCancel.Location = new System.Drawing.Point(93, 516);
+            this.buttonCancel.Name = "buttonCancel";
+            this.buttonCancel.Size = new System.Drawing.Size(75, 23);
+            this.buttonCancel.TabIndex = 4;
+            this.buttonCancel.Text = "Cancel";
+            this.buttonCancel.UseVisualStyleBackColor = true;
+            this.buttonCancel.Click += new System.EventHandler(this.buttonCancel_Click);
             // 
             // EditorWindow
             // 
@@ -781,6 +793,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(720, 568);
             this.ControlBox = false;
+            this.Controls.Add(this.buttonCancel);
             this.Controls.Add(this.buttonInfo);
             this.Controls.Add(this.buttonDone);
             this.Controls.Add(this.statusStripEditor);
@@ -871,5 +884,6 @@
         private System.Windows.Forms.Button buttonStylesHelp;
         private System.Windows.Forms.Button buttonStylesRemove;
         private System.Windows.Forms.Button buttonStylesAdd;
+        private System.Windows.Forms.Button buttonCancel;
     }
 }

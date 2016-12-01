@@ -25,10 +25,16 @@
         "Value": "PK"
       },
       {
+        "Value": "RHO"
+      },
+      {
         "Value": "RH"
       },
       {
         "Value": "RST"
+      },
+      {
+        "Value": "RSO"
       },
       {
         "Value": "RS"
@@ -38,6 +44,9 @@
       },
       {
         "Value": "ST"
+      },
+      {
+        "Value": "TSO"
       },
       {
         "Value": "TS"
@@ -4685,7 +4694,7 @@
       }
     },
     "TT2LL": {
-      "Stone": {
+      "Cut": {
         "Rule": "ignore"
       }
     },

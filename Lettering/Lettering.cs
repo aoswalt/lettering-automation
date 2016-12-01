@@ -37,15 +37,17 @@ namespace Lettering {
         }
 
         internal static void LoadAllConfigs() {
-            if(Directory.Exists(FilePaths.adjacentConfigFolderPath)
-                && File.Exists(FilePaths.adjacentConfigFolderPath + FilePaths.configFileName)) {
-                configFilePath = FilePaths.adjacentConfigFolderPath + FilePaths.configFileName;
-            } else if(Directory.Exists(FilePaths.networkConfigFolderPath)
-                && File.Exists(FilePaths.networkConfigFolderPath + FilePaths.configFileName)) {
-                configFilePath = FilePaths.networkConfigFolderPath + FilePaths.configFileName;
-            } else {
-                ErrorHandler.HandleError(ErrorType.Critical, "Could not find config files.");
-                return;
+            if(configFilePath == "") {
+                if(Directory.Exists(FilePaths.adjacentConfigFolderPath)
+                    && File.Exists(FilePaths.adjacentConfigFolderPath + FilePaths.configFileName)) {
+                    configFilePath = FilePaths.adjacentConfigFolderPath + FilePaths.configFileName;
+                } else if(Directory.Exists(FilePaths.networkConfigFolderPath)
+                    && File.Exists(FilePaths.networkConfigFolderPath + FilePaths.configFileName)) {
+                    configFilePath = FilePaths.networkConfigFolderPath + FilePaths.configFileName;
+                } else {
+                    ErrorHandler.HandleError(ErrorType.Critical, "Could not find config files.");
+                    return;
+                }
             }
 
             Config = JsonConvert.DeserializeObject<JsonConfigData>(File.ReadAllText(configFilePath));
@@ -61,8 +63,12 @@ namespace Lettering {
 
             EditorWindow editor = new EditorWindow(Config);
             editor.ShowDialog(mainWindow);
-            Config = editor.Config;
+            
+            if(editor.DialogResult != DialogResult.OK) {
+                return;
+            }
 
+            Config = editor.Config;
             File.WriteAllText(configFilePath, JsonConvert.SerializeObject(Config,
                 new JsonSerializerSettings() {
                     Formatting = Formatting.Indented,
@@ -244,6 +250,13 @@ namespace Lettering {
                     order.itemCode = trimmedCode;
                 }
 
+                if(GetStyleData(trimmedCode, type) == null) {
+                    ErrorHandler.HandleError(ErrorType.Log, $"No data for {trimmedCode} at Type: {type}");
+                    order.comment += "Wrong lettering type";
+                    ordersToLog.Add(order);
+                    continue;
+                }
+
                 string orderPath = FilePaths.ConstructNetworkOrderFilePath(order, type);
                 string newMadePath = FilePaths.ConstructSaveFilePath(order, type);
                 order.path = orderPath;
@@ -278,14 +291,16 @@ namespace Lettering {
 
                     if(IsNameStyle(order.itemCode, type)) {
                         //NOTE(adam): if following is name style and same order/voucher, skip processing current list
-                        if((i + 1 != orders.Count) && 
-                           (TryTrimStyleCode(orders[i + 1].itemCode).Length > 0) && 
-                           (IsNameStyle(orders[i + 1].itemCode, type)) &&
-                           (order.orderNumber == orders[i + 1].orderNumber) &&
-                           (order.voucherNumber == orders[i + 1].voucherNumber)) {
-                            order.comment += "Name style";
-                            ordersToLog.Add(order);
-                            continue;
+                        if(i + 1 != orders.Count) {
+                            string nextStyleCode = TryTrimStyleCode(orders[i + 1].itemCode);
+                            if((nextStyleCode.Length > 0) &&
+                               (IsNameStyle(nextStyleCode, type)) &&
+                               (order.orderNumber == orders[i + 1].orderNumber) &&
+                               (order.voucherNumber == orders[i + 1].voucherNumber)) {
+                                order.comment += "Name style";
+                                ordersToLog.Add(order);
+                                continue;
+                            }
                         }
                     }
 
