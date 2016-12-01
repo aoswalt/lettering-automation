@@ -67,7 +67,7 @@ namespace Lettering {
             //if need fonts
             if(needFontInstall) {
                 //NOTE(adam): open font folder and display message listing needed fonts
-                Process.Start(FilePaths.networkFontsFolderPath);
+                Process.Start(Lettering.Config.Setup.FilePaths.NetworkFontsFolderPath);
                 System.Threading.Thread.Sleep(200);     //NOTE(adam): delay to ensure dialog on top of folder window
                 Messenger.Show($"Font(s) need to be installed or updated:\n{neededFonts}", "Needed Fonts");
                 return false;

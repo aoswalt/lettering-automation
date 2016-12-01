@@ -76,6 +76,7 @@
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "FontCheckingWindow";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Checking Fonts";
             this.ResumeLayout(false);
             this.PerformLayout();

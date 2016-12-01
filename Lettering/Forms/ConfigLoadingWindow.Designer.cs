@@ -107,6 +107,7 @@
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "ConfigLoadingWindow";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Loading Configs";
             this.ResumeLayout(false);
             this.PerformLayout();

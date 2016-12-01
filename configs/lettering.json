@@ -1,0 +1,6024 @@
+{
+  "Setup": {
+    "FilePaths": {
+      "NetworkFontsFolderPath": "\\\\production\\Lettering\\Corel\\WORK FOLDERS\\VS Fonts\\",
+      "NetworkLibraryFilePath": "\\\\production\\Lettering\\Corel\\WORK FOLDERS\\Automation\\Automation.gms",
+      "InstalledLibraryFilePath": "C:\\Program Files\\Corel\\CorelDRAW Graphics Suite X7\\Draw\\GMS\\Automation.gms"
+    },
+    "StylePrefixes": [
+      {
+        "Value": "FL"
+      },
+      {
+        "Value": "HT"
+      },
+      {
+        "Value": "ID"
+      },
+      {
+        "Value": "MN"
+      },
+      {
+        "Value": "PF"
+      },
+      {
+        "Value": "PK"
+      },
+      {
+        "Value": "RHO"
+      },
+      {
+        "Value": "RH"
+      },
+      {
+        "Value": "RST"
+      },
+      {
+        "Value": "RSO"
+      },
+      {
+        "Value": "RS"
+      },
+      {
+        "Value": "SS"
+      },
+      {
+        "Value": "ST"
+      },
+      {
+        "Value": "TSO"
+      },
+      {
+        "Value": "TS"
+      },
+      {
+        "Value": "TT"
+      },
+      {
+        "Value": "VTT"
+      }
+    ],
+    "Trims": [
+      {
+        "Pattern": "-SAM$",
+        "_Comment": "Sample"
+      },
+      {
+        "Pattern": "-FW$",
+        "_Comment": "Fan Wear"
+      },
+      {
+        "Pattern": "-PS$",
+        "_Comment": "Pro Shop"
+      },
+      {
+        "Pattern": "PS$",
+        "_Comment": "Pro Shop"
+      },
+      {
+        "Pattern": "-SS$",
+        "_Comment": "Sold Separately"
+      },
+      {
+        "Pattern": "P\\d$",
+        "_Comment": "Package #"
+      },
+      {
+        "Pattern": "P$",
+        "_Comment": "Package"
+      },
+      {
+        "Pattern": "PKG$",
+        "_Comment": "Package"
+      },
+      {
+        "Pattern": "M$",
+        "_Comment": "Minimum Qty"
+      },
+      {
+        "Pattern": "-4L$",
+        "_Comment": "<none>"
+      },
+      {
+        "Pattern": "-8L$",
+        "_Comment": "<none>"
+      },
+      {
+        "Pattern": "OW$",
+        "_Comment": "Outerwear"
+      },
+      {
+        "Pattern": "\\d$",
+        "_Comment": "Number of Colors"
+      }
+    ],
+    "Exports": [
+      {
+        "StyleRegex": "^ID\\.+",
+        "FileType": "Eps"
+      },
+      {
+        "StyleRegex": "^PF\\.+",
+        "FileType": "Plt"
+      },
+      {
+        "StyleRegex": "^PKPFI\\.+",
+        "FileType": "Plt"
+      },
+      {
+        "StyleRegex": "^TTDARLMNB\\.+",
+        "FileType": "Plt"
+      },
+      {
+        "StyleRegex": "^TTDARLMNSF\\.+",
+        "FileType": "Plt"
+      },
+      {
+        "StyleRegex": "^TTLL3DAR\\.+",
+        "FileType": "Eps"
+      },
+      {
+        "StyleRegex": "^TTLLFBL\\.+",
+        "FileType": "Eps"
+      }
+    ],
+    "TypeData": {
+      "Cut": {
+        "Root": "\\\\production\\lettering\\1 CUT FILES\\",
+        "Extension": "cdr"
+      },
+      "Sew": {
+        "Root": "\\\\production\\lettering\\1 CUT FILES\\",
+        "Extension": "dst"
+      },
+      "Stone": {
+        "Root": "\\\\memap-nas01\\VSRhinestone\\Inline\\InlineStyles\\",
+        "Extension": "dsg"
+      }
+    },
+    "PathRules": [
+      {
+        "Id": "cut-sew_files",
+        "Rule": "cut-sew_files"
+      },
+      {
+        "Id": "cut-specific",
+        "Rule": "cut-specific"
+      },
+      {
+        "Id": "ignore",
+        "Rule": "ignore"
+      },
+      {
+        "Id": "mirror",
+        "Rule": "mirror"
+      },
+      {
+        "Id": "names",
+        "Rule": "names"
+      },
+      {
+        "Id": "style",
+        "Rule": "!type\\!style"
+      },
+      {
+        "Id": "style_CUT FILES",
+        "Rule": "!type\\!style\\CUT FILES"
+      },
+      {
+        "Id": "style_CUT FILES_cd",
+        "Rule": "!type\\!style\\CUT FILES\\!cd"
+      },
+      {
+        "Id": "style_SEW FILES",
+        "Rule": "!type\\!style\\SEW FILES"
+      },
+      {
+        "Id": "style_size",
+        "Rule": "!type\\!style\\!size"
+      },
+      {
+        "Id": "style_size_spec",
+        "Rule": "!type\\!style\\!size\\!spec"
+      },
+      {
+        "Id": "style_size_ya",
+        "Rule": "!type\\!style\\!size\\!ya"
+      },
+      {
+        "Id": "style_spec",
+        "Rule": "!type\\!style\\!spec"
+      },
+      {
+        "Id": "style_ya",
+        "Rule": "!type\\!style\\!ya"
+      }
+    ]
+  },
+  "Styles": {
+    "HPBRB": {
+      "Cut": {
+        "Rule": "style_CUT FILES"
+      },
+      "Sew": {
+        "Rule": "cut-sew_files"
+      }
+    },
+    "HPBXL": {
+      "Cut": {
+        "Rule": "style_CUT FILES"
+      },
+      "Sew": {
+        "Rule": "cut-sew_files"
+      }
+    },
+    "HPINU": {
+      "Cut": {
+        "Rule": "style_CUT FILES"
+      },
+      "Sew": {
+        "Rule": "cut-sew_files"
+      }
+    },
+    "HT2LLWD": {
+      "Cut": {
+        "Rule": "style_CUT FILES",
+        "CustomWordOrder": [
+          2,
+          1
+        ]
+      }
+    },
+    "HT2WFBL2": {
+      "Cut": {
+        "Rule": "ignore"
+      }
+    },
+    "HT3DNU": {
+      "Cut": {
+        "Rule": "ignore"
+      }
+    },
+    "HT3DNUI": {
+      "Cut": {
+        "Rule": "ignore"
+      }
+    },
+    "HT97UO2": {
+      "Cut": {
+        "Rule": "style_CUT FILES"
+      }
+    },
+    "HTADEC": {
+      "Cut": {
+        "Rule": "style_CUT FILES"
+      }
+    },
+    "HTAG": {
+      "Cut": {
+        "Rule": "style"
+      }
+    },
+    "HTALWAYS": {
+      "Cut": {
+        "Rule": "style_size_ya"
+      }
+    },
+    "HTARW2": {
+      "Cut": {
+        "Rule": "style_CUT FILES"
+      }
+    },
+    "HTBARSBL2": {
+      "Cut": {
+        "Rule": "style_spec"
+      }
+    },
+    "HTBARSFBL2": {
+      "Cut": {
+        "Rule": "style_spec"
+      }
+    },
+    "HTBARW": {
+      "Cut": {
+        "Rule": "style_CUT FILES"
+      }
+    },
+    "HTBARW2": {
+      "Cut": {
+        "Rule": "style_CUT FILES"
+      }
+    },
+    "HTBBC": {
+      "Cut": {
+        "Rule": "style_CUT FILES"
+      }
+    },
+    "HTBCRMN": {
+      "Cut": {
+        "Rule": "style_CUT FILES",
+        "CustomWordOrder": [
+          2
+        ]
+      },
+      "Sew": {
+        "Rule": "cut-sew_files",
+        "CustomWordOrder": [
+          1,
+          3
+        ]
+      }
+    },
+    "HTBEA": {
+      "Cut": {
+        "Rule": "ignore"
+      }
+    },
+    "HTBFB": {
+      "Cut": {
+        "Rule": "style_CUT FILES"
+      }
+    },
+    "HTBFBMN2": {
+      "Cut": {
+        "Rule": "style_CUT FILES",
+        "CustomWordOrder": [
+          2
+        ]
+      },
+      "Sew": {
+        "Rule": "cut-sew_files",
+        "CustomWordOrder": [
+          1,
+          3
+        ]
+      }
+    },
+    "HTBHV": {
+      "Cut": {
+        "Rule": "style_CUT FILES"
+      }
+    },
+    "HTBI": {
+      "Cut": {
+        "Rule": "style"
+      }
+    },
+    "HTBIGRAVMN": {
+      "Cut": {
+        "Rule": "style_CUT FILES",
+        "CustomWordOrder": [
+          1
+        ]
+      },
+      "Sew": {
+        "Rule": "cut-sew_files",
+        "CustomWordOrder": [
+          2
+        ]
+      }
+    },
+    "HTBIGSIW2": {
+      "Cut": {
+        "Rule": "style_CUT FILES",
+        "CustomWordOrder": [
+          2,
+          1
+        ]
+      }
+    },
+    "HTBIGSMN2": {
+      "Cut": {
+        "Rule": "style_CUT FILES",
+        "CustomWordOrder": [
+          1
+        ]
+      },
+      "Sew": {
+        "Rule": "cut-sew_files",
+        "CustomWordOrder": [
+          2
+        ]
+      }
+    },
+    "HTBL": {
+      "Cut": {
+        "Rule": "style_size_spec"
+      }
+    },
+    "HTBL2": {
+      "Cut": {
+        "Rule": "style_size_spec"
+      }
+    },
+    "HTBLDARL": {
+      "Cut": {
+        "Rule": "style_size"
+      }
+    },
+    "HTBLN": {
+      "Cut": {
+        "Rule": "names",
+        "MirroredStyle": "HTBL"
+      }
+    },
+    "HTBNKMN": {
+      "Cut": {
+        "Rule": "style_CUT FILES",
+        "CustomWordOrder": [
+          1
+        ]
+      },
+      "Sew": {
+        "Rule": "cut-sew_files",
+        "CustomWordOrder": [
+          2
+        ]
+      }
+    },
+    "HTBRADYMN": {
+      "Cut": {
+        "Rule": "style_CUT FILES",
+        "CustomWordOrder": [
+          1
+        ]
+      },
+      "Sew": {
+        "Rule": "cut-sew_files",
+        "CustomWordOrder": [
+          2
+        ]
+      }
+    },
+    "HTBRUSH2": {
+      "Cut": {
+        "Rule": "style_CUT FILES"
+      }
+    },
+    "HTBTOPMN2": {
+      "Cut": {
+        "Rule": "style_CUT FILES",
+        "CustomWordOrder": [
+          1
+        ]
+      },
+      "Sew": {
+        "Rule": "cut-sew_files",
+        "CustomWordOrder": [
+          2
+        ]
+      }
+    },
+    "HTBXPK": {
+      "Cut": {
+        "Rule": "style_CUT FILES"
+      }
+    },
+    "HTCBSLIMO2": {
+      "Cut": {
+        "Rule": "style_size_spec"
+      }
+    },
+    "HTCCH": {
+      "Cut": {
+        "Rule": "style"
+      }
+    },
+    "HTCCMN": {
+      "Cut": {
+        "Rule": "style_CUT FILES",
+        "CustomWordOrder": [
+          1
+        ]
+      },
+      "Sew": {
+        "Rule": "cut-sew_files",
+        "CustomWordOrder": [
+          2
+        ]
+      }
+    },
+    "HTCHEERMN": {
+      "Cut": {
+        "Rule": "ignore"
+      },
+      "Sew": {
+        "Rule": "cut-sew_files"
+      }
+    },
+    "HTCLOIS": {
+      "Cut": {
+        "Rule": "style_size"
+      }
+    },
+    "HTCRCI": {
+      "Cut": {
+        "Rule": "style_CUT FILES"
+      }
+    },
+    "HTCRCIRHMN": {
+      "Cut": {
+        "Rule": "mirror",
+        "MirroredStyle": "HTCRCLRVMN"
+      },
+      "Sew": {
+        "Rule": "mirror",
+        "MirroredStyle": "HTCRCLRVMN"
+      }
+    },
+    "HTCRCLL": {
+      "Cut": {
+        "Rule": "style_CUT FILES"
+      }
+    },
+    "HTCRCLLTS": {
+      "Cut": {
+        "Rule": "mirror",
+        "MirroredStyle": "HTCRCLL"
+      }
+    },
+    "HTCRCLRVMN": {
+      "Cut": {
+        "Rule": "ignore",
+        "CustomWordOrder": [
+          2
+        ]
+      },
+      "Sew": {
+        "Rule": "cut-sew_files",
+        "CustomWordOrder": [
+          1,
+          3
+        ]
+      }
+    },
+    "HTCRMN2": {
+      "Cut": {
+        "Rule": "style_CUT FILES",
+        "CustomWordOrder": [
+          1
+        ]
+      },
+      "Sew": {
+        "Rule": "cut-sew_files",
+        "CustomWordOrder": [
+          2
+        ]
+      }
+    },
+    "HTCRPK": {
+      "Cut": {
+        "Rule": "style_CUT FILES"
+      }
+    },
+    "HTCSWTL": {
+      "Cut": {
+        "Rule": "style_size"
+      }
+    },
+    "HTCSWTL2": {
+      "Cut": {
+        "Rule": "style_size"
+      }
+    },
+    "HTCVPK": {
+      "Cut": {
+        "Rule": "style_CUT FILES"
+      }
+    },
+    "HTDANCEMN": {
+      "Cut": {
+        "Rule": "ignore",
+        "CustomWordOrder": [
+          1
+        ]
+      },
+      "Sew": {
+        "Rule": "cut-sew_files"
+      }
+    },
+    "HTDARBAR": {
+      "Cut": {
+        "Rule": "style_CUT FILES_cd"
+      }
+    },
+    "HTDARL2": {
+      "Cut": {
+        "Rule": "style_size_spec"
+      }
+    },
+    "HTDARMBAR": {
+      "Cut": {
+        "Rule": "style_CUT FILES"
+      }
+    },
+    "HTDARMBAR2": {
+      "Cut": {
+        "Rule": "style_CUT FILES"
+      }
+    },
+    "HTDARMWD": {
+      "Cut": {
+        "Rule": "style_CUT FILES"
+      }
+    },
+    "HTDARO2": {
+      "Cut": {
+        "Rule": "style_size_spec"
+      }
+    },
+    "HTDHAN": {
+      "Cut": {
+        "Rule": "style_CUT FILES"
+      }
+    },
+    "HTDMD": {
+      "Cut": {
+        "Rule": "style_CUT FILES"
+      }
+    },
+    "HTDST2": {
+      "Cut": {
+        "Rule": "style_CUT FILES"
+      }
+    },
+    "HTEAG": {
+      "Cut": {
+        "Rule": "ignore"
+      }
+    },
+    "HTECMBWMN": {
+      "Cut": {
+        "Rule": "style_CUT FILES_cd",
+        "CustomWordOrder": [
+          2
+        ]
+      },
+      "Sew": {
+        "Rule": "ignore"
+      }
+    },
+    "HTECMFBL": {
+      "Cut": {
+        "Rule": "style_CUT FILES_cd",
+        "CustomWordOrder": [
+          2
+        ]
+      },
+      "Sew": {
+        "Rule": "ignore"
+      }
+    },
+    "HTFB29": {
+      "Cut": {
+        "Rule": "style_CUT FILES"
+      }
+    },
+    "HTFBI": {
+      "Cut": {
+        "Rule": "style_CUT FILES"
+      }
+    },
+    "HTFBL": {
+      "Cut": {
+        "Rule": "style_size_spec"
+      }
+    },
+    "HTFBL2": {
+      "Cut": {
+        "Rule": "style_size_spec"
+      }
+    },
+    "HTFBLBAR": {
+      "Cut": {
+        "Rule": "style_CUT FILES"
+      }
+    },
+    "HTFBLIWD": {
+      "Cut": {
+        "Rule": "style_size",
+        "CustomWordOrder": [
+          2,
+          1
+        ]
+      }
+    },
+    "HTFBLMN2": {
+      "Cut": {
+        "Rule": "style_CUT FILES",
+        "CustomWordOrder": [
+          1
+        ]
+      },
+      "Sew": {
+        "Rule": "cut-sew_files",
+        "CustomWordOrder": [
+          2
+        ]
+      }
+    },
+    "HTFBLN": {
+      "Cut": {
+        "Rule": "names",
+        "MirroredStyle": "HTFBL"
+      }
+    },
+    "HTFBLNU": {
+      "Cut": {
+        "Rule": "style_CUT FILES"
+      }
+    },
+    "HTFBO": {
+      "Cut": {
+        "Rule": "style_size"
+      }
+    },
+    "HTFBYD": {
+      "Cut": {
+        "Rule": "style_CUT FILES"
+      }
+    },
+    "HTFFBL": {
+      "Cut": {
+        "Rule": "style_size"
+      }
+    },
+    "HTFFBL2": {
+      "Cut": {
+        "Rule": "style_size"
+      }
+    },
+    "HTFFBLWD": {
+      "Cut": {
+        "Rule": "style_CUT FILES",
+        "CustomWordOrder": [
+          2,
+          1
+        ]
+      }
+    },
+    "HTFFBLWDNS": {
+      "Cut": {
+        "Rule": "mirror",
+        "MirroredStyle": "HTFFBLWD"
+      }
+    },
+    "HTFSTL": {
+      "Cut": {
+        "Rule": "style_CUT FILES_cd"
+      }
+    },
+    "HTFSTL2": {
+      "Cut": {
+        "Rule": "style_CUT FILES_cd"
+      }
+    },
+    "HTGALWAYS": {
+      "Cut": {
+        "Rule": "mirror",
+        "MirroredStyle": "HTALWAYS"
+      }
+    },
+    "HTGBIGRAVMN": {
+      "Cut": {
+        "Rule": "mirror",
+        "MirroredStyle": "HTBIGRAVMN"
+      }
+    },
+    "HTGBL": {
+      "Cut": {
+        "Rule": "mirror",
+        "MirroredStyle": "HTBL"
+      }
+    },
+    "HTGBLN": {
+      "Cut": {
+        "Rule": "mirror",
+        "MirroredStyle": "HTBLN"
+      }
+    },
+    "HTGBNKMN": {
+      "Cut": {
+        "Rule": "mirror",
+        "MirroredStyle": "HTBNKMN"
+      }
+    },
+    "HTGCLOIS": {
+      "Cut": {
+        "Rule": "mirror",
+        "MirroredStyle": "HTCLOIS"
+      }
+    },
+    "HTGCP": {
+      "Cut": {
+        "Rule": "style_CUT FILES"
+      }
+    },
+    "HTGDARBAR": {
+      "Cut": {
+        "Rule": "mirror",
+        "MirroredStyle": "HTDARBAR"
+      }
+    },
+    "HTGDMD": {
+      "Cut": {
+        "Rule": "mirror",
+        "MirroredStyle": "HTDMD"
+      }
+    },
+    "HTGEO2": {
+      "Cut": {
+        "Rule": "style_CUT FILES"
+      }
+    },
+    "HTGFB29": {
+      "Cut": {
+        "Rule": "mirror",
+        "MirroredStyle": "HTFB28"
+      }
+    },
+    "HTGFBL": {
+      "Cut": {
+        "Rule": "mirror",
+        "MirroredStyle": "HTFBL"
+      }
+    },
+    "HTGFBLN": {
+      "Cut": {
+        "Rule": "mirror",
+        "MirroredStyle": "HTFBLN"
+      }
+    },
+    "HTGFBYD": {
+      "Cut": {
+        "Rule": "mirror",
+        "MirroredStyle": "HTFBYD"
+      }
+    },
+    "HTGIHEART2": {
+      "Cut": {
+        "Rule": "mirror",
+        "MirroredStyle": "HTIHEART2"
+      }
+    },
+    "HTGLLBRMN": {
+      "Cut": {
+        "Rule": "mirror",
+        "MirroredStyle": "HTLLBRMN"
+      }
+    },
+    "HTGMASCOT": {
+      "Cut": {
+        "Rule": "mirror",
+        "MirroredStyle": "HTMAS"
+      }
+    },
+    "HTGNU": {
+      "Cut": {
+        "Rule": "mirror",
+        "MirroredStyle": "HTNU"
+      }
+    },
+    "HTGNUI": {
+      "Cut": {
+        "Rule": "mirror",
+        "MirroredStyle": "HTNU"
+      }
+    },
+    "HTGOFBL": {
+      "Cut": {
+        "Rule": "style_CUT FILES"
+      }
+    },
+    "HTGRAV": {
+      "Cut": {
+        "Rule": "mirror",
+        "MirroredStyle": "HTRAVMN"
+      }
+    },
+    "HTGRAV2": {
+      "Cut": {
+        "Rule": "mirror",
+        "MirroredStyle": "HTRAVMN2"
+      }
+    },
+    "HTGRAVMN": {
+      "Cut": {
+        "Rule": "mirror",
+        "MirroredStyle": "HTRAVMN"
+      }
+    },
+    "HTGRAVMN2": {
+      "Cut": {
+        "Rule": "mirror",
+        "MirroredStyle": "HTRAVMN2"
+      }
+    },
+    "HTGREEK": {
+      "Cut": {
+        "Rule": "style_CUT FILES"
+      }
+    },
+    "HTGSIW": {
+      "Cut": {
+        "Rule": "mirror",
+        "MirroredStyle": "HTSIW"
+      }
+    },
+    "HTGSIW2": {
+      "Cut": {
+        "Rule": "mirror",
+        "MirroredStyle": "HTSIW2"
+      }
+    },
+    "HTGTLYD2": {
+      "Cut": {
+        "Rule": "mirror",
+        "MirroredStyle": "HTTLYD2"
+      }
+    },
+    "HTGVLOGO": {
+      "Cut": {
+        "Rule": "mirror",
+        "MirroredStyle": "HTVLOGO"
+      }
+    },
+    "HTGVLOGO2": {
+      "Cut": {
+        "Rule": "mirror",
+        "MirroredStyle": "HTVLOGO2"
+      }
+    },
+    "HTGVONLY": {
+      "Cut": {
+        "Rule": "mirror",
+        "MirroredStyle": "HTVONLY"
+      }
+    },
+    "HTGVSLOGO": {
+      "Cut": {
+        "Rule": "ignore",
+        "MirroredStyle": "HTVSLOGO"
+      }
+    },
+    "HTGVSLOGO2": {
+      "Cut": {
+        "Rule": "ignore",
+        "MirroredStyle": "HTVSLOGO2"
+      }
+    },
+    "HTGWBL": {
+      "Cut": {
+        "Rule": "mirror",
+        "MirroredStyle": "HTWBL"
+      }
+    },
+    "HTGWFBL": {
+      "Cut": {
+        "Rule": "mirror",
+        "MirroredStyle": "HTWFBL"
+      }
+    },
+    "HTHEART2": {
+      "Cut": {
+        "Rule": "style_CUT FILES"
+      }
+    },
+    "HTHRTINT2": {
+      "Cut": {
+        "Rule": "style_CUT FILES"
+      }
+    },
+    "HTHSH": {
+      "Cut": {
+        "Rule": "style_CUT FILES"
+      }
+    },
+    "HTI2": {
+      "Cut": {
+        "Rule": "style_CUT FILES"
+      }
+    },
+    "HTIHEART2": {
+      "Cut": {
+        "Rule": "style_CUT FILES"
+      }
+    },
+    "HTINYD2": {
+      "Cut": {
+        "Rule": "style_CUT FILES_cd"
+      }
+    },
+    "HTISTBL": {
+      "Cut": {
+        "Rule": "style_CUT FILES"
+      }
+    },
+    "HTISTFBL": {
+      "Cut": {
+        "Rule": "style_CUT FILES"
+      }
+    },
+    "HTJERSEY": {
+      "Cut": {
+        "Rule": "mirror",
+        "MirroredStyle": "HTFBYD"
+      }
+    },
+    "HTLCR2": {
+      "Cut": {
+        "Rule": "style_CUT FILES"
+      }
+    },
+    "HTLLBNR2": {
+      "Cut": {
+        "Rule": "style_CUT FILES",
+        "CustomWordOrder": [
+          2,
+          1
+        ]
+      }
+    },
+    "HTLLBRMN": {
+      "Cut": {
+        "Rule": "style_CUT FILES"
+      },
+      "Sew": {
+        "Rule": "cut-sew_files",
+        "CustomWordOrder": [
+          2
+        ]
+      }
+    },
+    "HTLLCART2": {
+      "Cut": {
+        "Rule": "style_CUT FILES"
+      }
+    },
+    "HTLLWD": {
+      "Cut": {
+        "Rule": "style_CUT FILES"
+      }
+    },
+    "HTMAS": {
+      "Cut": {
+        "Rule": "ignore"
+      }
+    },
+    "HTMAS2": {
+      "Cut": {
+        "Rule": "ignore"
+      }
+    },
+    "HTMASFBL": {
+      "Cut": {
+        "Rule": "style_CUT FILES"
+      }
+    },
+    "HTMBL": {
+      "Cut": {
+        "Rule": "style_CUT FILES"
+      }
+    },
+    "HTMBX": {
+      "Cut": {
+        "Rule": "style_CUT FILES"
+      }
+    },
+    "HTMEG": {
+      "Cut": {
+        "Rule": "ignore"
+      }
+    },
+    "HTMEGIRHMN": {
+      "Cut": {
+        "Rule": "mirror",
+        "MirroredStyle": "HTMEGRVOVMN"
+      },
+      "Sew": {
+        "Rule": "mirror",
+        "MirroredStyle": "HTMEGRVOVMN"
+      }
+    },
+    "HTMEGRVOVMN": {
+      "Cut": {
+        "Rule": "ignore",
+        "CustomWordOrder": [
+          2
+        ]
+      },
+      "Sew": {
+        "Rule": "cut-sew_files",
+        "CustomWordOrder": [
+          2
+        ]
+      }
+    },
+    "HTMFBL": {
+      "Cut": {
+        "Rule": "style_CUT FILES"
+      }
+    },
+    "HTMODBIO2": {
+      "Cut": {
+        "Rule": "style_size"
+      }
+    },
+    "HTMODBL2": {
+      "Cut": {
+        "Rule": "style_size"
+      }
+    },
+    "HTMODBLO2": {
+      "Cut": {
+        "Rule": "style_size"
+      }
+    },
+    "HTMPTL": {
+      "Cut": {
+        "Rule": "style_CUT FILES"
+      }
+    },
+    "HTMUS": {
+      "Cut": {
+        "Rule": "ignore"
+      }
+    },
+    "HTNU": {
+      "Cut": {
+        "Rule": "ignore"
+      }
+    },
+    "HTNU2": {
+      "Cut": {
+        "Rule": "ignore"
+      }
+    },
+    "HTNUI": {
+      "Cut": {
+        "Rule": "ignore"
+      }
+    },
+    "HTNUOI2": {
+      "Cut": {
+        "Rule": "ignore"
+      }
+    },
+    "HTNUOL": {
+      "Cut": {
+        "Rule": "ignore"
+      }
+    },
+    "HTNUOL2": {
+      "Cut": {
+        "Rule": "ignore"
+      }
+    },
+    "HTOFBO": {
+      "Cut": {
+        "Rule": "style_CUT FILES"
+      }
+    },
+    "HTOI2": {
+      "Cut": {
+        "Rule": "style_CUT FILES"
+      }
+    },
+    "HTPAN": {
+      "Cut": {
+        "Rule": "ignore"
+      }
+    },
+    "HTPAW": {
+      "Cut": {
+        "Rule": "ignore"
+      }
+    },
+    "HTPDRAVMN2": {
+      "Cut": {
+        "Rule": "style_CUT FILES",
+        "CustomWordOrder": [
+          2
+        ]
+      },
+      "Sew": {
+        "Rule": "cut-sew_files",
+        "CustomWordOrder": [
+          1,
+          3
+        ]
+      }
+    },
+    "HTPKTMN": {
+      "Cut": {
+        "Rule": "ignore"
+      },
+      "Sew": {
+        "Rule": "cut-sew_files"
+      }
+    },
+    "HTRAVMN": {
+      "Cut": {
+        "Rule": "style_CUT FILES",
+        "CustomWordOrder": [
+          1
+        ]
+      },
+      "Sew": {
+        "Rule": "cut-sew_files",
+        "CustomWordOrder": [
+          2
+        ]
+      }
+    },
+    "HTRAVMN2": {
+      "Cut": {
+        "Rule": "style_CUT FILES",
+        "CustomWordOrder": [
+          1
+        ]
+      },
+      "Sew": {
+        "Rule": "cut-sew_files",
+        "CustomWordOrder": [
+          2
+        ]
+      }
+    },
+    "HTRCKWL": {
+      "Cut": {
+        "Rule": "style_CUT FILES"
+      }
+    },
+    "HTSAMI": {
+      "Cut": {
+        "Rule": "style_size_spec"
+      }
+    },
+    "HTSCHEART2": {
+      "Cut": {
+        "Rule": "style_CUT FILES"
+      }
+    },
+    "HTSHBRADY": {
+      "Cut": {
+        "Rule": "style_CUT FILES"
+      }
+    },
+    "HTSHLEAP": {
+      "Cut": {
+        "Rule": "style_CUT FILES"
+      }
+    },
+    "HTSHMEG": {
+      "Cut": {
+        "Rule": "style_CUT FILES"
+      }
+    },
+    "HTSHSQSL": {
+      "Cut": {
+        "Rule": "style_CUT FILES"
+      }
+    },
+    "HTSIKEY": {
+      "Cut": {
+        "Rule": "mirror",
+        "MirroredStyle": "HTSKEY"
+      }
+    },
+    "HTSIW": {
+      "Cut": {
+        "Rule": "style_CUT FILES",
+        "CustomWordOrder": [
+          2,
+          1
+        ]
+      }
+    },
+    "HTSIW2": {
+      "Cut": {
+        "Rule": "style_CUT FILES",
+        "CustomWordOrder": [
+          2,
+          1
+        ]
+      }
+    },
+    "HTSKEY": {
+      "Cut": {
+        "Rule": "style_size"
+      }
+    },
+    "HTSLS": {
+      "Cut": {
+        "Rule": "ignore"
+      }
+    },
+    "HTSLS2": {
+      "Cut": {
+        "Rule": "ignore"
+      }
+    },
+    "HTSLSBL": {
+      "Cut": {
+        "Rule": "style_CUT FILES"
+      }
+    },
+    "HTSLSBL2": {
+      "Cut": {
+        "Rule": "style_CUT FILES"
+      }
+    },
+    "HTSLSFBL": {
+      "Cut": {
+        "Rule": "style_CUT FILES"
+      }
+    },
+    "HTSLSFBL2": {
+      "Cut": {
+        "Rule": "style_CUT FILES"
+      }
+    },
+    "HTSPCR2": {
+      "Cut": {
+        "Rule": "style_CUT FILES"
+      }
+    },
+    "HTSPILLS": {
+      "Cut": {
+        "Rule": "style_CUT FILES"
+      }
+    },
+    "HTSPIRIT": {
+      "Cut": {
+        "Rule": "style_CUT FILES"
+      }
+    },
+    "HTSPMN2": {
+      "Cut": {
+        "Rule": "style_CUT FILES",
+        "CustomWordOrder": [
+          1
+        ]
+      },
+      "Sew": {
+        "Rule": "cut-sew_files",
+        "CustomWordOrder": [
+          2
+        ]
+      }
+    },
+    "HTSPPK": {
+      "Cut": {
+        "Rule": "style_CUT FILES"
+      }
+    },
+    "HTSQSLFW": {
+      "Cut": {
+        "Rule": "style_CUT FILES"
+      }
+    },
+    "HTSQSLMN": {
+      "Cut": {
+        "Rule": "style_CUT FILES",
+        "CustomWordOrder": [
+          1
+        ]
+      },
+      "Sew": {
+        "Rule": "cut-sew_files",
+        "CustomWordOrder": [
+          2
+        ]
+      }
+    },
+    "HTSQSLMN2": {
+      "Cut": {
+        "Rule": "style_CUT FILES",
+        "CustomWordOrder": [
+          1
+        ]
+      },
+      "Sew": {
+        "Rule": "cut-sew_files",
+        "CustomWordOrder": [
+          2
+        ]
+      }
+    },
+    "HTSTKWBL": {
+      "Cut": {
+        "Rule": "style_CUT FILES"
+      }
+    },
+    "HTSTKWC": {
+      "Cut": {
+        "Rule": "style_CUT FILES"
+      }
+    },
+    "HTSTKWD": {
+      "Cut": {
+        "Rule": "style_CUT FILES"
+      }
+    },
+    "HTSTMN": {
+      "Cut": {
+        "Rule": "style_CUT FILES",
+        "CustomWordOrder": [
+          1
+        ]
+      },
+      "Sew": {
+        "Rule": "cut-sew_files",
+        "CustomWordOrder": [
+          2
+        ]
+      }
+    },
+    "HTSTPK2": {
+      "Cut": {
+        "Rule": "style_CUT FILES"
+      }
+    },
+    "HTSW": {
+      "Cut": {
+        "Rule": "style_CUT FILES"
+      }
+    },
+    "HTTHMN": {
+      "Cut": {
+        "Rule": "style_CUT FILES",
+        "CustomWordOrder": [
+          1
+        ]
+      },
+      "Sew": {
+        "Rule": "cut-sew_files",
+        "CustomWordOrder": [
+          2
+        ]
+      }
+    },
+    "HTTIFBL": {
+      "Cut": {
+        "Rule": "style_spec"
+      }
+    },
+    "HTTIG": {
+      "Cut": {
+        "Rule": "ignore"
+      }
+    },
+    "HTTLYD2": {
+      "Cut": {
+        "Rule": "style_CUT FILES"
+      }
+    },
+    "HTTRO": {
+      "Cut": {
+        "Rule": "ignore"
+      }
+    },
+    "HTUDPK": {
+      "Cut": {
+        "Rule": "style_CUT FILES"
+      }
+    },
+    "HTVLOGO": {
+      "Cut": {
+        "Rule": "ignore"
+      }
+    },
+    "HTVLOGO2": {
+      "Cut": {
+        "Rule": "ignore"
+      }
+    },
+    "HTVONLY": {
+      "Cut": {
+        "Rule": "ignore"
+      }
+    },
+    "HTVR": {
+      "Cut": {
+        "Rule": "style_CUT FILES"
+      }
+    },
+    "HTVSLOGO": {
+      "Cut": {
+        "Rule": "ignore"
+      }
+    },
+    "HTVSLOGO2": {
+      "Cut": {
+        "Rule": "ignore"
+      }
+    },
+    "HTVSTPM": {
+      "Cut": {
+        "Rule": "ignore"
+      }
+    },
+    "HTWBL": {
+      "Cut": {
+        "Rule": "ignore"
+      }
+    },
+    "HTWBL2": {
+      "Cut": {
+        "Rule": "ignore"
+      }
+    },
+    "HTWEARE": {
+      "Cut": {
+        "Rule": "style_spec"
+      }
+    },
+    "HTWFBL": {
+      "Cut": {
+        "Rule": "ignore"
+      }
+    },
+    "HTWFBL2": {
+      "Cut": {
+        "Rule": "ignore"
+      }
+    },
+    "IDAMODBL": {
+      "Cut": {
+        "Rule": "style_size"
+      }
+    },
+    "IDBL": {
+      "Cut": {
+        "Rule": "ignore"
+      }
+    },
+    "IDBLDARL": {
+      "Cut": {
+        "Rule": "style_size"
+      }
+    },
+    "IDBLN": {
+      "Cut": {
+        "Rule": "names",
+        "MirroredStyle": "IDBLN"
+      }
+    },
+    "IDCBBL": {
+      "Cut": {
+        "Rule": "style_size_spec"
+      }
+    },
+    "IDCBSLIM": {
+      "Cut": {
+        "Rule": "style_size_spec"
+      }
+    },
+    "IDCBWBL": {
+      "Cut": {
+        "Rule": "style_size_spec"
+      }
+    },
+    "IDDARL": {
+      "Cut": {
+        "Rule": "style_size"
+      }
+    },
+    "IDDARLB": {
+      "Cut": {
+        "Rule": "style_CUT FILES"
+      }
+    },
+    "IDDARMAS": {
+      "Cut": {
+        "Rule": "style_CUT FILES",
+        "CustomWordOrder": [
+          2,
+          1
+        ]
+      }
+    },
+    "IDDDAR": {
+      "Cut": {
+        "Rule": "style_size_spec"
+      }
+    },
+    "IDELITE": {
+      "Cut": {
+        "Rule": "style_size_spec"
+      }
+    },
+    "IDFBL": {
+      "Cut": {
+        "Rule": "ignore"
+      }
+    },
+    "IDFBL2CR": {
+      "Cut": {
+        "Rule": "style_CUT FILES"
+      }
+    },
+    "IDFBLIWD": {
+      "Cut": {
+        "Rule": "style_size",
+        "CustomWordOrder": [
+          2,
+          1
+        ]
+      }
+    },
+    "IDFBLN": {
+      "Cut": {
+        "Rule": "names",
+        "MirroredStyle": "IDFBLN"
+      }
+    },
+    "IDFFBL": {
+      "Cut": {
+        "Rule": "ignore"
+      }
+    },
+    "IDIMASBL": {
+      "Cut": {
+        "Rule": "style_CUT FILES"
+      }
+    },
+    "IDINTL": {
+      "Cut": {
+        "Rule": "style_size"
+      }
+    },
+    "IDINTL2": {
+      "Cut": {
+        "Rule": "mirror",
+        "MirroredStyle": "IDINTL"
+      }
+    },
+    "IDINTL3": {
+      "Cut": {
+        "Rule": "mirror",
+        "MirroredStyle": "IDINTL"
+      }
+    },
+    "IDL": {
+      "Cut": {
+        "Rule": "ignore"
+      }
+    },
+    "IDLL3DAR": {
+      "Cut": {
+        "Rule": "ignore"
+      }
+    },
+    "IDLLFBL": {
+      "Cut": {
+        "Rule": "ignore"
+      }
+    },
+    "IDMAS": {
+      "Cut": {
+        "Rule": "ignore"
+      }
+    },
+    "IDMAS3": {
+      "Cut": {
+        "Rule": "ignore"
+      }
+    },
+    "IDMASBL": {
+      "Cut": {
+        "Rule": "style_CUT FILES"
+      }
+    },
+    "IDMASFBL": {
+      "Cut": {
+        "Rule": "style_CUT FILES"
+      }
+    },
+    "IDMASFBL3": {
+      "Cut": {
+        "Rule": "style_CUT FILES"
+      }
+    },
+    "IDMODBI": {
+      "Cut": {
+        "Rule": "style_size"
+      }
+    },
+    "IDMODBL": {
+      "Cut": {
+        "Rule": "style_size"
+      }
+    },
+    "IDNUI": {
+      "Cut": {
+        "Rule": "ignore"
+      }
+    },
+    "IDNUOLBL": {
+      "Cut": {
+        "Rule": "style_size"
+      }
+    },
+    "IDSTILC": {
+      "Cut": {
+        "Rule": "style_size"
+      }
+    },
+    "IDSTKDAR": {
+      "Cut": {
+        "Rule": "style_CUT FILES"
+      }
+    },
+    "IDWBL": {
+      "Cut": {
+        "Rule": "ignore"
+      }
+    },
+    "IDWTL": {
+      "Cut": {
+        "Rule": "style_CUT FILES"
+      }
+    },
+    "MN2001": {
+      "Sew": {
+        "Rule": "style_size"
+      }
+    },
+    "MN2002": {
+      "Sew": {
+        "Rule": "style_size"
+      }
+    },
+    "MNAO": {
+      "Sew": {
+        "Rule": "style_SEW FILES"
+      }
+    },
+    "MNARCBIOW": {
+      "Sew": {
+        "Rule": "style_SEW FILES"
+      }
+    },
+    "MNARCI": {
+      "Sew": {
+        "Rule": "style_SEW FILES"
+      }
+    },
+    "MNB1": {
+      "Sew": {
+        "Rule": "ignore"
+      }
+    },
+    "MNB2": {
+      "Sew": {
+        "Rule": "ignore"
+      }
+    },
+    "MNB2N": {
+      "Sew": {
+        "Rule": "mirror",
+        "MirroredStyle": "MNB"
+      }
+    },
+    "MNBBAR": {
+      "Sew": {
+        "Rule": "style_SEW FILES"
+      }
+    },
+    "MNBDGS": {
+      "Sew": {
+        "Rule": "style_SEW FILES"
+      }
+    },
+    "MNBENWD": {
+      "Sew": {
+        "Rule": "style_SEW FILES"
+      }
+    },
+    "MNBL2N": {
+      "Sew": {
+        "Rule": "mirror",
+        "MirroredStyle": "MNBW1"
+      }
+    },
+    "MNBL2WD": {
+      "Sew": {
+        "Rule": "style_SEW FILES"
+      }
+    },
+    "MNBLC1": {
+      "Sew": {
+        "Rule": "ignore"
+      }
+    },
+    "MNBLC2": {
+      "Sew": {
+        "Rule": "ignore"
+      }
+    },
+    "MNBLECMOW": {
+      "Sew": {
+        "Rule": "style_SEW FILES"
+      }
+    },
+    "MNBLMSCT": {
+      "Sew": {
+        "Rule": "style_SEW FILES"
+      }
+    },
+    "MNBLN": {
+      "Sew": {
+        "Rule": "mirror",
+        "MirroredStyle": "MNBW1"
+      }
+    },
+    "MNBLNM": {
+      "Sew": {
+        "Rule": "mirror",
+        "MirroredStyle": "MNBW1"
+      }
+    },
+    "MNBN": {
+      "Sew": {
+        "Rule": "mirror",
+        "MirroredStyle": "MNB"
+      }
+    },
+    "MNBNCW": {
+      "Sew": {
+        "Rule": "mirror",
+        "MirroredStyle": "MNB"
+      }
+    },
+    "MNBNI": {
+      "Sew": {
+        "Rule": "mirror",
+        "MirroredStyle": "MNBWI"
+      }
+    },
+    "MNBNIM": {
+      "Sew": {
+        "Rule": "mirror",
+        "MirroredStyle": "MNBWI"
+      }
+    },
+    "MNBNM": {
+      "Sew": {
+        "Rule": "mirror",
+        "MirroredStyle": "MNB"
+      }
+    },
+    "MNBO": {
+      "Sew": {
+        "Rule": "ignore"
+      }
+    },
+    "MNBOBW": {
+      "Sew": {
+        "Rule": "style_SEW FILES"
+      }
+    },
+    "MNBOSL": {
+      "Sew": {
+        "Rule": "style_SEW FILES"
+      }
+    },
+    "MNBOYZ": {
+      "Sew": {
+        "Rule": "style_SEW FILES"
+      }
+    },
+    "MNBP1": {
+      "Sew": {
+        "Rule": "ignore"
+      }
+    },
+    "MNBRDG": {
+      "Sew": {
+        "Rule": "style_SEW FILES"
+      }
+    },
+    "MNBRDW": {
+      "Sew": {
+        "Rule": "style_SEW FILES"
+      }
+    },
+    "MNBROWD": {
+      "Sew": {
+        "Rule": "style_SEW FILES"
+      }
+    },
+    "MNBRUSH1": {
+      "Sew": {
+        "Rule": "ignore"
+      }
+    },
+    "MNBRUSH2": {
+      "Sew": {
+        "Rule": "ignore"
+      }
+    },
+    "MNBRWP": {
+      "Sew": {
+        "Rule": "ignore"
+      }
+    },
+    "MNBSF": {
+      "Sew": {
+        "Rule": "ignore"
+      }
+    },
+    "MNBSF2N": {
+      "Sew": {
+        "Rule": "mirror",
+        "MirroredStyle": "MNBSF"
+      }
+    },
+    "MNBSFN": {
+      "Sew": {
+        "Rule": "mirror",
+        "MirroredStyle": "MNBSF"
+      }
+    },
+    "MNBSFNM": {
+      "Sew": {
+        "Rule": "mirror",
+        "MirroredStyle": "MNBSF"
+      }
+    },
+    "MNBW1": {
+      "Sew": {
+        "Rule": "ignore"
+      }
+    },
+    "MNBW2": {
+      "Sew": {
+        "Rule": "ignore"
+      }
+    },
+    "MNBWECM": {
+      "Sew": {
+        "Rule": "style_SEW FILES"
+      }
+    },
+    "MNBWI": {
+      "Sew": {
+        "Rule": "ignore"
+      }
+    },
+    "MNBWP1": {
+      "Sew": {
+        "Rule": "ignore"
+      }
+    },
+    "MNCHRMEGEC": {
+      "Sew": {
+        "Rule": "ignore"
+      }
+    },
+    "MNCRCI2WDS": {
+      "Sew": {
+        "Rule": "style_SEW FILES"
+      }
+    },
+    "MNCRCIWDS": {
+      "Sew": {
+        "Rule": "mirror",
+        "MirroredStyle": "MNOVRUNDR"
+      }
+    },
+    "MNCRECM": {
+      "Sew": {
+        "Rule": "style_SEW FILES"
+      }
+    },
+    "MNCRMSC": {
+      "Sew": {
+        "Rule": "mirror",
+        "MirroredStyle": "MNCRECM"
+      }
+    },
+    "MNCRS": {
+      "Sew": {
+        "Rule": "style_SEW FILES"
+      }
+    },
+    "MNCURLZ": {
+      "Sew": {
+        "Rule": "style_SEW FILES"
+      }
+    },
+    "MNDAR": {
+      "Sew": {
+        "Rule": "style_SEW FILES"
+      }
+    },
+    "MNDARECM": {
+      "Sew": {
+        "Rule": "style_SEW FILES"
+      }
+    },
+    "MNDRAWD": {
+      "Sew": {
+        "Rule": "style_SEW FILES"
+      }
+    },
+    "MNDRAWDY": {
+      "Sew": {
+        "Rule": "style_SEW FILES"
+      }
+    },
+    "MNDST": {
+      "Sew": {
+        "Rule": "style_SEW FILES"
+      }
+    },
+    "MNECLAT": {
+      "Sew": {
+        "Rule": "style_SEW FILES"
+      }
+    },
+    "MNECMHI": {
+      "Sew": {
+        "Rule": "style_SEW FILES"
+      }
+    },
+    "MNECMI": {
+      "Sew": {
+        "Rule": "style_SEW FILES"
+      }
+    },
+    "MNEURO": {
+      "Sew": {
+        "Rule": "style_SEW FILES"
+      }
+    },
+    "MNFBBR": {
+      "Sew": {
+        "Rule": "style_SEW FILES",
+        "CustomWordOrder": [
+          2,
+          1
+        ]
+      }
+    },
+    "MNFBCR": {
+      "Sew": {
+        "Rule": "style_SEW FILES"
+      }
+    },
+    "MNFBKEYCR": {
+      "Sew": {
+        "Rule": "style_SEW FILES"
+      }
+    },
+    "MNFBKEYWD": {
+      "Sew": {
+        "Rule": "style_SEW FILES"
+      }
+    },
+    "MNFBL2WD": {
+      "Sew": {
+        "Rule": "style_SEW FILES"
+      }
+    },
+    "MNFBOBROW": {
+      "Sew": {
+        "Rule": "style_SEW FILES",
+        "CustomWordOrder": [
+          2,
+          1
+        ]
+      }
+    },
+    "MNGIRLZ": {
+      "Sew": {
+        "Rule": "style_SEW FILES"
+      }
+    },
+    "MNHASN": {
+      "Sew": {
+        "Rule": "mirror",
+        "MirroredStyle": "MNHASW"
+      }
+    },
+    "MNHASNM": {
+      "Sew": {
+        "Rule": "mirror",
+        "MirroredStyle": "MNHASW"
+      }
+    },
+    "MNHASW": {
+      "Sew": {
+        "Rule": "style_size"
+      }
+    },
+    "MNHB": {
+      "Sew": {
+        "Rule": "ignore"
+      }
+    },
+    "MNHBO2": {
+      "Sew": {
+        "Rule": "style_size"
+      }
+    },
+    "MNHBW": {
+      "Sew": {
+        "Rule": "ignore"
+      }
+    },
+    "MNHFBO2": {
+      "Sew": {
+        "Rule": "style_size"
+      }
+    },
+    "MNHOBO": {
+      "Sew": {
+        "Rule": "style_SEW FILES"
+      }
+    },
+    "MNIKEY": {
+      "Sew": {
+        "Rule": "mirror",
+        "MirroredStyle": "MNKEY"
+      }
+    },
+    "MNILC": {
+      "Sew": {
+        "Rule": "style_SEW FILES"
+      }
+    },
+    "MNILCO": {
+      "Sew": {
+        "Rule": "style_SEW FILES"
+      }
+    },
+    "MNIOLFB": {
+      "Sew": {
+        "Rule": "style_SEW FILES"
+      }
+    },
+    "MNIOW": {
+      "Sew": {
+        "Rule": "style_SEW FILES"
+      }
+    },
+    "MNIW": {
+      "Sew": {
+        "Rule": "style_SEW FILES"
+      }
+    },
+    "MNKEY": {
+      "Sew": {
+        "Rule": "style_size"
+      }
+    },
+    "MNKEYWD": {
+      "Sew": {
+        "Rule": "style_SEW FILES"
+      }
+    },
+    "MNKEYWDY": {
+      "Sew": {
+        "Rule": "style_SEW FILES"
+      }
+    },
+    "MNKIO": {
+      "Sew": {
+        "Rule": "style_SEW FILES"
+      }
+    },
+    "MNLLB": {
+      "Sew": {
+        "Rule": "style_SEW FILES",
+        "CustomWordOrder": [
+          2,
+          1
+        ]
+      }
+    },
+    "MNLLECM": {
+      "Sew": {
+        "Rule": "style_SEW FILES"
+      }
+    },
+    "MNMEGSW": {
+      "Sew": {
+        "Rule": "style_SEW FILES"
+      }
+    },
+    "MNMODBL": {
+      "Sew": {
+        "Rule": "style_size"
+      }
+    },
+    "MNMODBN": {
+      "Sew": {
+        "Rule": "mirror",
+        "MirroredStyle": "MNMODBW"
+      }
+    },
+    "MNMODBNM": {
+      "Sew": {
+        "Rule": "mirror",
+        "MirroredStyle": "MNMODBW"
+      }
+    },
+    "MNMODBW": {
+      "Sew": {
+        "Rule": "style_size"
+      }
+    },
+    "MNNL1": {
+      "Sew": {
+        "Rule": "ignore"
+      }
+    },
+    "MNNL2": {
+      "Sew": {
+        "Rule": "ignore"
+      }
+    },
+    "MNNW": {
+      "Sew": {
+        "Rule": "ignore"
+      }
+    },
+    "MNNW2": {
+      "Sew": {
+        "Rule": "ignore"
+      }
+    },
+    "MNOBMEG": {
+      "Sew": {
+        "Rule": "style_SEW FILES"
+      }
+    },
+    "MNOCI": {
+      "Sew": {
+        "Rule": "style_SEW FILES"
+      }
+    },
+    "MNODAR": {
+      "Sew": {
+        "Rule": "style_SEW FILES"
+      }
+    },
+    "MNOLS": {
+      "Sew": {
+        "Rule": "style_SEW FILES"
+      }
+    },
+    "MNOVRLP": {
+      "Sew": {
+        "Rule": "style_SEW FILES"
+      }
+    },
+    "MNOVRUNDR": {
+      "Sew": {
+        "Rule": "style_SEW FILES"
+      }
+    },
+    "MNOZ": {
+      "Sew": {
+        "Rule": "style_SEW FILES"
+      }
+    },
+    "MNPNK": {
+      "Sew": {
+        "Rule": "ignore"
+      }
+    },
+    "MNPRBLK": {
+      "Sew": {
+        "Rule": "style_SEW FILES"
+      }
+    },
+    "MNPRES": {
+      "Sew": {
+        "Rule": "style_SEW FILES"
+      }
+    },
+    "MNRAV": {
+      "Sew": {
+        "Rule": "style_SEW FILES"
+      }
+    },
+    "MNRETRO": {
+      "Sew": {
+        "Rule": "style_SEW FILES"
+      }
+    },
+    "MNRKBOW": {
+      "Sew": {
+        "Rule": "style_SEW FILES"
+      }
+    },
+    "MNRKWD": {
+      "Sew": {
+        "Rule": "style_SEW FILES"
+      }
+    },
+    "MNRKWDY": {
+      "Sew": {
+        "Rule": "style_SEW FILES"
+      }
+    },
+    "MNS1": {
+      "Sew": {
+        "Rule": "ignore"
+      }
+    },
+    "MNS2": {
+      "Sew": {
+        "Rule": "ignore"
+      }
+    },
+    "MNS2N": {
+      "Sew": {
+        "Rule": "mirror",
+        "MirroredStyle": "MNSW1"
+      }
+    },
+    "MNS2NNW": {
+      "Sew": {
+        "Rule": "mirror",
+        "MirroredStyle": "MNNW1"
+      }
+    },
+    "MNS3N": {
+      "Sew": {
+        "Rule": "mirror",
+        "MirroredStyle": "MNSW1"
+      }
+    },
+    "MNSBX": {
+      "Sew": {
+        "Rule": "style_SEW FILES"
+      }
+    },
+    "MNSCSU": {
+      "Sew": {
+        "Rule": "style_SEW FILES"
+      }
+    },
+    "MNSFL1": {
+      "Sew": {
+        "Rule": "style_size"
+      }
+    },
+    "MNSFL2": {
+      "Sew": {
+        "Rule": "style_size"
+      }
+    },
+    "MNSIKEY": {
+      "Sew": {
+        "Rule": "mirror",
+        "MirroredStyle": "MNSKEY"
+      }
+    },
+    "MNSKEY": {
+      "Sew": {
+        "Rule": "style_size"
+      }
+    },
+    "MNSLT1": {
+      "Sew": {
+        "Rule": "style_size"
+      }
+    },
+    "MNSLT2": {
+      "Sew": {
+        "Rule": "style_size"
+      }
+    },
+    "MNSN": {
+      "Sew": {
+        "Rule": "mirror",
+        "MirroredStyle": "MNSW1"
+      }
+    },
+    "MNSNBR": {
+      "Sew": {
+        "Rule": "mirror",
+        "MirroredStyle": "MNBRUSH1"
+      }
+    },
+    "MNSNBRM": {
+      "Sew": {
+        "Rule": "mirror",
+        "MirroredStyle": "MNBRUSH1"
+      }
+    },
+    "MNSNCW": {
+      "Sew": {
+        "Rule": "mirror",
+        "MirroredStyle": "MNSW1"
+      }
+    },
+    "MNSNM": {
+      "Sew": {
+        "Rule": "mirror",
+        "MirroredStyle": "MNSW1"
+      }
+    },
+    "MNSNNW": {
+      "Sew": {
+        "Rule": "mirror",
+        "MirroredStyle": "MNNW1"
+      }
+    },
+    "MNSNNWCW": {
+      "Sew": {
+        "Rule": "mirror",
+        "MirroredStyle": "MNNW1"
+      }
+    },
+    "MNSNNWM": {
+      "Sew": {
+        "Rule": "mirror",
+        "MirroredStyle": "MNNW1"
+      }
+    },
+    "MNSP1": {
+      "Sew": {
+        "Rule": "ignore"
+      }
+    },
+    "MNSPCR": {
+      "Sew": {
+        "Rule": "ignore"
+      }
+    },
+    "MNSPOL": {
+      "Sew": {
+        "Rule": "style_SEW FILES"
+      }
+    },
+    "MNSQMASOW": {
+      "Sew": {
+        "Rule": "style_SEW FILES"
+      }
+    },
+    "MNSQSL": {
+      "Sew": {
+        "Rule": "style_SEW FILES"
+      }
+    },
+    "MNSTARS": {
+      "Sew": {
+        "Rule": "style_SEW FILES"
+      }
+    },
+    "MNSTDRA": {
+      "Sew": {
+        "Rule": "style"
+      }
+    },
+    "MNSTKBL": {
+      "Sew": {
+        "Rule": "style_SEW FILES"
+      }
+    },
+    "MNSTKDAR": {
+      "Sew": {
+        "Rule": "style_SEW FILES"
+      }
+    },
+    "MNSTKFBL": {
+      "Sew": {
+        "Rule": "style_SEW FILES"
+      }
+    },
+    "MNSTKRL": {
+      "Sew": {
+        "Rule": "style_SEW FILES"
+      }
+    },
+    "MNSTKW": {
+      "Sew": {
+        "Rule": "style_SEW FILES"
+      }
+    },
+    "MNSTO": {
+      "Sew": {
+        "Rule": "style_SEW FILES"
+      }
+    },
+    "MNSTUNT2": {
+      "Sew": {
+        "Rule": "ignore"
+      }
+    },
+    "MNSW1": {
+      "Sew": {
+        "Rule": "ignore"
+      }
+    },
+    "MNSW2": {
+      "Sew": {
+        "Rule": "ignore"
+      }
+    },
+    "MNSWP1": {
+      "Sew": {
+        "Rule": "ignore"
+      }
+    },
+    "MNSWTL": {
+      "Sew": {
+        "Rule": "style_SEW FILES"
+      }
+    },
+    "MNTAR": {
+      "Sew": {
+        "Rule": "style_SEW FILES"
+      }
+    },
+    "MNTHI": {
+      "Sew": {
+        "Rule": "style_SEW FILES"
+      }
+    },
+    "MNWSTKBL": {
+      "Sew": {
+        "Rule": "style_SEW FILES"
+      }
+    },
+    "MNZNK": {
+      "Sew": {
+        "Rule": "style_SEW FILES"
+      }
+    },
+    "MNZURIN": {
+      "Sew": {
+        "Rule": "style_SEW FILES"
+      }
+    },
+    "PFBIGRAVMN": {
+      "Cut": {
+        "Rule": "style_CUT FILES",
+        "CustomWordOrder": [
+          1
+        ]
+      },
+      "Sew": {
+        "Rule": "cut-sew_files",
+        "CustomWordOrder": [
+          2,
+          1
+        ]
+      }
+    },
+    "PFBLOCK": {
+      "Cut": {
+        "Rule": "style_size_ya"
+      },
+      "Sew": {
+        "Rule": "cut-specific"
+      }
+    },
+    "PFBLOCKMN": {
+      "Cut": {
+        "Rule": "style_size",
+        "CustomWordOrder": [
+          1
+        ]
+      },
+      "Sew": {
+        "Rule": "cut-specific"
+      }
+    },
+    "PFBNK": {
+      "Cut": {
+        "Rule": "style_size_ya"
+      },
+      "Sew": {
+        "Rule": "cut-specific"
+      }
+    },
+    "PFBNK2": {
+      "Cut": {
+        "Rule": "style_size"
+      },
+      "Sew": {
+        "Rule": "cut-specific"
+      }
+    },
+    "PFBNKI": {
+      "Cut": {
+        "Rule": "mirror",
+        "MirroredStyle": "PFBNK"
+      },
+      "Sew": {
+        "Rule": "mirror",
+        "MirroredStyle": "PFBNK"
+      }
+    },
+    "PFBNKMN": {
+      "Cut": {
+        "Rule": "style_size"
+      },
+      "Sew": {
+        "Rule": "cut-specific"
+      }
+    },
+    "PFBNKMN2": {
+      "Cut": {
+        "Rule": "style_size"
+      },
+      "Sew": {
+        "Rule": "cut-specific"
+      }
+    },
+    "PFBNKSPLIT": {
+      "Cut": {
+        "Rule": "style_size"
+      },
+      "Sew": {
+        "Rule": "cut-specific"
+      }
+    },
+    "PFBOYZ": {
+      "Cut": {
+        "Rule": "style_size"
+      },
+      "Sew": {
+        "Rule": "cut-specific"
+      }
+    },
+    "PFCHEERMN": {
+      "Cut": {
+        "Rule": "ignore"
+      },
+      "Sew": {
+        "Rule": "cut-sew_files"
+      }
+    },
+    "PFCND": {
+      "Cut": {
+        "Rule": "style_size_ya"
+      },
+      "Sew": {
+        "Rule": "cut-specific"
+      }
+    },
+    "PFCPR": {
+      "Cut": {
+        "Rule": "style_size_ya"
+      },
+      "Sew": {
+        "Rule": "cut-specific"
+      }
+    },
+    "PFCPR2": {
+      "Cut": {
+        "Rule": "style_size"
+      },
+      "Sew": {
+        "Rule": "cut-specific"
+      }
+    },
+    "PFCPRBTMMN": {
+      "Cut": {
+        "Rule": "style_CUT FILES",
+        "CustomWordOrder": [
+          1
+        ]
+      },
+      "Sew": {
+        "Rule": "cut-sew_files"
+      }
+    },
+    "PFCPRMN": {
+      "Cut": {
+        "Rule": "style_CUT FILES",
+        "CustomWordOrder": [
+          1
+        ]
+      },
+      "Sew": {
+        "Rule": "cut-sew_files"
+      }
+    },
+    "PFCPRMN2": {
+      "Cut": {
+        "Rule": "style_size",
+        "CustomWordOrder": [
+          1
+        ]
+      },
+      "Sew": {
+        "Rule": "cut-specific"
+      }
+    },
+    "PFCPRWD": {
+      "Cut": {
+        "Rule": "style_size_ya"
+      },
+      "Sew": {
+        "Rule": "cut-specific"
+      }
+    },
+    "PFCRFLMN": {
+      "Cut": {
+        "Rule": "ignore"
+      },
+      "Sew": {
+        "Rule": "cut-sew_files"
+      }
+    },
+    "PFCRLT2": {
+      "Cut": {
+        "Rule": "style_CUT FILES",
+        "CustomWordOrder": [
+          1
+        ]
+      },
+      "Sew": {
+        "Rule": "cut-sew_files"
+      }
+    },
+    "PFCRMN": {
+      "Cut": {
+        "Rule": "ignore"
+      },
+      "Sew": {
+        "Rule": "cut-sew_files"
+      }
+    },
+    "PFCRMN2": {
+      "Cut": {
+        "Rule": "ignore"
+      },
+      "Sew": {
+        "Rule": "cut-sew_files"
+      }
+    },
+    "PFCROMN": {
+      "Cut": {
+        "Rule": "style_CUT FILES"
+      },
+      "Sew": {
+        "Rule": "cut-sew_files"
+      }
+    },
+    "PFCURLZ": {
+      "Cut": {
+        "Rule": "style_size"
+      },
+      "Sew": {
+        "Rule": "cut-specific"
+      }
+    },
+    "PFDANCEMN": {
+      "Cut": {
+        "Rule": "style"
+      },
+      "Sew": {
+        "Rule": "cut-sew_files"
+      }
+    },
+    "PFDARB": {
+      "Cut": {
+        "Rule": "style_CUT FILES"
+      },
+      "Sew": {
+        "Rule": "cut-sew_files"
+      }
+    },
+    "PFDARBMN": {
+      "Cut": {
+        "Rule": "style_CUT FILES",
+        "CustomWordOrder": [
+          1
+        ]
+      },
+      "Sew": {
+        "Rule": "cut-sew_files"
+      }
+    },
+    "PFDAR-BMN": {
+      "Cut": {
+        "Rule": "style_CUT FILES",
+        "CustomWordOrder": [
+          1
+        ]
+      },
+      "Sew": {
+        "Rule": "cut-sew_files"
+      }
+    },
+    "PFDARL": {
+      "Cut": {
+        "Rule": "style_size_ya"
+      },
+      "Sew": {
+        "Rule": "cut-specific"
+      }
+    },
+    "PFDARL2": {
+      "Cut": {
+        "Rule": "style_size"
+      },
+      "Sew": {
+        "Rule": "cut-specific"
+      }
+    },
+    "PFDARLMN": {
+      "Cut": {
+        "Rule": "style_size",
+        "CustomWordOrder": [
+          1
+        ]
+      },
+      "Sew": {
+        "Rule": "cut-specific"
+      }
+    },
+    "PFDARLMN2": {
+      "Cut": {
+        "Rule": "style_size",
+        "CustomWordOrder": [
+          1
+        ]
+      },
+      "Sew": {
+        "Rule": "cut-specific"
+      }
+    },
+    "PFDINGO": {
+      "Cut": {
+        "Rule": "style_size"
+      },
+      "Sew": {
+        "Rule": "cut-specific"
+      }
+    },
+    "PFDMD": {
+      "Cut": {
+        "Rule": "style_size_ya"
+      },
+      "Sew": {
+        "Rule": "cut-specific"
+      }
+    },
+    "PFFBL": {
+      "Cut": {
+        "Rule": "style_size_ya"
+      },
+      "Sew": {
+        "Rule": "cut-specific"
+      }
+    },
+    "PFFBLSPLIT": {
+      "Cut": {
+        "Rule": "style_size"
+      },
+      "Sew": {
+        "Rule": "cut-specific"
+      }
+    },
+    "PFFBMEGMN": {
+      "Cut": {
+        "Rule": "style_CUT FILES",
+        "CustomWordOrder": [
+          1
+        ]
+      },
+      "Sew": {
+        "Rule": "cut-sew_files"
+      }
+    },
+    "PFHEART": {
+      "Cut": {
+        "Rule": "style_CUT FILES"
+      },
+      "Sew": {
+        "Rule": "cut-sew_files"
+      }
+    },
+    "PFHIP": {
+      "Cut": {
+        "Rule": "style_size"
+      },
+      "Sew": {
+        "Rule": "cut-specific"
+      }
+    },
+    "PFHOBO": {
+      "Cut": {
+        "Rule": "style_size_ya"
+      },
+      "Sew": {
+        "Rule": "cut-specific"
+      }
+    },
+    "PFHOBOMN": {
+      "Cut": {
+        "Rule": "style_size",
+        "CustomWordOrder": [
+          1
+        ]
+      },
+      "Sew": {
+        "Rule": "cut-specific"
+      }
+    },
+    "PFHOBOSPLIT": {
+      "Cut": {
+        "Rule": "style_size"
+      },
+      "Sew": {
+        "Rule": "cut-specific"
+      }
+    },
+    "PFLCBNK": {
+      "Sew": {
+        "Rule": "cut-specific"
+      }
+    },
+    "PFLCR": {
+      "Cut": {
+        "Rule": "style_CUT FILES"
+      },
+      "Sew": {
+        "Rule": "cut-sew_files"
+      }
+    },
+    "PFLCZNK": {
+      "Cut": {
+        "Rule": "style_size"
+      },
+      "Sew": {
+        "Rule": "cut-specific"
+      }
+    },
+    "PFLCZNKMN": {
+      "Cut": {
+        "Rule": "style_size",
+        "CustomWordOrder": [
+          1
+        ]
+      },
+      "Sew": {
+        "Rule": "cut-specific"
+      }
+    },
+    "PFLLBLMN": {
+      "Sew": {
+        "Rule": "cut-sew_files",
+        "CustomWordOrder": [
+          2,
+          1
+        ]
+      }
+    },
+    "PFLLBLW": {
+      "Sew": {
+        "Rule": "cut-specific",
+        "CustomWordOrder": [
+          2,
+          1
+        ]
+      }
+    },
+    "PFLLBRMN": {
+      "Cut": {
+        "Rule": "style_CUT FILES",
+        "CustomWordOrder": [
+          1
+        ]
+      },
+      "Sew": {
+        "Rule": "cut-sew_files",
+        "CustomWordOrder": [
+          2,
+          1
+        ]
+      }
+    },
+    "PFLLMN2": {
+      "Cut": {
+        "Rule": "style_CUT FILES",
+        "CustomWordOrder": [
+          1
+        ]
+      },
+      "Sew": {
+        "Rule": "cut-sew_files",
+        "CustomWordOrder": [
+          2,
+          1
+        ]
+      }
+    },
+    "PFLOWERCASEBNK": {
+      "Cut": {
+        "Rule": "style_size"
+      },
+      "Sew": {
+        "Rule": "cut-specific"
+      }
+    },
+    "PFMEG": {
+      "Cut": {
+        "Rule": "style_CUT FILES"
+      },
+      "Sew": {
+        "Rule": "cut-sew_files"
+      }
+    },
+    "PFOLMN": {
+      "Cut": {
+        "Rule": "style_CUT FILES",
+        "CustomWordOrder": [
+          3
+        ]
+      },
+      "Sew": {
+        "Rule": "cut-sew_files"
+      }
+    },
+    "PFPRS": {
+      "Cut": {
+        "Rule": "style_size"
+      },
+      "Sew": {
+        "Rule": "cut-specific"
+      }
+    },
+    "PFPUFF": {
+      "Cut": {
+        "Rule": "style_size"
+      },
+      "Sew": {
+        "Rule": "cut-specific"
+      }
+    },
+    "PFRAV": {
+      "Cut": {
+        "Rule": "mirror",
+        "MirroredStyle": "PFRAVMN"
+      },
+      "Sew": {
+        "Rule": "cut-specific"
+      }
+    },
+    "PFRAV2": {
+      "Cut": {
+        "Rule": "style_size"
+      },
+      "Sew": {
+        "Rule": "cut-specific"
+      }
+    },
+    "PFRAVMN": {
+      "Cut": {
+        "Rule": "style_size",
+        "CustomWordOrder": [
+          1
+        ]
+      },
+      "Sew": {
+        "Rule": "cut-specific"
+      }
+    },
+    "PFRAVMN2": {
+      "Cut": {
+        "Rule": "style_size",
+        "CustomWordOrder": [
+          1
+        ]
+      },
+      "Sew": {
+        "Rule": "cut-specific"
+      }
+    },
+    "PFRAVOUMN": {
+      "Cut": {
+        "Rule": "style_CUT FILES",
+        "CustomWordOrder": [
+          2
+        ]
+      },
+      "Sew": {
+        "Rule": "cut-sew_files"
+      }
+    },
+    "PFRKGLMN": {
+      "Cut": {
+        "Rule": "style_size",
+        "CustomWordOrder": [
+          1
+        ]
+      },
+      "Sew": {
+        "Rule": "cut-specific"
+      }
+    },
+    "PFRLCMN": {
+      "Cut": {
+        "Rule": "style_CUT FILES",
+        "CustomWordOrder": [
+          1
+        ]
+      },
+      "Sew": {
+        "Rule": "style_SEW FILES"
+      }
+    },
+    "PFROUND": {
+      "Cut": {
+        "Rule": "style_CUT FILES"
+      },
+      "Sew": {
+        "Rule": "cut-sew_files"
+      }
+    },
+    "PFROUNDMN": {
+      "Cut": {
+        "Rule": "style_CUT FILES",
+        "CustomWordOrder": [
+          1
+        ]
+      },
+      "Sew": {
+        "Rule": "cut-sew_files"
+      }
+    },
+    "PFSCHEARTMN": {
+      "Cut": {
+        "Rule": "style"
+      },
+      "Sew": {
+        "Rule": "cut-sew_files"
+      }
+    },
+    "PFSCHEARTMN2": {
+      "Cut": {
+        "Rule": "style"
+      },
+      "Sew": {
+        "Rule": "cut-sew_files"
+      }
+    },
+    "PFSPMN2": {
+      "Cut": {
+        "Rule": "style_CUT FILES",
+        "CustomWordOrder": [
+          1
+        ]
+      },
+      "Sew": {
+        "Rule": "cut-sew_files"
+      }
+    },
+    "PFSQSL": {
+      "Cut": {
+        "Rule": "style_CUT FILES"
+      },
+      "Sew": {
+        "Rule": "cut-sew_files"
+      }
+    },
+    "PFSQSL2": {
+      "Cut": {
+        "Rule": "style_CUT FILES"
+      },
+      "Sew": {
+        "Rule": "cut-sew_files"
+      }
+    },
+    "PFSQSLMN": {
+      "Cut": {
+        "Rule": "style_CUT FILES",
+        "CustomWordOrder": [
+          1
+        ]
+      },
+      "Sew": {
+        "Rule": "cut-sew_files"
+      }
+    },
+    "PFSQSLMN2": {
+      "Cut": {
+        "Rule": "style_CUT FILES",
+        "CustomWordOrder": [
+          1
+        ]
+      },
+      "Sew": {
+        "Rule": "cut-sew_files"
+      }
+    },
+    "PFTIMN": {
+      "Cut": {
+        "Rule": "style_CUT FILES",
+        "CustomWordOrder": [
+          1
+        ]
+      },
+      "Sew": {
+        "Rule": "cut-sew_files"
+      }
+    },
+    "PFTRCMN": {
+      "Cut": {
+        "Rule": "ignore"
+      },
+      "Sew": {
+        "Rule": "cut-sew_files"
+      }
+    },
+    "PFZNK": {
+      "Cut": {
+        "Rule": "style_size"
+      },
+      "Sew": {
+        "Rule": "cut-specific"
+      }
+    },
+    "PKCHEER": {
+      "Sew": {
+        "Rule": "ignore"
+      }
+    },
+    "PKCRC": {
+      "Sew": {
+        "Rule": "style_SEW FILES"
+      }
+    },
+    "PKCRCLMN": {
+      "Sew": {
+        "Rule": "style_SEW FILES"
+      }
+    },
+    "PKDANCE": {
+      "Sew": {
+        "Rule": "ignore"
+      }
+    },
+    "PKDIAGMN": {
+      "Sew": {
+        "Rule": "style_SEW FILES"
+      }
+    },
+    "PKECM": {
+      "Sew": {
+        "Rule": "style_SEW FILES"
+      }
+    },
+    "PKKEY": {
+      "Sew": {
+        "Rule": "style_SEW FILES"
+      }
+    },
+    "PKPFI": {
+      "Cut": {
+        "Rule": "style_CUT FILES"
+      },
+      "Sew": {
+        "Rule": "style_SEW FILES"
+      }
+    },
+    "PKSMN": {
+      "Sew": {
+        "Rule": "style_SEW FILES"
+      }
+    },
+    "PKSTDMN": {
+      "Sew": {
+        "Rule": "style_SEW FILES"
+      }
+    },
+    "RH2HARTI": {
+      "Stone": {
+        "Rule": "style"
+      }
+    },
+    "RHBBAR": {
+      "Stone": {
+        "Rule": "style"
+      }
+    },
+    "RHBBARN": {
+      "Stone": {
+        "Rule": "mirror",
+        "MirroredStyle": "RHBBAR"
+      }
+    },
+    "RHBCBBL2": {
+      "Stone": {
+        "Rule": "mirror",
+        "MirroredStyle": "TSBCBBL2"
+      }
+    },
+    "RHBCBBL3": {
+      "Stone": {
+        "Rule": "mirror",
+        "MirroredStyle": "TSBCBBL3"
+      }
+    },
+    "RHBCBSLIM2": {
+      "Stone": {
+        "Rule": "mirror",
+        "MirroredStyle": "TSBCBSLIM2"
+      }
+    },
+    "RHBCBSLIM3": {
+      "Stone": {
+        "Rule": "mirror",
+        "MirroredStyle": "TSBCBSLIM3"
+      }
+    },
+    "RHBCBWBL2": {
+      "Stone": {
+        "Rule": "mirror",
+        "MirroredStyle": "TSBCBWBL2"
+      }
+    },
+    "RHBCBWBL3": {
+      "Stone": {
+        "Rule": "mirror",
+        "MirroredStyle": "TSBCBWBL3"
+      }
+    },
+    "RHBEA": {
+      "Stone": {
+        "Rule": "ignore"
+      }
+    },
+    "RHBL": {
+      "Stone": {
+        "Rule": "style_size"
+      }
+    },
+    "RHBLDARW": {
+      "Stone": {
+        "Rule": "style"
+      }
+    },
+    "RHBLL3WD": {
+      "Stone": {
+        "Rule": "mirror",
+        "MirroredStyle": "TSBLL3WD"
+      }
+    },
+    "RHBLLWD": {
+      "Stone": {
+        "Rule": "mirror",
+        "MirroredStyle": "TSBLLWD"
+      }
+    },
+    "RHBMODBL2": {
+      "Stone": {
+        "Rule": "mirror",
+        "MirroredStyle": "TSBMODBL2"
+      }
+    },
+    "RHBMODBL3": {
+      "Stone": {
+        "Rule": "mirror",
+        "MirroredStyle": "TSBMODBL3"
+      }
+    },
+    "RHBN": {
+      "Stone": {
+        "Rule": "style"
+      }
+    },
+    "RHBOB": {
+      "Stone": {
+        "Rule": "style"
+      }
+    },
+    "RHBOBOS": {
+      "Stone": {
+        "Rule": "style"
+      }
+    },
+    "RHBRLL": {
+      "Stone": {
+        "Rule": "style"
+      }
+    },
+    "RHBRLLB": {
+      "Stone": {
+        "Rule": "style",
+        "CustomWordOrder": [
+          2,
+          1
+        ]
+      }
+    },
+    "RHBWN": {
+      "Stone": {
+        "Rule": "style"
+      }
+    },
+    "RHCBBLB": {
+      "Stone": {
+        "Rule": "mirror",
+        "MirroredStyle": "TSCBBLB"
+      }
+    },
+    "RHCCH": {
+      "Stone": {
+        "Rule": "ignore"
+      }
+    },
+    "RHCR": {
+      "Stone": {
+        "Rule": "mirror",
+        "MirroredStyle": "TSCR"
+      }
+    },
+    "RHCRCIMN": {
+      "Stone": {
+        "Rule": "style",
+        "CustomWordOrder": [
+          1
+        ]
+      }
+    },
+    "RHDANLEY": {
+      "Stone": {
+        "Rule": "style"
+      }
+    },
+    "RHDHAN": {
+      "Stone": {
+        "Rule": "style"
+      }
+    },
+    "RHDMD": {
+      "Stone": {
+        "Rule": "style"
+      }
+    },
+    "RHDMDVS": {
+      "Stone": {
+        "Rule": "style"
+      }
+    },
+    "RHEAG": {
+      "Stone": {
+        "Rule": "ignore"
+      }
+    },
+    "RHELITEB": {
+      "Stone": {
+        "Rule": "mirror",
+        "MirroredStyle": "TSELITEB"
+      }
+    },
+    "RHFBL": {
+      "Stone": {
+        "Rule": "style_size"
+      }
+    },
+    "RHFBOB": {
+      "Stone": {
+        "Rule": "style"
+      }
+    },
+    "RHFBOBOS": {
+      "Stone": {
+        "Rule": "style"
+      }
+    },
+    "RHFSTL": {
+      "Stone": {
+        "Rule": "style"
+      }
+    },
+    "RHGRADAR": {
+      "Stone": {
+        "Rule": "style"
+      }
+    },
+    "RHHASWB": {
+      "Stone": {
+        "Rule": "mirror",
+        "MirroredStyle": "TSHASWB"
+      }
+    },
+    "RHIOW": {
+      "Stone": {
+        "Rule": "style"
+      }
+    },
+    "RHLBLSP": {
+      "Stone": {
+        "Rule": "style"
+      }
+    },
+    "RHLFBLWD": {
+      "Stone": {
+        "Rule": "style"
+      }
+    },
+    "RHLL": {
+      "Stone": {
+        "Rule": "style"
+      }
+    },
+    "RHLLB": {
+      "Stone": {
+        "Rule": "style",
+        "CustomWordOrder": [
+          2,
+          1
+        ]
+      }
+    },
+    "RHLLCART": {
+      "Stone": {
+        "Rule": "style",
+        "CustomWordOrder": [
+          2,
+          1
+        ]
+      }
+    },
+    "RHLOVE": {
+      "Stone": {
+        "Rule": "style"
+      }
+    },
+    "RHLOVEBOUT": {
+      "Stone": {
+        "Rule": "style"
+      }
+    },
+    "RHMAS": {
+      "Stone": {
+        "Rule": "ignore"
+      }
+    },
+    "RHMEG": {
+      "Stone": {
+        "Rule": "ignore"
+      }
+    },
+    "RHMPTL": {
+      "Stone": {
+        "Rule": "style"
+      }
+    },
+    "RHMPTLW": {
+      "Stone": {
+        "Rule": "style"
+      }
+    },
+    "RHMUS": {
+      "Stone": {
+        "Rule": "ignore"
+      }
+    },
+    "RHNU": {
+      "Stone": {
+        "Rule": "style"
+      }
+    },
+    "RHO2LL": {
+      "Stone": {
+        "Rule": "style_size"
+      }
+    },
+    "RHO2LL4": {
+      "Stone": {
+        "Rule": "style_size"
+      }
+    },
+    "RHOASW": {
+      "Stone": {
+        "Rule": "style_size_spec"
+      }
+    },
+    "RHOBRLL": {
+      "Stone": {
+        "Rule": "style_size"
+      }
+    },
+    "RHOBRLL4": {
+      "Stone": {
+        "Rule": "style_size"
+      }
+    },
+    "RHOBRUSH": {
+      "Stone": {
+        "Rule": "style_size_spec"
+      }
+    },
+    "RHOCBAVGL": {
+      "Stone": {
+        "Rule": "style_size_spec"
+      }
+    },
+    "RHOCBBL": {
+      "Stone": {
+        "Rule": "style_size_spec"
+      }
+    },
+    "RHOCNR": {
+      "Stone": {
+        "Rule": "style_size_spec"
+      }
+    },
+    "RHODMDVS": {
+      "Stone": {
+        "Rule": "style_size_ya"
+      }
+    },
+    "RHOFFBL": {
+      "Stone": {
+        "Rule": "mirror",
+        "MirroredStyle": "TSOFFBL"
+      }
+    },
+    "RHOGRADAR": {
+      "Stone": {
+        "Rule": "style_size_spec"
+      }
+    },
+    "RHOGT": {
+      "Stone": {
+        "Rule": "style_size_spec"
+      }
+    },
+    "RHOL3": {
+      "Stone": {
+        "Rule": "mirror",
+        "MirroredStyle": "TSOL3"
+      }
+    },
+    "RHOLBLWD": {
+      "Stone": {
+        "Rule": "style_size"
+      }
+    },
+    "RHOLL3DAR": {
+      "Stone": {
+        "Rule": "style_size",
+        "CustomWordOrder": [
+          2,
+          1
+        ],
+        "Exceptions": [
+          {
+            "Conditions": [
+              "Spec<9.5"
+            ],
+            "Path": {
+              "Value": "!type\\!style\\!size\\8.5"
+            }
+          }
+        ]
+      }
+    },
+    "RHOLL3SKBT": {
+      "Stone": {
+        "Rule": "style_size",
+        "CustomWordOrder": [
+          2,
+          1
+        ],
+        "Exceptions": [
+          {
+            "Conditions": [
+              "Spec<9.5"
+            ],
+            "Path": {
+              "Value": "!type\\!style\\!size\\8.5"
+            }
+          }
+        ]
+      }
+    },
+    "RHOLL4": {
+      "Stone": {
+        "Rule": "style_size"
+      }
+    },
+    "RHOLLBLW": {
+      "Stone": {
+        "Rule": "style_size",
+        "CustomWordOrder": [
+          2,
+          1
+        ],
+        "Exceptions": [
+          {
+            "Conditions": [
+              "Spec<9.5"
+            ],
+            "Path": {
+              "Value": "!type\\!style\\!size\\8.5"
+            }
+          }
+        ]
+      }
+    },
+    "RHOLLDAR": {
+      "Stone": {
+        "Rule": "style_size",
+        "CustomWordOrder": [
+          2,
+          1
+        ],
+        "Exceptions": [
+          {
+            "Conditions": [
+              "Spec<9.5"
+            ],
+            "Path": {
+              "Value": "!type\\!style\\!size\\8.5"
+            }
+          }
+        ]
+      }
+    },
+    "RHOLLDWD": {
+      "Stone": {
+        "Rule": "style_size",
+        "CustomWordOrder": [
+          2,
+          1
+        ],
+        "Exceptions": [
+          {
+            "Conditions": [
+              "Spec<9.5"
+            ],
+            "Path": {
+              "Value": "!type\\!style\\!size\\8.5"
+            }
+          }
+        ]
+      }
+    },
+    "RHOLLFBL": {
+      "Stone": {
+        "Rule": "style_size",
+        "CustomWordOrder": [
+          2,
+          1
+        ],
+        "Exceptions": [
+          {
+            "Conditions": [
+              "Spec<9.5"
+            ],
+            "Path": {
+              "Value": "!type\\!style\\!size\\8.5"
+            }
+          }
+        ]
+      }
+    },
+    "RHOLLFBL4": {
+      "Stone": {
+        "Rule": "style_size",
+        "CustomWordOrder": [
+          2,
+          1
+        ],
+        "Exceptions": [
+          {
+            "Conditions": [
+              "Spec<9.5"
+            ],
+            "Path": {
+              "Value": "!type\\!style\\!size\\8.5"
+            }
+          }
+        ]
+      }
+    },
+    "RHOLLSKBT": {
+      "Stone": {
+        "Rule": "style_size",
+        "CustomWordOrder": [
+          2,
+          1
+        ],
+        "Exceptions": [
+          {
+            "Conditions": [
+              "Spec<9.5"
+            ],
+            "Path": {
+              "Value": "!type\\!style\\!size\\8.5"
+            }
+          }
+        ]
+      }
+    },
+    "RHOLLWD": {
+      "Stone": {
+        "Rule": "style_size",
+        "CustomWordOrder": [
+          2,
+          1
+        ],
+        "Exceptions": [
+          {
+            "Conditions": [
+              "Spec<9.5"
+            ],
+            "Path": {
+              "Value": "!type\\!style\\!size\\8.5"
+            }
+          }
+        ]
+      }
+    },
+    "RHONUI": {
+      "Stone": {
+        "Rule": "mirror",
+        "MirroredStyle": "TSONUI"
+      }
+    },
+    "RHONUOLBL": {
+      "Stone": {
+        "Rule": "style_size",
+        "CustomWordOrder": [
+          2
+        ]
+      }
+    },
+    "RHOOLL": {
+      "Stone": {
+        "Rule": "style_size"
+      }
+    },
+    "RHOONU": {
+      "Stone": {
+        "Rule": "style_size"
+      }
+    },
+    "RHOONUI2": {
+      "Stone": {
+        "Rule": "style_size"
+      }
+    },
+    "RHOPAW": {
+      "Stone": {
+        "Rule": "ignore"
+      }
+    },
+    "RHOSKBT": {
+      "Stone": {
+        "Rule": "style_size_spec"
+      }
+    },
+    "RHOSPILLS": {
+      "Stone": {
+        "Rule": "style_size_spec"
+      }
+    },
+    "RHPAN": {
+      "Stone": {
+        "Rule": "ignore"
+      }
+    },
+    "RHPAW": {
+      "Stone": {
+        "Rule": "ignore"
+      }
+    },
+    "RHRAVWD": {
+      "Stone": {
+        "Rule": "style"
+      }
+    },
+    "RHRCKWL": {
+      "Stone": {
+        "Rule": "style"
+      }
+    },
+    "RHSAMI": {
+      "Stone": {
+        "Rule": "style"
+      }
+    },
+    "RHSHBRADY": {
+      "Stone": {
+        "Rule": "style"
+      }
+    },
+    "RHSHSQSL": {
+      "Stone": {
+        "Rule": "style"
+      }
+    },
+    "RHSLS": {
+      "Stone": {
+        "Rule": "ignore"
+      }
+    },
+    "RHSLSBL": {
+      "Stone": {
+        "Rule": "style"
+      }
+    },
+    "RHSMPLX": {
+      "Stone": {
+        "Rule": "style"
+      }
+    },
+    "RHSMPLXN": {
+      "Stone": {
+        "Rule": "style"
+      }
+    },
+    "RHSMPLXW": {
+      "Stone": {
+        "Rule": "style"
+      }
+    },
+    "RHSMPLXWN": {
+      "Stone": {
+        "Rule": "style"
+      }
+    },
+    "RHSPILLS": {
+      "Stone": {
+        "Rule": "style"
+      }
+    },
+    "RHSPILLSW": {
+      "Stone": {
+        "Rule": "style"
+      }
+    },
+    "RHSW": {
+      "Stone": {
+        "Rule": "style"
+      }
+    },
+    "RHSWW": {
+      "Stone": {
+        "Rule": "style"
+      }
+    },
+    "RHTI": {
+      "Stone": {
+        "Rule": "mirror",
+        "MirroredStyle": "RSTTI"
+      }
+    },
+    "RHTIG": {
+      "Stone": {
+        "Rule": "ignore"
+      }
+    },
+    "RHTIOW": {
+      "Stone": {
+        "Rule": "mirror",
+        "MirroredStyle": "RSTTI"
+      }
+    },
+    "RHTRO": {
+      "Stone": {
+        "Rule": "ignore"
+      }
+    },
+    "RHVLOGO": {
+      "Stone": {
+        "Rule": "ignore"
+      }
+    },
+    "RSTBBAR": {
+      "Stone": {
+        "Rule": "mirror",
+        "MirroredStyle": "TSBBAR"
+      }
+    },
+    "RSTBL": {
+      "Stone": {
+        "Rule": "mirror",
+        "MirroredStyle": "TSBL"
+      }
+    },
+    "RSTBLDARW": {
+      "Stone": {
+        "Rule": "mirror",
+        "MirroredStyle": "TSBLDARW"
+      }
+    },
+    "RSTBN": {
+      "Stone": {
+        "Rule": "mirror",
+        "MirroredStyle": "TSBN"
+      }
+    },
+    "RSTBOB": {
+      "Stone": {
+        "Rule": "mirror",
+        "MirroredStyle": "TSBOB"
+      }
+    },
+    "RSTBRLL": {
+      "Stone": {
+        "Rule": "mirror",
+        "MirroredStyle": "TSBRLL"
+      }
+    },
+    "RSTBRLLB": {
+      "Stone": {
+        "Rule": "mirror",
+        "MirroredStyle": "TSBRLLB"
+      }
+    },
+    "RSTBWN": {
+      "Stone": {
+        "Rule": "mirror",
+        "MirroredStyle": "TSBWN"
+      }
+    },
+    "RSTCR": {
+      "Stone": {
+        "Rule": "style"
+      }
+    },
+    "RSTCRCIMN": {
+      "Stone": {
+        "Rule": "mirror",
+        "MirroredStyle": "TSCRCIMN"
+      }
+    },
+    "RSTDMD": {
+      "Stone": {
+        "Rule": "mirror",
+        "MirroredStyle": "TSDMD"
+      }
+    },
+    "RSTDMDVS": {
+      "Stone": {
+        "Rule": "mirror",
+        "MirroredStyle": "TSDMDVS"
+      }
+    },
+    "RSTFBL": {
+      "Stone": {
+        "Rule": "mirror",
+        "MirroredStyle": "TSFBL"
+      }
+    },
+    "RSTFBOB": {
+      "Stone": {
+        "Rule": "mirror",
+        "MirroredStyle": "TSFBOB"
+      }
+    },
+    "RSTFBOBOS": {
+      "Stone": {
+        "Rule": "mirror",
+        "MirroredStyle": "TSFBOBOS"
+      }
+    },
+    "RSTHT": {
+      "Stone": {
+        "Rule": "style"
+      }
+    },
+    "RSTIOW": {
+      "Stone": {
+        "Rule": "mirror",
+        "MirroredStyle": "TSIOW"
+      }
+    },
+    "RSTLBLSP": {
+      "Stone": {
+        "Rule": "mirror",
+        "MirroredStyle": "TSLBLSP"
+      }
+    },
+    "RSTLFBLWD": {
+      "Stone": {
+        "Rule": "mirror",
+        "MirroredStyle": "RHLFBLWD"
+      }
+    },
+    "RSTLL": {
+      "Stone": {
+        "Rule": "mirror",
+        "MirroredStyle": "TSLL"
+      }
+    },
+    "RSTLLB": {
+      "Stone": {
+        "Rule": "mirror",
+        "MirroredStyle": "TSLLB"
+      }
+    },
+    "RSTMAS": {
+      "Stone": {
+        "Rule": "mirror",
+        "MirroredStyle": "TSMAS"
+      }
+    },
+    "RSTMPTL": {
+      "Stone": {
+        "Rule": "mirror",
+        "MirroredStyle": "TSMPTL"
+      }
+    },
+    "RSTMPTLW": {
+      "Stone": {
+        "Rule": "mirror",
+        "MirroredStyle": "TSMPTLW"
+      }
+    },
+    "RSTPK": {
+      "Stone": {
+        "Rule": "style"
+      }
+    },
+    "RSTSMPLX": {
+      "Stone": {
+        "Rule": "mirror",
+        "MirroredStyle": "TSSMPLX"
+      }
+    },
+    "RSTSMPLXW": {
+      "Stone": {
+        "Rule": "mirror",
+        "MirroredStyle": "TSSMPLXW"
+      }
+    },
+    "RSTSP": {
+      "Stone": {
+        "Rule": "style"
+      }
+    },
+    "RSTSPILLS": {
+      "Stone": {
+        "Rule": "mirror",
+        "MirroredStyle": "TSSPILLS"
+      }
+    },
+    "RSTSPILLSW": {
+      "Stone": {
+        "Rule": "mirror",
+        "MirroredStyle": "TSSPILLSW"
+      }
+    },
+    "RSTSW": {
+      "Stone": {
+        "Rule": "mirror",
+        "MirroredStyle": "TSSW"
+      }
+    },
+    "RSTSWW": {
+      "Stone": {
+        "Rule": "mirror",
+        "MirroredStyle": "TSSWW"
+      }
+    },
+    "RSTTI": {
+      "Stone": {
+        "Rule": "style"
+      }
+    },
+    "RSTTIOW": {
+      "Stone": {
+        "Rule": "mirror",
+        "MirroredStyle": "RSTTI"
+      }
+    },
+    "RSTVONLY": {
+      "Stone": {
+        "Rule": "ignore"
+      }
+    },
+    "RVOMMPT": {
+      "Stone": {
+        "Rule": "style_ya"
+      }
+    },
+    "RVSLV": {
+      "Stone": {
+        "Rule": "ignore"
+      }
+    },
+    "TBRDCN": {
+      "Cut": {
+        "Rule": "style_size_spec"
+      }
+    },
+    "TSBBAR": {
+      "Stone": {
+        "Rule": "style"
+      }
+    },
+    "TSBBARN": {
+      "Stone": {
+        "Rule": "mirror",
+        "MirroredStyle": "TSBBAR"
+      }
+    },
+    "TSBCBBL2": {
+      "Stone": {
+        "Rule": "style_size_spec"
+      }
+    },
+    "TSBCBBL3": {
+      "Stone": {
+        "Rule": "style_size_spec"
+      }
+    },
+    "TSBCBSLIM2": {
+      "Stone": {
+        "Rule": "style_size_spec"
+      }
+    },
+    "TSBCBSLIM3": {
+      "Stone": {
+        "Rule": "style_size_spec"
+      }
+    },
+    "TSBCBWBL2": {
+      "Stone": {
+        "Rule": "style_size_spec"
+      }
+    },
+    "TSBCBWBL3": {
+      "Stone": {
+        "Rule": "style_size_spec"
+      }
+    },
+    "TSBEA": {
+      "Stone": {
+        "Rule": "ignore"
+      }
+    },
+    "TSBI": {
+      "Stone": {
+        "Rule": "style"
+      }
+    },
+    "TSBL": {
+      "Stone": {
+        "Rule": "style_size"
+      }
+    },
+    "TSBLDARW": {
+      "Stone": {
+        "Rule": "style"
+      }
+    },
+    "TSBLL3WD": {
+      "Stone": {
+        "Rule": "style_size",
+        "Exceptions": [
+          {
+            "Conditions": [
+              "Spec<9.5"
+            ],
+            "Path": {
+              "Value": "!type\\!style\\!size\\8.5"
+            }
+          }
+        ]
+      }
+    },
+    "TSBLLWD": {
+      "Stone": {
+        "Rule": "style_size",
+        "Exceptions": [
+          {
+            "Conditions": [
+              "Spec<9.5"
+            ],
+            "Path": {
+              "Value": "!type\\!style\\!size\\8.5"
+            }
+          }
+        ]
+      }
+    },
+    "TSBMODBL2": {
+      "Stone": {
+        "Rule": "style_size_spec"
+      }
+    },
+    "TSBMODBL3": {
+      "Stone": {
+        "Rule": "style_size_spec"
+      }
+    },
+    "TSBN": {
+      "Stone": {
+        "Rule": "style"
+      }
+    },
+    "TSBOB": {
+      "Stone": {
+        "Rule": "style"
+      }
+    },
+    "TSBRLL": {
+      "Stone": {
+        "Rule": "style"
+      }
+    },
+    "TSBRLLB": {
+      "Stone": {
+        "Rule": "style_size",
+        "CustomWordOrder": [
+          2,
+          1
+        ]
+      }
+    },
+    "TSBURST": {
+      "Stone": {
+        "Rule": "style"
+      }
+    },
+    "TSBWN": {
+      "Stone": {
+        "Rule": "style"
+      }
+    },
+    "TSBX": {
+      "Stone": {
+        "Rule": "style"
+      }
+    },
+    "TSCBBLB": {
+      "Stone": {
+        "Rule": "style_size_spec"
+      }
+    },
+    "TSCCH": {
+      "Stone": {
+        "Rule": "ignore"
+      }
+    },
+    "TSCR": {
+      "Stone": {
+        "Rule": "style"
+      }
+    },
+    "TSCRCIMN": {
+      "Stone": {
+        "Rule": "style"
+      }
+    },
+    "TSDAN": {
+      "Stone": {
+        "Rule": "ignore"
+      }
+    },
+    "TSDHAN": {
+      "Stone": {
+        "Rule": "style"
+      }
+    },
+    "TSDMD": {
+      "Stone": {
+        "Rule": "style"
+      }
+    },
+    "TSDMDVS": {
+      "Stone": {
+        "Rule": "style"
+      }
+    },
+    "TSELITEB": {
+      "Stone": {
+        "Rule": "style_size_spec"
+      }
+    },
+    "TSFBL": {
+      "Stone": {
+        "Rule": "style_size"
+      }
+    },
+    "TSFBOB": {
+      "Stone": {
+        "Rule": "style"
+      }
+    },
+    "TSFBOBOS": {
+      "Stone": {
+        "Rule": "style"
+      }
+    },
+    "TSHASWB": {
+      "Stone": {
+        "Rule": "style_size_spec"
+      }
+    },
+    "TSHEART2": {
+      "Stone": {
+        "Rule": "style"
+      }
+    },
+    "TSIOW": {
+      "Stone": {
+        "Rule": "style"
+      }
+    },
+    "TSLBLSP": {
+      "Stone": {
+        "Rule": "style"
+      }
+    },
+    "TSLFBLWD": {
+      "Stone": {
+        "Rule": "mirror",
+        "MirroredStyle": "RHLFBLWD"
+      }
+    },
+    "TSLL": {
+      "Stone": {
+        "Rule": "style"
+      }
+    },
+    "TSLLB": {
+      "Stone": {
+        "Rule": "style",
+        "CustomWordOrder": [
+          2,
+          1
+        ]
+      }
+    },
+    "TSLLCART": {
+      "Stone": {
+        "Rule": "style",
+        "CustomWordOrder": [
+          2,
+          1
+        ]
+      }
+    },
+    "TSLOVE": {
+      "Stone": {
+        "Rule": "style"
+      }
+    },
+    "TSMAS": {
+      "Stone": {
+        "Rule": "ignore"
+      }
+    },
+    "TSMEG": {
+      "Stone": {
+        "Rule": "ignore"
+      }
+    },
+    "TSMPTL": {
+      "Stone": {
+        "Rule": "style"
+      }
+    },
+    "TSMPTLW": {
+      "Stone": {
+        "Rule": "style"
+      }
+    },
+    "TSMUS": {
+      "Stone": {
+        "Rule": "ignore"
+      }
+    },
+    "TSNU": {
+      "Stone": {
+        "Rule": "ignore"
+      }
+    },
+    "TSOBRLL4": {
+      "Stone": {
+        "Rule": "style_size"
+      }
+    },
+    "TSOCBBL": {
+      "Stone": {
+        "Rule": "style_size_spec"
+      }
+    },
+    "TSOFFBL": {
+      "Stone": {
+        "Rule": "style_size"
+      }
+    },
+    "TSOGRADAR": {
+      "Stone": {
+        "Rule": "style_size_spec"
+      }
+    },
+    "TSOGT": {
+      "Stone": {
+        "Rule": "style_size_spec"
+      }
+    },
+    "TSOL3": {
+      "Stone": {
+        "Rule": "style_size"
+      }
+    },
+    "TSOLBLWD": {
+      "Stone": {
+        "Rule": "style_size"
+      }
+    },
+    "TSOLL3DAR": {
+      "Stone": {
+        "Rule": "style_size",
+        "CustomWordOrder": [
+          2,
+          1
+        ]
+      }
+    },
+    "TSOLL4": {
+      "Stone": {
+        "Rule": "style_size"
+      }
+    },
+    "TSOLLWD": {
+      "Stone": {
+        "Rule": "style_size",
+        "CustomWordOrder": [
+          2,
+          1
+        ],
+        "Exceptions": [
+          {
+            "Conditions": [
+              "Spec<9.5"
+            ],
+            "Path": {
+              "Value": "!type\\!style\\!size\\8.5"
+            }
+          }
+        ]
+      }
+    },
+    "TSONUI": {
+      "Stone": {
+        "Rule": "style_size"
+      }
+    },
+    "TSONUOLBL": {
+      "Stone": {
+        "Rule": "mirror",
+        "MirroredStyle": "RHONUOLBL"
+      }
+    },
+    "TSOONUI2": {
+      "Stone": {
+        "Rule": "ignore"
+      }
+    },
+    "TSOPAW": {
+      "Stone": {
+        "Rule": "ignore"
+      }
+    },
+    "TSPAN": {
+      "Stone": {
+        "Rule": "ignore"
+      }
+    },
+    "TSPAW": {
+      "Stone": {
+        "Rule": "ignore"
+      }
+    },
+    "TSRAVWD": {
+      "Stone": {
+        "Rule": "style"
+      }
+    },
+    "TSRCKWL": {
+      "Stone": {
+        "Rule": "style"
+      }
+    },
+    "TSSAMI": {
+      "Stone": {
+        "Rule": "style"
+      }
+    },
+    "TSSB": {
+      "Stone": {
+        "Rule": "ignore"
+      }
+    },
+    "TSSCHEART": {
+      "Stone": {
+        "Rule": "style"
+      }
+    },
+    "TSSHBRADY": {
+      "Stone": {
+        "Rule": "style"
+      }
+    },
+    "TSSHSQSL": {
+      "Stone": {
+        "Rule": "style"
+      }
+    },
+    "TSSLV": {
+      "Stone": {
+        "Rule": "ignore"
+      }
+    },
+    "TSSMPLX": {
+      "Stone": {
+        "Rule": "style"
+      }
+    },
+    "TSSMPLXW": {
+      "Stone": {
+        "Rule": "style"
+      }
+    },
+    "TSSPILLS": {
+      "Stone": {
+        "Rule": "style"
+      }
+    },
+    "TSSPILLSW": {
+      "Stone": {
+        "Rule": "style"
+      }
+    },
+    "TSSW": {
+      "Stone": {
+        "Rule": "style"
+      }
+    },
+    "TSSWW": {
+      "Stone": {
+        "Rule": "style"
+      }
+    },
+    "TSTI": {
+      "Stone": {
+        "Rule": "style"
+      }
+    },
+    "TSTIG": {
+      "Stone": {
+        "Rule": "ignore"
+      }
+    },
+    "TSTIOW": {
+      "Stone": {
+        "Rule": "mirror",
+        "MirroredStyle": "RSTTI"
+      }
+    },
+    "TSVLOGO": {
+      "Stone": {
+        "Rule": "ignore"
+      }
+    },
+    "TSVR": {
+      "Stone": {
+        "Rule": "style"
+      }
+    },
+    "TT2LL": {
+      "Cut": {
+        "Rule": "ignore"
+      }
+    },
+    "TT2LL4": {
+      "Cut": {
+        "Rule": "style_size"
+      }
+    },
+    "TT3DFBL": {
+      "Cut": {
+        "Rule": "ignore"
+      }
+    },
+    "TT3DFBLMEG": {
+      "Cut": {
+        "Rule": "style_size"
+      }
+    },
+    "TT97U": {
+      "Cut": {
+        "Rule": "ignore"
+      }
+    },
+    "TT97U4": {
+      "Cut": {
+        "Rule": "style_size"
+      }
+    },
+    "TT97UBVS": {
+      "Cut": {
+        "Rule": "style_size"
+      }
+    },
+    "TT97UW": {
+      "Cut": {
+        "Rule": "style_size"
+      }
+    },
+    "TTABW": {
+      "Cut": {
+        "Rule": "style_size_spec"
+      }
+    },
+    "TTABWC": {
+      "Cut": {
+        "Rule": "style_size_spec"
+      }
+    },
+    "TTABWCVS": {
+      "Cut": {
+        "Rule": "style_size_ya"
+      }
+    },
+    "TTADWAS": {
+      "Cut": {
+        "Rule": "style_size_spec"
+      }
+    },
+    "TTAMODBL": {
+      "Cut": {
+        "Rule": "style_size_spec"
+      }
+    },
+    "TTARC": {
+      "Cut": {
+        "Rule": "style_size_spec"
+      }
+    },
+    "TTASL": {
+      "Cut": {
+        "Rule": "style_size_spec"
+      }
+    },
+    "TTASW": {
+      "Cut": {
+        "Rule": "style_size_spec"
+      }
+    },
+    "TTASWVS": {
+      "Cut": {
+        "Rule": "style_size_ya"
+      }
+    },
+    "TTBL": {
+      "Cut": {
+        "Rule": "ignore"
+      }
+    },
+    "TTBLDAR": {
+      "Cut": {
+        "Rule": "style_size_spec"
+      }
+    },
+    "TTBLDARL": {
+      "Cut": {
+        "Rule": "style_size_spec"
+      }
+    },
+    "TTBLDARVS": {
+      "Cut": {
+        "Rule": "style_size_ya"
+      }
+    },
+    "TTBLDASH": {
+      "Cut": {
+        "Rule": "style_size_spec"
+      }
+    },
+    "TTBLFAN": {
+      "Cut": {
+        "Rule": "style_size"
+      }
+    },
+    "TTBLMEG": {
+      "Cut": {
+        "Rule": "ignore"
+      }
+    },
+    "TTBLN": {
+      "Cut": {
+        "Rule": "ignore"
+      }
+    },
+    "TTBLPAW": {
+      "Cut": {
+        "Rule": "ignore"
+      }
+    },
+    "TTBLSH": {
+      "Cut": {
+        "Rule": "ignore"
+      }
+    },
+    "TTBLSL": {
+      "Cut": {
+        "Rule": "ignore"
+      }
+    },
+    "TTBLSLIM": {
+      "Cut": {
+        "Rule": "ignore"
+      }
+    },
+    "TTBLSLIMN": {
+      "Cut": {
+        "Rule": "ignore"
+      }
+    },
+    "TTBR": {
+      "Cut": {
+        "Rule": "style_size"
+      }
+    },
+    "TTBRDG": {
+      "Cut": {
+        "Rule": "style_size_spec"
+      }
+    },
+    "TTBRDGS": {
+      "Cut": {
+        "Rule": "style_size_spec"
+      }
+    },
+    "TTBRDGSVS": {
+      "Cut": {
+        "Rule": "style_size_ya"
+      }
+    },
+    "TTBRDGVS": {
+      "Cut": {
+        "Rule": "style_size_ya"
+      }
+    },
+    "TTBRDMD": {
+      "Cut": {
+        "Rule": "style_size_spec"
+      }
+    },
+    "TTBRDMDVS": {
+      "Cut": {
+        "Rule": "style_size_ya"
+      }
+    },
+    "TTBRL": {
+      "Cut": {
+        "Rule": "ignore"
+      }
+    },
+    "TTBRLL": {
+      "Cut": {
+        "Rule": "ignore"
+      }
+    },
+    "TTBRLL4": {
+      "Cut": {
+        "Rule": "ignore"
+      }
+    },
+    "TTBRTLVS": {
+      "Cut": {
+        "Rule": "style_size_ya"
+      }
+    },
+    "TTBRUSH": {
+      "Cut": {
+        "Rule": "style_size_spec"
+      }
+    },
+    "TTBT": {
+      "Cut": {
+        "Rule": "style_size_spec"
+      }
+    },
+    "TTBWM": {
+      "Cut": {
+        "Rule": "style_CUT FILES"
+      }
+    },
+    "TTCASTL2": {
+      "Cut": {
+        "Rule": "ignore"
+      }
+    },
+    "TTCASTLVS": {
+      "Cut": {
+        "Rule": "ignore"
+      }
+    },
+    "TTCB97U": {
+      "Cut": {
+        "Rule": "style_size"
+      }
+    },
+    "TTCB97UB": {
+      "Cut": {
+        "Rule": "style_size"
+      }
+    },
+    "TTCB97UVS": {
+      "Cut": {
+        "Rule": "style_size"
+      }
+    },
+    "TTCBAVGL": {
+      "Cut": {
+        "Rule": "style_size_spec"
+      }
+    },
+    "TTCBBL": {
+      "Cut": {
+        "Rule": "style_size_spec"
+      }
+    },
+    "TTCBBLN": {
+      "Cut": {
+        "Rule": "mirror",
+        "MirroredStyle": "TTCBBL"
+      }
+    },
+    "TTCBBLSL": {
+      "Cut": {
+        "Rule": "style_size_spec"
+      }
+    },
+    "TTCBBLVS": {
+      "Cut": {
+        "Rule": "style_size_ya"
+      }
+    },
+    "TTCBBLW": {
+      "Cut": {
+        "Rule": "style_size_spec"
+      }
+    },
+    "TTCBBLWVS": {
+      "Cut": {
+        "Rule": "style_size_ya"
+      }
+    },
+    "TTCBCHV": {
+      "Cut": {
+        "Rule": "ignore"
+      }
+    },
+    "TTCBSLIM": {
+      "Cut": {
+        "Rule": "style_size_spec"
+      }
+    },
+    "TTCBSLIMN": {
+      "Cut": {
+        "Rule": "mirror",
+        "MirroredStyle": "TTCBSLIM"
+      }
+    },
+    "TTCBSLIMVS": {
+      "Cut": {
+        "Rule": "style_size_ya"
+      }
+    },
+    "TTCBWBL": {
+      "Cut": {
+        "Rule": "style_size_spec"
+      }
+    },
+    "TTCCHTL": {
+      "Cut": {
+        "Rule": "ignore"
+      }
+    },
+    "TTCCHTLVS": {
+      "Cut": {
+        "Rule": "ignore"
+      }
+    },
+    "TTCDRTL": {
+      "Cut": {
+        "Rule": "ignore"
+      }
+    },
+    "TTCDRTLVS": {
+      "Cut": {
+        "Rule": "ignore"
+      }
+    },
+    "TTCDTL": {
+      "Cut": {
+        "Rule": "ignore"
+      }
+    },
+    "TTCDTLVS": {
+      "Cut": {
+        "Rule": "ignore"
+      }
+    },
+    "TTCDTTL": {
+      "Cut": {
+        "Rule": "ignore"
+      }
+    },
+    "TTCDTTLVS": {
+      "Cut": {
+        "Rule": "ignore"
+      }
+    },
+    "TTCHTL": {
+      "Cut": {
+        "Rule": "ignore"
+      }
+    },
+    "TTCHV": {
+      "Cut": {
+        "Rule": "ignore"
+      }
+    },
+    "TTCHVI": {
+      "Cut": {
+        "Rule": "style_size_spec"
+      }
+    },
+    "TTCHVL": {
+      "Cut": {
+        "Rule": "style_size_spec"
+      }
+    },
+    "TTCN": {
+      "Cut": {
+        "Rule": "style_size_spec"
+      }
+    },
+    "TTCNR": {
+      "Cut": {
+        "Rule": "style_size_spec"
+      }
+    },
+    "TTCNRMPT": {
+      "Cut": {
+        "Rule": "style_size_spec"
+      }
+    },
+    "TTCRAZ": {
+      "Cut": {
+        "Rule": "style_size_spec"
+      }
+    },
+    "TTCRVCN": {
+      "Cut": {
+        "Rule": "style_size_spec"
+      }
+    },
+    "TTCSWTL": {
+      "Cut": {
+        "Rule": "style_size_spec"
+      }
+    },
+    "TTCSWTLVS": {
+      "Cut": {
+        "Rule": "style_size_ya"
+      }
+    },
+    "TTDAR": {
+      "Cut": {
+        "Rule": "style_size_spec"
+      }
+    },
+    "TTDARDS": {
+      "Cut": {
+        "Rule": "style_size_spec"
+      }
+    },
+    "TTDARL": {
+      "Cut": {
+        "Rule": "style_size_spec"
+      }
+    },
+    "TTDARLMNB": {
+      "Cut": {
+        "Rule": "style_size",
+        "CustomWordOrder": [
+          1
+        ]
+      },
+      "Sew": {
+        "Rule": "cut-specific"
+      }
+    },
+    "TTDARLMNSF": {
+      "Cut": {
+        "Rule": "style_CUT FILES",
+        "CustomWordOrder": [
+          1
+        ]
+      },
+      "Sew": {
+        "Rule": "ignore"
+      }
+    },
+    "TTDARLSPT": {
+      "Cut": {
+        "Rule": "mirror",
+        "MirroredStyle": "TTDARLMNSF"
+      }
+    },
+    "TTDARS": {
+      "Cut": {
+        "Rule": "style_size_spec"
+      }
+    },
+    "TTDARVS": {
+      "Cut": {
+        "Rule": "style_size_ya"
+      }
+    },
+    "TTDASH": {
+      "Cut": {
+        "Rule": "style_size_spec"
+      }
+    },
+    "TTDD": {
+      "Cut": {
+        "Rule": "style_size_spec"
+      }
+    },
+    "TTDDAR": {
+      "Cut": {
+        "Rule": "style_size_spec"
+      }
+    },
+    "TTDMD": {
+      "Cut": {
+        "Rule": "style_size"
+      }
+    },
+    "TTDMDSF": {
+      "Cut": {
+        "Rule": "style_size"
+      }
+    },
+    "TTDMDVS": {
+      "Cut": {
+        "Rule": "style_size_ya"
+      }
+    },
+    "TTDRA": {
+      "Cut": {
+        "Rule": "style_size_spec"
+      }
+    },
+    "TTDRAS": {
+      "Cut": {
+        "Rule": "style_size_spec"
+      }
+    },
+    "TTDRAVS": {
+      "Cut": {
+        "Rule": "style_size_ya"
+      }
+    },
+    "TTDRPC": {
+      "Cut": {
+        "Rule": "style_size"
+      }
+    },
+    "TTDRTL": {
+      "Cut": {
+        "Rule": "style"
+      }
+    },
+    "TTDTL": {
+      "Cut": {
+        "Rule": "style"
+      }
+    },
+    "TTDTTL": {
+      "Cut": {
+        "Rule": "style"
+      }
+    },
+    "TTELITE": {
+      "Cut": {
+        "Rule": "style_size_spec"
+      }
+    },
+    "TTFBL": {
+      "Cut": {
+        "Rule": "ignore"
+      }
+    },
+    "TTFBLFAN": {
+      "Cut": {
+        "Rule": "style_size"
+      }
+    },
+    "TTFBLM": {
+      "Cut": {
+        "Rule": "style_size",
+        "Exceptions": [
+          {
+            "Path": {
+              "Value": "!type\\!style\\!size\\!word1-!ecm2.cdr"
+            }
+          }
+        ]
+      }
+    },
+    "TTFBLN": {
+      "Cut": {
+        "Rule": "ignore"
+      }
+    },
+    "TTGRADAR": {
+      "Cut": {
+        "Rule": "style_size_spec"
+      }
+    },
+    "TTGRADARL": {
+      "Cut": {
+        "Rule": "style_size_spec"
+      }
+    },
+    "TTGRADARVS": {
+      "Cut": {
+        "Rule": "style_size_ya"
+      }
+    },
+    "TTGT": {
+      "Cut": {
+        "Rule": "style_size_spec"
+      }
+    },
+    "TTGTL": {
+      "Cut": {
+        "Rule": "style_size_spec"
+      }
+    },
+    "TTGTVS": {
+      "Cut": {
+        "Rule": "style_size_ya"
+      }
+    },
+    "TTHARC": {
+      "Cut": {
+        "Rule": "style_size_spec"
+      }
+    },
+    "TTHASW": {
+      "Cut": {
+        "Rule": "style_size_spec"
+      }
+    },
+    "TTHLSD": {
+      "Cut": {
+        "Rule": "style_size_spec"
+      }
+    },
+    "TTHSH": {
+      "Cut": {
+        "Rule": "ignore"
+      }
+    },
+    "TTILC": {
+      "Cut": {
+        "Rule": "style_size"
+      }
+    },
+    "TTILCW": {
+      "Cut": {
+        "Rule": "style_size_spec"
+      }
+    },
+    "TTINTL": {
+      "Cut": {
+        "Rule": "style_size"
+      }
+    },
+    "TTINTL2": {
+      "Cut": {
+        "Rule": "mirror",
+        "MirroredStyle": "TTINTL"
+      }
+    },
+    "TTINTL24": {
+      "Cut": {
+        "Rule": "mirror",
+        "MirroredStyle": "TTINTL4"
+      }
+    },
+    "TTINTL3": {
+      "Cut": {
+        "Rule": "mirror",
+        "MirroredStyle": "TTINTL"
+      }
+    },
+    "TTINTL34": {
+      "Cut": {
+        "Rule": "mirror",
+        "MirroredStyle": "TTINTL4"
+      }
+    },
+    "TTINTL4": {
+      "Cut": {
+        "Rule": "style_size"
+      }
+    },
+    "TTINV": {
+      "Cut": {
+        "Rule": "style_size_spec"
+      }
+    },
+    "TTKRAZ": {
+      "Cut": {
+        "Rule": "style_size"
+      }
+    },
+    "TTLBL3WD": {
+      "Cut": {
+        "Rule": "style_size",
+        "CustomWordOrder": [
+          2,
+          1
+        ]
+      }
+    },
+    "TTLBLWD": {
+      "Cut": {
+        "Rule": "style_size",
+        "CustomWordOrder": [
+          2,
+          1
+        ]
+      }
+    },
+    "TTLL": {
+      "Cut": {
+        "Rule": "ignore"
+      }
+    },
+    "TTLL3DAR": {
+      "Cut": {
+        "Rule": "style_size",
+        "CustomWordOrder": [
+          2,
+          1
+        ],
+        "Exceptions": [
+          {
+            "Conditions": [
+              "Spec<9.5"
+            ],
+            "Path": {
+              "Value": "!type\\!style\\!size\\8.5"
+            }
+          }
+        ]
+      }
+    },
+    "TTLL3SKBT": {
+      "Cut": {
+        "Rule": "style_size",
+        "CustomWordOrder": [
+          2,
+          1
+        ],
+        "Exceptions": [
+          {
+            "Conditions": [
+              "Spec<9.5"
+            ],
+            "Path": {
+              "Value": "!type\\!style\\!size\\8.5"
+            }
+          }
+        ]
+      }
+    },
+    "TTLL3WD": {
+      "Cut": {
+        "Rule": "style_size",
+        "CustomWordOrder": [
+          2,
+          1
+        ],
+        "Exceptions": [
+          {
+            "Conditions": [
+              "Spec<9.5"
+            ],
+            "Path": {
+              "Value": "!type\\!style\\!size\\8.5"
+            }
+          }
+        ]
+      }
+    },
+    "TTLL4": {
+      "Cut": {
+        "Rule": "style_size"
+      }
+    },
+    "TTLLBLW": {
+      "Cut": {
+        "Rule": "style_size",
+        "CustomWordOrder": [
+          2,
+          1
+        ],
+        "Exceptions": [
+          {
+            "Conditions": [
+              "Spec<9.5"
+            ],
+            "Path": {
+              "Value": "!type\\!style\\!size\\8.5"
+            }
+          }
+        ]
+      }
+    },
+    "TTLLDAR": {
+      "Cut": {
+        "Rule": "style_size",
+        "CustomWordOrder": [
+          2,
+          1
+        ],
+        "Exceptions": [
+          {
+            "Conditions": [
+              "Spec<9.5"
+            ],
+            "Path": {
+              "Value": "!type\\!style\\!size\\8.5"
+            }
+          }
+        ]
+      }
+    },
+    "TTLLDARVS": {
+      "Cut": {
+        "Rule": "style_size",
+        "CustomWordOrder": [
+          2,
+          1
+        ]
+      }
+    },
+    "TTLLDWD": {
+      "Cut": {
+        "Rule": "style_size",
+        "CustomWordOrder": [
+          2,
+          1
+        ],
+        "Exceptions": [
+          {
+            "Conditions": [
+              "Spec<9.5"
+            ],
+            "Path": {
+              "Value": "!type\\!style\\!size\\8.5"
+            }
+          }
+        ]
+      }
+    },
+    "TTLLFBL": {
+      "Cut": {
+        "Rule": "style_size",
+        "CustomWordOrder": [
+          2,
+          1
+        ],
+        "Exceptions": [
+          {
+            "Conditions": [
+              "Spec<9.5"
+            ],
+            "Path": {
+              "Value": "!type\\!style\\!size\\8.5"
+            }
+          }
+        ]
+      }
+    },
+    "TTLLFBL4": {
+      "Cut": {
+        "Rule": "style_size",
+        "CustomWordOrder": [
+          2,
+          1
+        ],
+        "Exceptions": [
+          {
+            "Conditions": [
+              "Spec<9.5"
+            ],
+            "Path": {
+              "Value": "!type\\!style\\!size\\8.5"
+            }
+          }
+        ]
+      }
+    },
+    "TTLLFBLVS": {
+      "Cut": {
+        "Rule": "style_size",
+        "CustomWordOrder": [
+          2,
+          1
+        ]
+      }
+    },
+    "TTLLSKBT": {
+      "Cut": {
+        "Rule": "style_size",
+        "CustomWordOrder": [
+          2,
+          1
+        ],
+        "Exceptions": [
+          {
+            "Conditions": [
+              "Spec<9.5"
+            ],
+            "Path": {
+              "Value": "!type\\!style\\!size\\8.5"
+            }
+          }
+        ]
+      }
+    },
+    "TTLLSKBTVS": {
+      "Cut": {
+        "Rule": "style_size",
+        "CustomWordOrder": [
+          2,
+          1
+        ]
+      }
+    },
+    "TTLLWD": {
+      "Cut": {
+        "Rule": "style_size",
+        "CustomWordOrder": [
+          2,
+          1
+        ],
+        "Exceptions": [
+          {
+            "Conditions": [
+              "Spec<9.5"
+            ],
+            "Path": {
+              "Value": "!type\\!style\\!size\\8.5"
+            }
+          }
+        ]
+      }
+    },
+    "TTLLWDVS": {
+      "Cut": {
+        "Rule": "style_size"
+      }
+    },
+    "TTLM": {
+      "Cut": {
+        "Rule": "ignore"
+      }
+    },
+    "TTLMEGDAR": {
+      "Cut": {
+        "Rule": "style_size"
+      }
+    },
+    "TTLMEGWD": {
+      "Cut": {
+        "Rule": "style_size"
+      }
+    },
+    "TTM": {
+      "Cut": {
+        "Rule": "ignore"
+      }
+    },
+    "TTMAS": {
+      "Cut": {
+        "Rule": "ignore"
+      }
+    },
+    "TTMEG": {
+      "Cut": {
+        "Rule": "ignore"
+      }
+    },
+    "TTMODBL": {
+      "Cut": {
+        "Rule": "style_size_spec"
+      }
+    },
+    "TTMPLF": {
+      "Cut": {
+        "Rule": "ignore"
+      }
+    },
+    "TTNCA": {
+      "Cut": {
+        "Rule": "ignore"
+      }
+    },
+    "TTNDA": {
+      "Cut": {
+        "Rule": "ignore"
+      }
+    },
+    "TTNU": {
+      "Cut": {
+        "Rule": "ignore"
+      }
+    },
+    "TTNUI": {
+      "Cut": {
+        "Rule": "ignore"
+      }
+    },
+    "TTOBLMAS": {
+      "Cut": {
+        "Rule": "style_size"
+      }
+    },
+    "TTOFOV": {
+      "Cut": {
+        "Rule": "style_size"
+      }
+    },
+    "TTORL": {
+      "Cut": {
+        "Rule": "ignore"
+      }
+    },
+    "TTOSH": {
+      "Cut": {
+        "Rule": "style_size_spec"
+      }
+    },
+    "TTOVAL": {
+      "Cut": {
+        "Rule": "style_size"
+      }
+    },
+    "TTPAW": {
+      "Cut": {
+        "Rule": "ignore"
+      }
+    },
+    "TTPAWBI": {
+      "Cut": {
+        "Rule": "style_CUT FILES"
+      }
+    },
+    "TTRAR": {
+      "Cut": {
+        "Rule": "style_size_spec"
+      }
+    },
+    "TTRARS": {
+      "Cut": {
+        "Rule": "style_size_spec"
+      }
+    },
+    "TTRBRDMD": {
+      "Cut": {
+        "Rule": "style_size_spec"
+      }
+    },
+    "TTRETFBL": {
+      "Cut": {
+        "Rule": "style_size"
+      }
+    },
+    "TTRGL": {
+      "Cut": {
+        "Rule": "style_size_spec"
+      }
+    },
+    "TTRGW": {
+      "Cut": {
+        "Rule": "style_size_spec"
+      }
+    },
+    "TTRKGL": {
+      "Cut": {
+        "Rule": "style_size"
+      }
+    },
+    "TTRLL": {
+      "Cut": {
+        "Rule": "ignore"
+      }
+    },
+    "TTRLL3WD": {
+      "Cut": {
+        "Rule": "style_size",
+        "CustomWordOrder": [
+          2,
+          1
+        ],
+        "Exceptions": [
+          {
+            "Conditions": [
+              "Spec<9.5"
+            ],
+            "Path": {
+              "Value": "!type\\!style\\!size\\8.5"
+            }
+          }
+        ]
+      }
+    },
+    "TTRLLWD": {
+      "Cut": {
+        "Rule": "style_size",
+        "CustomWordOrder": [
+          2,
+          1
+        ],
+        "Exceptions": [
+          {
+            "Conditions": [
+              "Spec<9.5"
+            ],
+            "Path": {
+              "Value": "!type\\!style\\!size\\8.5"
+            }
+          }
+        ]
+      }
+    },
+    "TTSKBRDG": {
+      "Cut": {
+        "Rule": "style_size_spec"
+      }
+    },
+    "TTSKBRDGVS": {
+      "Cut": {
+        "Rule": "style_size_ya"
+      }
+    },
+    "TTSKBT": {
+      "Cut": {
+        "Rule": "style_size_spec"
+      }
+    },
+    "TTSKBTVS": {
+      "Cut": {
+        "Rule": "style_size_ya"
+      }
+    },
+    "TTSL": {
+      "Cut": {
+        "Rule": "style_size"
+      }
+    },
+    "TTSLIM": {
+      "Cut": {
+        "Rule": "ignore"
+      }
+    },
+    "TTSLSH": {
+      "Cut": {
+        "Rule": "style_size"
+      }
+    },
+    "TTSLSTR": {
+      "Cut": {
+        "Rule": "style"
+      }
+    },
+    "TTSNG": {
+      "Cut": {
+        "Rule": "ignore"
+      }
+    },
+    "TTSPILLS": {
+      "Cut": {
+        "Rule": "style_size_spec"
+      }
+    },
+    "TTSQBT": {
+      "Cut": {
+        "Rule": "style_size_ya",
+        "Exceptions": [
+          {
+            "Conditions": [
+              "size=5"
+            ],
+            "Path": {
+              "Value": "!type\\!style\\5INCH\\GUYS"
+            }
+          },
+          {
+            "Conditions": [
+              "spec=9.5"
+            ],
+            "Path": {
+              "Value": "!type\\!style\\4INCH\\YOUTH"
+            }
+          }
+        ]
+      }
+    },
+    "TTST067": {
+      "Cut": {
+        "Rule": "style"
+      }
+    },
+    "TTST2DRA": {
+      "Cut": {
+        "Rule": "style_size"
+      }
+    },
+    "TTST3DRA": {
+      "Cut": {
+        "Rule": "style_size"
+      }
+    },
+    "TTSTDAR": {
+      "Cut": {
+        "Rule": "style_size"
+      }
+    },
+    "TTSTILC": {
+      "Cut": {
+        "Rule": "style_size"
+      }
+    },
+    "TTSTKALM": {
+      "Cut": {
+        "Rule": "style_size_spec"
+      }
+    },
+    "TTSTKBRDGWD": {
+      "Cut": {
+        "Rule": "style_size_spec"
+      }
+    },
+    "TTSTKSTR": {
+      "Cut": {
+        "Rule": "ignore"
+      }
+    },
+    "TTSTR": {
+      "Cut": {
+        "Rule": "ignore"
+      }
+    },
+    "TTSTRO": {
+      "Cut": {
+        "Rule": "ignore"
+      }
+    },
+    "TTSW": {
+      "Cut": {
+        "Rule": "style_size"
+      }
+    },
+    "TTSWM": {
+      "Cut": {
+        "Rule": "style_size"
+      }
+    },
+    "TTSWSH": {
+      "Cut": {
+        "Rule": "style_size"
+      }
+    },
+    "TTSWTL": {
+      "Cut": {
+        "Rule": "style_size"
+      }
+    },
+    "TTV": {
+      "Cut": {
+        "Rule": "style_size_spec"
+      }
+    },
+    "TTVBL": {
+      "Cut": {
+        "Rule": "style_size"
+      }
+    },
+    "TTVFBL": {
+      "Cut": {
+        "Rule": "style_size"
+      }
+    },
+    "TTVLOGO": {
+      "Cut": {
+        "Rule": "ignore"
+      }
+    },
+    "TTVLOGO2": {
+      "Cut": {
+        "Rule": "ignore"
+      }
+    },
+    "TTVMEG": {
+      "Cut": {
+        "Rule": "style_size"
+      }
+    },
+    "TTVSFLOGO": {
+      "Cut": {
+        "Rule": "ignore"
+      }
+    },
+    "TTVSFLOGO2": {
+      "Cut": {
+        "Rule": "ignore"
+      }
+    },
+    "TTVSLOGO": {
+      "Cut": {
+        "Rule": "ignore"
+      }
+    },
+    "TTVSLOGO2": {
+      "Cut": {
+        "Rule": "ignore"
+      }
+    },
+    "TTVVS": {
+      "Cut": {
+        "Rule": "style_size"
+      }
+    },
+    "TTWBL": {
+      "Cut": {
+        "Rule": "style_size"
+      }
+    },
+    "VTT97U": {
+      "Cut": {
+        "Rule": "ignore"
+      }
+    },
+    "VTTBLMEG": {
+      "Cut": {
+        "Rule": "ignore"
+      }
+    },
+    "VTTCB97U": {
+      "Cut": {
+        "Rule": "style_size"
+      }
+    },
+    "VTTCBBL": {
+      "Cut": {
+        "Rule": "style_size_spec"
+      }
+    },
+    "VTTCBSLIM": {
+      "Cut": {
+        "Rule": "style_size_spec"
+      }
+    },
+    "VTTDRA": {
+      "Cut": {
+        "Rule": "style_size_spec"
+      }
+    },
+    "VTTFBL": {
+      "Cut": {
+        "Rule": "ignore"
+      }
+    },
+    "VTTLL": {
+      "Cut": {
+        "Rule": "ignore"
+      }
+    },
+    "VTTRKGL": {
+      "Cut": {
+        "Rule": "ignore"
+      }
+    }
+  }
+}

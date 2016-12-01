@@ -51,6 +51,10 @@
     <StartupObject />
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Newtonsoft.Json, Version=8.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.8.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="PresentationCore" />
     <Reference Include="System" />
     <Reference Include="System.Data" />
@@ -60,18 +64,50 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Data\FieldData.cs" />
-    <Compile Include="Data\GlobalConfigData.cs" />
-    <Compile Include="Data\StyleConfigData.cs" />
-    <Compile Include="Data\ExceptionData.cs" />
-    <Compile Include="Data\ExportData.cs" />
+    <Compile Include="Data\JsonConfigData.cs" />
     <Compile Include="Data\FilePaths.cs" />
-    <Compile Include="Data\StylePathData.cs" />
     <Compile Include="Errors\ErrorHandler.cs" />
+    <Compile Include="Forms\AddExportWindow.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\AddExportWindow.Designer.cs">
+      <DependentUpon>AddExportWindow.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\AddPathRuleWindow.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\AddPathRuleWindow.Designer.cs">
+      <DependentUpon>AddPathRuleWindow.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\ConfigLoadingWindow.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Forms\ConfigLoadingWindow.Designer.cs">
       <DependentUpon>ConfigLoadingWindow.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\EditorWindow.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\EditorWindow.Designer.cs">
+      <DependentUpon>EditorWindow.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\EditStyleWindow.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\EditStyleWindow.Designer.cs">
+      <DependentUpon>EditStyleWindow.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\AddTrimWindow.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\AddTrimWindow.Designer.cs">
+      <DependentUpon>AddTrimWindow.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\InputWindow.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\InputWindow.Designer.cs">
+      <DependentUpon>InputWindow.cs</DependentUpon>
     </Compile>
     <Compile Include="Forms\ReportProgressWindow.cs">
       <SubType>Form</SubType>
@@ -135,8 +171,26 @@
     <EmbeddedResource Include="Forms\ActiveOrderWindow.resx">
       <DependentUpon>ActiveOrderWindow.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Forms\AddExportWindow.resx">
+      <DependentUpon>AddExportWindow.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\AddPathRuleWindow.resx">
+      <DependentUpon>AddPathRuleWindow.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Forms\ConfigLoadingWindow.resx">
       <DependentUpon>ConfigLoadingWindow.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\EditorWindow.resx">
+      <DependentUpon>EditorWindow.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\EditStyleWindow.resx">
+      <DependentUpon>EditStyleWindow.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\AddTrimWindow.resx">
+      <DependentUpon>AddTrimWindow.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\InputWindow.resx">
+      <DependentUpon>InputWindow.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\ReportProgressWindow.resx">
       <DependentUpon>ReportProgressWindow.cs</DependentUpon>
@@ -162,6 +216,9 @@
       <ProductName>.NET Framework 3.5 SP1</ProductName>
       <Install>false</Install>
     </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>

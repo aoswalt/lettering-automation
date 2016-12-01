@@ -1,10 +1,10 @@
 ﻿using System.Windows.Forms;
 using Lettering.Errors;
+using Lettering.Forms;
 
 namespace Lettering {
     internal enum MessageButtons { Ok, OkCancel, YesNo }
-
-    //TODO(adam): expand Messenger class with more functionality
+    
     internal class Messenger {
         private static MainWindow parentWindow;
 
@@ -33,12 +33,17 @@ namespace Lettering {
                     messsageBoxButtons = MessageBoxButtons.OK;
                     break;
             }
-
-
-            //TODO(adam): add displaying to custom form for auto-sizing, etc
+            
             Lettering.MoveWindowToTop();
-            DialogResult result = MessageBox.Show(message, title, messsageBoxButtons);
+            //TODO(adam): add custom message window too allow centering on parent
+            DialogResult result = MessageBox.Show(parentWindow, message, title, messsageBoxButtons);
             return result == DialogResult.OK || result == DialogResult.Yes;
+        }
+
+        internal static string Prompt(string message, string title) {
+            InputWindow inputWindow = new InputWindow(message, title);
+            inputWindow.ShowDialog(parentWindow);
+            return inputWindow.Input;
         }
 
         internal static void ShowErrorLog() {
@@ -47,7 +52,7 @@ namespace Lettering {
                 log += $"{line}\n";
             }
 
-            MessageBox.Show(log);
+            MessageBox.Show(parentWindow, log);
         }
     }
 }

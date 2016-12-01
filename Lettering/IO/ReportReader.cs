@@ -6,7 +6,7 @@ using Lettering.Errors;
 
 namespace Lettering {
     internal class ReportReader {
-        internal static DataTable RunReport(DateTime? startDate, DateTime? endDate, ReportType reportType) {
+        internal static DataTable RunReport(DateTime? startDate, DateTime? endDate, LetteringType reportType) {
             string dateClause;
             if(startDate.HasValue && endDate.HasValue) {
                 //NOTE(adam): start and end could be reversed or same
@@ -50,14 +50,14 @@ namespace Lettering {
 
             string styleClause = "";
             switch(reportType) {
-                case ReportType.Cut:
+                case LetteringType.Cut:
                     styleClause = @"
                         (d.dclas IN ('041', '049', '04C', '04D', '04Y', 'F09', 'JVT', 'L02', 'L05', 'L10', 'PS3', 'S03', 'SKL', 'VTT', '04G')) AND 
                         (d.ditem NOT LIKE 'OZ%') AND (d.ditem NOT LIKE 'COZ%') AND 
                         (d.ditem NOT LIKE 'SP%') AND 
                         (d.ditem NOT LIKE 'IDC%')";
                     break;
-                case ReportType.Sew:
+                case LetteringType.Sew:
                     styleClause += @"
                         ((d.ditem LIKE '%MN%') OR (d.ditem LIKE 'PF%') OR (d.dlrea LIKE 'ASW') OR (d.ditem LIKE 'PK%')) AND 
                         ((d.ditem NOT LIKE '%CBSLIMN%') AND (d.ditem NOT LIKE '%SLIMN%') AND (d.ditem NOT LIKE '%PKEY%')) AND 
@@ -78,7 +78,7 @@ namespace Lettering {
                          (d.ditem NOT LIKE 'MNHBW%') AND (d.ditem NOT LIKE 'MNBP%') AND (d.ditem NOT LIKE 'MNSP1%') AND (d.ditem NOT LIKE 'MNSP2%') AND 
                          (d.ditem NOT LIKE 'MNBWP%') AND (d.ditem NOT LIKE 'MNSWP%') AND (d.ditem NOT LIKE 'MNBRWP%') AND (d.ditem NOT LIKE 'MNNWP%')) ";
                     break;
-                case ReportType.Stone:
+                case LetteringType.Stone:
                     styleClause += @"
                         (d.dclas IN ('04U', '04V', '04W', 'L01', 'L03', 'L04', 'L09', 'F09', 'PS3', 'RSC', 'RSO', 'TSO')) AND 
                         ((d.ditem LIKE 'RH%') OR (d.ditem LIKE 'TS%') OR (d.ditem LIKE 'RST%') OR (d.ditem Like 'RVOMMPT%'))";

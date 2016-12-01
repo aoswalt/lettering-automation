@@ -27,6 +27,7 @@ namespace Lettering.Data {
         public static readonly FieldData COLOR4 =        new FieldData("DCLR4",    "Color 4",       typeof(string),   new string[] { "color*4" });
         public static readonly FieldData RUSH_DATE =     new FieldData("RUDAT",    "Rush Date",     typeof(DateTime), new string[] { "rush", "rsh" });
         public static readonly FieldData COMMENTS =      new FieldData("COMMENTS", "Comment",       typeof(DateTime), new string[] { "comment" });
+        public static readonly FieldData PATH =          new FieldData("PATH",     "Path",          typeof(string),   new string[] { "path" });
 
         internal readonly string DbName;
         internal readonly string DisplayName;

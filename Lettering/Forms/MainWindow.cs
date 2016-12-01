@@ -37,18 +37,18 @@ namespace Lettering {
         }
 
         private void btnCutReport_Click(object sender, EventArgs e) {
-            ExportReport(ReportType.Cut);
+            ExportReport(LetteringType.Cut);
         }
 
         private void btnSewReport_Click(object sender, EventArgs e) {
-            ExportReport(ReportType.Sew);
+            ExportReport(LetteringType.Sew);
         }
 
         private void btnStoneReport_Click(object sender, EventArgs e) {
-            ExportReport(ReportType.Stone);
+            ExportReport(LetteringType.Stone);
         }
 
-        private void ExportReport(ReportType type) {
+        private void ExportReport(LetteringType type) {
             DateTime? startDate = null;
             if(datePickerStart.Checked) {
                 startDate = datePickerStart.Value;
@@ -76,6 +76,10 @@ namespace Lettering {
 
         private void exitToolStripMenuItem_Click(object sender, EventArgs e) {
             this.Close();
+        }
+
+        private void editConfigsToolStripMenuItem_Click(object sender, EventArgs e) {
+            Lettering.LaunchConfigEditor();
         }
     }
 }

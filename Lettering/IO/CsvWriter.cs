@@ -47,7 +47,8 @@ namespace Lettering {
             ret += FieldData.COLOR3.DisplayName + ",";
             ret += FieldData.COLOR4.DisplayName + ",";
             ret += FieldData.RUSH_DATE.DisplayName + ",";
-            ret += FieldData.COMMENTS.DisplayName;
+            ret += FieldData.COMMENTS.DisplayName + ",";
+            ret += FieldData.PATH.DisplayName;
 
             return ret;
         }
@@ -72,7 +73,8 @@ namespace Lettering {
             ret += order.color3 + ",";
             ret += order.color4 + ",";
             ret += order.rushDate + ",";
-            ret += order.comment;
+            ret += order.comment + ",";
+            ret += order.path;
 
             return ret;
         }

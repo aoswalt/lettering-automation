@@ -3,27 +3,30 @@ using System.Collections.Generic;
 using System.Data;
 using System.Diagnostics;
 using System.IO;
+using System.Linq;
+using System.Text.RegularExpressions;
 using System.Windows.Forms;
 using Lettering.Data;
 using Lettering.Errors;
 using Lettering.Forms;
 using Lettering.IO;
+using Newtonsoft.Json;
 using VGCore;
 
 namespace Lettering {
-    internal enum ReportType { Cut, Sew, Stone };
-    internal enum ExportType { None, Plt, Eps };
-
-    //TODO(adam): rethink all of the static usage
+    public enum LetteringType { Cut, Sew, Stone };
+    public enum ExportType { None, Plt, Eps };
 
     internal class Lettering {
+        public static JsonConfigData Config;
+
         internal static CorelDRAW.Application corel = new CorelDRAW.Application();
 
         private static MainWindow mainWindow;
-        private static GlobalConfigData globalConfig = new GlobalConfigData();
-        internal static Dictionary<ReportType, StyleConfigData> configs = new Dictionary<ReportType, StyleConfigData>();
         private static bool hasCheckedSetup = false;
         private static bool isSetupOk = false;
+
+        private static string configFilePath = "";
 
         internal static void SetMainWindow(MainWindow mainWindow) {
             Lettering.mainWindow = mainWindow;
@@ -34,43 +37,43 @@ namespace Lettering {
         }
 
         internal static void LoadAllConfigs() {
-            //NOTE(adam): try multiple locations for config files
-            string[] configFiles = null;
-            if(Directory.Exists(FilePaths.adjacentConfigFolderPath)) {
-                configFiles = Directory.GetFiles(FilePaths.adjacentConfigFolderPath, "*.cfg");
-            } else if(Directory.Exists(FilePaths.networkConfigFolderPath)) {
-                configFiles = Directory.GetFiles(FilePaths.networkConfigFolderPath, "*.cfg");
-            }
-
-            if(configFiles == null || configFiles.Length == 0) {
-                ErrorHandler.HandleError(ErrorType.Critical, "Could not find config files.");
-                return;
-            }
-            
-            ConfigLoadingWindow configLoadingWindow = new ConfigLoadingWindow();
-            configLoadingWindow.Show();
-            configLoadingWindow.Location = new System.Drawing.Point(mainWindow.Location.X + (mainWindow.Width - configLoadingWindow.Width) / 2,
-                                                                    mainWindow.Location.Y + (mainWindow.Height - configLoadingWindow.Height) / 2);
-
-            for(int i = 0; i != configFiles.Length; ++i) {
-                string fileName = Path.GetFileName(configFiles[i]);
-                if(fileName.Split('.')[0] == "global") {
-                    ConfigReader.ReadGlobalFile(configFiles[i], globalConfig, configLoadingWindow);
+            if(configFilePath == "") {
+                if(Directory.Exists(FilePaths.adjacentConfigFolderPath)
+                    && File.Exists(FilePaths.adjacentConfigFolderPath + FilePaths.configFileName)) {
+                    configFilePath = FilePaths.adjacentConfigFolderPath + FilePaths.configFileName;
+                } else if(Directory.Exists(FilePaths.networkConfigFolderPath)
+                    && File.Exists(FilePaths.networkConfigFolderPath + FilePaths.configFileName)) {
+                    configFilePath = FilePaths.networkConfigFolderPath + FilePaths.configFileName;
                 } else {
-                    ReportType type;
-                    if(Enum.TryParse(fileName.Split('.')[0], true, out type)) {
-                        StyleConfigData config = new StyleConfigData(type, globalConfig);
-                        configLoadingWindow.SetFilesProgress(fileName, i + 1, configFiles.Length);
-                        ConfigReader.ReadStyleFile(configFiles[i], config, configLoadingWindow);
-
-                        configs.Add(type, config);
-                    } else {
-                        ErrorHandler.HandleError(ErrorType.Alert, $"Could not find type for config file: {fileName}");
-                    }
+                    ErrorHandler.HandleError(ErrorType.Critical, "Could not find config files.");
+                    return;
                 }
             }
-            configLoadingWindow.Hide();
-            //TODO(adam): investigate program freeze after reading config file
+
+            Config = JsonConvert.DeserializeObject<JsonConfigData>(File.ReadAllText(configFilePath));
+        }
+        
+        internal static void LaunchConfigEditor() {
+            LoadAllConfigs();
+
+            if(Config == null) {
+                ErrorHandler.HandleError(ErrorType.Log, "No config data when trying to Launch editor.");
+                return;
+            }
+
+            EditorWindow editor = new EditorWindow(Config);
+            editor.ShowDialog(mainWindow);
+            
+            if(editor.DialogResult != DialogResult.OK) {
+                return;
+            }
+
+            Config = editor.Config;
+            File.WriteAllText(configFilePath, JsonConvert.SerializeObject(Config,
+                new JsonSerializerSettings() {
+                    Formatting = Formatting.Indented,
+                    NullValueHandling = NullValueHandling.Ignore
+                }));
         }
 
         internal static void CheckFonts() {
@@ -78,7 +81,7 @@ namespace Lettering {
 
             if(neededFonts.Length > 0) {
                 //NOTE(adam): open font folder and display message listing needed fonts
-                Process.Start(FilePaths.networkFontsFolderPath);
+                Process.Start(Config.Setup.FilePaths.NetworkFontsFolderPath);
                 System.Threading.Thread.Sleep(200);     //NOTE(adam): delay to ensure dialog on top of folder window
                 ErrorHandler.HandleError(ErrorType.Alert, $"Font(s) need to be installed or updated:\n{neededFonts}");
             }
@@ -94,14 +97,20 @@ namespace Lettering {
         }
 
         internal static void AutomateReport(DateTime? startDate, DateTime? endDate) {
-            if(configs.Values.Count == 0) {
+            if(Config == null) {
                 LoadAllConfigs();
             }
-            
+
+            //NOTE(adam): if still no config data, abort
+            if(Config == null) {
+                ErrorHandler.HandleError(ErrorType.Log, "Attempt to automate with no config data.");
+                return;
+            }
+
             CheckMacroSetup();
             if(!isSetupOk) { return; }
 
-            DataTable data = ReportReader.RunReport(startDate, endDate, ReportType.Cut);
+            DataTable data = ReportReader.RunReport(startDate, endDate, LetteringType.Cut);
             if(data == null) {
                 ErrorHandler.HandleError(ErrorType.Alert, "No data from report.");
                 return;
@@ -111,40 +120,47 @@ namespace Lettering {
         }
 
         internal static void AutomateCsv() {
-            if(configs.Values.Count == 0) {
+            if(Config == null) {
                 LoadAllConfigs();
+            }
+
+            //NOTE(adam): if still no config data, abort
+            if(Config == null) {
+                ErrorHandler.HandleError(ErrorType.Log, "Attempt to automate with no config data.");
+                return;
             }
 
             CheckMacroSetup();
             if(!isSetupOk) { return; }
-            
+
 
             OpenFileDialog openFileDialog = new OpenFileDialog();
             openFileDialog.InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
             openFileDialog.Filter = "csv file (*.csv)|*.csv|txt file (*.txt)|*.txt";
             openFileDialog.RestoreDirectory = true;
 
-            if(openFileDialog.ShowDialog() == DialogResult.OK) {
+            if(openFileDialog.ShowDialog(mainWindow) == DialogResult.OK) {
                 DataTable data = CsvReader.Read(openFileDialog.FileName);
                 if(data == null) {
                     ErrorHandler.HandleError(ErrorType.Alert, "No data from csv.");
                     return;
-                }
+                } 
 
                 ProcessOrders(data);
             }
         }
-        
-        internal static void ExportReport(ReportType type, DateTime? startDate, DateTime? endDate) {
-            if(configs.Values.Count == 0) {
+
+        internal static void ExportReport(LetteringType type, DateTime? startDate, DateTime? endDate) {
+            if(Config == null) {
                 LoadAllConfigs();
             }
 
-            if(!configs.ContainsKey(type)) {
-                ErrorHandler.HandleError(ErrorType.Critical, $"No config found for {type} orders.");
+            //NOTE(adam): if still no config data, abort
+            if(Config == null) {
+                ErrorHandler.HandleError(ErrorType.Log, "Attempt to automate with no config data.");
                 return;
             }
-            
+
             DataTable data = ReportReader.RunReport(startDate, endDate, type);
             if(data == null) {
                 ErrorHandler.HandleError(ErrorType.Alert, "No data from report.");
@@ -155,10 +171,8 @@ namespace Lettering {
         }
 
         //TODO(adam): combine repeating in CheckForDoneOrders and ProcssOrders
-        
-        private static void CheckForDoneOrders(DataTable data, ReportType type) {
-            StyleConfigData config = configs[type];
 
+        private static void CheckForDoneOrders(DataTable data, LetteringType type) {
             List<OrderData> ordersToLog = new List<OrderData>();
 
             Messenger.Show(data.Rows.Count + " total orders found");
@@ -178,7 +192,7 @@ namespace Lettering {
                 progressWindow.SetReportProgress(type, i, orders.Count);
 
                 OrderData order = orders[i];
-                string trimmedCode = config.TryTrimStyleCode(order.itemCode);
+                string trimmedCode = TryTrimStyleCode(order.itemCode);
 
                 //NOTE(adam): if not in config, continue; else, store the trimmed code
                 if(trimmedCode.Length == 0) {
@@ -188,11 +202,19 @@ namespace Lettering {
                 } else {
                     order.itemCode = trimmedCode;
                 }
+                
+                if(GetStyleData(trimmedCode, type) == null) {
+                    ErrorHandler.HandleError(ErrorType.Log, $"No data for {trimmedCode} at Type: {type}");
+                    order.comment += "Wrong lettering type";
+                    ordersToLog.Add(order);
+                    continue;
+                }
 
-                string orderPath = config.filePaths.ConstructNetworkOrderFilePath(order);
-                string newMadePath = config.filePaths.ConstructSaveFilePath(order);
+                string orderPath = FilePaths.ConstructNetworkOrderFilePath(order, type);
+                string newMadePath = FilePaths.ConstructSaveFilePath(order, type);
+                order.path = orderPath;
 
-                if(config.IsIgnoredStyle(order)) {
+                if(IsIgnoredStyle(order.itemCode, type)) {
                     order.comment += "Ignored style";
                     ordersToLog.Add(order);
                     continue;
@@ -209,15 +231,16 @@ namespace Lettering {
             }
 
             progressWindow.Close();
-            
+
             string reportFileName = $"{type.ToString()}Report-{DateTime.Now.ToString("yyyyMMdd_HHmm")}";
             CsvWriter.WriteReport(ordersToLog, reportFileName);
             Messenger.Show($"Report saved as {reportFileName}.csv");
         }
 
         private static void ProcessOrders(DataTable data) {
+            LetteringType type = LetteringType.Cut;
+
             bool cancelBuilding = false;
-            StyleConfigData config = configs[ReportType.Cut];
 
             ActiveOrderWindow activeOrderWindow = new ActiveOrderWindow();
             List<string> currentNames = new List<string>();
@@ -234,7 +257,7 @@ namespace Lettering {
 
             for(int i = 0; i != orders.Count; ++i) {
                 OrderData order = orders[i];
-                string trimmedCode = config.TryTrimStyleCode(order.itemCode);
+                string trimmedCode = TryTrimStyleCode(order.itemCode);
 
                 //NOTE(adam): if not in config, continue; else, store the trimmed code
                 if(trimmedCode.Length == 0) {
@@ -245,10 +268,18 @@ namespace Lettering {
                     order.itemCode = trimmedCode;
                 }
 
-                string orderPath = config.filePaths.ConstructNetworkOrderFilePath(order);
-                string newMadePath = config.filePaths.ConstructSaveFilePath(order);
+                if(GetStyleData(trimmedCode, type) == null) {
+                    ErrorHandler.HandleError(ErrorType.Log, $"No data for {trimmedCode} at Type: {type}");
+                    order.comment += "Wrong lettering type";
+                    ordersToLog.Add(order);
+                    continue;
+                }
 
-                if(config.IsIgnoredStyle(order)) {
+                string orderPath = FilePaths.ConstructNetworkOrderFilePath(order, type);
+                string newMadePath = FilePaths.ConstructSaveFilePath(order, type);
+                order.path = orderPath;
+
+                if(IsIgnoredStyle(order.itemCode, type)) {
                     order.comment += "Ignored style";
                     ordersToLog.Add(order);
                     continue;
@@ -268,7 +299,7 @@ namespace Lettering {
                 }
 
                 //NOTE(adam): build point
-                String templatePath = config.filePaths.ConstructTemplateFilePath(order);
+                string templatePath = FilePaths.ConstructTemplateFilePath(order, type);
                 if(!File.Exists(templatePath)) {
                     ErrorHandler.HandleError(ErrorType.Alert, "Template not found:\n" + templatePath);
                     order.comment += "Template not found";
@@ -276,14 +307,18 @@ namespace Lettering {
                 } else {
                     currentNames.Add(order.name);
 
-                    if(config.IsNameStyle(order.itemCode)) {
+                    if(IsNameStyle(order.itemCode, type)) {
                         //NOTE(adam): if following is name style and same order/voucher, skip processing current list
-                        if((i + 1 != orders.Count) && (config.TryTrimStyleCode(orders[i + 1].itemCode).Length > 0) && (config.IsNameStyle(orders[i + 1].itemCode)) && 
-                           (order.orderNumber == orders[i + 1].orderNumber) && 
-                           (order.voucherNumber == orders[i + 1].voucherNumber)) {
-                            order.comment += "Name style";
-                            ordersToLog.Add(order);
-                            continue;
+                        if(i + 1 != orders.Count) {
+                            string nextStyleCode = TryTrimStyleCode(orders[i + 1].itemCode);
+                            if((nextStyleCode.Length > 0) &&
+                               (IsNameStyle(nextStyleCode, type)) &&
+                               (order.orderNumber == orders[i + 1].orderNumber) &&
+                               (order.voucherNumber == orders[i + 1].voucherNumber)) {
+                                order.comment += "Name style";
+                                ordersToLog.Add(order);
+                                continue;
+                            }
                         }
                     }
 
@@ -298,14 +333,14 @@ namespace Lettering {
                             ShapeRange shapes = corel.ActiveDocument.ActivePage.FindShapes(null, cdrShapeType.cdrTextShape);
                             shapes.ConvertToCurves();
 
-                            if(config.IsNameStyle(order.itemCode)) {
+                            if(IsNameStyle(order.itemCode, type)) {
                                 string namesDir = Environment.GetFolderPath(Environment.SpecialFolder.Desktop) + @"\Name Styles\" + order.cutHouse + "\\";
                                 Directory.CreateDirectory(namesDir);
                                 corel.ActiveDocument.SaveAs(namesDir + order.orderNumber + order.voucherNumber.ToString("D3") + ".cdr");
                             } else {
-                                Directory.CreateDirectory(config.filePaths.ConstructSaveFolderPath(order));
+                                Directory.CreateDirectory(FilePaths.ConstructSaveFolderPath(order, type));
                                 corel.ActiveDocument.SaveAs(newMadePath);
-                                if(config.GetExportType(order.itemCode) != ExportType.None) ExportOrder(order, config);
+                                if(GetExportType(order.itemCode, type) != ExportType.None) ExportOrder(order);
                             }
                         }
 
@@ -323,14 +358,14 @@ namespace Lettering {
                     while(corel.Documents.Count > 0) {
                         corel.ActiveDocument.Close();
                     }
-                    System.Threading.Thread.Sleep(50);      //NOTE(adamf): delay prevents error on closing templates
+                    System.Threading.Thread.Sleep(50);      //NOTE(adam): delay prevents error on closing templates
 
                     currentNames.Clear();
                 }
             }
 
             CsvWriter.WriteReport(ordersToLog, "LetteringLog-" + DateTime.Now.ToString("yyyyMMdd_HHmm"));
-            
+
             Messenger.Show("Done!");
             mainWindow.Show();
         }
@@ -364,9 +399,9 @@ namespace Lettering {
             corel.ActivePage.CreateLayer("Automate");
         }
 
-        private static void ExportOrder(OrderData order, StyleConfigData config) {
-            string orderWords = config.filePaths.ConstructFileName(order).Replace(".cdr", String.Empty);
-            ExportType exportType = config.GetExportType(order.itemCode);
+        private static void ExportOrder(OrderData order) {
+            string orderWords = FilePaths.ConstructFileName(order, LetteringType.Cut).Replace(".cdr", String.Empty);
+            ExportType exportType = Config.Setup.Exports.Find(x => Regex.Match(order.itemCode, x.StyleRegex).Success).FileType;
 
             cdrFilter corelExport;
             switch(exportType) {
@@ -425,10 +460,69 @@ namespace Lettering {
                 Messenger.Show("Could not get shapes for exporting. Manual export required.");
             } else {
                 string exportUpper = exportType.ToString().ToUpper();
-                Directory.CreateDirectory(config.filePaths.ConstructExportFolderPath(order, exportUpper));
+                Directory.CreateDirectory(FilePaths.ConstructExportFolderPath(order, LetteringType.Cut, exportUpper));
                 //NOTE(adam): options need to be specified within Corel previously
-                corel.ActiveDocument.Export(config.filePaths.ConstructExportFilePath(order, exportUpper), corelExport, cdrExportRange.cdrSelection);
+                corel.ActiveDocument.Export(FilePaths.ConstructExportFilePath(order, LetteringType.Cut, exportUpper), corelExport, cdrExportRange.cdrSelection);
             }
+        }
+
+        public static Data_StyleData GetStyleData(string styleCode, LetteringType type) {
+            return GetStyleData(Config.Styles[styleCode], type);
+        }
+
+        public static Data_StyleData GetStyleData(Data_Style style, LetteringType type) {
+            switch(type) {
+                case LetteringType.Cut:
+                    return style.Cut;
+                case LetteringType.Sew:
+                    return style.Sew;
+                case LetteringType.Stone:
+                    return style.Stone;
+                default:
+                    ErrorHandler.HandleError(ErrorType.Critical, "Invalid report type for style data");
+                    return null;
+            }
+        }
+
+        public static bool IsIgnoredStyle(string styleCode, LetteringType type) {
+            return Config.Setup.PathRules.Find(x => x.Id == GetStyleData(styleCode, type).Rule).Rule == "ignore";
+        }
+
+        public static bool IsNameStyle(string styleCode, LetteringType type) {
+            return Config.Setup.PathRules.Find(x => x.Id == GetStyleData(styleCode, type).Rule).Rule == "names";
+        }
+
+        public static bool IsMirroredStyle(string styleCode, LetteringType type) {
+            return GetStyleData(styleCode, type).MirroredStyle != null;
+        }
+
+        public static Data_StyleData GetMirroredStyleData(string styleCode, LetteringType type) {
+            return GetStyleData(GetStyleData(styleCode, type).MirroredStyle, type);
+        }
+        
+        public static ExportType GetExportType(string styleCode, LetteringType type) {
+            //FIXME: null error
+            return Config.Setup.Exports.Find(x => Regex.Match(styleCode, x.StyleRegex).Success).FileType;
+        }
+
+        public static string GetStylePath(string styleCode, LetteringType type) {
+            return Config.Setup.PathRules.Find(x => x.Id == GetStyleData(styleCode, type).Rule).Rule;
+        }
+
+        public static string TryTrimStyleCode(string styleCode) {
+            styleCode = styleCode.Replace(" ", String.Empty);
+            styleCode = Regex.Replace(styleCode, @"^CF", "TT");     //NOTE(adam): always treat CF as TT
+            styleCode = Regex.Replace(styleCode, @"^JVT", "TT");    //NOTE(adam): always treat JVT as TT
+
+            if(Config.Styles.ContainsKey(styleCode)) return styleCode;     //NOTE(adam): path data exists, no trimming needed
+            
+            foreach(string pattern in Config.Setup.Trims.Select(trim => trim.Pattern)) {
+                styleCode = Regex.Replace(styleCode, pattern, String.Empty);
+                if(Config.Styles.ContainsKey(styleCode)) return styleCode;     //NOTE(adam): path data found
+            }
+
+            ErrorHandler.HandleError(ErrorType.Log, $"No style found in TryTrimStyleCode for final style code {styleCode}");
+            return "";
         }
     }
 }
