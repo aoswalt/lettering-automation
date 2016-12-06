@@ -12,6 +12,7 @@ namespace Lettering.Data {
         public static readonly string adjacentHolidaysFilePath = adjacentConfigFolderPath + "holidays.txt";
         public static readonly string networkHolidaysFilePath = networkConfigFolderPath + "holidays.txt";
         public static readonly string desktopFolderPath = Environment.GetFolderPath(Environment.SpecialFolder.Desktop) + '\\';
+        public static readonly string desktopSaveFolderPath = desktopFolderPath + @"1 CUT FILES\";
         public static readonly string tempFolderPath = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + @"\TemporaryAutomationFiles\";
         public static readonly string installedFontsFolderPath = Environment.GetFolderPath(Environment.SpecialFolder.Fonts) + '\\';
         public static readonly string errorLogFilePath = tempFolderPath + "errors.log";
@@ -136,18 +137,38 @@ namespace Lettering.Data {
             return folders[folders.Length - 1] + '\\';
         }
 
+        private static List<string> getKnownExtenstions() {
+            List<string> extensions = new List<string>();
+
+            List<Data_TypeData> types = new List<Data_TypeData>(Lettering.Config.Setup.TypeData.Values);
+            List<string> typeExtensions = types.ConvertAll(t => t.Extension.ToLower());
+            extensions.AddRange(typeExtensions);
+            
+
+            List<ExportType> rawExportExtensions = new List<ExportType>((ExportType[])Enum.GetValues(typeof(ExportType)));
+            List<string> exportExtensions = rawExportExtensions.ConvertAll(ext => ext.ToString());
+            exportExtensions.Remove(ExportType.None.ToString());
+            extensions.AddRange(exportExtensions);
+
+            return extensions;
+        }
+
         internal static string ConstructNetworkOrderFilePath(OrderData order, LetteringType type) {
             string path = Lettering.Config.Setup.TypeData[type.ToString()].Root +
                           ConstructStylePathPart(order, type);
             string filename = '\\' + ConstructFileName(order, type) + '.' + 
                               Lettering.Config.Setup.TypeData[type.ToString()].Extension;
-            if(!path.Contains(".")) { path += filename; }
+
+            List<string> extensions = getKnownExtenstions();
+            bool noMatch = extensions.TrueForAll(ext => !path.Contains(ext));
+            if(noMatch) { path += filename; }
+
             return BuildPath(order, type, path);
         }
 
         internal static string ConstructSaveFolderPath(OrderData order, LetteringType type) {
             string lastFolder = GetRootLast(order, type);
-            string path = desktopFolderPath + lastFolder + ConstructStylePathPart(order, type);
+            string path = desktopSaveFolderPath + lastFolder + ConstructStylePathPart(order, type);
             return BuildPath(order, type, path);
         }
 
@@ -156,12 +177,17 @@ namespace Lettering.Data {
             string filename = '\\' + ConstructFileName(order, type) + '.' + 
                               Lettering.Config.Setup.TypeData[type.ToString()].Extension;
             if(!path.Contains(".")) { path += filename; }
+
+            List<string> extensions = getKnownExtenstions();
+            bool noMatch = extensions.TrueForAll(ext => !path.Contains(ext));
+            if(noMatch) { path += filename; }
+
             return BuildPath(order, type, path);
         }
 
         internal static string ConstructExportFolderPath(OrderData order, LetteringType type, string extension) {
             string lastFolder = GetRootLast(order, type);
-            string path = desktopFolderPath + lastFolder + ConstructStylePathPart(order, type) + extension.ToUpper();
+            string path = desktopFolderPath + lastFolder + ConstructStylePathPart(order, type) + extension.ToLower();
             return BuildPath(order, type, path);
         }
 
@@ -169,6 +195,11 @@ namespace Lettering.Data {
             string path = ConstructExportFolderPath(order, type, extension);
             string filename = '\\' + ConstructFileName(order, type) + '.' + extension;
             if(!path.Contains(".")) { path += filename; }
+
+            List<string> extensions = getKnownExtenstions();
+            bool noMatch = extensions.TrueForAll(ext => !path.Contains(ext));
+            if(noMatch) { path += filename; }
+
             return BuildPath(order, type, path);
         }
 

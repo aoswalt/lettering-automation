@@ -501,8 +501,8 @@ namespace Lettering {
         }
         
         public static ExportType GetExportType(string styleCode, LetteringType type) {
-            //FIXME: null error
-            return Config.Setup.Exports.Find(x => Regex.Match(styleCode, x.StyleRegex).Success).FileType;
+            Data_Export export = Config.Setup.Exports.Find(x => Regex.Match(styleCode, x.StyleRegex).Success);
+            return export != null ? export.FileType : ExportType.None;
         }
 
         public static string GetStylePath(string styleCode, LetteringType type) {
