@@ -137,7 +137,7 @@ namespace Lettering.Data {
             return folders[folders.Length - 1] + '\\';
         }
 
-        private static List<string> getKnownExtenstions() {
+        private static List<string> getKnownExtensions() {
             List<string> extensions = new List<string>();
 
             List<Data_TypeData> types = new List<Data_TypeData>(Lettering.Config.Setup.TypeData.Values);
@@ -159,8 +159,8 @@ namespace Lettering.Data {
             string filename = '\\' + ConstructFileName(order, type) + '.' + 
                               Lettering.Config.Setup.TypeData[type.ToString()].Extension;
 
-            List<string> extensions = getKnownExtenstions();
-            bool noMatch = extensions.TrueForAll(ext => !path.Contains(ext));
+            List<string> extensions = getKnownExtensions();
+            bool noMatch = extensions.TrueForAll(ext => !path.Contains("." + ext));
             if(noMatch) { path += filename; }
 
             return BuildPath(order, type, path);
@@ -176,10 +176,9 @@ namespace Lettering.Data {
             string path = ConstructSaveFolderPath(order, type);
             string filename = '\\' + ConstructFileName(order, type) + '.' + 
                               Lettering.Config.Setup.TypeData[type.ToString()].Extension;
-            if(!path.Contains(".")) { path += filename; }
 
-            List<string> extensions = getKnownExtenstions();
-            bool noMatch = extensions.TrueForAll(ext => !path.Contains(ext));
+            List<string> extensions = getKnownExtensions();
+            bool noMatch = extensions.TrueForAll(ext => !path.Contains("." + ext));
             if(noMatch) { path += filename; }
 
             return BuildPath(order, type, path);
@@ -187,17 +186,16 @@ namespace Lettering.Data {
 
         internal static string ConstructExportFolderPath(OrderData order, LetteringType type, string extension) {
             string lastFolder = GetRootLast(order, type);
-            string path = desktopFolderPath + lastFolder + ConstructStylePathPart(order, type) + extension.ToLower();
+            string path = desktopSaveFolderPath + lastFolder + ConstructStylePathPart(order, type) + extension.ToLower();
             return BuildPath(order, type, path);
         }
 
         internal static string ConstructExportFilePath(OrderData order, LetteringType type, string extension) {
             string path = ConstructExportFolderPath(order, type, extension);
             string filename = '\\' + ConstructFileName(order, type) + '.' + extension;
-            if(!path.Contains(".")) { path += filename; }
 
-            List<string> extensions = getKnownExtenstions();
-            bool noMatch = extensions.TrueForAll(ext => !path.Contains(ext));
+            List<string> extensions = getKnownExtensions();
+            bool noMatch = extensions.TrueForAll(ext => !path.Contains("." + ext));
             if(noMatch) { path += filename; }
 
             return BuildPath(order, type, path);
