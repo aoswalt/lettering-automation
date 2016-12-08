@@ -5,7 +5,7 @@ using Lettering.Errors;
 
 namespace Lettering.Data {
     public class FilePaths {
-        private static readonly string networkAutomationFolderPath = @"\\production\Lettering\Corel\WORK FOLDERS\Automation\";
+        private static readonly string networkAutomationFolderPath = @"\\vsc-fs01\Lettering\Corel\WORK FOLDERS\Automation\";
         public static readonly string configFileName = "lettering.json";
         public static readonly string adjacentConfigFolderPath = @".\configs\";
         public static readonly string networkConfigFolderPath = networkAutomationFolderPath + @"application\configs\";
@@ -186,7 +186,7 @@ namespace Lettering.Data {
 
         internal static string ConstructExportFolderPath(OrderData order, LetteringType type, string extension) {
             string lastFolder = GetRootLast(order, type);
-            string path = desktopSaveFolderPath + lastFolder + ConstructStylePathPart(order, type) + extension.ToLower();
+            string path = desktopSaveFolderPath + lastFolder + ConstructStylePathPart(order, type) + "\\" + extension.ToUpper();
             return BuildPath(order, type, path);
         }
 
