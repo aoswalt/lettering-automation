@@ -12,8 +12,24 @@ namespace Lettering {
             if(!File.Exists(Lettering.Config.Setup.FilePaths.InstalledLibraryFilePath)) {
                 needLibInstall = true;
             } else {
-                DateTime installedLibDT = File.GetLastWriteTime(Lettering.Config.Setup.FilePaths.InstalledLibraryFilePath);
-                DateTime networkLibDT = File.GetLastWriteTime(Lettering.Config.Setup.FilePaths.NetworkLibraryFilePath);
+                string installedFilePath = Lettering.Config.Setup.FilePaths.InstalledLibraryFilePath;
+                DateTime installedLibDT = new DateTime(0);
+
+                if(File.Exists(installedFilePath)) {
+                    installedLibDT = File.GetLastWriteTime(installedFilePath);
+                } else {
+                    ErrorHandler.HandleError(ErrorType.Critical, $"Could not find installed library file at\n{installedFilePath}");
+                    return false;
+                }
+
+                string networkFilePath = Lettering.Config.Setup.FilePaths.NetworkLibraryFilePath;
+                DateTime networkLibDT = new DateTime(0);
+                if(File.Exists(networkFilePath)) {
+                    networkLibDT = File.GetLastWriteTime(networkFilePath);
+                } else {
+                    ErrorHandler.HandleError(ErrorType.Critical, $"Could not find network library file at\n{networkFilePath}");
+                    return false;
+                }
 
                 //NOTE(adam): is network file newer than installed
                 needLibInstall = (networkLibDT > installedLibDT);

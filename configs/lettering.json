@@ -1,8 +1,8 @@
 {
   "Setup": {
     "FilePaths": {
-      "NetworkFontsFolderPath": "\\\\production\\Lettering\\Corel\\WORK FOLDERS\\VS Fonts\\",
-      "NetworkLibraryFilePath": "\\\\production\\Lettering\\Corel\\WORK FOLDERS\\Automation\\Automation.gms",
+      "NetworkFontsFolderPath": "\\\\vsc-fs01\\Lettering\\Corel\\WORK FOLDERS\\VS Fonts\\",
+      "NetworkLibraryFilePath": "\\\\vsc-fs01\\Lettering\\Corel\\WORK FOLDERS\\Automation\\Automation.gms",
       "InstalledLibraryFilePath": "C:\\Program Files\\Corel\\CorelDRAW Graphics Suite X7\\Draw\\GMS\\Automation.gms"
     },
     "StylePrefixes": [
@@ -114,41 +114,41 @@
     ],
     "Exports": [
       {
-        "StyleRegex": "^ID\\.+",
+        "StyleRegex": "^ID",
         "FileType": "Eps"
       },
       {
-        "StyleRegex": "^PF\\.+",
+        "StyleRegex": "^PF",
         "FileType": "Plt"
       },
       {
-        "StyleRegex": "^PKPFI\\.+",
+        "StyleRegex": "^PKPFI",
         "FileType": "Plt"
       },
       {
-        "StyleRegex": "^TTDARLMNB\\.+",
+        "StyleRegex": "^TTDARLMNB",
         "FileType": "Plt"
       },
       {
-        "StyleRegex": "^TTDARLMNSF\\.+",
+        "StyleRegex": "^TTDARLMNSF",
         "FileType": "Plt"
       },
       {
-        "StyleRegex": "^TTLL3DAR\\.+",
+        "StyleRegex": "^TTLL3DAR",
         "FileType": "Eps"
       },
       {
-        "StyleRegex": "^TTLLFBL\\.+",
+        "StyleRegex": "^TTLLFBL",
         "FileType": "Eps"
       }
     ],
     "TypeData": {
       "Cut": {
-        "Root": "\\\\production\\lettering\\1 CUT FILES\\",
+        "Root": "\\\\memap-nas01\\VSLettering\\Inline\\",
         "Extension": "cdr"
       },
       "Sew": {
-        "Root": "\\\\production\\lettering\\1 CUT FILES\\",
+        "Root": "\\\\memap-nas01\\VSLettering\\Inline\\",
         "Extension": "dst"
       },
       "Stone": {
@@ -1440,6 +1440,11 @@
         "Rule": "style_CUT FILES"
       }
     },
+    "HTSTSHI": {
+      "Cut": {
+        "Rule": "style_CUT FILES"
+      }
+    },
     "HTSW": {
       "Cut": {
         "Rule": "style_CUT FILES"
@@ -1737,6 +1742,11 @@
       }
     },
     "IDWTL": {
+      "Cut": {
+        "Rule": "style_CUT FILES"
+      }
+    },
+    "IDWTLVS": {
       "Cut": {
         "Rule": "style_CUT FILES"
       }
@@ -3037,7 +3047,7 @@
       "Cut": {
         "Rule": "style_CUT FILES",
         "CustomWordOrder": [
-          3
+          1
         ]
       },
       "Sew": {
@@ -5987,22 +5997,26 @@
     },
     "VTTCB97U": {
       "Cut": {
-        "Rule": "style_size"
+        "Rule": "mirror",
+        "MirroredStyle": "TTCB97U"
       }
     },
     "VTTCBBL": {
       "Cut": {
-        "Rule": "style_size_spec"
+        "Rule": "mirror",
+        "MirroredStyle": "TTCBBL"
       }
     },
     "VTTCBSLIM": {
       "Cut": {
-        "Rule": "style_size_spec"
+        "Rule": "mirror",
+        "MirroredStyle": "TTCBSLIM"
       }
     },
     "VTTDRA": {
       "Cut": {
-        "Rule": "style_size_spec"
+        "Rule": "mirror",
+        "MirroredStyle": "TTDRA"
       }
     },
     "VTTFBL": {
@@ -6017,7 +6031,8 @@
     },
     "VTTRKGL": {
       "Cut": {
-        "Rule": "ignore"
+        "Rule": "mirror",
+        "MirroredStyle": "TTRKGL"
       }
     }
   }

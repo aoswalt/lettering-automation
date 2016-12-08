@@ -20,7 +20,14 @@ namespace Lettering {
                 installedFontNames.Add(fontFamily.ToString().Split('#')[fontFamily.ToString().Split('#').Count() - 1]);
             }
 
-            string[] networkFontFiles = Directory.GetFiles(Lettering.Config.Setup.FilePaths.NetworkFontsFolderPath, "*.otf");
+            string networkFontsPath = Lettering.Config.Setup.FilePaths.NetworkFontsFolderPath;
+            string[] networkFontFiles = null;
+            if(Directory.Exists(networkFontsPath)) {
+                networkFontFiles = Directory.GetFiles(networkFontsPath, "*.otf");
+            } else {
+                ErrorHandler.HandleError(ErrorType.Critical, $"Could not find network font folder at \n{networkFontsPath}");
+                return "";
+            }
 
             FontCheckingWindow fontCheckingWindow = new FontCheckingWindow();
             fontCheckingWindow.Show();
