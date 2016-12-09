@@ -12,7 +12,7 @@ namespace Lettering.Data {
         public static readonly string adjacentHolidaysFilePath = adjacentConfigFolderPath + "holidays.txt";
         public static readonly string networkHolidaysFilePath = networkConfigFolderPath + "holidays.txt";
         public static readonly string desktopFolderPath = Environment.GetFolderPath(Environment.SpecialFolder.Desktop) + '\\';
-        public static readonly string desktopSaveFolderPath = desktopFolderPath + @"1 CUT FILES\";
+        public static readonly string desktopSaveFolderPath = desktopFolderPath + @"INLINE\";
         public static readonly string tempFolderPath = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + @"\TemporaryAutomationFiles\";
         public static readonly string installedFontsFolderPath = Environment.GetFolderPath(Environment.SpecialFolder.Fonts) + '\\';
         public static readonly string errorLogFilePath = tempFolderPath + "errors.log";
