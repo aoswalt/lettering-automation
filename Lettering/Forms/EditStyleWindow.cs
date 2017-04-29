@@ -108,7 +108,10 @@ namespace Lettering.Forms {
                     listBoxCutExPaths.DisplayMember = "Path";
 
                     if((Data_Exception)listBoxCutExPaths.SelectedItem != null) {
-                        listBoxCutExConditions.DataSource = new BindingList<string>(((Data_Exception)listBoxCutExPaths.SelectedItem).Conditions);
+                        List<string> conditions = ((Data_Exception)listBoxCutExPaths.SelectedItem).Conditions;
+                        if(conditions != null) {
+                            listBoxCutExConditions.DataSource = new BindingList<string>();
+                        }
                     }
                 }
             }
@@ -140,7 +143,10 @@ namespace Lettering.Forms {
                     listBoxSewExPaths.DisplayMember = "Path";
 
                     if((Data_Exception)listBoxSewExPaths.SelectedItem != null) {
-                        listBoxSewExConditions.DataSource = new BindingList<string>(((Data_Exception)listBoxSewExPaths.SelectedItem).Conditions);
+                        List<string> conditions = ((Data_Exception)listBoxSewExPaths.SelectedItem).Conditions;
+                        if(conditions != null) {
+                            listBoxSewExConditions.DataSource = new BindingList<string>();
+                        }
                     }
                 }
             }
@@ -172,7 +178,10 @@ namespace Lettering.Forms {
                     listBoxStoneExPaths.DisplayMember = "Path";
 
                     if((Data_Exception)listBoxStoneExPaths.SelectedItem != null) {
-                        listBoxStoneExConditions.DataSource = new BindingList<string>(((Data_Exception)listBoxStoneExPaths.SelectedItem).Conditions);
+                        List<string> conditions = ((Data_Exception)listBoxStoneExPaths.SelectedItem).Conditions;
+                        if(conditions != null) {
+                            listBoxStoneExConditions.DataSource = new BindingList<string>();
+                        }
                     }
                 }
             }
@@ -289,7 +298,11 @@ namespace Lettering.Forms {
                 if(((BindingList<Data_Exception>)listBoxCutExPaths.DataSource).Count > 0) {
                     //NOTE(adam): next item is automatically selected
                     ex = (Data_Exception)listBoxCutExPaths.SelectedItem;
-                    listBoxCutExConditions.DataSource = new BindingList<string>(ex.Conditions);
+                    if(ex.Conditions != null) {
+                        listBoxCutExConditions.DataSource = new BindingList<string>(ex.Conditions);
+                    } else {
+                        listBoxCutExConditions.DataSource = null;
+                    }
                 } else {
                     listBoxCutExPaths.DataSource = null;
                 }
@@ -430,7 +443,11 @@ namespace Lettering.Forms {
                 if(((BindingList<Data_Exception>)listBoxSewExPaths.DataSource).Count > 0) {
                     //NOTE(adam): next item is automatically selected
                     ex = (Data_Exception)listBoxSewExPaths.SelectedItem;
-                    listBoxSewExConditions.DataSource = new BindingList<string>(ex.Conditions);
+                    if(ex.Conditions != null) {
+                        listBoxSewExConditions.DataSource = new BindingList<string>(ex.Conditions);
+                    } else {
+                        listBoxSewExConditions.DataSource = null;
+                    }
                 } else {
                     listBoxSewExPaths.DataSource = null;
                 }
@@ -571,7 +588,11 @@ namespace Lettering.Forms {
                 if(((BindingList<Data_Exception>)listBoxStoneExPaths.DataSource).Count > 0) {
                     //NOTE(adam): next item is automatically selected
                     ex = (Data_Exception)listBoxStoneExPaths.SelectedItem;
-                    listBoxStoneExConditions.DataSource = new BindingList<string>(ex.Conditions);
+                    if(ex.Conditions != null) {
+                        listBoxStoneExConditions.DataSource = new BindingList<string>(ex.Conditions);
+                    } else {
+                        listBoxStoneExConditions.DataSource = null;
+                    }
                 } else {
                     listBoxStoneExPaths.DataSource = null;
                 }

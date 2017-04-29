@@ -17,8 +17,8 @@ namespace Lettering.Data {
         public static readonly string installedFontsFolderPath = Environment.GetFolderPath(Environment.SpecialFolder.Fonts) + '\\';
         public static readonly string errorLogFilePath = tempFolderPath + "errors.log";
 
-        private static Dictionary<string, Func<OrderData, LetteringType, string>> pathBuilders = new Dictionary<string, Func<OrderData, LetteringType, string>>() {
-            {"!type", (order, type) => {
+        private static Dictionary<string, Func<OrderData, LetteringType, bool, string>> pathBuilders = new Dictionary<string, Func<OrderData, LetteringType, bool, string>>() {
+            {"!type", (order, type, forCompare) => {
                 //NOTE(adam): example: "TTstyle" becomes "TT STYLES"
                 foreach(string stylePrefix in Lettering.Config.Setup.StylePrefixes) {
                     OrderData tempOrder = order.Clone();
@@ -33,7 +33,7 @@ namespace Lettering.Data {
                 ErrorHandler.HandleError(ErrorType.Log, "No style prefix found for !style path builder.");
                 return "";
             } },
-            {"!style", (order, type) => {
+            {"!style", (order, type, forCompare) => {
                 //NOTE(adam): example: "TTstyle" becomes "TT style"
                 foreach(string stylePrefix in Lettering.Config.Setup.StylePrefixes) {
                     OrderData tempOrder = order.Clone();
@@ -48,7 +48,9 @@ namespace Lettering.Data {
                 ErrorHandler.HandleError(ErrorType.Log, "No style prefix found for !style path builder.");
                 return "";
             } },
-            {"!size", (order, type) => {
+            {"!size", (order, type, forCompare) => {
+                    if(forCompare) { return order.size.ToString(); }
+
                     //NOTE(adam): if int size, force as int; otherwise, allow decimal part
                     if(Math.Ceiling(order.size) == Math.Floor(order.size)) {
                         return (int)order.size + "INCH";
@@ -56,9 +58,9 @@ namespace Lettering.Data {
                         return order.size + "INCH";
                     }
                 } },
-            {"!spec", (order, type) => { return String.Format("{0:0.#}", order.spec); } },
-            {"!ya", (order, type) => { return order.spec< 10 ? "YOUTH" : "ADULT"; } },
-            {"!cd", (order, type) => {
+            {"!spec", (order, type, forCompare) => { return String.Format("{0:0.#}", order.spec); } },
+            {"!ya", (order, type, forCompare) => { return order.spec< 10 ? "YOUTH" : "ADULT"; } },
+            {"!cd", (order, type, forCompare) => {
                 //NOTE(adam): using last entered word as cheer/dance
                 if(order.word4 != "") {
                     return order.word4.ToUpper();
@@ -73,7 +75,7 @@ namespace Lettering.Data {
                     return "";
                 }
             } },
-            {"!word1", (order, type) => {
+            {"!word1", (order, type, forCompare) => {
                 if(order.word1 != "") {
                     return order.word1.ToUpper();
                 } else if(order.name != "") {
@@ -82,14 +84,14 @@ namespace Lettering.Data {
                     return "";
                 }
             } },
-            {"!word2", (order, type) => { return order.word2.ToUpper(); } },
-            {"!word3", (order, type) => { return order.word3.ToUpper(); } },
-            {"!word4", (order, type) => { return order.word4.ToUpper(); } },
-            {"!ecm1", (order, type) => { return ToEcm(order.word1); } },
-            {"!ecm2", (order, type) => { return ToEcm(order.word2); } },
-            {"!ecm3", (order, type) => { return ToEcm(order.word3); } },
-            {"!ecm4", (order, type) => { return ToEcm(order.word4); } },
-            {"!name", (order, type) => { return order.name.ToUpper(); } }
+            {"!word2", (order, type, forCompare) => { return order.word2.ToUpper(); } },
+            {"!word3", (order, type, forCompare) => { return order.word3.ToUpper(); } },
+            {"!word4", (order, type, forCompare) => { return order.word4.ToUpper(); } },
+            {"!ecm1", (order, type, forCompare) => { return ToEcm(order.word1); } },
+            {"!ecm2", (order, type, forCompare) => { return ToEcm(order.word2); } },
+            {"!ecm3", (order, type, forCompare) => { return ToEcm(order.word3); } },
+            {"!ecm4", (order, type, forCompare) => { return ToEcm(order.word4); } },
+            {"!name", (order, type, forCompare) => { return order.name.ToUpper(); } }
         };
 
         private static Dictionary<string, Func<object, object, bool>> comparisons = new Dictionary<string, Func<object, object, bool>>() {
@@ -231,7 +233,7 @@ namespace Lettering.Data {
         private static string BuildPath(OrderData order, LetteringType type, string path) {
             foreach(string key in pathBuilders.Keys) {
                 if(path.Contains(key)) {
-                    path = path.Replace(key, pathBuilders[key](order, type));
+                    path = path.Replace(key, pathBuilders[key](order, type, false));
                 }
             }
             path = Regex.Replace(path, @"-+\B", "");
@@ -261,8 +263,14 @@ namespace Lettering.Data {
                 ErrorHandler.HandleError(ErrorType.Alert, "Invalid condition: " + condition);
                 return false;
             }
-            
-            string prop = pathBuilders["!" + tokens[0].ToLower()](order, type);
+
+            string prop = pathBuilders["!" + tokens[0].ToLower()](order, type, true);
+            //var tok = tokens[0].ToLower();
+            //var t = typeof(OrderData);
+            //var f = t.GetField(tok);
+            //var v = f.GetValue(order);
+            //var s = v.ToString();
+            //string prop = s;
             
             double val;
             if(double.TryParse(tokens[2], out val)) {

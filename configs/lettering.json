@@ -10,6 +10,9 @@
         "Value": "FL"
       },
       {
+        "Value": "HP"
+      },
+      {
         "Value": "HT"
       },
       {
@@ -28,6 +31,9 @@
         "Value": "RHO"
       },
       {
+        "Value": "RHB"
+      },
+      {
         "Value": "RH"
       },
       {
@@ -40,6 +46,15 @@
         "Value": "RS"
       },
       {
+        "Value": "RU"
+      },
+      {
+        "Value": "RV"
+      },
+      {
+        "Value": "RX"
+      },
+      {
         "Value": "SS"
       },
       {
@@ -50,6 +65,9 @@
       },
       {
         "Value": "TS"
+      },
+      {
+        "Value": "TSB"
       },
       {
         "Value": "TT"
@@ -100,7 +118,15 @@
         "_Comment": "<none>"
       },
       {
+        "Pattern": "4L$",
+        "_Comment": "<none>"
+      },
+      {
         "Pattern": "-8L$",
+        "_Comment": "<none>"
+      },
+      {
+        "Pattern": "8L$",
         "_Comment": "<none>"
       },
       {
@@ -110,9 +136,37 @@
       {
         "Pattern": "\\d$",
         "_Comment": "Number of Colors"
+      },
+      {
+        "Pattern": "N$",
+        "_Comment": "Names"
+      },
+      {
+        "Pattern": "C$",
+        "_Comment": "Child - ASF"
+      },
+      {
+        "Pattern": "G$",
+        "_Comment": "Guys - ASF"
+      },
+      {
+        "Pattern": "Y$",
+        "_Comment": "Youth - ASF"
+      },
+      {
+        "Pattern": "YG$",
+        "_Comment": "Youth Guys - ASF"
+      },
+      {
+        "Pattern": "W$",
+        "_Comment": "Womens - ASF"
       }
     ],
     "Exports": [
+      {
+        "StyleRegex": "^HP",
+        "FileType": "Plt"
+      },
       {
         "StyleRegex": "^ID",
         "FileType": "Eps"
@@ -124,6 +178,14 @@
       {
         "StyleRegex": "^PKPFI",
         "FileType": "Plt"
+      },
+      {
+        "StyleRegex": "^TT",
+        "FileType": "Eps"
+      },
+      {
+        "StyleRegex": "^TTDARL",
+        "FileType": "Eps"
       },
       {
         "StyleRegex": "^TTDARLMNB",
@@ -216,6 +278,16 @@
     ]
   },
   "Styles": {
+    "DARBMNBM": {
+      "Cut": {
+        "Rule": "mirror",
+        "MirroredStyle": "PFDARBMN"
+      },
+      "Sew": {
+        "Rule": "mirror",
+        "MirroredStyle": "PFDARBMN"
+      }
+    },
     "HPBRB": {
       "Cut": {
         "Rule": "style_CUT FILES"
@@ -226,18 +298,32 @@
     },
     "HPBXL": {
       "Cut": {
-        "Rule": "style_CUT FILES"
+        "Rule": "style_CUT FILES",
+        "CustomWordOrder": [
+          1,
+          2
+        ]
       },
       "Sew": {
-        "Rule": "cut-sew_files"
+        "Rule": "cut-sew_files",
+        "CustomWordOrder": [
+          1
+        ]
       }
     },
     "HPINU": {
       "Cut": {
-        "Rule": "style_CUT FILES"
+        "Rule": "style_CUT FILES",
+        "CustomWordOrder": [
+          1,
+          2
+        ]
       },
       "Sew": {
-        "Rule": "cut-sew_files"
+        "Rule": "cut-sew_files",
+        "CustomWordOrder": [
+          2
+        ]
       }
     },
     "HT2LLWD": {
@@ -318,13 +404,13 @@
       "Cut": {
         "Rule": "style_CUT FILES",
         "CustomWordOrder": [
-          2
+          1
         ]
       },
       "Sew": {
         "Rule": "cut-sew_files",
         "CustomWordOrder": [
-          1,
+          2,
           3
         ]
       }
@@ -627,6 +713,26 @@
         "Rule": "style_size_spec"
       }
     },
+    "HTDARONUO": {
+      "Cut": {
+        "Rule": "style_CUT FILES"
+      },
+      "Sew": {
+        "Rule": "cut-sew_files"
+      }
+    },
+    "HTDAROST2": {
+      "Cut": {
+        "Rule": "mirror",
+        "MirroredStyle": "HTDARO2"
+      }
+    },
+    "HTDAROSTO2": {
+      "Cut": {
+        "Rule": "mirror",
+        "MirroredStyle": "HTDARO2"
+      }
+    },
     "HTDHAN": {
       "Cut": {
         "Rule": "style_CUT FILES"
@@ -740,12 +846,32 @@
     },
     "HTFFBL": {
       "Cut": {
-        "Rule": "style_size"
+        "Rule": "style_size_spec",
+        "Exceptions": [
+          {
+            "Conditions": [
+              "Spec<14"
+            ],
+            "Path": {
+              "Value": "!type\\!style\\!size\\9.5"
+            }
+          }
+        ]
       }
     },
     "HTFFBL2": {
       "Cut": {
-        "Rule": "style_size"
+        "Rule": "style_size_spec",
+        "Exceptions": [
+          {
+            "Conditions": [
+              "Spec<14"
+            ],
+            "Path": {
+              "Value": "!type\\!style\\!size\\9.5"
+            }
+          }
+        ]
       }
     },
     "HTFFBLWD": {
@@ -1551,7 +1677,8 @@
     },
     "IDAMODBL": {
       "Cut": {
-        "Rule": "style_size"
+        "Rule": "mirror",
+        "MirroredStyle": "TTAMODBL"
       }
     },
     "IDBL": {
@@ -1561,33 +1688,37 @@
     },
     "IDBLDARL": {
       "Cut": {
-        "Rule": "style_size"
+        "Rule": "mirror",
+        "MirroredStyle": "TTBLDARL"
       }
     },
     "IDBLN": {
       "Cut": {
-        "Rule": "names",
-        "MirroredStyle": "IDBLN"
+        "Rule": "style_size"
       }
     },
     "IDCBBL": {
       "Cut": {
-        "Rule": "style_size_spec"
+        "Rule": "mirror",
+        "MirroredStyle": "TTCBBL"
       }
     },
     "IDCBSLIM": {
       "Cut": {
-        "Rule": "style_size_spec"
+        "Rule": "mirror",
+        "MirroredStyle": "TTCBSLIM"
       }
     },
     "IDCBWBL": {
       "Cut": {
-        "Rule": "style_size_spec"
+        "Rule": "mirror",
+        "MirroredStyle": "TTCBWBL"
       }
     },
     "IDDARL": {
       "Cut": {
-        "Rule": "style_size"
+        "Rule": "mirror",
+        "MirroredStyle": "TTDARL"
       }
     },
     "IDDARLB": {
@@ -1606,12 +1737,14 @@
     },
     "IDDDAR": {
       "Cut": {
-        "Rule": "style_size_spec"
+        "Rule": "mirror",
+        "MirroredStyle": "TTDDAR"
       }
     },
     "IDELITE": {
       "Cut": {
-        "Rule": "style_size_spec"
+        "Rule": "mirror",
+        "MirroredStyle": "TTELITE"
       }
     },
     "IDFBL": {
@@ -1635,8 +1768,7 @@
     },
     "IDFBLN": {
       "Cut": {
-        "Rule": "names",
-        "MirroredStyle": "IDFBLN"
+        "Rule": "style_size"
       }
     },
     "IDFFBL": {
@@ -1651,19 +1783,20 @@
     },
     "IDINTL": {
       "Cut": {
-        "Rule": "style_size"
+        "Rule": "mirror",
+        "MirroredStyle": "TTINTL"
       }
     },
     "IDINTL2": {
       "Cut": {
         "Rule": "mirror",
-        "MirroredStyle": "IDINTL"
+        "MirroredStyle": "TTINTL"
       }
     },
     "IDINTL3": {
       "Cut": {
         "Rule": "mirror",
-        "MirroredStyle": "IDINTL"
+        "MirroredStyle": "TTINTL"
       }
     },
     "IDL": {
@@ -1673,12 +1806,14 @@
     },
     "IDLL3DAR": {
       "Cut": {
-        "Rule": "ignore"
+        "Rule": "ignore",
+        "MirroredStyle": "TTLL3DAR"
       }
     },
     "IDLLFBL": {
       "Cut": {
-        "Rule": "ignore"
+        "Rule": "ignore",
+        "MirroredStyle": "TTLLFBL"
       }
     },
     "IDMAS": {
@@ -1713,7 +1848,8 @@
     },
     "IDMODBL": {
       "Cut": {
-        "Rule": "style_size"
+        "Rule": "mirror",
+        "MirroredStyle": "TTMODBL"
       }
     },
     "IDNUI": {
@@ -1728,10 +1864,16 @@
     },
     "IDSTILC": {
       "Cut": {
-        "Rule": "style_size"
+        "Rule": "mirror",
+        "MirroredStyle": "TTSTILC"
       }
     },
     "IDSTKDAR": {
+      "Cut": {
+        "Rule": "style_CUT FILES"
+      }
+    },
+    "IDW": {
       "Cut": {
         "Rule": "style_CUT FILES"
       }
@@ -2814,13 +2956,15 @@
     },
     "PFDAR-BMN": {
       "Cut": {
-        "Rule": "style_CUT FILES",
+        "Rule": "mirror",
         "CustomWordOrder": [
           1
-        ]
+        ],
+        "MirroredStyle": "PFDARBMN"
       },
       "Sew": {
-        "Rule": "cut-sew_files"
+        "Rule": "mirror",
+        "MirroredStyle": "PFDARBMN"
       }
     },
     "PFDARL": {
@@ -3306,6 +3450,16 @@
         "Rule": "style_SEW FILES"
       }
     },
+    "RH17B": {
+      "Stone": {
+        "Rule": "ignore"
+      }
+    },
+    "RH17N": {
+      "Stone": {
+        "Rule": "ignore"
+      }
+    },
     "RH2HARTI": {
       "Stone": {
         "Rule": "style"
@@ -3426,6 +3580,21 @@
         ]
       }
     },
+    "RHBVLOGO": {
+      "Stone": {
+        "Rule": "ignore"
+      }
+    },
+    "RHBVSFLOGO": {
+      "Stone": {
+        "Rule": "ignore"
+      }
+    },
+    "RHBVSLOGO": {
+      "Stone": {
+        "Rule": "ignore"
+      }
+    },
     "RHBWN": {
       "Stone": {
         "Rule": "style"
@@ -3454,6 +3623,11 @@
         "CustomWordOrder": [
           1
         ]
+      }
+    },
+    "RHDAN": {
+      "Stone": {
+        "Rule": "ignore"
       }
     },
     "RHDANLEY": {
@@ -3859,6 +4033,7 @@
       "Stone": {
         "Rule": "style_size",
         "CustomWordOrder": [
+          1,
           2
         ]
       }
@@ -3875,7 +4050,7 @@
     },
     "RHOONUI2": {
       "Stone": {
-        "Rule": "style_size"
+        "Rule": "ignore"
       }
     },
     "RHOPAW": {
@@ -4224,6 +4399,19 @@
         "Rule": "style_size_spec"
       }
     },
+    "TSASFFADD": {
+      "Cut": {
+        "Rule": "style_size_spec"
+      },
+      "Stone": {
+        "Rule": "style_spec"
+      }
+    },
+    "TSASFFADU": {
+      "Cut": {
+        "Rule": "style_size_spec"
+      }
+    },
     "TSBBAR": {
       "Stone": {
         "Rule": "style"
@@ -4237,12 +4425,26 @@
     },
     "TSBCBBL2": {
       "Stone": {
-        "Rule": "style_size_spec"
+        "Rule": "style_size_spec",
+        "Exceptions": [
+          {
+            "Path": {
+              "Value": "TSB STYLES\\TSB CBBL2\\!size\\!spec"
+            }
+          }
+        ]
       }
     },
     "TSBCBBL3": {
       "Stone": {
-        "Rule": "style_size_spec"
+        "Rule": "style_size_spec",
+        "Exceptions": [
+          {
+            "Path": {
+              "Value": "TSB STYLES\\TSB CBBL3\\!size\\!spec"
+            }
+          }
+        ]
       }
     },
     "TSBCBSLIM2": {
@@ -4354,6 +4556,21 @@
         "Rule": "style"
       }
     },
+    "TSBVLOGO": {
+      "Stone": {
+        "Rule": "ignore"
+      }
+    },
+    "TSBVSFLOGO": {
+      "Stone": {
+        "Rule": "ignore"
+      }
+    },
+    "TSBVSLOGO": {
+      "Stone": {
+        "Rule": "ignore"
+      }
+    },
     "TSBWN": {
       "Stone": {
         "Rule": "style"
@@ -4381,7 +4598,10 @@
     },
     "TSCRCIMN": {
       "Stone": {
-        "Rule": "style"
+        "Rule": "style",
+        "CustomWordOrder": [
+          1
+        ]
       }
     },
     "TSDAN": {
@@ -4520,7 +4740,7 @@
     },
     "TSOFFBL": {
       "Stone": {
-        "Rule": "style_size"
+        "Rule": "ignore"
       }
     },
     "TSOGRADAR": {
@@ -4535,7 +4755,7 @@
     },
     "TSOL3": {
       "Stone": {
-        "Rule": "style_size"
+        "Rule": "ignore"
       }
     },
     "TSOLBLWD": {
@@ -4578,7 +4798,7 @@
     },
     "TSONUI": {
       "Stone": {
-        "Rule": "style_size"
+        "Rule": "ignore"
       }
     },
     "TSONUOLBL": {
@@ -4667,6 +4887,11 @@
         "Rule": "style"
       }
     },
+    "TSST": {
+      "Stone": {
+        "Rule": "style"
+      }
+    },
     "TSSW": {
       "Stone": {
         "Rule": "style"
@@ -4691,6 +4916,11 @@
       "Stone": {
         "Rule": "mirror",
         "MirroredStyle": "RSTTI"
+      }
+    },
+    "TSTR": {
+      "Stone": {
+        "Rule": "style"
       }
     },
     "TSVLOGO": {
@@ -5721,7 +5951,7 @@
     },
     "TTRETFBL": {
       "Cut": {
-        "Rule": "style_size"
+        "Rule": "ignore"
       }
     },
     "TTRGL": {
