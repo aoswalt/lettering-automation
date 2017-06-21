@@ -206,11 +206,11 @@ namespace Lettering.Data {
         private static string ConstructStylePathPart(OrderData order, LetteringType type) {
             //NOTE(adam): special path handling
             if(Lettering.GetStylePath(order.itemCode, type) == "cut-sew_files") {
-                return  @"!type\\!style\SEW FILES\";
+                return  @"!type\!style\SEW FILES";
             }
 
             if(Lettering.GetStylePath(order.itemCode, type) == "cut-specific") {
-                return FilePaths.ConstructStylePathPart(order, LetteringType.Cut) + @"SEW FILES\";
+                return FilePaths.ConstructStylePathPart(order, LetteringType.Cut) + @"\SEW FILES";
             }
 
             //NOTE(adam): replace item code if mirror style
