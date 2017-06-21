@@ -31,10 +31,10 @@
         "Value": "RHO"
       },
       {
-        "Value": "RHB"
+        "Value": "RH"
       },
       {
-        "Value": "RH"
+        "Value": "RHB"
       },
       {
         "Value": "RST"
@@ -98,6 +98,10 @@
         "_Comment": "Sold Separately"
       },
       {
+        "Pattern": "S$",
+        "_Comment": "Staff"
+      },
+      {
         "Pattern": "P\\d$",
         "_Comment": "Package #"
       },
@@ -107,6 +111,14 @@
       },
       {
         "Pattern": "PKG$",
+        "_Comment": "Package"
+      },
+      {
+        "Pattern": "PKGM$",
+        "_Comment": "Package"
+      },
+      {
+        "Pattern": "-PKG$",
         "_Comment": "Package"
       },
       {
@@ -180,14 +192,6 @@
         "FileType": "Plt"
       },
       {
-        "StyleRegex": "^TT",
-        "FileType": "Eps"
-      },
-      {
-        "StyleRegex": "^TTDARL",
-        "FileType": "Eps"
-      },
-      {
         "StyleRegex": "^TTDARLMNB",
         "FileType": "Plt"
       },
@@ -201,6 +205,14 @@
       },
       {
         "StyleRegex": "^TTLLFBL",
+        "FileType": "Eps"
+      },
+      {
+        "StyleRegex": "^TTDARL",
+        "FileType": "Eps"
+      },
+      {
+        "StyleRegex": "^TT",
         "FileType": "Eps"
       }
     ],
@@ -278,6 +290,16 @@
     ]
   },
   "Styles": {
+    "DARBMNB": {
+      "Cut": {
+        "Rule": "mirror",
+        "MirroredStyle": "PFDARBMN"
+      },
+      "Sew": {
+        "Rule": "mirror",
+        "MirroredStyle": "PFDARBMN"
+      }
+    },
     "DARBMNBM": {
       "Cut": {
         "Rule": "mirror",
@@ -352,7 +374,7 @@
     },
     "HT97UO2": {
       "Cut": {
-        "Rule": "style_CUT FILES"
+        "Rule": "style_size"
       }
     },
     "HTADEC": {
@@ -497,6 +519,12 @@
         "Rule": "style_size_spec"
       }
     },
+    "HTBL2-PKG": {
+      "Cut": {
+        "Rule": "mirror",
+        "MirroredStyle": "HTBL2"
+      }
+    },
     "HTBLDARL": {
       "Cut": {
         "Rule": "style_size"
@@ -505,6 +533,12 @@
     "HTBLN": {
       "Cut": {
         "Rule": "names",
+        "MirroredStyle": "HTBL"
+      }
+    },
+    "HTBL-PKG": {
+      "Cut": {
+        "Rule": "mirror",
         "MirroredStyle": "HTBL"
       }
     },
@@ -558,6 +592,16 @@
     "HTBXPK": {
       "Cut": {
         "Rule": "style_CUT FILES"
+      }
+    },
+    "HTCBBL2": {
+      "Cut": {
+        "Rule": "style_size_spec"
+      }
+    },
+    "HTCBFBL2": {
+      "Cut": {
+        "Rule": "style_size_spec"
       }
     },
     "HTCBSLIMO2": {
@@ -693,6 +737,18 @@
         "Rule": "style_size_spec"
       }
     },
+    "HTDARLST2": {
+      "Cut": {
+        "Rule": "mirror",
+        "MirroredStyle": "HTDARL2"
+      }
+    },
+    "HTDARLSTO2": {
+      "Cut": {
+        "Rule": "mirror",
+        "MirroredStyle": "HTDARL2"
+      }
+    },
     "HTDARMBAR": {
       "Cut": {
         "Rule": "style_CUT FILES"
@@ -795,6 +851,12 @@
         "Rule": "style_size_spec"
       }
     },
+    "HTFBL2-PKG": {
+      "Cut": {
+        "Rule": "mirror",
+        "MirroredStyle": "HTFBL2"
+      }
+    },
     "HTFBLBAR": {
       "Cut": {
         "Rule": "style_CUT FILES"
@@ -834,6 +896,12 @@
         "Rule": "style_CUT FILES"
       }
     },
+    "HTFBL-PKG": {
+      "Cut": {
+        "Rule": "mirror",
+        "MirroredStyle": "HTFBL"
+      }
+    },
     "HTFBO": {
       "Cut": {
         "Rule": "style_size"
@@ -847,31 +915,13 @@
     "HTFFBL": {
       "Cut": {
         "Rule": "style_size_spec",
-        "Exceptions": [
-          {
-            "Conditions": [
-              "Spec<14"
-            ],
-            "Path": {
-              "Value": "!type\\!style\\!size\\9.5"
-            }
-          }
-        ]
+        "Exceptions": []
       }
     },
     "HTFFBL2": {
       "Cut": {
         "Rule": "style_size_spec",
-        "Exceptions": [
-          {
-            "Conditions": [
-              "Spec<14"
-            ],
-            "Path": {
-              "Value": "!type\\!style\\!size\\9.5"
-            }
-          }
-        ]
+        "Exceptions": []
       }
     },
     "HTFFBLWD": {
@@ -1209,6 +1259,12 @@
     "HTMBX": {
       "Cut": {
         "Rule": "style_CUT FILES"
+      }
+    },
+    "HTMBXS": {
+      "Cut": {
+        "Rule": "mirror",
+        "MirroredStyle": "HTMBX"
       }
     },
     "HTMEG": {
@@ -1635,6 +1691,12 @@
         "Rule": "style_CUT FILES"
       }
     },
+    "HTVRS": {
+      "Cut": {
+        "Rule": "mirror",
+        "MirroredStyle": "HTVR"
+      }
+    },
     "HTVSLOGO": {
       "Cut": {
         "Rule": "ignore"
@@ -1724,6 +1786,12 @@
     "IDDARLB": {
       "Cut": {
         "Rule": "style_CUT FILES"
+      }
+    },
+    "IDDARLN": {
+      "Cut": {
+        "Rule": "mirror",
+        "MirroredStyle": "TTDARL"
       }
     },
     "IDDARMAS": {
@@ -1903,6 +1971,11 @@
         "Rule": "style_size"
       }
     },
+    "MNABECM": {
+      "Sew": {
+        "Rule": "style_SEW FILES"
+      }
+    },
     "MNAO": {
       "Sew": {
         "Rule": "style_SEW FILES"
@@ -1945,6 +2018,11 @@
       }
     },
     "MNBENWD": {
+      "Sew": {
+        "Rule": "style_SEW FILES"
+      }
+    },
+    "MNBGSC": {
       "Sew": {
         "Rule": "style_SEW FILES"
       }
@@ -2221,12 +2299,22 @@
         "Rule": "style_SEW FILES"
       }
     },
+    "MNFBKEY1": {
+      "Sew": {
+        "Rule": "ignore"
+      }
+    },
     "MNFBKEYCR": {
       "Sew": {
         "Rule": "style_SEW FILES"
       }
     },
     "MNFBKEYWD": {
+      "Sew": {
+        "Rule": "style_SEW FILES"
+      }
+    },
+    "MNFBL2CR": {
       "Sew": {
         "Rule": "style_SEW FILES"
       }
@@ -2471,12 +2559,20 @@
     },
     "MNRKWD": {
       "Sew": {
-        "Rule": "style_SEW FILES"
+        "Rule": "style_SEW FILES",
+        "CustomWordOrder": [
+          2,
+          1
+        ]
       }
     },
     "MNRKWDY": {
       "Sew": {
-        "Rule": "style_SEW FILES"
+        "Rule": "style_SEW FILES",
+        "CustomWordOrder": [
+          2,
+          1
+        ]
       }
     },
     "MNS1": {
@@ -2603,7 +2699,7 @@
     },
     "MNSPCR": {
       "Sew": {
-        "Rule": "ignore"
+        "Rule": "style_SEW FILES"
       }
     },
     "MNSPOL": {
@@ -2634,6 +2730,15 @@
     "MNSTKBL": {
       "Sew": {
         "Rule": "style_SEW FILES"
+      }
+    },
+    "MNSTKBSF": {
+      "Sew": {
+        "Rule": "cut-sew_files",
+        "CustomWordOrder": [
+          1,
+          2
+        ]
       }
     },
     "MNSTKDAR": {
@@ -2709,6 +2814,11 @@
     "MNZURIN": {
       "Sew": {
         "Rule": "style_SEW FILES"
+      }
+    },
+    "PF17PO-VCCP": {
+      "Sew": {
+        "Rule": "ignore"
       }
     },
     "PFBIGRAVMN": {
@@ -3291,7 +3401,7 @@
         "Rule": "style_CUT FILES"
       },
       "Sew": {
-        "Rule": "cut-sew_files"
+        "Rule": "style_SEW FILES"
       }
     },
     "PFROUNDMN": {
@@ -3302,7 +3412,7 @@
         ]
       },
       "Sew": {
-        "Rule": "cut-sew_files"
+        "Rule": "style_SEW FILES"
       }
     },
     "PFSCHEARTMN": {
@@ -3618,6 +3728,9 @@
       }
     },
     "RHCRCIMN": {
+      "Sew": {
+        "Rule": "ignore"
+      },
       "Stone": {
         "Rule": "style",
         "CustomWordOrder": [
@@ -3954,16 +4067,7 @@
           2,
           1
         ],
-        "Exceptions": [
-          {
-            "Conditions": [
-              "Spec<9.5"
-            ],
-            "Path": {
-              "Value": "!type\\!style\\!size\\8.5"
-            }
-          }
-        ]
+        "Exceptions": []
       }
     },
     "RHOLLFBL4": {
@@ -4449,22 +4553,50 @@
     },
     "TSBCBSLIM2": {
       "Stone": {
-        "Rule": "style_size_spec"
+        "Rule": "style_size_spec",
+        "Exceptions": [
+          {
+            "Path": {
+              "Value": "TSB STYLES\\TSB CBSLIM2\\!size\\!spec"
+            }
+          }
+        ]
       }
     },
     "TSBCBSLIM3": {
       "Stone": {
-        "Rule": "style_size_spec"
+        "Rule": "style_size_spec",
+        "Exceptions": [
+          {
+            "Path": {
+              "Value": "TSB STYLES\\TSB CBSLIM3\\!size\\!spec"
+            }
+          }
+        ]
       }
     },
     "TSBCBWBL2": {
       "Stone": {
-        "Rule": "style_size_spec"
+        "Rule": "style_size_spec",
+        "Exceptions": [
+          {
+            "Path": {
+              "Value": "TSB STYLES\\TSB CBWBL2\\!size\\!spec"
+            }
+          }
+        ]
       }
     },
     "TSBCBWBL3": {
       "Stone": {
-        "Rule": "style_size_spec"
+        "Rule": "style_size_spec",
+        "Exceptions": [
+          {
+            "Path": {
+              "Value": "TSB STYLES\\TSB CBWBL3\\!size\\!spec"
+            }
+          }
+        ]
       }
     },
     "TSBEA": {
@@ -4490,13 +4622,19 @@
     "TSBLL3WD": {
       "Stone": {
         "Rule": "style_size",
+        "CustomWordOrder": [
+          2,
+          1
+        ],
         "Exceptions": [
           {
-            "Conditions": [
-              "Spec<9.5"
-            ],
             "Path": {
-              "Value": "!type\\!style\\!size\\8.5"
+              "Value": "TSB STYLES\\TSB LL3WD\\!size\\"
+            }
+          },
+          {
+            "Path": {
+              "Value": "TSB STYLES\\TSB LL3WD\\!size\\!spec"
             }
           }
         ]
@@ -4505,13 +4643,22 @@
     "TSBLLWD": {
       "Stone": {
         "Rule": "style_size",
+        "CustomWordOrder": [
+          2,
+          1
+        ],
         "Exceptions": [
           {
             "Conditions": [
               "Spec<9.5"
             ],
             "Path": {
-              "Value": "!type\\!style\\!size\\8.5"
+              "Value": "TSB STYLES\\TSB LLWD\\!size\\"
+            }
+          },
+          {
+            "Path": {
+              "Value": "TSB STYLES\\TSB LLWD\\!size\\!spec"
             }
           }
         ]
@@ -4519,12 +4666,26 @@
     },
     "TSBMODBL2": {
       "Stone": {
-        "Rule": "style_size_spec"
+        "Rule": "style_size_spec",
+        "Exceptions": [
+          {
+            "Path": {
+              "Value": "TSB STYLES\\TSB MODBL2\\!size\\!spec"
+            }
+          }
+        ]
       }
     },
     "TSBMODBL3": {
       "Stone": {
-        "Rule": "style_size_spec"
+        "Rule": "style_size_spec",
+        "Exceptions": [
+          {
+            "Path": {
+              "Value": "TSB STYLES\\TSB MODBL3\\!size\\!spec"
+            }
+          }
+        ]
       }
     },
     "TSBN": {
@@ -4597,6 +4758,9 @@
       }
     },
     "TSCRCIMN": {
+      "Sew": {
+        "Rule": "ignore"
+      },
       "Stone": {
         "Rule": "style",
         "CustomWordOrder": [
@@ -4777,6 +4941,16 @@
         "Rule": "style_size"
       }
     },
+    "TSOLLFBL": {
+      "Stone": {
+        "Rule": "style_size",
+        "CustomWordOrder": [
+          2,
+          1
+        ],
+        "Exceptions": []
+      }
+    },
     "TSOLLWD": {
       "Stone": {
         "Rule": "style_size",
@@ -4940,7 +5114,7 @@
     },
     "TT2LL4": {
       "Cut": {
-        "Rule": "style_size"
+        "Rule": "ignore"
       }
     },
     "TT3DFBL": {
@@ -4960,7 +5134,7 @@
     },
     "TT97U4": {
       "Cut": {
-        "Rule": "style_size"
+        "Rule": "ignore"
       }
     },
     "TT97UBVS": {
@@ -5358,7 +5532,14 @@
         ]
       },
       "Sew": {
-        "Rule": "cut-specific"
+        "Rule": "style_SEW FILES",
+        "Exceptions": [
+          {
+            "Path": {
+              "Value": "!type\\!style\\!size\\sew files"
+            }
+          }
+        ]
       }
     },
     "TTDARLMNSF": {
@@ -5836,7 +6017,11 @@
     },
     "TTLLWDVS": {
       "Cut": {
-        "Rule": "style_size"
+        "Rule": "style_size",
+        "CustomWordOrder": [
+          2,
+          1
+        ]
       }
     },
     "TTLM": {
