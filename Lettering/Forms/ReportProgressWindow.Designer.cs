@@ -27,6 +27,7 @@
             this.progressFonts = new System.Windows.Forms.ProgressBar();
             this.labelRecordNumber = new System.Windows.Forms.Label();
             this.labelReportType = new System.Windows.Forms.Label();
+            this.labelStyleCode = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // label1
@@ -40,7 +41,7 @@
             // 
             // progressFonts
             // 
-            this.progressFonts.Location = new System.Drawing.Point(10, 60);
+            this.progressFonts.Location = new System.Drawing.Point(10, 86);
             this.progressFonts.Name = "progressFonts";
             this.progressFonts.Size = new System.Drawing.Size(100, 17);
             this.progressFonts.TabIndex = 0;
@@ -63,12 +64,22 @@
             this.labelReportType.Text = "No Type";
             this.labelReportType.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
+            // labelStyleCode
+            // 
+            this.labelStyleCode.Location = new System.Drawing.Point(2, 60);
+            this.labelStyleCode.Name = "labelStyleCode";
+            this.labelStyleCode.Size = new System.Drawing.Size(117, 13);
+            this.labelStyleCode.TabIndex = 4;
+            this.labelStyleCode.Text = "Style Code";
+            this.labelStyleCode.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
             // ReportProgressWindow
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(122, 89);
+            this.ClientSize = new System.Drawing.Size(122, 115);
             this.ControlBox = false;
+            this.Controls.Add(this.labelStyleCode);
             this.Controls.Add(this.labelReportType);
             this.Controls.Add(this.labelRecordNumber);
             this.Controls.Add(this.progressFonts);
@@ -89,5 +100,6 @@
         private System.Windows.Forms.ProgressBar progressFonts;
         private System.Windows.Forms.Label labelRecordNumber;
         private System.Windows.Forms.Label labelReportType;
+        private System.Windows.Forms.Label labelStyleCode;
     }
 }

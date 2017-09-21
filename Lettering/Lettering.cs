@@ -189,9 +189,10 @@ namespace Lettering {
             }
 
             for(int i = 0; i != orders.Count; ++i) {
-                progressWindow.SetReportProgress(type, i, orders.Count);
-
                 OrderData order = orders[i];
+
+                progressWindow.SetReportProgress(type, order.itemCode, i, orders.Count);
+
                 string trimmedCode = TryTrimStyleCode(order.itemCode);
 
                 //NOTE(adam): if not in config, continue; else, store the trimmed code
@@ -467,6 +468,7 @@ namespace Lettering {
         }
 
         public static Data_StyleData GetStyleData(string styleCode, LetteringType type) {
+            styleCode = styleCode.Replace(" ", String.Empty);
             return GetStyleData(Config.Styles[styleCode], type);
         }
 
@@ -501,6 +503,7 @@ namespace Lettering {
         }
         
         public static ExportType GetExportType(string styleCode, LetteringType type) {
+            styleCode = styleCode.Replace(" ", String.Empty);
             Data_Export export = Config.Setup.Exports.Find(x => Regex.Match(styleCode, x.StyleRegex).Success);
             return export != null ? export.FileType : ExportType.None;
         }

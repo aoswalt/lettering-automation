@@ -192,6 +192,14 @@
         "FileType": "Plt"
       },
       {
+        "StyleRegex": "^TT",
+        "FileType": "Eps"
+      },
+      {
+        "StyleRegex": "^TTDARL",
+        "FileType": "Eps"
+      },
+      {
         "StyleRegex": "^TTDARLMNB",
         "FileType": "Plt"
       },
@@ -204,15 +212,11 @@
         "FileType": "Eps"
       },
       {
+        "StyleRegex": "^TTLLDAR",
+        "FileType": "Eps"
+      },
+      {
         "StyleRegex": "^TTLLFBL",
-        "FileType": "Eps"
-      },
-      {
-        "StyleRegex": "^TTDARL",
-        "FileType": "Eps"
-      },
-      {
-        "StyleRegex": "^TT",
         "FileType": "Eps"
       }
     ],
@@ -1874,13 +1878,19 @@
     },
     "IDLL3DAR": {
       "Cut": {
-        "Rule": "ignore",
+        "Rule": "mirror",
         "MirroredStyle": "TTLL3DAR"
+      }
+    },
+    "IDLLDAR": {
+      "Cut": {
+        "Rule": "mirror",
+        "MirroredStyle": "TTLLDAR"
       }
     },
     "IDLLFBL": {
       "Cut": {
-        "Rule": "ignore",
+        "Rule": "mirror",
         "MirroredStyle": "TTLLFBL"
       }
     },
@@ -3883,6 +3893,12 @@
         "Rule": "style"
       }
     },
+    "RHO181": {
+      "Stone": {
+        "Rule": "mirror",
+        "MirroredStyle": "TSO 181"
+      }
+    },
     "RHO2LL": {
       "Stone": {
         "Rule": "style_size"
@@ -4149,7 +4165,7 @@
     },
     "RHOONU": {
       "Stone": {
-        "Rule": "style_size"
+        "Rule": "ignore"
       }
     },
     "RHOONUI2": {
@@ -4503,6 +4519,12 @@
         "Rule": "style_size_spec"
       }
     },
+    "TS181": {
+      "Stone": {
+        "Rule": "mirror",
+        "MirroredStyle": "RH181"
+      }
+    },
     "TSASFFADD": {
       "Cut": {
         "Rule": "style_size_spec"
@@ -4788,6 +4810,12 @@
         "Rule": "style"
       }
     },
+    "TSEAG": {
+      "Stone": {
+        "Rule": "mirror",
+        "MirroredStyle": "RHEAG"
+      }
+    },
     "TSELITEB": {
       "Stone": {
         "Rule": "style_size_spec"
@@ -4888,6 +4916,11 @@
       }
     },
     "TSNU": {
+      "Stone": {
+        "Rule": "ignore"
+      }
+    },
+    "TSO181": {
       "Stone": {
         "Rule": "ignore"
       }
