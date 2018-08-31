@@ -1,8 +1,8 @@
 {
   "Setup": {
     "FilePaths": {
-      "NetworkFontsFolderPath": "\\\\vsc-fs01\\Lettering\\Corel\\WORK FOLDERS\\VS Fonts\\",
-      "NetworkLibraryFilePath": "\\\\vsc-fs01\\Lettering\\Corel\\WORK FOLDERS\\Automation\\Automation.gms",
+      "NetworkFontsFolderPath": "\\\\path\\to\\VS Fonts\\",
+      "NetworkLibraryFilePath": "\\\\path\\to\\libaray\\file\\Automation.gms",
       "InstalledLibraryFilePath": "C:\\Program Files\\Corel\\CorelDRAW Graphics Suite X7\\Draw\\GMS\\Automation.gms"
     },
     "StylePrefixes": [
